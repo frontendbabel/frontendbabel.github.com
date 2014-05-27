@@ -8,6 +8,9 @@ plugins:
     rss:
         default:
             collection: 'articles'
+    grunt:
+        writeAfter: false
+        generateAfter: ["bem", "copy"]
 
 templateData:
 

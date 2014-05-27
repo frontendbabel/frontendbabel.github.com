@@ -1,2 +1,10 @@
+.bem/tmp/cache.js
 node_modules/
 out/
+.DS_Store
+libs/
+
+.bem/cache/
+*.bundles/*/*.*
+!*.bundles/*/*.bemjson.js
+!*.bundles/.bem/*
