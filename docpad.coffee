@@ -4,7 +4,24 @@
 # Define the DocPad Configuration
 docpadConfig = {
 
+templateData:
+
+    cutTag: '<!-- cut -->'
+
+    # Post part before “cut”
+    cuttedContent: (content) ->
+        if @hasReadMore content
+            cutIdx = content.search @cutTag
+            content[0..cutIdx-1]
+        else
+            content
+
+    # Has “cut”?
+    hasReadMore: (content) ->
+        content and ((content.search @cutTag) isnt -1)
+
 collections:
+
     pages: (database) ->
         @getCollection('documents').findAllLive({ relativeOutDirPath: 'pages' }).on 'add', (document) ->
             a = document.attributes
@@ -19,6 +36,7 @@ collections:
                     url: urls[0]
                 })
                 .addUrl(urls)
+
     articles: (database) ->
         @getCollection('documents').findAllLive({ relativeOutDirPath: 'articles' })
 
