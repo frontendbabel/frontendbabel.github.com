@@ -19,7 +19,7 @@ module.exports = function(grunt) {
             },
             bundles: {
                 files: {
-                    "out/": ["desktop.bundles/index/*"]
+                    "out/": ["desktop.bundles/*/*.min.*"]
                 }
             }
         }
