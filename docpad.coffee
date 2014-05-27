@@ -3,7 +3,28 @@
 
 # Define the DocPad Configuration
 docpadConfig = {
-	# ...
+
+collections:
+    pages: (database) ->
+        @getCollection('documents').findAllLive({ relativeOutDirPath: 'pages' }).on 'add', (document) ->
+            a = document.attributes
+            basename = a.basename
+            newUrl = "#{basename}.#{a.outExtension}"
+            document.set('isPage', true)
+            urls = ["/#{newUrl}"]
+
+            document
+                .setMetaDefaults({
+                    #outPath: newOutPath,
+                    url: urls[0]
+                })
+                .addUrl(urls)
+    articles: (database) ->
+        @getCollection('documents').findAllLive({ relativeOutDirPath: 'articles' })
+
+
+env: 'static'
+
 }
 
 # Export the DocPad Configuration
