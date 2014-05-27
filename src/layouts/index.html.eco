@@ -1,0 +1,10 @@
+---
+layout: base
+---
+<ul>
+<% for article in @getCollection("articles").findAll({}, [{date:-1}]).toJSON().slice(0,20): %>
+    <li>
+        <%- article.title %>
+    </li>
+<% end %>
+</ul>
