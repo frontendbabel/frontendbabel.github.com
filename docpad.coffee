@@ -4,6 +4,11 @@
 # Define the DocPad Configuration
 docpadConfig = {
 
+plugins:
+    rss:
+        default:
+            collection: 'articles'
+
 templateData:
 
     cutTag: '<!-- cut -->'
