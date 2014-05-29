@@ -38,10 +38,14 @@ collections:
             document.set('isPage', true)
             urls = ["/#{newUrl}"]
 
+            layout = a.layout
+            if !layout
+                layout = 'page'
+
             document
                 .setMetaDefaults({
-                    #outPath: newOutPath,
                     url: urls[0]
+                    layout: layout
                 })
                 .addUrl(urls)
 

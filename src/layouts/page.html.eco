@@ -1,0 +1,5 @@
+---
+layout: base
+---
+<h1 class="page__title"><%- @document.title %></h1>
+<%- @content %>
