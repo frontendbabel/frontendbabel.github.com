@@ -9,7 +9,13 @@
     ],
     content:[
         {
-            block: 'header'
+            block: 'header',
+            content: [
+                {
+                    block: 'logo',
+                    content: 'Frontend Babel'
+                }
+            ]
         },
         {
             block: 'layout',
