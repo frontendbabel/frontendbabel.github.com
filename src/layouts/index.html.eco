@@ -1,10 +1,10 @@
 ---
 layout: base
 ---
-<ul>
+<ul class="posts-list">
 <% for article in @getCollection("articles").findAll({}, [{date:-1}]).toJSON().slice(0,20): %>
-    <li>
-        <h2><%- article.title %></h2>
+    <li class="posts-list__item">
+        <a class="link posts-list__link" href="<%- article.url %>"><%- article.title %></a>
         <%- @cuttedContent(article.contentRenderedWithoutLayouts) %>
     </li>
 <% end %>
