@@ -50,8 +50,17 @@ collections:
                 .addUrl(urls)
 
     articles: (database) ->
-        @getCollection('documents').findAllLive({ relativeOutDirPath: 'articles' })
+        @getCollection('documents').findAllLive({ relativeOutDirPath: 'articles' }).on 'add', (document)->
+            a = document.attributes
 
+            layout = a.layout
+            if !layout
+                layout = 'article'
+
+            document
+                .setMetaDefaults({
+                    layout: layout
+                })
 
 env: 'static'
 
