@@ -1,0 +1,10 @@
+block site-menu {
+
+    tag: 'ul'
+
+    elem item {
+        tag: 'li'
+    }
+
+}
+
