@@ -1,4 +1,11 @@
-body
+/* Color scheme
+ * blue: #7294D4
+ * pink: #E6A0C4
+ * light violet: #C6CDF7
+ * beige: #D8A499
+ */
+
+.page
 {
     background: #fff;
     font-family: 'PT Sans', sans-serif;
@@ -6,9 +13,8 @@ body
     margin: 0 auto;
 }
 
-/* Color scheme
- * blue: #7294D4
- * pink: #E6A0C4
- * light violet: #C6CDF7
- * beige: #D8A499
- */
+.page__title
+{
+    font-size: 1.6em;
+    margin: 0;
+}

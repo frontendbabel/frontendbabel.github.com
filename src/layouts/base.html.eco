@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
 </head>
-<body>
+<body class="page">
     <header class="header">
         <div class="logo">Frontend Babel</div>
         <ul class="site-menu">
