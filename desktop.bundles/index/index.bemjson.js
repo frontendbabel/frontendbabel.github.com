@@ -75,6 +75,9 @@
                 }
             ]
         },
+        {
+            block: 'footer'
+        },
         { elem: 'js', url: 'index.min.js' }
     ]
 })
