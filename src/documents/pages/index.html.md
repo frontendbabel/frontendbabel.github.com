@@ -1,5 +1,5 @@
 ---
-title: Russian End
+title: Articles
 order: 1
 layout: index
 ---
