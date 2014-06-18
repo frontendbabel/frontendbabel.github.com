@@ -43,4 +43,44 @@ layout: page
             </dl>
         <% end %>
     </div>
+    <div class="credits__translator user">
+        <dl class="credits____name">
+            <dt class="credits_var">Translator:</dt>
+            <dd class="user__name">
+                <% if @document.translator.site: %>
+                    <a href="<%- @document.translator.site %>">
+                        <%- @document.translator.name %>
+                    </a>
+                <% else: %>
+                    <%- @document.translator.name %>
+                <% end %>
+            </dd>
+        </dl>
+        <% if @document.translator.github: %>
+            <dl class="credits____github">
+                <dt class="credits_var">GitHub:</dt>
+                <dd class="user__name">
+                    <%- @document.translator.github %>
+                </dd>
+            </dl>
+        <% end %>
+        <% if @document.translator.twitter: %>
+            <dl class="credits____twitter">
+                <dt class="credits_var">Twitter:</dt>
+                <dd class="user__name">
+                    <%- @document.translator.twitter %>
+                </dd>
+            </dl>
+        <% end %>
+        <% if @document.translator.site: %>
+            <dl class="credits____site">
+                <dt class="credits_var">Site:</dt>
+                <dd class="user__name">
+                    <a href="<%- @document.translator.site %>">
+                        <%- @document.translator.site %>
+                    </a>
+                </dd>
+            </dl>
+        <% end %>
+    </div>
 </div>
