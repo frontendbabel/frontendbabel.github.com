@@ -20,7 +20,9 @@ layout: page
             <dl class="credits____github">
                 <dt class="credits_var">GitHub:</dt>
                 <dd class="user__name">
-                    <%- @document.author.github %>
+                    <a href="https://github.com/<%- @document.author.github %>">
+                        <%- @document.author.github %>
+                    </a>
                 </dd>
             </dl>
         <% end %>
@@ -28,7 +30,9 @@ layout: page
             <dl class="credits____twitter">
                 <dt class="credits_var">Twitter:</dt>
                 <dd class="user__name">
-                    <%- @document.author.twitter %>
+                    <a href="https://twitter.com/<%- @document.author.twitter %>">
+                        <%- @document.author.twitter %>
+                    </a>
                 </dd>
             </dl>
         <% end %>
@@ -60,7 +64,9 @@ layout: page
             <dl class="credits____github">
                 <dt class="credits_var">GitHub:</dt>
                 <dd class="user__name">
-                    <%- @document.translator.github %>
+                    <a href="https://github.com/<%- @document.translator.github %>">
+                        <%- @document.translator.github %>
+                    </a>
                 </dd>
             </dl>
         <% end %>
@@ -68,7 +74,9 @@ layout: page
             <dl class="credits____twitter">
                 <dt class="credits_var">Twitter:</dt>
                 <dd class="user__name">
-                    <%- @document.translator.twitter %>
+                    <a href="https://twitter.com/<%- @document.translator.twitter %>">
+                        <%- @document.translator.twitter %>
+                    </a>
                 </dd>
             </dl>
         <% end %>
