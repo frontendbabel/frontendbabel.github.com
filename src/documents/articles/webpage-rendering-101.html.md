@@ -1,5 +1,20 @@
 ---
 title: What Every Frontend Developer Should Know About Webpage Rendering
+
+source:
+  name: Рендеринг WEB-страницы: что об этом должен знать front-end разработчик
+  url: http://habrahabr.ru/post/224187/
+  lang: ru
+
+author:
+  name: Alexander Skutin
+  site: http://habrahabr.ru/users/skutin/
+
+translator:
+  name: Max Shirshin
+  github: ingdir
+  twitter: ingdir
+
 ---
 
 Translated from: [Habrahabr.ru](http://habrahabr.ru/post/224187/)

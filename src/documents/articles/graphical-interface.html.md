@@ -1,5 +1,21 @@
 ---
 title: Graphical interface: a shaped emotion, a message in a well-defined system
+
+source:
+  name: Графический интерфейс
+  url: https://medium.com/@kovchiy/70bb2d0d58be
+  lang: ru
+
+author:
+  name: Danil Kovchy
+  site: https://medium.com/@kovchiy
+  twitter: kovchiy
+
+translator:
+  name: Max Shirshin
+  github: ingdir
+  twitter: ingdir
+
 ---
 
 Let me introduce myself. I am an Interface Designer at Yandex, and I've been involved with projects like Yandex.Maps and Search Engine Results Page, and also designed services icons, promo materials, documentation, a project planner, a shared interface component library, and a fast prototyping system. Besides that, I follow my colleagues' projects such as Yandex Main Page and other Yandex portal services: Market, News, Images, Video, Disk, Auto, Realty. I see how these projects grow and evolve.
