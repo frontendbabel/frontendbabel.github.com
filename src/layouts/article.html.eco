@@ -39,7 +39,7 @@ layout: page
                 <dt class="credits_var">Twitter:</dt>
                 <dd class="user__name">
                     <a href="https://twitter.com/<%- @document.author.twitter %>">
-                        <%- @document.author.twitter %>
+                        @<%- @document.author.twitter %>
                     </a>
                 </dd>
             </dl>
@@ -83,7 +83,7 @@ layout: page
                 <dt class="credits_var">Twitter:</dt>
                 <dd class="user__name">
                     <a href="https://twitter.com/<%- @document.translator.twitter %>">
-                        <%- @document.translator.twitter %>
+                        @<%- @document.translator.twitter %>
                     </a>
                 </dd>
             </dl>
