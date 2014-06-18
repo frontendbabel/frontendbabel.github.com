@@ -2,4 +2,17 @@
 {
     margin-top: 1em;
     font-size: 18px;
+    line-height: 1.5;
+}
+
+.content code
+{
+    font-family: Menlo, Monaco, Courier New, monospace, serif;
+    font-size: 90%;
+}
+
+.content p code
+{
+    padding: 1px 5px;
+    background-color: #f0f0f0;
 }
