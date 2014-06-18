@@ -62,6 +62,13 @@ collections:
                     layout: layout
                 })
 
+            # Normalize meta info
+            document.set({
+              author: a.author || {},
+              source: a.source || {},
+              translator: a.translator || {}
+            })
+
 env: 'static'
 
 }
