@@ -7,7 +7,13 @@ layout: page
         <dl class="credits____name">
             <dt class="credits_var">Author:</dt>
             <dd class="user__name">
-                <%- @document.author.name %>
+                <% if @document.author.site: %>
+                    <a href="<%- @document.author.site %>">
+                        <%- @document.author.name %>
+                    </a>
+                <% else: %>
+                    <%- @document.author.name %>
+                <% end %>
             </dd>
         </dl>
         <% if @document.author.github: %>
