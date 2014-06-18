@@ -4,6 +4,7 @@
             block: 'custom-fonts',
             elems: [ 'pt-sans' ]
         },
-        { block: 'highlight' }
+        { block: 'highlight' },
+        { block: 'flags' }
     ]
 })
