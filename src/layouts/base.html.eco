@@ -28,5 +28,6 @@
       <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
       </form>
     </footer>
+    <script src="/desktop.bundles/index/index.min.js"></script>
 </body>
 </html>
