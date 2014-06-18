@@ -2,6 +2,14 @@
 layout: page
 ---
 <%- @content %>
+<div class="article-source">
+    <% if @document.source.lang: %>
+        <i class="flag-<%- @document.source.lang.toUpperCase() %>"></i>
+    <% end %>
+    <a href="<%- @document.source.url %>">
+        <%- @document.source.name %>
+    </a>
+</div>
 <div class="credits">
     <div class="credits__author user">
         <dl class="credits____name">
