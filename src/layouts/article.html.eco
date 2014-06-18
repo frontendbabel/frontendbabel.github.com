@@ -2,3 +2,39 @@
 layout: page
 ---
 <%- @content %>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits____name">
+            <dt class="credits_var">Author:</dt>
+            <dd class="user__name">
+                <%- @document.author.name %>
+            </dd>
+        </dl>
+        <% if @document.author.github: %>
+            <dl class="credits____github">
+                <dt class="credits_var">GitHub:</dt>
+                <dd class="user__name">
+                    <%- @document.author.github %>
+                </dd>
+            </dl>
+        <% end %>
+        <% if @document.author.twitter: %>
+            <dl class="credits____twitter">
+                <dt class="credits_var">Twitter:</dt>
+                <dd class="user__name">
+                    <%- @document.author.twitter %>
+                </dd>
+            </dl>
+        <% end %>
+        <% if @document.author.site: %>
+            <dl class="credits____site">
+                <dt class="credits_var">Site:</dt>
+                <dd class="user__name">
+                    <a href="<%- @document.author.site %>">
+                        <%- @document.author.site %>
+                    </a>
+                </dd>
+            </dl>
+        <% end %>
+    </div>
+</div>
