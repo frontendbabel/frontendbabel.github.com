@@ -4,6 +4,6 @@
     "dependencies": {
         "bem-core": "bem/bem-core#v2.2.0",
         "bem-components": "bem/bem-components#231b03867325a51a33ae6bdd300b12946944a4de",
-        "bem-highlight.js" : "varya/bem-highlight.js#v0.2.1"
+        "bem-highlight.js" : "varya/bem-highlight.js#v0.2.2"
     }
 }
