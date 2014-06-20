@@ -45,6 +45,9 @@
             block: 'content',
             content: [
                 {
+                    block: 'text-header'
+                },
+                {
                     block: 'posts-list',
                     content: [
                         {

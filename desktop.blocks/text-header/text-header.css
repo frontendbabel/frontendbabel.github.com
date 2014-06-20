@@ -1,0 +1,19 @@
+.text-header__anchor
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+.text-header__anchor:before
+{
+    content: '# ';
+    display: block;
+    position: absolute;
+    margin-left: -1em;
+    visibility: hidden;
+}
+
+.text-header__anchor:hover::before
+{
+    visibility: visible;
+}
