@@ -97,7 +97,7 @@ events:
                         .replace(/[^\w\-]/g, '')
                         .toLowerCase()
                     fulltag += "id='##{anchor}'"
-                "<#{fulltag}><a href=\"\##{anchor}\" class=\"text-header__anchor\"></a>#{header}</#{name}>"
+                "<#{fulltag}><a href=\"\##{anchor}\" class=\"text-header__anchor\">#{header}</a></#{name}>"
 
 env: 'static'
 
