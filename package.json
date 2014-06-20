@@ -23,7 +23,8 @@
     "docpad-plugin-grunt": "~2.1.1",
     "docpad-plugin-highlightjs": "~2.2.1",
     "docpad-plugin-marked": "~2.2.1",
-    "docpad-plugin-rss": "~2.1.3"
+    "docpad-plugin-rss": "~2.1.3",
+    "docpad-plugin-services": "~2.6.0"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {
