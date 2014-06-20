@@ -100,3 +100,4 @@ layout: page
         <% end %>
     </div>
 </div>
+<%- @getDisqus() %>

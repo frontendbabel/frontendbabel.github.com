@@ -14,6 +14,10 @@ plugins:
 
 templateData:
 
+    site:
+        services:
+            disqus: 'frontendbabel'
+
     cutTag: '<!-- cut -->'
 
     # Post part before “cut”
