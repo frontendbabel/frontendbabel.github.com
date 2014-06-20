@@ -10,7 +10,7 @@ plugins:
             collection: 'articles'
     grunt:
         writeAfter: false
-        generateAfter: ["bem", "copy"]
+        generateAfter: ["shell", "copy"]
 
 templateData:
 
