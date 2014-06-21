@@ -11,6 +11,17 @@ plugins:
     grunt:
         writeAfter: false
         generateAfter: ["shell", "copy"]
+    marked:
+        markedRenderer:
+            heading: (text, level)->
+                anchor = text.toLowerCase().replace(/[^\w]+/g, '-');
+                anchor = text.replace /<\/?\w+(?:\s.+?)*>/g, '';
+                anchor = anchor
+                    .trim()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\w\-]/g, '')
+                    .toLowerCase()
+                "<h#{level} class=\"text-header text-header_lvl_#{level}\"><a href=\"\##{anchor}\" class=\"text-header__anchor\">#{text}</a></h#{level}>"
 
 templateData:
 
@@ -72,32 +83,6 @@ collections:
               source: a.source || {},
               translator: a.translator || {}
             })
-
-events:
-    renderDocument: (opts) ->
-        {extension,file} = opts
-        if file.type is 'document' and extension is 'html'
-            opts.content = opts.content.replace /<((h(\d)).*?)>(.+?)<\/\2>/g, (str, fulltag, name, level, header) ->
-                if /<a\s+[^>]*class="text-header__anchor/.test(header)
-                    return str
-                # add class
-                if !fulltag.match(/class=/)
-                    fulltag += " class='text-header text-header_lvl_#{level}'"
-                idRe = /^.*?id=('|")(.+?)\1.*?$/g
-                if fulltag.match(idRe)
-                    anchor = fulltag.replace idRe, (fulltag, quote, id) ->
-                        id
-                else
-                    anchor = ''
-                if anchor == ''
-                    anchor = header.replace /<\/?\w+(?:\s.+?)*>/g, '';
-                    anchor = anchor
-                        .trim()
-                        .replace(/\s+/g, '-')
-                        .replace(/[^\w\-]/g, '')
-                        .toLowerCase()
-                    fulltag += "id='##{anchor}'"
-                "<#{fulltag}><a href=\"\##{anchor}\" class=\"text-header__anchor\">#{header}</a></#{name}>"
 
 env: 'static'
 
