@@ -48,6 +48,9 @@
                     block: 'text-header'
                 },
                 {
+                    block: 'article'
+                },
+                {
                     block: 'posts-list',
                     content: [
                         {
