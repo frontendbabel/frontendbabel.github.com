@@ -1,20 +1,23 @@
 ---
 layout: page
 ---
-<%- @content %>
+<article class="article">
+<div class="article__text">
+    <%- @content %>
+</div>
 <div class="article-source">
     <% if @document.source.lang: %>
-        <i class="flag-<%- @document.source.lang.toUpperCase() %>"></i>
+        <i class="article-source__flag flag-<%- @document.source.lang.toUpperCase() %>"></i>
     <% end %>
-    <a href="<%- @document.source.url %>">
+    <a class="link article-source__link" href="<%- @document.source.url %>">
         <%- @document.source.name %>
     </a>
 </div>
 <div class="credits">
     <div class="credits__author user">
-        <dl class="credits____name">
-            <dt class="credits_var">Author:</dt>
-            <dd class="user__name">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
                 <% if @document.author.site: %>
                     <a href="<%- @document.author.site %>">
                         <%- @document.author.name %>
@@ -25,9 +28,9 @@ layout: page
             </dd>
         </dl>
         <% if @document.author.github: %>
-            <dl class="credits____github">
-                <dt class="credits_var">GitHub:</dt>
-                <dd class="user__name">
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
                     <a href="https://github.com/<%- @document.author.github %>">
                         <%- @document.author.github %>
                     </a>
@@ -35,9 +38,9 @@ layout: page
             </dl>
         <% end %>
         <% if @document.author.twitter: %>
-            <dl class="credits____twitter">
-                <dt class="credits_var">Twitter:</dt>
-                <dd class="user__name">
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
                     <a href="https://twitter.com/<%- @document.author.twitter %>">
                         @<%- @document.author.twitter %>
                     </a>
@@ -45,9 +48,9 @@ layout: page
             </dl>
         <% end %>
         <% if @document.author.site: %>
-            <dl class="credits____site">
-                <dt class="credits_var">Site:</dt>
-                <dd class="user__name">
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
                     <a href="<%- @document.author.site %>">
                         <%- @document.author.site %>
                     </a>
@@ -56,9 +59,9 @@ layout: page
         <% end %>
     </div>
     <div class="credits__translator user">
-        <dl class="credits____name">
-            <dt class="credits_var">Translator:</dt>
-            <dd class="user__name">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
                 <% if @document.translator.site: %>
                     <a href="<%- @document.translator.site %>">
                         <%- @document.translator.name %>
@@ -69,9 +72,9 @@ layout: page
             </dd>
         </dl>
         <% if @document.translator.github: %>
-            <dl class="credits____github">
-                <dt class="credits_var">GitHub:</dt>
-                <dd class="user__name">
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
                     <a href="https://github.com/<%- @document.translator.github %>">
                         <%- @document.translator.github %>
                     </a>
@@ -79,9 +82,9 @@ layout: page
             </dl>
         <% end %>
         <% if @document.translator.twitter: %>
-            <dl class="credits____twitter">
-                <dt class="credits_var">Twitter:</dt>
-                <dd class="user__name">
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
                     <a href="https://twitter.com/<%- @document.translator.twitter %>">
                         @<%- @document.translator.twitter %>
                     </a>
@@ -89,9 +92,9 @@ layout: page
             </dl>
         <% end %>
         <% if @document.translator.site: %>
-            <dl class="credits____site">
-                <dt class="credits_var">Site:</dt>
-                <dd class="user__name">
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
                     <a href="<%- @document.translator.site %>">
                         <%- @document.translator.site %>
                     </a>
@@ -100,4 +103,7 @@ layout: page
         <% end %>
     </div>
 </div>
+</article>
+<comments class="comments">
 <%- @getDisqus() %>
+</comments>

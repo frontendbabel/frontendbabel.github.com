@@ -1,0 +1,27 @@
+.article-source
+{
+    background-color: #7294D4;
+    position: relative;
+    padding: 0.5em;
+    margin-top: 3em;
+}
+
+.article-source::before
+{
+    content: 'source';
+    color: #7294D4;
+    font-size: 36px;
+    display: block;
+    position: absolute;
+    top: -36px;
+    left: 0px;
+    font-weight: bold;
+}
+
+.article-source__link
+{
+    color: #FFF;
+    text-decoration: none;
+    border: #FFF dotted;
+    border-width: 0 0 1px 0;
+}
