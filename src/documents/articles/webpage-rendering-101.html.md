@@ -61,7 +61,7 @@ Browsers are doing their best to restrict repaint/reflow to the area that covers
 
 Other optimization technique is that while running pieces of JavaScript code, browsers cache the changes, and appl them in a single pass after the code was run. For example, this piece of code will only trigger one reflow and repaint:
 
-```
+```js
 var $body = $('body');
 $body.css('padding', '1px'); // reflow, repaint
 $body.css('color', 'red'); // repaint
@@ -71,7 +71,7 @@ $body.css('margin', '2px'); // reflow, repaint
 
 However, as mentioned above, accessing an element property triggers a forced reflow. This will happen if we add an extra line that reads an element property to the previous block:
 
-```
+```js
 var $body = $('body');
 $body.css('padding', '1px');
 $body.css('padding'); // reading a property, a forced reflow
@@ -85,7 +85,7 @@ There are situations when you have to trigger a forced reflow. Example: we have 
 
 We start by creating a CSS class with a transition:
 
-```
+```css
 .has-transition {
    -webkit-transition: margin-left 1s ease-out;
       -moz-transition: margin-left 1s ease-out;
@@ -96,7 +96,7 @@ We start by creating a CSS class with a transition:
 
 Then proceed with the implementation:
 
-```
+```js
 var $targetElem = $('#targetElemId'); // our element that has a "has-transition" class by default
 
 // remove the transition class
@@ -114,7 +114,7 @@ $targetElem.css('margin-left', 50);
 
 This implementation, however, does not work as expected. The changes are cached and applied only at the end of the code block. What we need is a forced reflow, which we can achieve by making the following changes:
 
-```
+```js
 // remove the transition class
 $(this).removeClass('has-transition');
 
@@ -148,7 +148,8 @@ Summarizing the available information, I could recommend the following:
   1. Attribute selector: `input[type="text"]`
   1. Pseudoclasses and pseudoelements: `a:hover`
 You should remember that browsers process selectors from right to left, that's why the rightmost selector should be the fastest one — either `#id` or `.class`:
-```
+
+```css
 div * {...} // bad
 .list li {...} // bad
 .list-item {...} // good
