@@ -4,6 +4,9 @@ layout: page
 <article class="article">
 <div class="article__text text">
     <%- @content %>
+    <div class="article__date">
+        <%= @moment(@document.date).format('Do MMMM YYYY') %>
+    </div>
 </div>
 <div class="article-source">
     <% if @document.source.lang: %>

@@ -11,6 +11,14 @@ plugins:
     grunt:
         writeAfter: false
         generateAfter: ["shell", "copy"]
+    ghpages:
+        deployRemote: 'origin'
+        deployBranch: 'master'
+    moment:
+        formats: [
+            {raw: 'date', format: 'Do MMMM YYYY', formatted: 'humanDate'}
+            {raw: 'date', format: 'YYYY-MM-DD', formatted: 'computerDate'}
+        ]
     marked:
         markedRenderer:
             heading: (text, level)->
