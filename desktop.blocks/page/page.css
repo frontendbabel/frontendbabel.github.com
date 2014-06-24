@@ -9,12 +9,29 @@
 {
     background: #fff;
     font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
     max-width: 900px;
     margin: 0 auto;
 }
 
 .page__title
 {
-    font-size: 1.6em;
+    font-size: 1.8em;
     margin: 0;
+    font-weight: 300;
+}
+
+.text-header
+{
+    font-weight: 300;
+}
+
+.text-header_lvl_2
+{
+    font-size: 1.4em;
+}
+
+.text-header_lvl_3
+{
+    font-size: 1.2em;
 }
