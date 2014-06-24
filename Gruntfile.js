@@ -17,6 +17,11 @@ module.exports = function(grunt) {
                 files: {
                     "out/": ["desktop.bundles/*/*.min.*"]
                 }
+            },
+            cname: {
+                files: {
+                    "out/": ["./CNAME"]
+                }
             }
         }
     });
