@@ -24,6 +24,8 @@ plugins:
                 "<h#{level} class=\"text-header text-header_lvl_#{level}\"><a href=\"\##{anchor}\" class=\"text-header__anchor\">#{text}</a></h#{level}>"
             paragraph: (text) ->
                 "<p class=\"text__p\">#{text}</p>"
+            image: (src) ->
+                "<img class=\"text-image i-bem\" data-bem='{ \"text-image\": {} }'  src=\"#{src}\"/>"
 
 templateData:
 
