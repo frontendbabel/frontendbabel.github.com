@@ -9,10 +9,7 @@
 {
     font-family: Menlo, Monaco, Courier New, monospace, serif;
     font-size: 90%;
-}
-
-.content p code
-{
+    background-color: rgba(0,0,0, 0.05);
+    font-weight: 300;
     padding: 1px 5px;
-    background-color: #f0f0f0;
 }
