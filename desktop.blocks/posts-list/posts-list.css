@@ -15,3 +15,8 @@
     display: block;
     font-size: 1.4em;
 }
+
+.post-list__meta
+{
+    font-size: 0.8em;
+}
