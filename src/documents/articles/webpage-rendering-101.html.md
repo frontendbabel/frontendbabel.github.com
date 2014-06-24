@@ -17,8 +17,6 @@ translator:
 
 ---
 
-Translated from: [Habrahabr.ru](http://habrahabr.ru/post/224187/)
-
 Today I'd like to focus on the subject of web page rendering and why it is important in web development. A lot of articles are available covering the subject, but the information is scattered and somehow fragmented. To wrap my head around the subject, for example, I had to study a lot of sources. That's why I decided I should write this article. I believe the article will be useful for beginners as well as for more advanced developers who want to refresh and structure what they already know.
 
 <!-- cut -->
