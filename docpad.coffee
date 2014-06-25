@@ -75,6 +75,8 @@ collections:
                     layout: layout
                 })
                 .addUrl(urls)
+    menu: (database) ->
+        @getCollection('pages').findAllLive({ order: $ne: false })
 
     articles: (database) ->
         @getCollection('documents').findAllLive({ relativeOutDirPath: 'articles' }).on 'add', (document)->
