@@ -35,5 +35,10 @@ what she or he does, along with some links or promos.
 It's a good idea to notify the original author about your translation plans and make sure you do not infringe any
 copyrights. We respect the law.
 
-Contact us if you're interested, and let's rock!
+If you are interested and ready to contribute, follow the next page:
+ * [How to contribute](/how-to-contribute)
 
+And let's rock!
+
+To contact us [create an issue on GitHub](https://github.com/frontendbabel/frontendbabel.github.com/issues/new)
+or write an email to [mail@varya.me](mailto:mail@varya.me).
