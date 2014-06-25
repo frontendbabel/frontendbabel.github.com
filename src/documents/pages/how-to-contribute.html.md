@@ -14,6 +14,9 @@ If you are ready to push new translation, then
 1. [Add an article text](#workign-with-articles-texts)
 1. Make a pull request with your changes to an original repo
 
+If you only want to suggest an article for future translation,
+[create an issue](https://github.com/frontendbabel/frontendbabel.github.com/issues/new).
+
 ## Set up the project locally
 1. Fork [the original repository](https://github.com/frontendbabel/frontendbabel.github.com)
 1. Clone your repository and run:
