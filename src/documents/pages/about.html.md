@@ -3,7 +3,7 @@ title: About
 order: 2
 ---
 
-## About Frontend Babel
+# About Frontend Babel
 
 The world is diverse. We frontend developers work in different companies, live on different continents, look different and act different, yet we have something in common: **the passion**. Passion for discovering new, sharing what we already know, and reaching out for impossible.
 

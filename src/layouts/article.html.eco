@@ -2,6 +2,7 @@
 layout: page
 ---
 <article class="article">
+<h1 class="page__title"><%- @document.title %></h1>
 <div class="article__text text">
     <%- @content %>
     <div class="article__date">
