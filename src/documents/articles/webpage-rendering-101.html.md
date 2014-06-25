@@ -8,7 +8,7 @@ source:
 
 author:
   name: Alexander Skutin
-  site: http://habrahabr.ru/users/skutin/
+  site: http://skutin.ru/
 
 translator:
   name: Max Shirshin
