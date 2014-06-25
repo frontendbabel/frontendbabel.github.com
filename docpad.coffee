@@ -29,7 +29,7 @@ plugins:
                     .replace(/\s+/g, '-')
                     .replace(/[^\w\-]/g, '')
                     .toLowerCase()
-                "<h#{level} class=\"text-header text-header_lvl_#{level}\"><a href=\"\##{anchor}\" class=\"text-header__anchor\">#{text}</a></h#{level}>"
+                "<h#{level} class=\"text-header text-header_lvl_#{level}\" id=\"#{anchor}\"><a href=\"\##{anchor}\" class=\"text-header__anchor\">#{text}</a></h#{level}>"
             paragraph: (text) ->
                 "<p class=\"text__p\">#{text}</p>"
             image: (src) ->
@@ -75,6 +75,8 @@ collections:
                     layout: layout
                 })
                 .addUrl(urls)
+    menu: (database) ->
+        @getCollection('pages').findAllLive({ order: $ne: false })
 
     articles: (database) ->
         @getCollection('documents').findAllLive({ relativeOutDirPath: 'articles' }).on 'add', (document)->
