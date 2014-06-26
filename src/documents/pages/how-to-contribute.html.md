@@ -19,7 +19,7 @@ Find a nice article in a language you know, translate it into English and publis
 With mentioning this project in social networks and your blog posts you can involve people from
 all over the world!
 * Fix English in the texts<br/>
-If you spotted a grammar error, you can edit an article (the is a link to editor below) and propose
+If you spotted a grammar error, you can edit an article (there is a link to editor below) and propose
 your pull request.
 * Propose site changes<br/>
 Suggest what can be improved in this web site with adding your ideas in [the list of
