@@ -54,6 +54,7 @@ templateData:
     # Has “cut”?
     hasReadMore: (content) ->
         content and ((content.search @cutTag) isnt -1)
+
     hlp:
         pageTitle: (document) ->
             switch document.layout
@@ -96,11 +97,18 @@ collections:
                     layout: layout
                 })
 
+            repo = {
+                owner: 'frontendbabel'
+                name: 'frontendbabel.github.com'
+                branch: 'source'
+            }
+
             # Normalize meta info
             document.set({
               author: a.author || {},
               source: a.source || {},
-              translator: a.translator || {}
+              translator: a.translator || {},
+              sourcePath: ['https://github.com', repo.owner, repo.name, 'edit', repo.branch, 'src/documents', a.relativePath].join('/')
             })
 
 env: 'static'
