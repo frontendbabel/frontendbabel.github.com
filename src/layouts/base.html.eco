@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title><%= @document.title %></title>
+    <title><%= @hlp.pageTitle(@document) %></title>
     <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
 </head>
