@@ -108,6 +108,10 @@ layout: page
     </div>
 </div>
 </article>
+<div>
+If you've stopped a mistake, feel free to
+<a href="<%- @document.sourcePath %>">edit it on GitHub</a>.
+</div>
 <comments class="comments">
 <%- @getDisqus() %>
 </comments>
