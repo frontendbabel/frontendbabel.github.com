@@ -54,6 +54,11 @@ templateData:
     # Has “cut”?
     hasReadMore: (content) ->
         content and ((content.search @cutTag) isnt -1)
+    hlp:
+        pageTitle: (document) ->
+            switch document.layout
+                when 'index' then "Frontend Babel. Articles and blog posts from all over the world"
+                else "#{document.title} — Frontend Babel"
 
 collections:
 
