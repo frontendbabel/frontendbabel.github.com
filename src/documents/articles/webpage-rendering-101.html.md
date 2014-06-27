@@ -95,12 +95,14 @@ We start by creating a CSS class with a transition:
 Then proceed with the implementation:
 
 ```js
-var $targetElem = $('#targetElemId'); // our element that has a "has-transition" class by default
+// our element that has a "has-transition" class by default
+var $targetElem = $('#targetElemId');
 
 // remove the transition class
 $targetElem.removeClass('has-transition');
 
-// change the property expecting the transition to be off, as the class is not there anymore
+// change the property expecting the transition to be off, as the class is not there
+// anymore
 $targetElem.css('margin-left', 100);
 
 // put the transition class back
