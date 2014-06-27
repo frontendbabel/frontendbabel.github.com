@@ -34,6 +34,10 @@ plugins:
                 "<p class=\"text__p\">#{text}</p>"
             image: (src) ->
                 "<img class=\"text-image i-bem\" data-bem='{ \"text-image\": {} }'  src=\"#{src}\"/>"
+            code: (text, lang) ->
+                params = "{}"
+                lang && params = "{ \"lang\": \"#{lang}\"}"
+                "<pre class=\"highlight i-bem\" data-bem='{ \"highlight\": #{params} }'><code>#{text}</code></pre>"
 
 templateData:
 

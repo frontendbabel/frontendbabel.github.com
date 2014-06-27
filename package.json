@@ -22,7 +22,6 @@
     "docpad-plugin-eco": "~2.0.3",
     "docpad-plugin-grunt": "~2.1.1",
     "docpad-plugin-ghpages": "~2.4.3",
-    "docpad-plugin-highlightjs": "~2.2.1",
     "docpad-plugin-marked": "git://github.com/varya/docpad-plugin-marked.git#compiled",
     "docpad-plugin-moment": "~2.0.2",
     "docpad-plugin-rss": "~2.1.3",
