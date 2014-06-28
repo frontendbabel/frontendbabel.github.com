@@ -5,6 +5,8 @@
     <title><%= @hlp.pageTitle(@document) %></title>
     <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body class="page">
     <header class="header">
