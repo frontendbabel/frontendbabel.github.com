@@ -21,7 +21,6 @@
     margin-top: 3em;
     display: table-cell;
     width: 50%;
-    /*border-right: #FFF 1em solid;*/
 }
 
 .credits__author::before
