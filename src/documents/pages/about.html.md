@@ -6,13 +6,13 @@ order: 2
 # About Frontend Babel
 
 The world is diverse. We frontend developers work in different companies, live on different continents, look different
-and act different, yet we have something in common: **the passion**. Passion for discovering new, sharing what we
-already know, and reaching out for impossible.
+and act different, yet we have something in common: **the passion**. Passion for discovering what is new, sharing what we
+already know, and reaching out for the impossible.
 
-That's why we decided to start **Frontend Babel** — an online hub for publishing amateur English translations of
+That's why we decided to start **Frontend Babel** — an online hub for publishing English translations of
 frontend articles originally written in other languages.
 
-Not all authors have time or resources or skills to make an English version of what they write. Other people from the
+Not all authors have time, resources or skills to make an English version of what they write. Other members of the
 community can change that, contributing their translations and helping the world discover new frontend stars, experts,
 and innovators. Across boundaries.
 
@@ -23,14 +23,13 @@ they cannot access — because of the language boundaries, as old as
 
 ## How To Help
 
-We are a community project, that means you can join us if you want. We are looking for people with bilingual or
-professional proficiency in English who want to translate frontend-related materials, articles, and publications
-from non-English languages.
+We are a community project – that means you can join us if you want. We are looking for bilingual people with professional proficiency in English who want to translate frontend-related materials, articles, and publications
+from other languages.
 
-We are not strict with requirements. However, we only publish materials that were never translated to English before,
-and topic should be frontend-oriented, i.e. HTML/CSS/JavaScript and UX are specifically welcome. Other relevant
-technologies can be considered, too. For each translator, our web site will be glad to publish a short summary of
-what she or he does, along with some links or promos.
+We are not strict about the requirements. However, we only publish materials that were never translated to English before,
+and the topic should be frontend-oriented, i.e. HTML/CSS/JavaScript and UX are specifically welcome. Other relevant
+technologies can be considered too. For each translator our website will be glad to publish a short summary of
+what she or he does, along with some links or promotional information.
 
 It's a good idea to notify the original author about your translation plans and make sure you do not infringe any
 copyrights. We respect the law.
