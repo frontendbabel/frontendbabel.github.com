@@ -26,7 +26,7 @@
 .credits__author::before
 {
     content: 'Author';
-    font-size: 36px;
+    font-size: 2em;
     display: block;
 }
 
@@ -44,7 +44,7 @@
 .credits__translator::before
 {
     content: 'Translator';
-    font-size: 36px;
+    font-size: 2em;
     display: block;
 }
 
