@@ -1,6 +1,8 @@
 ---
 title: Graphical interface: a shaped emotion, a message in a well-defined system
 
+date: 2014-06-30
+
 source:
   name: Графический интерфейс
   url: https://medium.com/@kovchiy/70bb2d0d58be

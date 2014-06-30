@@ -1,6 +1,8 @@
 ---
 title: What Every Frontend Developer Should Know About Webpage Rendering
 
+date: 2014-06-30
+
 source:
   name: Рендеринг WEB-страницы: что об этом должен знать front-end разработчик
   url: http://habrahabr.ru/post/224187/
