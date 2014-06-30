@@ -42,6 +42,8 @@ plugins:
 templateData:
 
     site:
+        title: 'Frontend Babel'
+        description: 'Articles and blog posts from all over the world.'
         services:
             disqus: 'frontendbabel'
 
