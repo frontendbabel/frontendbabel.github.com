@@ -43,7 +43,7 @@ templateData:
 
     site:
         title: 'Frontend Babel'
-        description: 'Articles and blog posts from all over the world.'
+        description: 'Articles and blog posts from all over the world. Translated INTO English.'
         services:
             disqus: 'frontendbabel'
 
