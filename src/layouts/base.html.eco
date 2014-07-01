@@ -10,7 +10,8 @@
 </head>
 <body class="page">
     <header class="header">
-        <div class="logo">Frontend Babel</div>
+    <div class="logo">
+        <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i></div>
         <ul class="site-menu">
         <% for page in @getCollection("menu").findAll({}, [{order:1}]).toJSON(): %>
             <li class="site-menu__item <%- 'site-menu__item_current' if page.id == @document.id %>">
