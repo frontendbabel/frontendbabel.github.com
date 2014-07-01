@@ -1,5 +1,6 @@
 ---
 title: How to contribute
+order: 3
 ---
 
 # How to contribute
