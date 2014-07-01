@@ -5,3 +5,15 @@
     padding: 1.25em 0;
     font-size: 18px;
 }
+
+.header:before,
+.header:after
+{
+    content: " ";
+    display: table;
+}
+
+.header:after
+{
+    clear: both;
+}
