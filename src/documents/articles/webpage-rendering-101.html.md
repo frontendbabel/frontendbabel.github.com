@@ -57,9 +57,9 @@ When the changes affect document contents or structure, or element position, a r
 
 ## How browsers optimize rendering
 
-Browsers are doing their best to restrict repaint/reflow to the area that covers the changed elements only. For eaxmple, a size change in an absolute/fixed positioned element only affects the element itself and its descendants, whereas a similar change in a statically positioned element triggers reflow for all the subsequent elements.
+Browsers are doing their best to restrict repaint/reflow to the area that covers the changed elements only. For example, a size change in an absolute/fixed positioned element only affects the element itself and its descendants, whereas a similar change in a statically positioned element triggers reflow for all the subsequent elements.
 
-Other optimization technique is that while running pieces of JavaScript code, browsers cache the changes, and appl them in a single pass after the code was run. For example, this piece of code will only trigger one reflow and repaint:
+Another optimization technique is that while running pieces of JavaScript code, browsers cache the changes, and apply them in a single pass after the code was run. For example, this piece of code will only trigger one reflow and repaint:
 
 ```js
 var $body = $('body');
@@ -159,7 +159,7 @@ div * {...} // bad
 ```
 1. In your scripts, minimize DOM manipulation whenever possible. Cache everything, including properties and objects (if they are to be reused). It's better to work with an "offline" element when performing complicated manipulations (an "offline" element is one that is disconnected from DOM and only stored in memory), and append it to DOM afterwards.
 1. If you use jQuery to select elements, follow <a href="http://learn.jquery.com/performance/optimize-selectors/">jQuery selectors best practices</a>.
-1. To change element's styles, modifying the "class" attribute is one of the most performant ways. The deeper in the DOM tree you perform this change, the better (also because this helps decouple logics from presentation).
+1. To change element's styles, modifying the "class" attribute is one of the most performant ways. The deeper in the DOM tree you perform this change, the better (also because this helps decouple logic from presentation).
 1. Animate only absolute/fixed positioned elements if you can.
 1. It is a good idea to disable complicated `:hover` animations while scrolling (e.g. by adding an extra "no-hover" class to &lt;body&gt;). <a href="http://habrahabr.ru/post/204238/">Read an article on the subject</a>.
 
