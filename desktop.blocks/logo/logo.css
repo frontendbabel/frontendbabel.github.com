@@ -1,4 +1,23 @@
 .logo
 {
-    font-size: 60px;
+    font-family: Menlo, Monaco, Courier New, monospace, serif;
+    font-size: 45px;
+}
+
+.logo__symb
+{
+    color: #bd3613;
+    font-style: normal;
+}
+
+.logo__fr
+{
+    color: #859900;
+    font-style: normal;
+}
+
+.logo__bl
+{
+    color: #b58900;
+    font-style: normal;
 }
