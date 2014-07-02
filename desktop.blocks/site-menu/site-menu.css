@@ -10,10 +10,14 @@
 .site-menu__item
 {
     display: table-cell;
-    padding: 1em 1.6em;
 }
 
 .site-menu__item_current
 {
     background-color: #ddd;
+}
+
+.site-menu__text {
+	display: block;
+	padding: 1em 1.6em;
 }

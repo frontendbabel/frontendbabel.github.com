@@ -10,6 +10,7 @@
     display: block;
     position: absolute;
     margin-left: -1em;
+	padding-right: 1em;
     visibility: hidden;
 }
 
