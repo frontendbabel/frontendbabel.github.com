@@ -19,8 +19,5 @@
 
 .site-menu__text {
 	display: block;
-	padding: 1em 2em;
-}
-a.site-menu__text:hover {
-	text-decoration: none;
+	padding: 1em 1.6em;
 }
