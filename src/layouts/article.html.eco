@@ -21,7 +21,7 @@ layout: page
     <% if @document.source.lang: %>
         [<%- @document.source.lang.toUpperCase() %>]
     <% end %>
-    <a class="link article-source__link" href="<%- @document.source.url %>" lang="<%- @document.source.lang.toUpperCase() %>">
+    <a class="link article-source__link" href="<%- @document.source.url %>" rel="alternate" hreflang="<%- @document.source.lang.toLowerCase() %>">
         <%- @document.source.name %>
     </a>
 </div>
