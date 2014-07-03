@@ -19,9 +19,9 @@ layout: page
 </div>
 <div class="article-source">
     <% if @document.source.lang: %>
-        <i class="article-source__flag flag-<%- @document.source.lang.toUpperCase() %>"></i>
+        [<%- @document.source.lang.toUpperCase() %>]
     <% end %>
-    <a class="link article-source__link" href="<%- @document.source.url %>">
+    <a class="link article-source__link" href="<%- @document.source.url %>" lang="<%- @document.source.lang.toUpperCase() %>">
         <%- @document.source.name %>
     </a>
 </div>

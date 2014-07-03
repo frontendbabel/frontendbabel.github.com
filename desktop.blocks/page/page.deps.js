@@ -5,7 +5,6 @@
             elems: [ 'pt-sans' ]
         },
         { block: 'social-likes-panel' },
-        { block: 'highlight' },
-        { block: 'flags' }
+        { block: 'highlight' }
     ]
 })
