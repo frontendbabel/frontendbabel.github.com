@@ -88,3 +88,51 @@ browser-extention/
 
 The build runs with [gulp](http://gulpjs.com/), a "reconsidered" build system under NodeJS. I recommend to intall node
 if you are not using it yet, you will be able to enjoy a all the profiets of npm world.
+
+### Platform-dependent code
+
+To begin with the most improrant, if you are staring a new project or want to adapt another one, you should clearly
+understand what are the needed platform-dependent calls and place them into a dedicated module.
+
+In my case there was only one such a call - getting our resourse URL from inside the app (here they are images). So I
+had a separate `browser.js` file.
+
+```js
+;(function (window) {
+    var app = window.app = window.app || {};
+
+    app.browser = {
+        name: 'Chrome',
+
+        getUrl: function (url) {
+            return chrome.extension.getURL(url);
+        }
+    };
+})(window);
+```
+
+The differ variants of this module are used for [Firefox](https://github.com/likeastore/browser-extension/blob/master/vendor/firefox/browser.js)
+and [Safari](https://github.com/likeastore/browser-extension/blob/master/vendor/safari/browser.js).
+
+The `browser.js` file can be extended with all the necessary calls for more complex cases and so be a facade between
+specific code and browser.
+
+```
+vendor/
+  chrome/
+    browser.js
+    manifest.json
+  firefox/
+    browser.js
+    main.js
+    package.json
+  safari/
+    browser.js
+    Info.plist
+    Settings.plist
+    Update.plist
+```
+
+Besides the facade platform-dependent code means also manifests and extention settings. They are `manifest.json` for
+Chrome, `main.js` and `package.json` for Firefox and `.plist` files for Safari such as `Info.plist`, `Settings.plist`,
+and `Update.plist`.
