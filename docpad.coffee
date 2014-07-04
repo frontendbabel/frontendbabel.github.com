@@ -1,6 +1,8 @@
 # DocPad Configuration File
 # http://docpad.org/docs/config
 
+moment = require 'moment'
+
 # Define the DocPad Configuration
 docpadConfig = {
 
@@ -66,6 +68,19 @@ templateData:
             switch document.layout
                 when 'index' then "Frontend Babel. Articles and blog posts from all over the world"
                 else "#{document.title} — Frontend Babel"
+        personLink: (person) ->
+            if person.site
+                "<a href=\"#{person.site}\">#{person.name}</a>"
+            else
+                person.name
+        articleCredits: (article) ->
+            "Written by #{@personLink(article.author)}#{@onDate(article.source.date)}; " +
+            "translated by #{@personLink(article.translator)}#{@onDate(article.date)}"
+        onDate: (date) ->
+            if date
+                " on " + moment(date).format('Do MMMM YYYY')
+            else
+                ""
 
 collections:
 

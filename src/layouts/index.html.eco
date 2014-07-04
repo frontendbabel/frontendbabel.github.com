@@ -7,12 +7,7 @@ layout: base
         <a class="link posts-list__link" href="<%- article.url %>"><%- article.title %></a>
         <%- @cuttedContent(article.contentRenderedWithoutLayouts) %>
         <div class="post-list__meta">
-            <time class="post-list__time">
-                <%= @moment(article.date).format('Do MMMM YYYY') %>
-            </time>
-            <% if article.source.lang: %>
-                <i class="post-list__flag flag-<%- article.source.lang.toUpperCase() %>"></i>
-            <% end %>
+            <%- @hlp.articleCredits(article) %>
         </div>
     </li>
 <% end %>
