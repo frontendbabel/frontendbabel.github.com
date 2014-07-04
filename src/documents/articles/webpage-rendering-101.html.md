@@ -5,6 +5,7 @@ date: 2014-06-30
 
 source:
   name: Рендеринг WEB-страницы: что об этом должен знать front-end разработчик
+  date: 2014-05-26
   url: http://habrahabr.ru/post/224187/
   lang: ru
 
