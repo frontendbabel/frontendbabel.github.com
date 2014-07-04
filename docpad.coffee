@@ -66,6 +66,16 @@ templateData:
             switch document.layout
                 when 'index' then "Frontend Babel. Articles and blog posts from all over the world"
                 else "#{document.title} — Frontend Babel"
+        personLink: (person) ->
+            if person.site
+                "<a href=\"#{person.site}\">#{person.name}</a>"
+            else
+                person.name
+        onDate: (val, date) ->
+            if val
+                "on #{date}"
+            else
+                ""
 
 collections:
 
