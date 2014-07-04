@@ -25,7 +25,8 @@
     "docpad-plugin-marked": "git://github.com/varya/docpad-plugin-marked.git#compiled",
     "docpad-plugin-moment": "~2.0.2",
     "docpad-plugin-rss": "~2.1.3",
-    "docpad-plugin-services": "~2.6.0"
+    "docpad-plugin-services": "~2.6.0",
+    "moment": "~2.0.0"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {

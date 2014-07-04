@@ -1,6 +1,8 @@
 # DocPad Configuration File
 # http://docpad.org/docs/config
 
+moment = require 'moment'
+
 # Define the DocPad Configuration
 docpadConfig = {
 
@@ -71,9 +73,12 @@ templateData:
                 "<a href=\"#{person.site}\">#{person.name}</a>"
             else
                 person.name
-        onDate: (val, date) ->
-            if val
-                "on #{date}"
+        articleCredits: (article) ->
+            "Written by #{@personLink(article.author)}#{@onDate(article.source.date)}; " +
+            "translated by #{@personLink(article.translator)}#{@onDate(article.date)}"
+        onDate: (date) ->
+            if date
+                " on " + moment(date).format('Do MMMM YYYY')
             else
                 ""
 

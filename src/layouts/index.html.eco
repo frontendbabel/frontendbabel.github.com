@@ -7,12 +7,7 @@ layout: base
         <a class="link posts-list__link" href="<%- article.url %>"><%- article.title %></a>
         <%- @cuttedContent(article.contentRenderedWithoutLayouts) %>
         <div class="post-list__meta">
-            Written by
-            <%- @hlp.personLink(article.author) %>
-            <%- @hlp.onDate(article.source.date, @moment(article.source.date).format('Do MMMM YYYY')) %>;
-            translated by
-            <%- @hlp.personLink(article.translator) %>
-            <%- @hlp.onDate(article.date, @moment(article.date).format('Do MMMM YYYY')) %>
+            <%- @hlp.articleCredits(article) %>
         </div>
     </li>
 <% end %>
