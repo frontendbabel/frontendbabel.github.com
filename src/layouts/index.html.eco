@@ -4,7 +4,16 @@ layout: base
 <ul class="posts-list">
 <% for article in @getCollection("articles").findAll({}, [{date:-1}]).toJSON().slice(0,20): %>
     <li class="posts-list__item">
-        <a class="link posts-list__link" href="<%- article.url %>"><%- article.title %></a>
+        <a class="link" href="<%- article.url %>">
+            <h2 class="post-list__title">
+                <%= article.title %>
+            </h2>
+        </a>
+        <% if article.subtitle: %>
+            <h3 class="post-list__subtitle">
+                <%= article.subtitle %>
+            </h3>
+        <% end %>
         <%- @cuttedContent(article.contentRenderedWithoutLayouts) %>
         <div class="post-list__meta">
             <%- @hlp.articleCredits(article) %>

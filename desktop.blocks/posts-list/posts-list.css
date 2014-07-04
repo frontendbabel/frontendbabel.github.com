@@ -10,10 +10,18 @@
     margin: 0 0 2em;
 }
 
-.posts-list__link
+.post-list__title
 {
-    display: block;
+    margin: 0;
     font-size: 1.4em;
+    font-weight: 300;
+}
+
+.post-list__subtitle
+{
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 300;
 }
 
 .post-list__meta
