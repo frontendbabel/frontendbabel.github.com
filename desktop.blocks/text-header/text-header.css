@@ -18,3 +18,20 @@
 {
     visibility: visible;
 }
+
+.text-header
+{
+    font-size: 1.8em;
+    margin: 0;
+    font-weight: 300;
+}
+
+.text-header_lvl_2
+{
+    font-size: 1.4em;
+}
+
+.text-header_lvl_3
+{
+    font-size: 1.2em;
+}
