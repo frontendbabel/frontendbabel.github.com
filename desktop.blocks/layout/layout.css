@@ -1,0 +1,9 @@
+.layout
+{
+    display: table;
+}
+
+.layout__col
+{
+    display: table-cell;
+}

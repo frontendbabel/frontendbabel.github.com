@@ -1,8 +1,8 @@
 .logo
 {
     font-family: Menlo, Monaco, Courier New, monospace, serif;
-    font-size: 45px;
-    float: left;
+    font-size: 2.5em;
+    line-height: 1em;
     text-decoration: none;
 }
 
