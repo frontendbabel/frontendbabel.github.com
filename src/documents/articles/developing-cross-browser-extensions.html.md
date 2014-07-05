@@ -5,6 +5,7 @@ source:
   name: Разработка кросс-браузерных расширений
   url: http://habrahabr.ru/company/likeastore/blog/227881/
   lang: ru
+  date: 2014-06-27
 
 author:
   name: Alexander Beletsky
@@ -136,3 +137,177 @@ vendor/
 Besides the facade platform-dependent code means also manifests and extention settings. They are `manifest.json` for
 Chrome, `main.js` and `package.json` for Firefox and `.plist` files for Safari such as `Info.plist`, `Settings.plist`,
 and `Update.plist`.
+
+### Automating build process with gulp
+
+The purpose of build process is to copy core code and platform-dependent code into folders tree expexted by browsers.
+
+Let's define 3 taska for that:
+
+```js
+var gulp     = require('gulp');
+var clean    = require('gulp-clean');
+var es       = require('event-stream');
+var rseq     = require('gulp-run-sequence');
+var zip      = require('gulp-zip');
+var shell    = require('gulp-shell');
+var chrome   = require('./vendor/chrome/manifest');
+var firefox  = require('./vendor/firefox/package');
+
+function pipe(src, transforms, dest) {
+    if (typeof transforms === 'string') {
+        dest = transforms;
+        transforms = null;
+    }
+
+    var stream = gulp.src(src);
+    transforms && transforms.forEach(function(transform) {
+        stream = stream.pipe(transform);
+    });
+
+    if (dest) {
+        stream = stream.pipe(gulp.dest(dest));
+    }
+
+    return stream;
+}
+
+gulp.task('clean', function() {
+    return pipe('./build', [clean()]);
+});
+
+gulp.task('chrome', function() {
+    return es.merge(
+        pipe('./libs/**/*', './build/chrome/libs'),
+        pipe('./img/**/*', './build/chrome/img'),
+        pipe('./js/**/*', './build/chrome/js'),
+        pipe('./css/**/*', './build/chrome/css'),
+        pipe('./vendor/chrome/browser.js', './build/chrome/js'),
+        pipe('./vendor/chrome/manifest.json', './build/chrome/')
+    );
+});
+
+gulp.task('firefox', function() {
+    return es.merge(
+        pipe('./libs/**/*', './build/firefox/data/libs'),
+        pipe('./img/**/*', './build/firefox/data/img'),
+        pipe('./js/**/*', './build/firefox/data/js'),
+        pipe('./css/**/*', './build/firefox/data/css'),
+        pipe('./vendor/firefox/browser.js', './build/firefox/data/js'),
+        pipe('./vendor/firefox/main.js', './build/firefox/data'),
+        pipe('./vendor/firefox/package.json', './build/firefox/')
+    );
+});
+
+gulp.task('safari', function() {
+    return es.merge(
+        pipe('./libs/**/*', './build/safari/likeastore.safariextension/libs'),
+        pipe('./img/**/*', './build/safari/likeastore.safariextension/img'),
+        pipe('./js/**/*', './build/safari/likeastore.safariextension/js'),
+        pipe('./css/**/*', './build/safari/likeastore.safariextension/css'),
+        pipe('./vendor/safari/browser.js', './build/safari/likeastore.safariextension/js'),
+        pipe('./vendor/safari/Info.plist', './build/safari/likeastore.safariextension'),
+        pipe('./vendor/safari/Settings.plist', './build/safari/likeastore.safariextension')
+    );
+});
+```
+
+The default task builds all the three extensions:
+
+```js
+gulp.task('default', function(cb) {
+    return rseq('clean', ['chrome', 'firefox', 'safari'], cb);
+});
+```
+
+Besides, for comfortable developing process it's good to watch over file changes and run background built:
+
+```js
+gulp.task('watch', function() {
+    gulp.watch(['./js/**/*', './css/**/*', './vendor/**/*', './img/**/*'], ['default']);
+});
+```
+
+### Ready to distribution
+
+Having the build finished, you will need to pack the extension into the format requested by browser extension storage. I
+have to note that in the Safari's case there is no such a store but they can show your extension is their gallery and
+link to where you host it if you match their requirements.
+
+For Chrome you only need to pack into `.zip`. It is signed and verified in the Chrome Web Store.
+
+```js
+gulp.task('chrome-dist', function () {
+    gulp.src('./build/chrome/**/*')
+        .pipe(zip('chrome-extension-' + chrome.version + '.zip'))
+        .pipe(gulp.dest('./dist/chrome'));
+});
+```
+
+Firefox procedure is a little bit more complex as you need to use SDK including `cfx` which can wrap your extention
+into an `.xpi` file.
+
+```js
+gulp.task('firefox-dist', shell.task([
+    'mkdir -p dist/firefox',
+    'cd ./build/firefox && ../../tools/addon-sdk-1.16/bin/cfx xpi --output-file=../../dist/firefox/firefox-extension-' + firefox.version + '.xpi > /dev/null',
+]));
+```
+
+As for Safari, that was a bummer. That turned out that to get `.safariextz` package you need to run Safari. I've spent a
+few hours to make work according to [the manual](http://stackoverflow.com/questions/3423522/how-can-i-build-a-safari-extension-package-from-the-command-line)
+but have not succeeded. The point is that it is not possible to convert your developer certificate into `.p12` and so
+you are not able to create the keys needed to sign a package. I still have to you Safari manually to pack the extention
+but so the disctibution task is as simple as copying of the `Update.plist` file.
+
+```js
+gulp.task('safari-dist', function () {
+    pipe('./vendor/safari/Update.plist', './dist/safari');
+});
+```
+
+### Summing up
+
+This is joy and pleasure to develop with a single repository. As I mentioned, I find Chrome as the most comfortable
+developing environment, so I provide all the changes for it first and test with it.
+
+```
+$ gulp watch
+```
+
+The next goes Firefox
+
+```
+$ gulp firefox-run
+```
+
+And then manual tampering with Safari.
+
+Once I need to release a new version, I update the manifests and so run
+
+```
+$ gulp dist
+```
+
+```
+dist/
+  chrome/
+    chrome-extention-1.0.10.zip
+    chrome-extention-1.0.6.zip
+    chrome-extention-1.0.8.zip
+    chrome-extention-1.0.9.zip
+  firefox/
+    firefox-extention-1.0.10.xpi
+    firefox-extention-1.0.6.xpi
+    firefox-extention-1.0.7.xpi
+    firefox-extention-1.0.8.xpi
+    firefox-extention-1.0.9.xpi
+  safari/
+    likeastore.safariextz
+    Update.plist
+```
+
+Finally there are ready-to-distribution files in the `dist` folder. This would be perfect if extention stores would have
+an API for uploading a new version, but they don't. This is done manually.
+
+Fore more details in code please proceed into [the repository](https://github.com/likeastore/browser-extension).
