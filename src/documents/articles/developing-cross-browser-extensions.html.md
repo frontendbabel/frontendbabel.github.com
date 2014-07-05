@@ -303,6 +303,6 @@ dist/
     Update.plist
 ```
 
-As a result, there are ready-to-distribution files in the `dist` folder. This would be perfect if extention stores would have an API for uploading a new version, but they don't. This is done manually.
+As a result, there are ready-to-distribution files in the `dist` folder. This would be perfect if extension stores would have an API for uploading a new version, but they don't. This is done manually.
 
 Fore more details and code please proceed to [the repository](https://github.com/likeastore/browser-extension).
