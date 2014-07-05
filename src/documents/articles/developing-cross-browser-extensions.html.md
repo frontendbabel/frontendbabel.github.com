@@ -1,5 +1,5 @@
 ---
-title: Developing Cross-browser Extensions
+title: Developing Cross-Browser Extensions
 
 source:
   name: Разработка кросс-браузерных расширений
@@ -21,41 +21,38 @@ translator:
 
 ---
 
-What do we do if needed to search something? Indeed, we go to our favorite search engine web site. This is quite hard to
-push yourself to use another search rather than your usual one even if you know that its result would be better. To
-change this UX pattern I developed [Likeastore Chrome
-Extension](https://chrome.google.com/webstore/detail/likeastore/einhadilfmpdfmmjnnppomcccmlohjad). It provides social
-part into your search flow showing relevant information from the article you liked. Besides Chrome we support Firefox
+What do we do if we have to search for something? Of course, we fire up our favorite search engine web site. It is quite hard to push yourself to use another a different search engine rather than the usual one, even if you know that the result would be better. To change this UX pattern I developed [Likeastore Chrome
+Extension](https://chrome.google.com/webstore/detail/likeastore/einhadilfmpdfmmjnnppomcccmlohjad). It adds social
+part to your search flow by showing relevant information from the article you liked. Besides Chrome we support Firefox
 and Safari. Despite the platform difference all these extentions are built from the same codebase.
 
 <!-- cut -->
 
 ## At the first set-out
-This began with me developing a simple Chrome extention. By the way, developing for Chrome was the most comfortable. I
-didn't go through the hassle of automatization just packing code into zip after some local testing and then uploaded
-this into the Web Store.
+This began with me developing a simple Chrome extention. By the way, developing for Chrome was very comfortable. I
+didn't go through the hassle of automation, just packed code into a zip after some local testing and then uploaded
+this to the Web Store.
 
-The Chrome extenstion was very welcomed by our customers which was proved my metrics and feedback and meant that we
-should continue. The next was Firefox as it has 15% or our traffic.
+The Chrome extension was very welcomed by our customers which had been proved by metrics and feedback and meant that we
+should continue. The next was Firefox as it has 15% of our traffic.
 
-The matter of browser extentions is the same. They are HTML/CSS/JavaScript applications with a manifest file where the
-content and the properties are described. So my initial idea was to copy the Chrome extention's repository and adapt
-code for Firefox.
+The basis of all browser extentions is the same: they are HTML/CSS/JavaScript applications with a manifest file where the
+content and the properties are described. So my initial idea was to copy the Chrome extention's repository and adjst
+the code for Firefox.
 
-While developing I had feeling of guilt for copy-paste familiar to many developers. Obviously 99% of code was the same
-for both extentions and it might bring problems with application support as functional was growing.
+While developing I had that guilty feeling for doing copy-paste; many developers must be familiar with it. Obviously, 99% of code was the same for both extentions and it could bring problems with application support as functional was growing.
 
 By a lucky chance I bumped into [octotree](https://github.com/buunguyen/octotree) extention (which I recommend to all
 active GitHub users) and met the need to fix a bag in it. When I cloned their repository and began to explore the code,
-I realized that all the octotree extentions a built from this repo code. Octotree is content injection application
+I realized that all the octotree extentions are built from this repo code. Octotree is a content injection application
 similar to Likeastore, so this pattern could be borrowed.
 
 I [fixed the bug](https://github.com/buunguyen/octotree/pull/60) and adapted and improved the compilation proccess
-according to the Likeastore needs. And, look what that resulted in.
+according with the Likeastore needs. Let's have a look what it turned to be.
 
 ## Application structure
 
-I propose the application structure which I believe is suitable for any extention.
+I propose the application structure which I believe is suitable for any extension.
 
 ```bash
 browser-extention/
@@ -79,7 +76,7 @@ browser-extention/
   README.md
 ```
 
-`build` and `dist` folders are generic and correspondingly contain source code and application for distribution.
+`build` and `dist` folders are generic and contain source code and application for distribution, respectively.
 
 `css`, `img`, and `js` hold source code of the application.
 
@@ -88,14 +85,14 @@ browser-extention/
 `tools` is a place for building utils.
 
 The build runs with [gulp](http://gulpjs.com/), a "reconsidered" build system under NodeJS. I recommend to intall node
-if you are not using it yet, you will be able to enjoy a all the profiets of npm world.
+if you are not using it yet, you will be able to enjoy all the profits of the npm world.
 
 ### Platform-dependent code
 
-To begin with the most improrant, if you are staring a new project or want to adapt another one, you should clearly
+To begin with the most important: if you are staring a new project or want to adapt another one, you should clearly
 understand what are the needed platform-dependent calls and place them into a dedicated module.
 
-In my case there was only one such a call - getting our resourse URL from inside the app (here they are images). So I
+In my case there was only one such call: getting our resourse URL from inside the app (here they are images). So I
 had a separate `browser.js` file.
 
 ```js
@@ -112,11 +109,11 @@ had a separate `browser.js` file.
 })(window);
 ```
 
-The differ variants of this module are used for [Firefox](https://github.com/likeastore/browser-extension/blob/master/vendor/firefox/browser.js)
+The different variants of this module are used for [Firefox](https://github.com/likeastore/browser-extension/blob/master/vendor/firefox/browser.js)
 and [Safari](https://github.com/likeastore/browser-extension/blob/master/vendor/safari/browser.js).
 
 The `browser.js` file can be extended with all the necessary calls for more complex cases and so be a facade between
-specific code and browser.
+the specific code and the browser.
 
 ```
 vendor/
@@ -134,15 +131,15 @@ vendor/
     Update.plist
 ```
 
-Besides the facade platform-dependent code means also manifests and extention settings. They are `manifest.json` for
+Besides the facade, platform-dependent code also means manifests and extention settings. They are `manifest.json` for
 Chrome, `main.js` and `package.json` for Firefox and `.plist` files for Safari such as `Info.plist`, `Settings.plist`,
 and `Update.plist`.
 
 ### Automating build process with gulp
 
-The purpose of build process is to copy core code and platform-dependent code into folders tree expexted by browsers.
+The purpose of a build process is to copy the core code and platform-dependent code into folders tree expected by the browsers.
 
-Let's define 3 taska for that:
+Let's define 3 tasks for that:
 
 ```js
 var gulp     = require('gulp');
@@ -220,7 +217,7 @@ gulp.task('default', function(cb) {
 });
 ```
 
-Besides, for comfortable developing process it's good to watch over file changes and run background built:
+In addition, a good idea that ensures comfortable development is to watch the file changes and run a background build:
 
 ```js
 gulp.task('watch', function() {
@@ -230,11 +227,11 @@ gulp.task('watch', function() {
 
 ### Ready to distribution
 
-Having the build finished, you will need to pack the extension into the format requested by browser extension storage. I
-have to note that in the Safari's case there is no such a store but they can show your extension is their gallery and
+Having the build finished, you need to pack the extension into a format requested by the browser extension storage. I
+have to note that in the Safari's case there is no such store but they can show your extension in their gallery and
 link to where you host it if you match their requirements.
 
-For Chrome you only need to pack into `.zip`. It is signed and verified in the Chrome Web Store.
+For Chrome, you only need to pack into a `.zip`. It is signed and verified in the Chrome Web Store.
 
 ```js
 gulp.task('chrome-dist', function () {
@@ -244,7 +241,7 @@ gulp.task('chrome-dist', function () {
 });
 ```
 
-Firefox procedure is a little bit more complex as you need to use SDK including `cfx` which can wrap your extention
+Firefox procedure is a little bit more complex as you need to use the SDK including `cfx` which can wrap your extension
 into an `.xpi` file.
 
 ```js
@@ -255,10 +252,9 @@ gulp.task('firefox-dist', shell.task([
 ```
 
 As for Safari, that was a bummer. That turned out that to get `.safariextz` package you need to run Safari. I've spent a
-few hours to make work according to [the manual](http://stackoverflow.com/questions/3423522/how-can-i-build-a-safari-extension-package-from-the-command-line)
-but have not succeeded. The point is that it is not possible to convert your developer certificate into `.p12` and so
-you are not able to create the keys needed to sign a package. I still have to you Safari manually to pack the extention
-but so the disctibution task is as simple as copying of the `Update.plist` file.
+few hours to make it work according to [the manual](http://stackoverflow.com/questions/3423522/how-can-i-build-a-safari-extension-package-from-the-command-line)
+but did not succeed. The point is that it is not possible to convert your developer certificate into `.p12` and so
+you are not able to create the keys needed to sign a package. I still have to run Safari manually to pack the extension yet the release is now as simple as copying the `Update.plist` file.
 
 ```js
 gulp.task('safari-dist', function () {
@@ -268,22 +264,22 @@ gulp.task('safari-dist', function () {
 
 ### Summing up
 
-This is joy and pleasure to develop with a single repository. As I mentioned, I find Chrome as the most comfortable
-developing environment, so I provide all the changes for it first and test with it.
+This is joy and pleasure to develop with a single repository. As I mentioned, I found Chrome to be the most comfortable
+development environment, so I provide all the changes for it first and test with it.
 
 ```
 $ gulp watch
 ```
 
-The next goes Firefox
+Firefox goes next
 
 ```
 $ gulp firefox-run
 ```
 
-And then manual tampering with Safari.
+And then the manual tampering with Safari.
 
-Once I need to release a new version, I update the manifests and so run
+Once I need to release a new version, I update the manifests and run
 
 ```
 $ gulp dist
@@ -307,7 +303,6 @@ dist/
     Update.plist
 ```
 
-Finally there are ready-to-distribution files in the `dist` folder. This would be perfect if extention stores would have
-an API for uploading a new version, but they don't. This is done manually.
+As a result, there are ready-to-distribution files in the `dist` folder. This would be perfect if extention stores would have an API for uploading a new version, but they don't. This is done manually.
 
-Fore more details in code please proceed into [the repository](https://github.com/likeastore/browser-extension).
+Fore more details and code please proceed to [the repository](https://github.com/likeastore/browser-extension).
