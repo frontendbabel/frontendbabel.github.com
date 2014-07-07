@@ -123,7 +123,7 @@ layout: page
     </div>
 </div>
 <div>
-If you've stopped a mistake, feel free to
+If you've spotted a mistake, feel free to
 <a href="<%- @document.sourcePath %>">edit it on GitHub</a>.
 </div>
 <comments class="comments">
