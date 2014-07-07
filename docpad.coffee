@@ -81,6 +81,11 @@ templateData:
                 " on " + moment(date).format('Do MMMM YYYY')
             else
                 ""
+        metaProps: (document) ->
+            switch document.meta.layout
+                when 'index' then desc = "Frontend Babel — an online hub for publishing English translations of frontend articles originally written in other languages. Not all authors have time, resources or skills to make an English version of what they write. Other members of the community can change that, contributing their translations and helping the world discover new frontend stars, experts, and innovators. Across boundaries."
+                else desc = ""
+            "<meta content=\"#{desc}\" property=\"og:description\">"
 
 collections:
 
