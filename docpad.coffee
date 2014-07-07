@@ -84,6 +84,8 @@ templateData:
         metaProps: (document) ->
             if document.meta.layout == 'index'
                 desc = "Frontend Babel — an online hub for publishing English translations of frontend articles originally written in other languages. Not all authors have time, resources or skills to make an English version of what they write. Other members of the community can change that, contributing their translations and helping the world discover new frontend stars, experts, and innovators. Across boundaries."
+            if document.meta.desc
+                desc = document.meta.desc
             if document.meta.image
                 image = document.meta.image
             "" +
