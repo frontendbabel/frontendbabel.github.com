@@ -53,7 +53,7 @@ guide](http://docpad.org/docs/install).
 
 ## Working with articles' texts
 Articles' sources are stored in the `src/documents/articles/` directory. To add a new article
-create a new `<article-name>.html.md` file and start.
+create a new `<article-name>` folder, place `index.html.md` file and start.
 
 The articles are written with Markdown. Explore [an
 example](https://github.com/frontendbabel/frontendbabel.github.com/blob/source/src/documents/articles/graphical-interface.html.md)
@@ -82,3 +82,23 @@ translator:
 ```
 Information about author's and translator's social network accounts is optional. However we recommend to provide it
 to recognize and promote people. It is nice if you contact the original author of the article and get his or her permission.
+
+### Provide meta information
+It is recommended to provide meta information which makes an article more attrative when sharing link to it in social
+networks.
+
+You might want to give an article short description. For this declare `meta.desc` property. Use `>` operator for long
+strings.
+
+```md
+meta:
+  desc: >
+    Hugo Domingo, a freelance developer shares his experiments in SVG animation.
+    Currently being supported by all the popular browseres this feature enables
+    us to create stunning web effects.
+```
+
+Besides description, you can provide thumbnail and so make an article snippet more noticeable. To do this place a
+thumbnail into article source folder named as `thumb.png` (`jpg` and 'gif' are also possible extensions). You also can
+provide an URL to a third party resource with an image using `meta.thumb` property. However it is recommended to store
+thumbnails with articles.
