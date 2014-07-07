@@ -1,14 +1,6 @@
 ---
 layout: page
 ---
-<div class="social-likes-panel">
-    <div class="social-likes social-likes_light" data-title="<%- @document.title %>">
-        <div class="facebook" title="Share on Facebook">Facebook</div>
-        <div class="twitter" title="Share on Twitter">Twitter</div>
-        <div class="plusone" title="Share on Google+">Google+</div>
-    </div>
-</div>
-
 <article class="article">
 <h1 class="text-header"><%= @document.title %></h1>
 <% if @document.subtitle: %>
@@ -119,6 +111,13 @@ layout: page
     </div>
 </div>
 </article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="<%- @document.title %>">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
 <div>
 If you've stopped a mistake, feel free to
 <a href="<%- @document.sourcePath %>">edit it on GitHub</a>.
