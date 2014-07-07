@@ -82,10 +82,13 @@ templateData:
             else
                 ""
         metaProps: (document) ->
-            switch document.meta.layout
-                when 'index' then desc = "Frontend Babel — an online hub for publishing English translations of frontend articles originally written in other languages. Not all authors have time, resources or skills to make an English version of what they write. Other members of the community can change that, contributing their translations and helping the world discover new frontend stars, experts, and innovators. Across boundaries."
-                else desc = ""
-            "<meta content=\"#{desc}\" property=\"og:description\">"
+            if document.meta.layout == 'index'
+                desc = "Frontend Babel — an online hub for publishing English translations of frontend articles originally written in other languages. Not all authors have time, resources or skills to make an English version of what they write. Other members of the community can change that, contributing their translations and helping the world discover new frontend stars, experts, and innovators. Across boundaries."
+            if document.meta.image
+                image = document.meta.image
+            "" +
+            (if desc then "<meta content=\"#{desc}\" property=\"og:description\"/>" else "") +
+            (if image then "<meta content=\"#{image}\" property=\"og:image\"/>" else "")
 
 collections:
 
