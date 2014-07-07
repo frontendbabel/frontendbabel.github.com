@@ -87,11 +87,11 @@ templateData:
                 desc = "Frontend Babel — an online hub for publishing English translations of frontend articles originally written in other languages. Not all authors have time, resources or skills to make an English version of what they write. Other members of the community can change that, contributing their translations and helping the world discover new frontend stars, experts, and innovators. Across boundaries."
             if document.meta.desc
                 desc = document.meta.desc
-            if document.image
-                image = document.image
+            if document.thumb
+                thumb = document.thumb
             "" +
             (if desc then "<meta content=\"#{desc}\" property=\"og:description\"/>" else "") +
-            (if image then "<meta content=\"#{image}\" property=\"og:image\"/>" else "")
+            (if thumb then "<meta content=\"#{thumb}\" property=\"og:image\"/>" else "")
 
 collections:
 
@@ -142,17 +142,17 @@ collections:
                         return "thumb.#{ext}"
 
             # Check thumbnail
-            image = checkThumb(['src/documents', a.relativeDirPath].join('/'))
-            if image
-                image = "http://frontendbabel.info/#{a.relativeOutDirPath}/#{image}"
-            if !a.image
-                a.image = image
+            thumb = checkThumb(['src/documents', a.relativeDirPath].join('/'))
+            if thumb
+                thumb = "http://frontendbabel.info/#{a.relativeOutDirPath}/#{thumb}"
+            if !a.thumb
+                a.thumb = thumb
 
             # Normalize meta info
             document.set({
               author: a.author || {},
               source: a.source || {},
-              image: a.image || "",
+              image: a.thumb || "",
               translator: a.translator || {},
               sourcePath: ['https://github.com', repo.owner, repo.name, 'edit', repo.branch, 'src/documents', a.relativePath].join('/')
             })
