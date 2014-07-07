@@ -116,7 +116,7 @@ collections:
         @getCollection('pages').findAllLive({ order: $ne: false })
 
     articles: (database) ->
-        @getCollection('documents').findAllLive({ relativeOutDirPath: 'articles' }).on 'add', (document)->
+        @getCollection('documents').findAllLive({ relativeOutBase: /^articles\// }).on 'add', (document)->
             a = document.attributes
 
             layout = a.layout
