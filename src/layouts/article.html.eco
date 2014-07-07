@@ -6,6 +6,10 @@ layout: page
 <% if @document.subtitle: %>
     <h2 class="text-header text-header_lvl_2"><%= @document.subtitle %></h2>
 <% end %>
+
+<div class="article__meta">
+    <%- @hlp.articleCredits(@document) %>
+</div>
 <div class="article__text text">
     <%- @content %>
     <div class="article__date">
