@@ -21,6 +21,11 @@ translator:
 
 meta:
   image: /img/likeastore.png
+  desc: >
+    A piece of experience in building browser extensions for Chrome, Firefox and Safari shared with code examples.
+    Alexander Beletsky, the author of Likeastore extention and tried different development practises from shameful
+    copy-paste to reputable unified-code-base principle and so came up with some recommendations on extension architecture
+    and building process."
 
 ---
 
@@ -308,6 +313,7 @@ dist/
     Update.plist
 ```
 
-As a result, there are ready-to-distribution files in the `dist` folder. This would be perfect if extension stores would have an API for uploading a new version, but they don't. This is done manually.
+As a result, there are ready-to-distribution files in the `dist` folder. This would be perfect if extension stores
+would have an API for uploading a new version, but they don't. This is done manually.
 
 Fore more details and code please proceed to [the repository](https://github.com/likeastore/browser-extension).
