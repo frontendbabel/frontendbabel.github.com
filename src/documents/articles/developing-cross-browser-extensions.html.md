@@ -19,6 +19,9 @@ translator:
   twitter: toivonens
   site: http://varya.me/
 
+meta:
+  image: /img/likeastore.png
+
 ---
 
 What do we do if we have to search for something? Of course, we fire up our favorite search engine web site. It is quite hard to push yourself to use another a different search engine rather than the usual one, even if you know that the result would be better. To change this UX pattern I developed [Likeastore Chrome
