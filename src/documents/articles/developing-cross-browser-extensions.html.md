@@ -23,7 +23,7 @@ meta:
   image: /img/likeastore.png
   desc: >
     A piece of experience in building browser extensions for Chrome, Firefox and Safari shared with code examples.
-    Alexander Beletsky, the author of Likeastore extention and tried different development practises from shameful
+    Alexander Beletsky, the author of Likeastore extension and tried different development practices from shameful
     copy-paste to reputable unified-code-base principle and so came up with some recommendations on extension architecture
     and building process."
 
@@ -45,18 +45,18 @@ The Chrome extension was very welcomed by our customers which had been proved by
 should continue. The next was Firefox as it has 15% of our traffic.
 
 The basis of all browser extentions is the same: they are HTML/CSS/JavaScript applications with a manifest file where the
-content and the properties are described. So my initial idea was to copy the Chrome extention's repository and adjst
+content and the properties are described. So my initial idea was to copy the Chrome extention's repository and adjust
 the code for Firefox.
 
-While developing I had that guilty feeling for doing copy-paste; many developers must be familiar with it. Obviously, 99% of code was the same for both extentions and it could bring problems with application support as functional was growing.
+While developing I had that guilty feeling for doing copy-paste; many developers must be familiar with it. Obviously, 99% of code was the same for both extensions and it could bring problems with application support as more and more functionallity was being added.
 
 By a lucky chance I bumped into [octotree](https://github.com/buunguyen/octotree) extention (which I recommend to all
-active GitHub users) and met the need to fix a bag in it. When I cloned their repository and began to explore the code,
+active GitHub users) and met the need to fix a bug in it. When I cloned their repository and began to explore the code,
 I realized that all the octotree extentions are built from this repo code. Octotree is a content injection application
 similar to Likeastore, so this pattern could be borrowed.
 
-I [fixed the bug](https://github.com/buunguyen/octotree/pull/60) and adapted and improved the compilation proccess
-according with the Likeastore needs. Let's have a look what it turned to be.
+I [fixed the bug](https://github.com/buunguyen/octotree/pull/60) and adapted and improved the compilation process
+to fit Likeastore needs. Let's have a look what it turned to be.
 
 ## Application structure
 
@@ -100,7 +100,7 @@ if you are not using it yet, you will be able to enjoy all the profits of the np
 To begin with the most important: if you are staring a new project or want to adapt another one, you should clearly
 understand what are the needed platform-dependent calls and place them into a dedicated module.
 
-In my case there was only one such call: getting our resourse URL from inside the app (here they are images). So I
+In my case there was only one such call: getting our resourse URL from inside the app (where there are images). So I
 had a separate `browser.js` file.
 
 ```js
@@ -139,7 +139,7 @@ vendor/
     Update.plist
 ```
 
-Besides the facade, platform-dependent code also means manifests and extention settings. They are `manifest.json` for
+Besides the facade, platform-dependent code also means manifests and extension settings. They are `manifest.json` for
 Chrome, `main.js` and `package.json` for Firefox and `.plist` files for Safari such as `Info.plist`, `Settings.plist`,
 and `Update.plist`.
 
@@ -316,4 +316,4 @@ dist/
 As a result, there are ready-to-distribution files in the `dist` folder. This would be perfect if extension stores
 would have an API for uploading a new version, but they don't. This is done manually.
 
-Fore more details and code please proceed to [the repository](https://github.com/likeastore/browser-extension).
+For more details and code please proceed to [the repository](https://github.com/likeastore/browser-extension).
