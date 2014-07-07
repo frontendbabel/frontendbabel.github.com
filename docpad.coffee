@@ -2,6 +2,7 @@
 # http://docpad.org/docs/config
 
 moment = require 'moment'
+fs = require 'fs'
 
 # Define the DocPad Configuration
 docpadConfig = {
@@ -86,8 +87,8 @@ templateData:
                 desc = "Frontend Babel — an online hub for publishing English translations of frontend articles originally written in other languages. Not all authors have time, resources or skills to make an English version of what they write. Other members of the community can change that, contributing their translations and helping the world discover new frontend stars, experts, and innovators. Across boundaries."
             if document.meta.desc
                 desc = document.meta.desc
-            if document.meta.image
-                image = document.meta.image
+            if document.image
+                image = document.image
             "" +
             (if desc then "<meta content=\"#{desc}\" property=\"og:description\"/>" else "") +
             (if image then "<meta content=\"#{image}\" property=\"og:image\"/>" else "")
@@ -116,7 +117,7 @@ collections:
         @getCollection('pages').findAllLive({ order: $ne: false })
 
     articles: (database) ->
-        @getCollection('documents').findAllLive({ relativeOutBase: /^articles\// }).on 'add', (document)->
+        @getCollection('documents').findAllLive({ relativeOutBase: /^articles\//, extension: 'md' }).on 'add', (document)->
             a = document.attributes
 
             layout = a.layout
@@ -134,10 +135,24 @@ collections:
                 branch: 'source'
             }
 
+            checkThumb = (path) ->
+                exts = ['jpeg', 'png', 'jpg', 'gif']
+                for k, ext of exts
+                    if fs.existsSync "#{path}/thumb.#{ext}"
+                        return "thumb.#{ext}"
+
+            # Check thumbnail
+            image = checkThumb(['src/documents', a.relativeDirPath].join('/'))
+            if image
+                image = "http://frontendbabel.info/#{a.relativeOutDirPath}/#{image}"
+            if !a.image
+                a.image = image
+
             # Normalize meta info
             document.set({
               author: a.author || {},
               source: a.source || {},
+              image: a.image || "",
               translator: a.translator || {},
               sourcePath: ['https://github.com', repo.owner, repo.name, 'edit', repo.branch, 'src/documents', a.relativePath].join('/')
             })

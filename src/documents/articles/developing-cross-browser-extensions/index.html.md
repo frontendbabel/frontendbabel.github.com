@@ -20,7 +20,6 @@ translator:
   site: http://varya.me/
 
 meta:
-  image: /img/likeastore.png
   desc: >
     A piece of experience in building browser extensions for Chrome, Firefox and Safari shared with code examples.
     Alexander Beletsky, the author of Likeastore extension and tried different development practices from shameful
