@@ -26,7 +26,7 @@ Today I'd like to focus on the subject of web page rendering and why it is impor
 
 Rendering has to be optimized from the very beginning, when the page layout is being defined, as styles and scripts play the crucial role in page rendering. Professionals have to know certain tricks to avoid performance problems.
 
-This arcticle does not study the inner browser mechanics in detail, but rather offers some common principles. Different browser engines work differently, this would make a browser-specific study even more complicated.
+This article does not study the inner browser mechanics in detail, but rather offers some common principles. Different browser engines work differently, this would make a browser-specific study even more complicated.
 
 ## How do browsers render a web page
 
@@ -136,7 +136,7 @@ $(this).css('margin-left', 50);
 
 Now this works as expected.
 
-## Practical advice on opmitization
+## Practical advice on optimization
 
 Summarizing the available information, I could recommend the following:
 
