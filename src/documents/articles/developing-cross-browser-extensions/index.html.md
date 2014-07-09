@@ -31,31 +31,31 @@ meta:
 What do we do if we have to search for something? Of course, we fire up our favorite search engine web site. It is quite hard to push yourself to use another a different search engine rather than the usual one, even if you know that the result would be better. To change this UX pattern I developed [Likeastore Chrome
 Extension](https://chrome.google.com/webstore/detail/likeastore/einhadilfmpdfmmjnnppomcccmlohjad). It adds social
 part to your search flow by showing relevant information from the article you liked. Besides Chrome we support Firefox
-and Safari. Despite the platform difference all these extentions are built from the same codebase.
+and Safari. Despite the platform difference all these extensions are built from the same codebase.
 
 <!-- cut -->
 
 ## At the first set-out
-This began with me developing a simple Chrome extention. By the way, developing for Chrome was very comfortable. I
+This began with me developing a simple Chrome extension. By the way, developing for Chrome was very comfortable. I
 didn't go through the hassle of automation, just packed code into a zip after some local testing and then uploaded
 this to the Web Store.
 
 The Chrome extension was very welcomed by our customers which had been proved by metrics and feedback and meant that we
 should continue. The next was Firefox as it has 15% of our traffic.
 
-The basis of all browser extentions is the same: they are HTML/CSS/JavaScript applications with a manifest file where the
-content and the properties are described. So my initial idea was to copy the Chrome extention's repository and adjust
+The basis of all browser extensions is the same: they are HTML/CSS/JavaScript applications with a manifest file where the
+content and the properties are described. So my initial idea was to copy the Chrome extension's repository and adjust
 the code for Firefox.
 
 While developing I had that guilty feeling for doing copy-paste; many developers must be familiar with it. Obviously, 99% of code was the same for both extensions and it could bring problems with application support as more and more functionallity was being added.
 
-By a lucky chance I bumped into [octotree](https://github.com/buunguyen/octotree) extention (which I recommend to all
+By a lucky chance I bumped into [octotree](https://github.com/buunguyen/octotree) extension (which I recommend to all
 active GitHub users) and met the need to fix a bug in it. When I cloned their repository and began to explore the code,
-I realized that all the octotree extentions are built from this repo code. Octotree is a content injection application
+I realized that all the octotree extensions are built from this repo code. Octotree is a content injection application
 similar to Likeastore, so this pattern could be borrowed.
 
 I [fixed the bug](https://github.com/buunguyen/octotree/pull/60) and adapted and improved the compilation process
-to fit Likeastore needs. Let's have a look what it turned to be.
+to fit Likeastore needs. Let's have a look at what it turned out to be.
 
 ## Application structure
 
@@ -85,13 +85,13 @@ browser-extention/
 
 `build` and `dist` folders are generic and contain source code and application for distribution, respectively.
 
-`css`, `img`, and `js` hold source code of the application.
+`css`, `img`, and `js` hold the source code of the application.
 
 `vendor` has platform-depending code in a separate directory for every browser.
 
 `tools` is a place for building utils.
 
-The build runs with [gulp](http://gulpjs.com/), a "reconsidered" build system under NodeJS. I recommend to intall node
+The build runs with [gulp](http://gulpjs.com/), a "reconsidered" build system under NodeJS. I recommend to install node
 if you are not using it yet, you will be able to enjoy all the profits of the npm world.
 
 ### Platform-dependent code
@@ -99,7 +99,7 @@ if you are not using it yet, you will be able to enjoy all the profits of the np
 To begin with the most important: if you are staring a new project or want to adapt another one, you should clearly
 understand what are the needed platform-dependent calls and place them into a dedicated module.
 
-In my case there was only one such call: getting our resourse URL from inside the app (where there are images). So I
+In my case there was only one such call: getting our resource URL from inside the app (where there are images). So I
 had a separate `browser.js` file.
 
 ```js
@@ -232,10 +232,10 @@ gulp.task('watch', function() {
 });
 ```
 
-### Ready to distribution
+### Ready to distribute
 
 Having the build finished, you need to pack the extension into a format requested by the browser extension storage. I
-have to note that in the Safari's case there is no such store but they can show your extension in their gallery and
+have to note that in Safari's case there is no such store but they can show your extension in their gallery and
 link to where you host it if you match their requirements.
 
 For Chrome, you only need to pack into a `.zip`. It is signed and verified in the Chrome Web Store.
@@ -312,7 +312,7 @@ dist/
     Update.plist
 ```
 
-As a result, there are ready-to-distribution files in the `dist` folder. This would be perfect if extension stores
+As a result, there are ready-to-distribute files in the `dist` folder. This would be perfect if extension stores
 would have an API for uploading a new version, but they don't. This is done manually.
 
 For more details and code please proceed to [the repository](https://github.com/likeastore/browser-extension).
