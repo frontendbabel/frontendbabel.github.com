@@ -1,6 +1,8 @@
 ---
 title: Developing Cross-Browser Extensions
 
+date: 2014-07-07
+
 source:
   name: Разработка кросс-браузерных расширений
   url: http://habrahabr.ru/company/likeastore/blog/227881/
