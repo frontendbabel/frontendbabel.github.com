@@ -16,7 +16,7 @@ author:
 translator:
   name: Varya Stepanova
   github: varya
-  twitter: toivonens
+  twitter: varya_en
   site: http://varya.me/
 
 ---
