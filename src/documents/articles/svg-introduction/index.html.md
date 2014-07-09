@@ -204,3 +204,114 @@ However it has a drawback. IE9-11 downloads all the two images although only SVG
 has problems too. You may get the following instead of your picture:
 
 ![](http://img-fotki.yandex.ru/get/9831/5091629.9d/0_7f9f6_9033810_M.png)
+
+#### 3. Modernizr
+
+Elements containing SVG are wrapped with `div.svg`. Then, you can detect if browsers supports SVG using
+[Modernizr](http://modernizr.com/); browsers which do not understand SVG get `.no-svg` CSS class. With a piece of CSS
+you can hide the SVG images for the browsers that do not render them:
+
+```css
+/* Define size and PNG background for the wrapper: */
+.no-svg .svg {
+  width: 200px;
+  height: 200px;
+  background: url(your.png); /* PNG backdrop */
+  }
+
+/* Hide ements inside the wrapper. Otherwise there would be icons of
+not loaded images */
+.no-svg .svg IFRAME,
+.no-svg .svg OBJECT,
+.no-svg .svg EMBED,
+.no-svg .svg IMG {
+  display: none;
+}
+```
+
+This method works nicely in IE8 (and earlier IE versions). However you might have a problem with Opera Mini.
+This browser provides partual SVG support and so does not get `.no-svg` CSS class whereas it cannot render SVG CSS
+background and inline SVG inserts.
+
+It is also possible to use [this
+method](http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/) to detect IE.
+
+#### 4. :root
+
+The `:root` CSS selector is only supported by browsers that understand CSS3. So it can be used to separate CSS rules
+for modern and older browsers.
+
+```css
+/* Display PNG by default */
+.svg {
+  width: 200px;
+  height: 200px;
+  background: url(your.png);
+}
+
+/* Hide elements containing SVG */
+.svg IFRAME,
+.svg OBJECT,
+.svg EMBED,
+.svg IMG {
+  display: none;
+}
+
+/* Show SVG containers for the browsers with CSS3 */
+:root IFRAME,
+:root OBJECT,
+:root EMBED,
+:root IMG {
+  display: inline-block;
+}
+```
+
+Like the previous solution this works correctly to weed out IE8 (and the aged) but does not help in Opera Mini's case
+since it supports CSS3 and so the SVG containder will be switched on anyway.
+
+#### 5. Solution for Opera with Pesto (version 12 or Mini)
+
+In Opera 12 SVG backgrounds are weridly odd. Simple CSS code, harmless at first glance, can cause render issues with
+SVG backgrounds when scrolling. I was lucky to get pictures like this:
+
+![](http://img-fotki.yandex.ru/get/9746/5091629.9d/0_7f9f8_dff062ac_L.png)
+
+You can examine the working example here: [http://jsbin.com/winag/2/edit](http://jsbin.com/winag/2/edit)<br/>
+*Open this page with Opera 12 and scroll up and down.*
+
+Opera Mini has issues with SVG backgrounds and does not support inlined SVG at all. This is how SVG background looks
+like with it:
+
+![](http://img-fotki.yandex.ru/get/9819/5091629.9d/0_7f9f7_19c1f3e9_L.png)
+
+For such a case you can use this *special for Opera* hack:
+
+```css
+doesnotexist:-o-prefocus, .selector {
+  background-image: url(your.png);
+}
+```
+
+This method uses specific Opera selector. You can learn details here:
+[http://www.opera.com/docs/specs/presto2.12/css/o-vendor/](http://www.opera.com/docs/specs/presto2.12/css/o-vendor/).
+
+#### 6. Specific Opera Mini selector
+
+```css
+@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
+  .selector {
+    background-image: url(your.png);
+  }
+}
+```
+
+## To be continued
+Everything written above is just the tip of the iceberg. There is plenty of interesting in the SVG specification.
+To be continued! :-)
+
+### Further links
+* [Browsers support for SVG](http://caniuse.com/#search=svg)
+* [SVG Fallbacks](http://css-tricks.com/svg-fallbacks/)
+* [Modernizr](http://modernizr.com/)
+* [A Primer to Front-end SVG Hacking](http://dbushell.com/2013/02/04/a-primer-to-front-end-svg-hacking/)
+* [SVG and <image> tag tricks](http://lynn.ru/examples/svg/en.html)
