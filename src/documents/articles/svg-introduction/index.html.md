@@ -78,7 +78,7 @@ capabilities.
 The content is available for external JavaScript.<br/>
 It has good browser support (all but IE8 and earlier).
 
-<table class="marg--bottom">
+<table>
     <thead>
         <tr>
             <td>Embed:</td>
@@ -118,9 +118,9 @@ It has good browser support (all but IE8 and earlier).
 
 Browser support:
 
-| IE | Opera | Opera Mini | Opera Mobile | Chrome | Firefox | Safari |
------|-------|------------|--------------|--------|---------|--------|
-| 9+ |  9+   | 5+         | 10+          | 4+     | 3+      | 3.2+   |
+ IE | Opera | Opera Mini | Opera Mobile | Chrome | Firefox | Safari
+----|-------|------------|--------------|--------|---------|--------
+ 9+ |  9+   | 5+         | 10+          | 4+     | 3+      | 3.2+
 
 ### IMG
 
@@ -134,9 +134,9 @@ In this case the content is not available for JavaScript.
 
 Browser support:
 
-| IE | Opera | Opera Mini | Opera Mobile | Chrome | Firefox | Safari |
------|-------|------------|--------------|--------|---------|--------|
-| 9+ | 9+    | 5+         | 10+          | 4+     | 4+      | 4+     |
+ IE | Opera | Opera Mini | Opera Mobile | Chrome | Firefox | Safari
+----|-------|------------|--------------|--------|---------|-------
+ 9+ | 9+    | 5+         | 10+          | 4+     | 4+      | 4+
 
 ### Css background
 
@@ -151,9 +151,9 @@ background-image: url(your.svg);
 
 Browser support:
 
-| IE | Opera | Opera Mini | Opera Mobile | Chrome | Firefox | Safari |
------|-------|------------|--------------|--------|---------|--------|
-| 9+ | 12+   | 5+         | 16+          | 5+     | 24+     | 5+     |
+ IE | Opera | Opera Mini | Opera Mobile | Chrome | Firefox | Safari
+----|-------|------------|--------------|--------|---------|-------
+ 9+ | 12+   | 5+         | 16+          | 5+     | 24+     | 5+
 
 ### Inline SVG
 
@@ -163,9 +163,9 @@ Is not supported by Opera Mini.
 
 Browser support:
 
-| IE | Opera | Opera Mini | Opera Mobile | Chrome | Firefox | Safari |
------|-------|------------|--------------|--------|---------|--------|
-| 9+ | 11.6+ | -          | 12+          | 7+     | 4+      | 5.1+   |
+ IE | Opera | Opera Mini | Opera Mobile | Chrome | Firefox | Safari
+----|-------|------------|--------------|--------|---------|-------
+ 9+ | 11.6+ | -          | 12+          | 7+     | 4+      | 5.1+
 
 The examples above are placed into this article page exactly as described. You can open the very page in another browser
 and observe how SVG works there.
