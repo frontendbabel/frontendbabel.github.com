@@ -88,9 +88,9 @@ It has good browser support (all but IE8 and earlier).
     </thead>
     <tbody>
         <tr>
-            <td><embed src="http://css.yoksel.http://css.yoksel.ru/assets/img/svg/sign.svg" width="199" height="200"/></td>
-            <td><object type="image/svg+xml" data="http://css.yoksel.http://css.yoksel.ru/assets/img/svg/sign.svg" width="199" height="200"></object></td>
-            <td><iframe src="http://css.yoksel.http://css.yoksel.ru/assets/img/svg/sign.svg" width="199px" height="200px"></iframe></td>
+            <td><embed src="/articles/svg-introduction/sign.svg" width="199" height="200"/></td>
+            <td><object type="image/svg+xml" data="/articles/svg-introduction/sign.svg" width="199" height="200"></object></td>
+            <td><iframe src="/articles/svg-introduction/sign.svg" width="199px" height="200px"></iframe></td>
         </tr>
     </tbody>
 </table>
