@@ -172,7 +172,7 @@ and observe how SVG works there.
 
 ## Ways to deal with older browsers
 
-#### 1. Background hack
+### 1. Background hack
 
 ```css
 DIV {
@@ -183,7 +183,7 @@ DIV {
 
 The second `background-image` works with CSS3 supportive browsers. Others ignore it and so show the png background.
 
-#### 2. The `image` method
+### 2. The `image` method
 
 Modern browsers choose `xlink:href` attribute and render SVG image; others show the rastr version.
 
@@ -205,7 +205,7 @@ has problems too. You may get the following instead of your picture:
 
 ![](http://img-fotki.yandex.ru/get/9831/5091629.9d/0_7f9f6_9033810_M.png)
 
-#### 3. Modernizr
+### 3. Modernizr
 
 Elements containing SVG are wrapped with `div.svg`. Then, you can detect if browsers supports SVG using
 [Modernizr](http://modernizr.com/); browsers which do not understand SVG get `.no-svg` CSS class. With a piece of CSS
@@ -236,7 +236,7 @@ background and inline SVG inserts.
 It is also possible to use [this
 method](http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/) to detect IE.
 
-#### 4. :root
+### 4. :root
 
 The `:root` CSS selector is only supported by browsers that understand CSS3. So it can be used to separate CSS rules
 for modern and older browsers.
@@ -269,7 +269,7 @@ for modern and older browsers.
 Like the previous solution this works correctly to weed out IE8 (and the aged) but does not help in Opera Mini's case
 since it supports CSS3 and so the SVG containder will be switched on anyway.
 
-#### 5. Solution for Opera with Pesto (version 12 or Mini)
+### 5. Solution for Opera with Pesto (version 12 or Mini)
 
 In Opera 12 SVG backgrounds are weridly odd. Simple CSS code, harmless at first glance, can cause render issues with
 SVG backgrounds when scrolling. I was lucky to get pictures like this:
@@ -295,7 +295,7 @@ doesnotexist:-o-prefocus, .selector {
 This method uses specific Opera selector. You can learn details here:
 [http://www.opera.com/docs/specs/presto2.12/css/o-vendor/](http://www.opera.com/docs/specs/presto2.12/css/o-vendor/).
 
-#### 6. Specific Opera Mini selector
+### 6. Specific Opera Mini selector
 
 ```css
 @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
