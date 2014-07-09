@@ -49,6 +49,7 @@ templateData:
         description: 'Articles and blog posts from all over the world. Translated INTO English.'
         services:
             disqus: 'frontendbabel'
+        url: 'http://frontendbabel.info'
 
     cutTag: '<!-- cut -->'
 
