@@ -1,5 +1,5 @@
 ---
-title: Introduction to SVG
+title: Acquaintance with SVG images
 
 source:
   name: Об SVG в блоге Йоксель
@@ -26,6 +26,10 @@ meta:
     smoothly be absorbed in the subject.
 
 ---
+
+SVG is quite a mature technology but it began to gain its popularity just recently. Mostly because
+vector graphics perfectly suits for adaptive web sites. If you have just started to learn about SVG,
+below is some information you can start with.
 
 SVG is a vector image format that uses XML.
 
