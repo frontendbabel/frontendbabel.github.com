@@ -4,6 +4,7 @@
     border-bottom: 0;
     border-spacing: 0;
     border-collapse: collapse;
+    margin-bottom: 1em;
 }
 
 .text-table__head
