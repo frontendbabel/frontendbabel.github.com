@@ -126,10 +126,10 @@ Browser support:
 
 In this case the content is not available for JavaScript.
 
-![](http://css.yoksel.http://css.yoksel.ru/assets/img/svg/sign.svg)
+![](/articles/svg-introduction/sign.svg)
 
 ```xml
-&lt;img src="your.svg">
+&lt;img src="your.svg"/>
 ```
 
 Browser support:
