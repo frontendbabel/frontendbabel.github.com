@@ -78,7 +78,7 @@ capabilities.
 The content is available for external JavaScript.<br/>
 It has good browser support (all but IE8 and earlier).
 
-<table>
+<table style="width: 100%; text-align: center;">
     <thead>
         <tr>
             <td>Embed:</td>
