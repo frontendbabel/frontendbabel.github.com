@@ -19,6 +19,12 @@ translator:
   twitter: varya_en
   site: http://varya.me/
 
+meta:
+  desc: >
+    Yulya Buhvalova, a developer for LiveJornal and talented frontend dev blogger shares her
+    findings on SVG. With her introduction into scalable vector graphics for web you can
+    smoothly be absorbed in the subject.
+
 ---
 
 SVG is a vector image format that uses XML.
