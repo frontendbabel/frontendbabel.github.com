@@ -32,13 +32,13 @@ SVG is quite a mature technology but it began to gain its popularity just recent
 vector graphics perfectly suits for adaptive web sites. If you have just started to learn about SVG,
 below is some information you can start with.
 
+<!-- cut -->
+
 SVG is a vector image format that uses XML.
 
 Specification: [w3.org/TR/SVG](http://www.w3.org/TR/SVG/)
 
 SVG has a lot of advantages over raster graphics:
-
-<!-- cut -->
 
 * Vector images are lossless when being scaled and look nicer with retina displays;
 * Usually the size of SVG data less heavy than data size of PNG image with the same picture;
