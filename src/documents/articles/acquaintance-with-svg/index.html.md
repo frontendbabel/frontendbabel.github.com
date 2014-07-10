@@ -23,7 +23,7 @@ translator:
 
 meta:
   desc: >
-    Yulya Buhvalova, a developer for LiveJornal and talented frontend dev blogger shares her
+    Yulya Buhvalova, a developer for LiveJournal and talented frontend dev blogger shares her
     findings on SVG; vector graphics format which is now becoming more and more popular and is peftectly
     suitable for adaptive web sites. With her introduction into scalable vector graphics for web you can
     smoothly be absorbed in the subject.
