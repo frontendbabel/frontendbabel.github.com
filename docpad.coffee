@@ -65,6 +65,7 @@ templateData:
         services:
             disqus: 'frontendbabel'
         url: 'http://frontendbabel.info'
+        author: 'Frontend Babel'
 
     cutTag: '<!-- cut -->'
 
@@ -91,7 +92,7 @@ templateData:
             else
                 person.name
         articleCredits: (article) ->
-            "Written by #{@personLink(article.author)}#{@onDate(article.source.date)}; " +
+            "Written by #{@personLink(article.authorInfo)}#{@onDate(article.source.date)}; " +
             "translated by #{@personLink(article.translator)}#{@onDate(article.date)}"
         onDate: (date) ->
             if date
@@ -145,12 +146,6 @@ collections:
                     layout: layout
                 })
 
-            repo = {
-                owner: 'frontendbabel'
-                name: 'frontendbabel.github.com'
-                branch: 'source'
-            }
-
             checkThumb = (path) ->
                 exts = ['jpeg', 'png', 'jpg', 'gif']
                 for k, ext of exts
@@ -164,12 +159,21 @@ collections:
             if !a.thumb
                 a.thumb = thumb
 
+            repo = {
+                owner: 'frontendbabel'
+                name: 'frontendbabel.github.com'
+                branch: 'source'
+            }
+
+            author = a.author || {}
+
             # Normalize meta info
             document.set({
-              author: a.author || {},
-              source: a.source || {},
-              image: a.thumb || "",
-              translator: a.translator || {},
+              author: author.name
+              authorInfo: author
+              source: a.source || {}
+              image: a.thumb || ""
+              translator: a.translator || {}
               sourcePath: ['https://github.com', repo.owner, repo.name, 'edit', repo.branch, 'src/documents', a.relativePath].join('/')
             })
 
