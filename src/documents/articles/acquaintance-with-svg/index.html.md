@@ -101,9 +101,9 @@ It has good browser support (all but IE8 and earlier).
     </thead>
     <tbody>
         <tr>
-            <td><embed src="/articles/svg-introduction/sign.svg" width="199" height="200"/></td>
-            <td><object type="image/svg+xml" data="/articles/svg-introduction/sign.svg" width="199" height="200"></object></td>
-            <td><iframe src="/articles/svg-introduction/sign.svg" width="199px" height="200px"></iframe></td>
+            <td><embed src="/articles/acquaintance-with-svg/sign.svg" width="199" height="200"/></td>
+            <td><object type="image/svg+xml" data="/articles/acquaintance-with-svg/sign.svg" width="199" height="200"></object></td>
+            <td><iframe src="/articles/acquaintance-with-svg/sign.svg" width="199px" height="200px"></iframe></td>
         </tr>
     </tbody>
 </table>
@@ -139,7 +139,7 @@ Browser support:
 
 In this case the content is not available for JavaScript.
 
-![](/articles/svg-introduction/sign.svg)
+![](/articles/acquaintance-with-svg/sign.svg)
 
 ```xml
 &lt;img src="your.svg"/>
