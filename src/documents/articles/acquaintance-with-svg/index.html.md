@@ -1,6 +1,8 @@
 ---
 title: Acquaintance with SVG images
 
+date: 2014-07-10
+
 source:
   name: Знакомство с SVG
   date: 2014-03-19
