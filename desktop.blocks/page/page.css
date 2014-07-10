@@ -14,7 +14,21 @@
     margin: 0 auto;
 }
 
-.page__title
+table,
+tr,
+td,
+th,
+tbody,
+thead,
+iframe
 {
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
+table
+{
+    border-collapse: collapse;
+    border-spacing: 0;
+}

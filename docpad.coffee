@@ -41,6 +41,21 @@ plugins:
                 params = "{}"
                 lang && params = "{ \"lang\": \"#{lang}\"}"
                 "<pre class=\"highlight i-bem\" data-bem='{ \"highlight\": #{params} }'><code>#{text}</code></pre>"
+            table: (header, body) ->
+                "<table class=\"text-table\">" +
+                    "<thead class=\"text-table__head\">#{header}</thead>" +
+                    "<tbody class=\"text-table__body\">#{body}</tbody>" +
+                "</table>"
+            tablerow: (content) ->
+                "<tr class=\"text-table__row\">#{content}</tr>"
+            tablecell: (content, flags) ->
+                type = if flags.header then 'th' else 'td'
+                klass = if flags.header then 'text-table__th' else 'text-table__td'
+                if flags.align
+                    tag = "<#{type} class=\"#{klass}\" style=\"text-align: #{flags.align}\">"
+                else
+                    tag = "<#{type} class=\"#{klass}\">"
+                "#{tag}#{content}</#{type}>"
 
 templateData:
 

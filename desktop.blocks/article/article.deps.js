@@ -11,6 +11,9 @@
         },
         {
             block: 'comments'
+        },
+        {
+            block: 'text-table'
         }
     ]
 })
