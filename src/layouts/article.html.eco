@@ -29,41 +29,41 @@ layout: page
         <dl class="credits__name">
             <dt class="credits__var">Author:</dt>
             <dd class="credits__val">
-                <% if @document.author.site: %>
-                    <a href="<%- @document.author.site %>">
-                        <%- @document.author.name %>
+                <% if @document.authorInfo.site: %>
+                    <a href="<%- @document.authorInfo.site %>">
+                        <%- @document.authorInfo.name %>
                     </a>
                 <% else: %>
-                    <%- @document.author.name %>
+                    <%- @document.authorInfo.name %>
                 <% end %>
             </dd>
         </dl>
-        <% if @document.author.github: %>
+        <% if @document.authorInfo.github: %>
             <dl class="credits__github">
                 <dt class="credits__var">GitHub:</dt>
                 <dd class="credits__val">
-                    <a href="https://github.com/<%- @document.author.github %>">
-                        <%- @document.author.github %>
+                    <a href="https://github.com/<%- @document.authorInfo.github %>">
+                        <%- @document.authorInfo.github %>
                     </a>
                 </dd>
             </dl>
         <% end %>
-        <% if @document.author.twitter: %>
+        <% if @document.authorInfo.twitter: %>
             <dl class="credits__twitter">
                 <dt class="credits__var">Twitter:</dt>
                 <dd class="credits__val">
-                    <a href="https://twitter.com/<%- @document.author.twitter %>">
-                        @<%- @document.author.twitter %>
+                    <a href="https://twitter.com/<%- @document.authorInfo.twitter %>">
+                        @<%- @document.authorInfo.twitter %>
                     </a>
                 </dd>
             </dl>
         <% end %>
-        <% if @document.author.site: %>
+        <% if @document.authorInfo.site: %>
             <dl class="credits__site">
                 <dt class="credits__var">Site:</dt>
                 <dd class="credits__val">
-                    <a href="<%- @document.author.site %>">
-                        <%- @document.author.site %>
+                    <a href="<%- @document.authorInfo.site %>">
+                        <%- @document.authorInfo.site %>
                     </a>
                 </dd>
             </dl>
