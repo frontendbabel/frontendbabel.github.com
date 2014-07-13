@@ -243,7 +243,7 @@ not loaded images */
 ```
 
 This method works nicely in IE8 (and earlier IE versions). However you might have a problem with Opera Mini.
-This browser provides partual SVG support and so does not get `.no-svg` CSS class whereas it cannot render SVG CSS
+This browser provides partial SVG support and so does not get `.no-svg` CSS class whereas it cannot render SVG CSS
 background and inline SVG inserts.
 
 It is also possible to use [this
@@ -282,7 +282,7 @@ for modern and older browsers.
 Like the previous solution this works correctly to weed out IE8 (and the aged) but does not help in Opera Mini's case
 since it supports CSS3 and so the SVG containder will be switched on anyway.
 
-### 5. Solution for Opera with Pesto (version 12 or Mini)
+### 5. Solution for Opera with Presto (version 12 or Mini)
 
 In Opera 12 SVG backgrounds are weirdly odd. Simple CSS code, harmless at first glance, can cause render issues with
 SVG backgrounds when scrolling. I was lucky to get pictures like this:
