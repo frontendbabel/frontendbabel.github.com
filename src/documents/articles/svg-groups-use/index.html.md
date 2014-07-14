@@ -1,5 +1,5 @@
 ---
-title: SVG: Grouping and Re-use of Elements
+title: SVG: Grouping and Re-using Elements
 
 date: 2014-07-12
 
