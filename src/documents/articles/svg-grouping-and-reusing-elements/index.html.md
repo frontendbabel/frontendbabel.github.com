@@ -19,6 +19,7 @@ translator:
   name: George Gritsouk
   github: gggritso
   twitter: gggritso
+  site: http://gggritso.com/
 
 meta:
   desc: >
