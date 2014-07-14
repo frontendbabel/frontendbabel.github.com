@@ -12,7 +12,7 @@ source:
 author:
   name: Yulya Buhvalova
   site: http://css.yoksel.ru/
-  twitter: yoksel
+  twitter: yoksel_en
   github: yoksel
 
 translator:
