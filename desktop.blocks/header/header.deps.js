@@ -1,7 +1,8 @@
 ({
 
     shouldDeps: [
-        { block: 'layout' }
+        { block: 'layout' },
+        { block: 'social-icons' }
     ]
 
 })

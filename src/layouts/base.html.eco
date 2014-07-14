@@ -29,6 +29,24 @@
             <% end %>
             </ul>
         </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </header>
     <div class="content">
         <%- @content %>
