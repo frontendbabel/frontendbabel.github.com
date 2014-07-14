@@ -1,5 +1,5 @@
 ---
-title: SVG: Grouping and Re-use of Elements
+title: SVG: Grouping and Re-using Elements
 
 date: 2014-07-12
 
@@ -23,17 +23,20 @@ translator:
 
 meta:
   desc: >
-    Yulya Buhvalova, talks about using SVG features like `<g>`, `<def>` and `<symbol>` to make SVG elements more organized and easy to re-use.
+    Yulya Buhvalova, talks about using SVG features like `<g>`, `<def>` and `<symbol>` to make SVG elements
+    more organized and easy to re-use.
 
 ---
 
-SVG-figures can be grouped to comfortably structure a file. Several tags exist for this purpose: `<g>`, `<defs>` and `<symbol>`. Elements, element groups and symbols can be used repeatedly.
+SVG-figures can be grouped to structure a file in more convenient manner. There are several tags for this purpose:
+`<g>`, `<defs>` and `<symbol>`. Elements, element groups and symbols can be used repeatedly.
 
 <!-- cut -->
 
 ## g
 
-The `<g>` tag serves for grouping figures semantically, for maintaining a transparent document structure. Groups of elements can be used repeatedly.
+The `<g>` tag serves for grouping figures semantically, for maintaining a transparent document structure.
+Groups of elements can be used repeatedly.
 
 <svg width="275" height="100">
   <!-- Group 1  -->
@@ -79,7 +82,8 @@ The `<g>` tag serves for grouping figures semantically, for maintaining a transp
 &lt;/svg>
 ```
 
-Groups, like figures, can be given fills and strokes. The style will work for figures inside groups, which don't have their own style:
+Groups, like figures, can be given fills and strokes. The style will work for figures inside groups, which
+don't have their own style:
 
 <svg width="170" height="50">
   <!-- Red Figures -->
@@ -119,13 +123,18 @@ Groups, like figures, can be given fills and strokes. The style will work for fi
 
 Groups don't work like included elements in HTML, but more like groups of elements in visual editors.
 
-Groups don't show themselves visually, but can be used for grouping operations on their contents: it's possible to apply transformations for a group of elements, without having to move each one, it's possible to set a visual theme to the whole group at once, and it will be inherited by all the elements inside the group. Additionally, properties of the group are added to the inner elements, without overwriting existing ones. For example, if an element has a red fill, but the group has a green one — the fill of the element remains red.
+Groups don't show themselves visually, but can be used for grouping operations on their contents: it's possible
+to apply transformations for a group of elements, with no need to move each one, it's possible to set a visual
+theme to the whole group at once; all the elements inside the group inherit the given style. Additionally, properties
+of the group are added to the inner elements, without overwriting their own ones. For example, if an element has a red
+fill, but the group has a green one — the fill of the element remains red.
 
 For an element to inherit the visual properties of the group, it can't have properties of its own.
 
 ## defs
 
-The `<defs>` tag acts as a library of elements and effects, which can be used lated. The contents of a tag are not shown on the page.
+The `<defs>` tag acts as a library of elements and effects, which can be used later. The contents of the tag
+are not shown on the page.
 
 <svg width="200" height="200">
   <!-- Hidden container for effects and figures -->
@@ -183,7 +192,8 @@ The `<defs>` tag acts as a library of elements and effects, which can be used la
 
 ## symbol
 
-A symbol is a group of figures, all part of a single whole. Like a `<def>`, not shown on the page, and like a `<g>`, can be used again. Inside a symbol is a new coordinate system.
+A symbol is a group of figures, all part of a single whole. Like a `<def>`, not shown on the page, and like
+the `<g>`, can be used again. Inside a symbol is a new coordinate system.
 
 <svg width="240" height="170">
   <defs>
@@ -253,7 +263,8 @@ A symbol is a group of figures, all part of a single whole. Like a `<def>`, not 
 
 ## use
 
-Tag, allowing re-use of SVG-elements. It's possible to copy any element inside a single HTML page. It's also possible to include a library of elements at the beginning of a page and later use them in the necessary places.
+This is a tag allowing re-use SVG-elements. It's possible to copy any element inside a single HTML page. It's
+also possible to include a library of elements at the beginning of a page and later use them in the necessary places.
 
 The copies can be given positions, widths and heights:
 
@@ -293,9 +304,12 @@ The copies can be given positions, widths and heights:
 &lt;/svg>
 ```
 
-The position of the copy is determined with respect to the top left corner of the figure in the existing coordinate system. However, the coordinate system within the symbol is its own.
+The position of the copy is determined with respect to the top left corner of the figure in the existing
+coordinate system. However, the coordinate system within the symbol is its own.
 
-On insertion of a symbol, the `width` and `height` determine not the size of the figure, but the visible area of the copy (like in the figure on the right), however when copying a group (`<g>`) the height and width don't affect anything. Use transformations to change the sizes of copies.
+On insertion of a symbol, the `width` and `height` determine not the size of the figure, but the visible area of
+the copy (like in the figure on the right), however when copying a group (`<g>`) the height and width don't affect
+anything. Use transformations to change the sizes of copies.
 
 It's also possible to give strokes, fills and transformations:
 
@@ -345,7 +359,7 @@ It's also possible to give strokes, fills and transformations:
 &lt;/svg>
 ```
 
-The copies can be given different classes:
+Different CSS classes can be applied for the copies:
 
 <svg width="260" height="50">
   <style>
@@ -389,7 +403,7 @@ The copies can be given different classes:
        transform="rotate(100 224 26)"/>
 </svg>
 
-House from [icomoon.io](http://icomoon.io)
+House is from [icomoon.io](http://icomoon.io)
 
 ```xml
 &lt;svg width="260" height="50">
@@ -413,7 +427,8 @@ House from [icomoon.io](http://icomoon.io)
 
   &lt;defs>
     &lt;!-- House -->
-    &lt;path id="house" d="M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z"/>
+    &lt;path id="house"
+          d="M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z"/>
   &lt;/defs>
 
   &lt;!-- House copy -->
@@ -435,7 +450,8 @@ House from [icomoon.io](http://icomoon.io)
 &lt;/svg>
 ```
 
-A well-structured file makes development faster and more comfortable, and copying symbols can make code significantly shorter.
+A well-structured file makes development faster and more comfortable, and copying symbols can make
+code significantly shorter.
 
 ### Links on the Same Topic
 
