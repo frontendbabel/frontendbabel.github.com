@@ -19,7 +19,6 @@ translator:
   name: George Gritsouk
   github: gggritso
   twitter: gggritso
-  site: http://varya.me/
 
 meta:
   desc: >
