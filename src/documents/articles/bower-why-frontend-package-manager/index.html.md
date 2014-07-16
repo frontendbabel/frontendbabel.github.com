@@ -1,7 +1,7 @@
 ---
 title: Bower: Why Front-End Needs a Package Manager
 
-date: 2014-07-15
+date: 2014-07-16
 
 source:
   name: Bower: зачем фронтенду нужен менеджер пакетов
