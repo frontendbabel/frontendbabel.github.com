@@ -245,7 +245,8 @@ To create the manifest file the `bower init` command is used:
 [?] homepage: https://github.com/sapegn/jquery.awesomeplugin.js
 [?] set currently installed components as dependencies? Yes
 [?] add commonly ignored files to ignore list? Yes
-[?] would you like to mark this package as private which prevents it from being accidentally published to the registry? No
+[?] would you like to mark this package as private which prevents it from being accidentally
+    published to the registry? No
 
 {
     name: 'awesomelib',
