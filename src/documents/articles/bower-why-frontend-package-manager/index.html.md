@@ -142,7 +142,7 @@ There are two approaches for deploying a project:
 
 Secondly, it's a method of describing necessary dependencies, which is used by Bower and npm.
 
-While installing with the `--save` flag, package version are added to `bower.json` like `~1.0.1`. The tilde at the beginning means that during installation version 1.0.1 will be chosen, or a version with a larger last digit (PATCH) if it's available. This way the installed version will have the latest bug fixes, but will be fully compatible with the one specified in the manifest file.
+While installing with the `--save` flag, package version are added to `bower.json` like `~1.0.1`. The tilde at the beginning means that during installation version 1.0.1 will be chosen, or a version with a larger last number (PATCH) if it's available. This way the installed version will have the latest bug fixes, but will be fully compatible with the one specified in the manifest file.
 
 ## Updating Dependencies
 
