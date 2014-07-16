@@ -29,7 +29,7 @@ meta:
 
 ---
 
-This article was first published in the [May 2014 issue](http://www.xakep.ru/xa/?id=184) of Хакер magazine. The article in the magazine is a shortened version; the full one is below.
+This article was first published in the [May 2014 issue](http://www.xakep.ru/xa/?id=184) of "Хакер" (russian word for "Hacker") magazine. The article in the magazine is a shortened version; the full one is below.
 
 Package managers simplify installing and updating project dependencies, which are libraries that it uses: jQuery, Fotorama, everything that is used on your site and isn't written by you.
 
