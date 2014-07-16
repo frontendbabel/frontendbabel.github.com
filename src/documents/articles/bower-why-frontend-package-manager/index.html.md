@@ -39,7 +39,7 @@ Browsing all the library websites, downloading and unpacking the archives, copyi
 
 Many programming languages have standard package managers, which developers use to install all libraries: gem for Ruby, pip for Python and others. For server-side JavaScript there is npm (reasons why it's not suitable for client-side are below), but client-side JavaScript until recently didn't have anything. There were many different package managers (Jam, Component, Volo, Ender), but the majority of them never became popular, and there is little sense in package managers that can't install the right packages.
 
-Bower is not the standard package manager for client-side JavaScript, but the most popular one: currently there are more than eleven thousand packages.
+Bower is not the standard package manager for client-side JavaScript, but the most popular one: currently there are more than sixteen thousand packages.
 
 Bower doesn't prescribe to the user its own build system, or to the developer a method of including  libraries (AMD, CommonJS, etc.) All Bower does is install the right versions of the packages that the project needs and their dependencies. In other words: it downloads source files for the right libraries and everything they need into a special folder. Everything else is up to the developer.
 
