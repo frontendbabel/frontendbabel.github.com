@@ -23,11 +23,13 @@ translator:
 
 meta:
   desc: >
-    Artem Sapegin, a developer for Badoo, runs through the basics of Bower, how it's used and why it's a necessary part of a modern front-end development workflow. He also covers some more advanced topics, like publishing packages.
+    Artem Sapegin, a developer for Badoo, runs through the basics of Bower, how it's used and why it's a
+    necessary part of a modern front-end development workflow. He also covers some more advanced topics,
+    like publishing packages.
 
 ---
 
-This article was first published in the [may issue](http://www.xakep.ru/xa/?id=184) of Хакер magazine. The article in the magazine is a shortened version; the full one is below.
+This article was first published in the [May 2014 issue](http://www.xakep.ru/xa/?id=184) of Хакер magazine. The article in the magazine is a shortened version; the full one is below.
 
 Package managers simplify installing and updating project dependencies, which are libraries that it uses: jQuery, Fotorama, everything that is used on your site and isn't written by you.
 
