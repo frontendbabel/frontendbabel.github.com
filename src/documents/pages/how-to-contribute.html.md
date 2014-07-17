@@ -56,7 +56,7 @@ Articles' sources are stored in the `src/documents/articles/` directory. To add 
 create a new `<article-name>` folder, place `index.html.md` file and start.
 
 The articles are written with Markdown. Explore [an
-example](https://github.com/frontendbabel/frontendbabel.github.com/blob/source/src/documents/articles/graphical-interface.html.md)
+example](https://github.com/frontendbabel/frontendbabel.github.com/blob/source/src/documents/articles/graphical-interface/index.html.md)
 to learn the structure.
 
 ### Provide credits
