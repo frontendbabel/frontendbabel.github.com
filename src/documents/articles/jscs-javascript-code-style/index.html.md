@@ -52,7 +52,7 @@ I became sad. After that there was a second similar review, and the same situati
 
 This is how JavaScript Code Style — JSCS for short — a tool that will notify me of all my code style violations before I send the code off for review, was born. For a long time the tool had just one rule, which checked whether or not there was a space after "function". And this was enough for me to feel happy. If it so happened that I forgot to insert the ill-fated space, JSCS would alert me of it before every commit.
 
-![JSCS](JSCS-output.jpg)
+![JSCS](jscs-output.jpg)
 
 For some time I was the only one to use the tool, without sharing with anyone. Why would I? I solved my problems and relaxed. But soon it turned out that many of my colleagues suffered from the same problems with code style. It's just that it wasn't the space after `function` that they forgot, but for example adding a newline at the end of a file. So I shared with them.
 
