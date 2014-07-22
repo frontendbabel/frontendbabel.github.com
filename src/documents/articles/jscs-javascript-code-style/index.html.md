@@ -1,10 +1,10 @@
 ---
 title: JSCS: JavaScript Code Style
-date: 2014-07-10
+date: 2014-07-22
 
 source:
   name: JSCS: JavaScript Code Style
-  date: 2014-04-22
+  date: 2014-04-21
   url: http://habrahabr.ru/post/220229/
   lang: ru
 
