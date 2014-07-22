@@ -1,5 +1,5 @@
 ---
-title: About @viewport
+title: About the @viewport
 
 date: 2014-07-22
 
@@ -34,7 +34,7 @@ right now.
 
 <!-- cut -->
 
-## Proper `viewport` for Windows Phones
+## 1. Proper `viewport` for Windows Phones
 
 I've noticed long ago that websites on Windows Phones look bulky if using landscape more but never deeply thought
 about the fact.
@@ -85,7 +85,7 @@ viewport is a little bit wider than 320 pixels:
 `@-ms-viewport` was buggy in WP 8 before its third update because it operated with real pixels and not with logical
 ones. This caused too large viewport size (and so too small website view) in the retinish phones.
 
-## Responsiveness with WP 8
+## 2. Responsiveness with WP 8
 
 Besides, [as it proved](http://timkadlec.com/2013/01/windows-phone-8-and-device-width/), IE8 ignores the meta tag in
 metro mode but correctly interprets `@-ms-viewport`. Here there are a couple of explanatory GIF images:
