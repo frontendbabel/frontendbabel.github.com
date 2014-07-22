@@ -45,7 +45,7 @@ You might overlook the difference between iOS and Windows Phone views in portrai
 ---------------------------|-------------------------
 <div class="article__tip">Windows Phone 8.1</div> | <div class="article__tip">iOS 7</div>
 
-However in the landscape mode the enourmousness of Windows Phone view becames clear:
+However in the landscape mode the enourmousness of Windows Phone view becomes clear:
 
 ![Windows Phone 8.1](p_before-landscape.png) <br/>
 <div class='article__tip'>
@@ -57,50 +57,49 @@ Windows Phone 8.1
 iOS 7
 </div>
 
-It turned out that Windows considers that `<meta name="viewport" content="width=device-width, initial-scale=1">` tells
-it to make a viewport 320 abstract pixels wide; no matter what real device resolution is.
+It turned out that Windows Phone considers usual `<meta name="viewport" content="width=device-width, initial-scale=1">` as a designation to make a viewport 320 logical pixels wide, no matter what real device resolution is (because iPhone).
 
-Instead, freash and lush `@viewport {width: device-width;}` currently being supported by IE10 and IE11 with prefix
-overwrites this meta`s value; and moreover — instructs a Windows Phone to use its native viewport resolution.
+Instead, fresh and lush `@viewport {width: device-width;}` currently being supported by IE10 and IE11 with prefix
+overrides this meta`s value; and moreover — instructs a Windows Phone to use its native viewport resolution.
 
 This is how it should work:
 
-![Windows Phone 8.1](before-landscape.png) <br/>
+![WP 8.1 before the change](before-landscape.png) <br/>
 <div class='article__tip'>
 Before
 </div>
 
-![](after-landscape.png) <br/>
+![WP 8.1 after the change](after-landscape.png) <br/>
 <div class='article__tip'>
 After
 </div>
 
-The portrait mode also undergoes a change. HTC 8x has better resolution when iPod, but retinish in the same way, so its
-viewport is a little bit wider than 320 pixels:
+The portrait mode also undergoes a change. HTC 8x has better resolution then iPod and same pixel density, so its
+viewport should be a little bit wider than 320 pixels:
 
-![](before-portrait.png) | ![](after-portrait.png)
+![WP 8.1 in portrait mode before the change](before-portrait.png) | ![WP 8.1 in portrait mode after the change](after-portrait.png)
 -------------------------|-------------------------
 <div class="article__tip">Before</div> | <div class="article__tip">After</div>
 
 `@-ms-viewport` was buggy in WP 8 before its third update because it operated with real pixels and not with logical
 ones. This caused too large viewport size (and so too small website view) in the retinish phones.
 
-## 2. Responsiveness with WP 8
+## 2. Responsiveness with Windows 8
 
-Besides, [as it proved](http://timkadlec.com/2013/01/windows-phone-8-and-device-width/), IE8 ignores the meta tag in
-metro mode but correctly interprets `@-ms-viewport`. Here there are a couple of explanatory GIF images:
+Besides, [as it proved](http://timkadlec.com/2013/01/windows-phone-8-and-device-width/), IE in Windows 8 ignores the meta tag in
+metro mode but correctly interprets `@-ms-viewport`. Here there are a couple of explanatory GIFs:
 
-![](win8-before.gif) <br/>
+![Windows 8 with meta-tag](win8-before.gif) <br/>
 <div class='article__tip'>
 The web site is zoomed when using meta tag.
 </div>
 
-![](win8-after.gif) <br/>
+![Windows 8 with @-ms-viewport](win8-after.gif) <br/>
 <div class='article__tip'>
 The website adapts when using <code>@-ms-viwport</code>.
 </div>
 
-In the first case we get a not-adaptive web site. Bad. The second approach gives a mobile version sticky to the edge.
+In the first case we get a not-adaptive web site. Bad. The second approach gives a mobile version snapped to the edge.
 Splendid!
 
 ## What do we do?
@@ -127,7 +126,7 @@ and provide CSS:
 }
 ```
 
-They win:
+Advantages:
 
 * Responsiveness in IE Win8
 * Native viewport in Windows Phones
