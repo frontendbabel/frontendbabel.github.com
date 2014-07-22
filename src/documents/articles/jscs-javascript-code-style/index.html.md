@@ -22,7 +22,7 @@ translator:
 
 meta:
   desc: >
-    Matar Dulin is a front-end developer for Yander, a very popular Russian search portal and suite of web tools. In this article, he talks about his experiences with managing code style while writing JavaScript and the tool be built to make style linting automatic.
+    Matar Dulin is a front-end developer for Yandex, a very popular Russian search portal and suite of web tools. In this article, he talks about his experiences with managing code style while writing JavaScript and the tool be built to make style linting automatic.
 
 ---
 
