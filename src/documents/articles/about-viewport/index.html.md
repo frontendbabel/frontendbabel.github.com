@@ -125,6 +125,7 @@ and provide CSS:
 @viewport {
   width: device-width;
 }
+```
 
 They win:
 
