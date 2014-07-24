@@ -198,7 +198,7 @@ concat: {
 }
 ```
 
-This method has many downsides: you have to watch the files for each package, make sure that the files are assembled in the right order (for example, jQuery has to be higher than scripts depending on it). The [grunt-concat-bower](https://github.com/sapegin/grunt-bower-concat) plugin
+This method has many downsides: you have to watch the files for each package, make sure that the files are assembled in the right order (for example, jQuery has to be higher than scripts depending on it). The [grunt-bower-concat](https://github.com/sapegin/grunt-bower-concat) plugin
  can do this for you: it automatically concatenates all installed dependencies in the right order into a single file:
 
 
