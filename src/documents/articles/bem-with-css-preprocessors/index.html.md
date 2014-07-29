@@ -173,6 +173,7 @@ sugget not to yield to temptation in spite of you get correct resultant CSS.
     }
   }
 }
+```
 
 Never do such a thing. Selectors like this are very hard to found in the code. And the name of the element
 (`elemet-wrapper`) is divided into 2 parts. You should write the whole element name even if it is partly similar to the
