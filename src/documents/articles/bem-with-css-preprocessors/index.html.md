@@ -138,7 +138,7 @@ Now, a few simple rules to warn you of shoting your own foot.
 
 ### Use a block name just once
 
-A block name should be mantioned at the first level only and never repeated again. There might be exeptions in
+A block name should be mentioned at the first level only and never repeated again. There might be exceptions in
 case of complex modifier name. However if you met the need to do such a thing, you should reconsider the whole structure
 of this block elements and modifiers. I am sure you will find a way to decompose the block and simplify it.
 
@@ -176,7 +176,7 @@ sugget not to yield to temptation in spite of you get correct resultant CSS.
 ```
 
 Never do such a thing. Selectors like this are very hard to found in the code. And the name of the element
-(`elemet-wrapper`) is divided into 2 parts. You should write the whole element name even if it is partly similar to the
+(`element-wrapper`) is divided into 2 parts. You should write the whole element name even if it is partly similar to the
 others.
 
 ### Pseudo-classes, pseudo-elemets andi element modifiers can fit the 3rd level
@@ -197,14 +197,14 @@ others.
 }
 ```
 
-Here you group styles for the element and its suppliments in a very natural way; this will make it easier to find them
+Here you group styles for the element and its supplements in a very natural way; this will make it easier to find them
 across the source code.
 
 As is the convention, the element modifier must not influence inner elements. Placing it in the 3rd level of selectors
 you provide error protection. But I can imagine cases when it is handy to place a modifier into the 2nd level and so to
 repeat the element name.
 
-I believe that it is a bad practise to divide a modifier name into parts or separate its key and value parts. Excessive
+I believe that it is a bad practice to divide a modifier name into parts or separate its key and value parts. Excessive
 structure would make code less readable and so you can easily loose context.
 
 ### Modifiers fit the 2nd level and can cause cascade
@@ -249,6 +249,6 @@ redefined and this makes us to write full block name in selectors which is recom
 ```
 
 ## Wrapping up
-* CSS preprocessors prevent repeting block names in selectors.
+* CSS preprocessors prevent repeating block names in selectors.
 * The source code shows cascade but in the resultant CSS it all transforms into simple selectors.
 * This method cut down errors and structural bugs.
