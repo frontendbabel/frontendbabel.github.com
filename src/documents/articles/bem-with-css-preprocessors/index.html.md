@@ -30,8 +30,8 @@ meta:
 
 The [BEM methodology](http://bem.info/) never assumed that its long CSS classes such as `.block__element_modifier` to
 be written manually. At Yandex they use special tools to produce HTML markup and styles. If you are using CSS
-proprocessors to generate your styles, you also do not have to repeat block names again and again. Here I'm going to
-demonsrtate how to do this.
+preprocessors to generate your styles, you also do not have to repeat block names again and again. Here I'm going to
+demonstrate how to do this.
 
 <!-- cut -->
 
@@ -131,11 +131,11 @@ CSS:
 }
 ```
 
-As you can see, nested selectos were flattened.
+As you can see, nested selectors were flattened.
 
 ## Best to know
 
-Now, a few simple rules to warn you of shoting your own foot.
+Now, a few simple rules to warn you of shooting your own foot.
 
 ### Use a block name just once
 
@@ -149,7 +149,7 @@ of this block elements and modifiers. I am sure you will find a way to decompose
 }
 ```
 
-### Elemets are 2nd level selectors
+### Elements are 2nd level selectors
 
 ```css
 .block {
@@ -163,7 +163,7 @@ of this block elements and modifiers. I am sure you will find a way to decompose
 ```
 
 Sometime you may have elements with similar names and this would induce you to include one element into another. I
-sugget not to yield to temptation in spite of you get correct resultant CSS.
+suggest not to yield to temptation in spite of you get correct resultant CSS.
 
 ```css
 .block {
@@ -180,13 +180,16 @@ Never do such a thing. Selectors like this are very hard to found in the code. A
 (`element-wrapper`) is divided into 2 parts. You should write the whole element name even if it is partly similar to the
 others.
 
-### Pseudo-classes, pseudo-elemets andi element modifiers can fit the 3rd level
+### Pseudo-classes, pseudo-elements and element modifiers can fit the 3rd level
 
 ```css
 .block {
   &__element {
     &_modifier {
       // styles for a modifier of an element
+    }
+    &_modifier_value {
+      // do not split modifier key and value
     }
     &:hover {
       // pseudo-class is also a kind of a modifier
@@ -198,14 +201,14 @@ others.
 Here you group styles for the element and its supplements in a very natural way; this will make it easier to find them
 across the source code.
 
-As is the convention, the element modifier must not influence inner elements. Placing it in the 3rd level of selectors
+As is the convention, the element modifier must not influence inner elements. Placing it at the 3rd level of selectors
 you provide error protection. But I can imagine cases when it is handy to place a modifier into the 2nd level and so to
 repeat the element name.
 
 ```css
 .block {
   &__element_active {
-    // element modifier at teh 2nd level
+    // element modifier at the 2nd level
   }
   &__element_modifier_good {
     // example of key-value modifier
@@ -213,9 +216,9 @@ repeat the element name.
 }
 ```
 
-I personally prefer to place element modifiers at the 2nd level.<br/>
-I believe that it is a bad practice to divide a modifier name into parts or separate its key and value parts. Excessive
-structure would make code less readable and so you can easily loose context.
+I personally prefer to place element modifiers at the 2nd level.
+Also, I believe that it is a bad practice to divide a modifier name into parts or separate its key and value parts.
+Excessive structure would make code less readable and so you can easily loose context.
 
 ### Modifiers fit the 2nd level and can cause cascade
 
