@@ -189,9 +189,9 @@ others.
     &:hover {
       // pseudo-class is also a kind of a modifier
     }
-    &_modifier_good {
-      // example of key-value modifier
-    }
+  }
+  &__element_modifier_good {
+    // example of key-value modifier
   }
 }
 ```
