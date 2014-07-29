@@ -23,7 +23,8 @@ translator:
 
 meta:
   desc: >
-    BEM CSS selectors
+    Vladimir Kuznetsov explains how to benefit from CSS preprocessors (such as SASS and LESS) when using BEM
+    methodology.
 
 ---
 
@@ -191,9 +192,6 @@ others.
       // pseudo-class is also a kind of a modifier
     }
   }
-  &__element_modifier_good {
-    // example of key-value modifier
-  }
 }
 ```
 
@@ -204,6 +202,18 @@ As is the convention, the element modifier must not influence inner elements. Pl
 you provide error protection. But I can imagine cases when it is handy to place a modifier into the 2nd level and so to
 repeat the element name.
 
+```css
+.block {
+  &__element_active {
+    // element modifier at teh 2nd level
+  }
+  &__element_modifier_good {
+    // example of key-value modifier
+  }
+}
+```
+
+I personally prefer to place element modifiers at the 2nd level.<br/>
 I believe that it is a bad practice to divide a modifier name into parts or separate its key and value parts. Excessive
 structure would make code less readable and so you can easily loose context.
 
