@@ -8,6 +8,8 @@ fs = require 'fs'
 docpadConfig = {
 
 plugins:
+    cleanurls:
+        trailingSlashes: true
     rss:
         default:
             collection: 'articles'
