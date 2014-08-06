@@ -27,19 +27,19 @@ meta:
 
 ---
 
-Once Opera's guys proposed to use `@viewport { ... }` in CSS instead of `<meta name="viewport" ...>`. Regarding the
+Once Opera’s guys proposed to use `@viewport { ... }` in CSS instead of `<meta name="viewport" ...>` tag. Regarding the
 reasons
-[you'd better watch and listen to @ppk](http://vimeo.com/100523275) and I will explain why you should use this
+[you’d better watch and listen to @ppk](http://vimeo.com/100523275) and I will explain why you should use this
 right now.
 
 <!-- cut -->
 
-## 1. Proper `viewport` for Windows Phones
+## 1. Proper viewport for Windows Phones
 
-I've noticed long ago that websites on Windows Phones look bulky if using landscape more but never deeply thought
+I’ve noticed long ago that websites on Windows Phone look bulky in landscape mode but never deeply thought
 about the fact.
 
-You might overlook the difference between iOS and Windows Phone views in portraite mode:
+You might overlook the difference between iOS and Windows Phone views in portrait mode:
 
 ![Windows Phone 8.1](p_before-portrait.png) | ![iOS 7](p_ipod-portrait.png)
 ---------------------------|-------------------------
@@ -60,7 +60,7 @@ iOS 7
 It turned out that Windows Phone considers usual `<meta name="viewport" content="width=device-width, initial-scale=1">` as a designation to make a viewport 320 logical pixels wide, no matter what real device resolution is (because iPhone).
 
 Instead, fresh and lush `@viewport {width: device-width;}` currently being supported by IE10 and IE11 with prefix
-overrides this meta`s value; and moreover — instructs a Windows Phone to use its native viewport resolution.
+overrides this meta’s value; and moreover – instructs a Windows Phone to use its native viewport resolution.
 
 This is how it should work:
 
@@ -84,7 +84,9 @@ viewport should be a little bit wider than 320 pixels:
 `@-ms-viewport` was buggy in WP 8 before its third update because it operated with real pixels and not with logical
 ones. This caused too large viewport size (and so too small website view) in the retinish phones.
 
-## 2. Responsiveness with Windows 8
+Third update came out a while ago, older phones running WP7 are not affected by the bug, so now this bug can be safely ignored.
+
+## 2. Responsiveness on Windows 8 devices
 
 Besides, [as it proved](http://timkadlec.com/2013/01/windows-phone-8-and-device-width/), IE in Windows 8 ignores the meta tag in
 metro mode but correctly interprets `@-ms-viewport`. Here there are a couple of explanatory GIFs:
@@ -99,12 +101,12 @@ The web site is zoomed when using meta tag.
 The website adapts when using <code>@-ms-viwport</code>.
 </div>
 
-In the first case we get a not-adaptive web site. Bad. The second approach gives a mobile version snapped to the edge.
+In the first case we get a non-adaptive web site. Bad. The second approach gives a mobile version snapped to the edge of the screen.
 Splendid!
 
 ## What do we do?
 
-All the real guys now are doing like this:
+All the real guys are now combining the meta tag:
 
 ```html
 &lt;head>
@@ -114,7 +116,7 @@ All the real guys now are doing like this:
 &lt;/head>
 ```
 
-and provide CSS:
+with CSS `@viewport` declaration:
 
 ```css
 @-ms-viewport {
@@ -128,13 +130,13 @@ and provide CSS:
 
 Advantages:
 
-* Responsiveness in IE Win8
-* Native viewport in Windows Phones
+* Responsiveness in IE on Windows 8
+* Native viewport in IE on Windows Phones
 * Future-proof!
 
 Drawbacks:
 
-* Viewport at Windows Phone without third update will be broken.
+* Viewport is broken on Windows Phone without third update
 
 ## Related links
 
