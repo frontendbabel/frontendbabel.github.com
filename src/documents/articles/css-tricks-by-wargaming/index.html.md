@@ -1,7 +1,7 @@
 ---
 title: Some CSS tricks; or what we do on our Naked Fridays
 
-date: 2014-08-11
+date: 2014-08-25
 
 source:
   name: Подборка полезных CSS рецептов, или чем мы занимаемся на голых пятницах
@@ -69,8 +69,27 @@ very often used, so we consider that not everyone is familiar with it.
 }
 ```
 
-<p data-height="268" data-theme-id="7780" data-slug-hash="AoFsc" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/varya/pen/AoFsc/'>AoFsc</a> by Varya Stepanova (<a href='http://codepen.io/varya'>@varya</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-<script async src="//codepen.io/assets/embed/ei.js"></script>
+<style>
+.text-overflow {
+    white-space: nowrap;       /* No line breaks */
+    overflow: hidden;          /* Hide text which does not fit the block */
+    text-overflow: ellipsis;   /* Cut off with ellipsis */
+    display: block;            /* Works only for block elements */
+}
+
+.column {
+  width: 250px;
+  border: red 1px solid;
+  padding: 1em;
+}
+
+</style>
+
+<div class="column">
+    <div class="text-overflow">
+        Articles and blog posts from all over the world
+    </div>
+</div>
 
 You can define block width, but by default it is as wide as its parent block. So, ellipsis is shown if the block
 is wider than its container. This works only for single lines.
@@ -100,10 +119,49 @@ And the main content width depends only on the sidebar width. How do you do this
 }
 ```
 
-![](img/block-width.jpg)
+![](overflow.png)
 
 As you can see `overflow: hidden` solves the problems.
 
 ## Elliptic corners
 
 Only a few know (or at least not may use) that `border-radius` property accepts not 4 but 8 parameters; 2 per corner.
+The first one defines horizontal radius, and the second defines vertical one. For example:
+
+```css
+.circle {
+    border-radius: 150px/100px 100px/200px 0 0;
+}
+```
+
+![](img/eliptic-corners.gif)
+
+## A little bit about pseudo elements
+
+Pseudo elements `:before` and `:after` overlay the element they belong to. In case you need them to be under the parent,
+set negative `z-index` property to them.
+
+Also, pseudo element do not work with tags which are not supposed to have text content; such as `<img>`, `<br>` and
+strangely enough `<input>`.
+
+![](img/pseudo-elements.gif)
+
+However `<hr>` works normally with pseudo elements for some reason.
+
+## Bonus: little Firebug with pure HTML
+
+Just put this code into your page:
+
+```html
+&lt;style contenteditable style="display: block; border: 1px solid black; width: 90%; height: 300px; position: fixed;
+bottom: 50px; left: 5%;">&lt;/style>
+```
+
+![](img/little-firebug.gif)
+
+Whoohoo! Everything works, thanks to HTML5!
+
+This this is almost useless. however if it is styled to have big font-size, it can come in handy for the presentations.
+Not all of us can easily make out the small letters of the real Firebug.
+
+This is all for today. Thank you for your attention! We are looking forward for your comments!
