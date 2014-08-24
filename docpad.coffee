@@ -112,6 +112,23 @@ templateData:
             (if desc then "<meta content=\"#{desc}\" property=\"og:description\"/>" else "") +
             (if thumb then "<meta content=\"#{thumb}\" property=\"og:image\"/>" else "")
 
+events:
+
+    renderBefore: () ->
+        this.docpad.getCollection('html').forEach (document) ->
+            a = document.attributes
+
+            # Use document's base file name as a default title
+            if a.title == null
+                title = a.basename.replace(/-/g, ' ')
+                title = title.charAt(0).toUpperCase() + title.slice(1);
+                document.set('title', title)
+
+            # Hardcode the menu order for the contributing guideline
+            # TODO: there should be a better wat to do this
+            if a.basename == 'how-to-contribute' && a.order == undefined
+                document.set('order', 3)
+
 collections:
 
     pages: (database) ->

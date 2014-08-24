@@ -1,8 +1,3 @@
----
-title: How to contribute
-order: 3
----
-
 # How to contribute
 
 **Frontend Babel** is an open source project publicly
