@@ -26,7 +26,7 @@ meta:
 ---
 Our development department has a very nice tradition. Every 2 weeks we hold Naked Friday; this is a little conference
 where we share interesting knowledge gotten during our work. As a result, we have a lot of such information by now and
-so we decided to publish them.
+so we decided to publish it.
 
 Thus, let me introduce a set of fascinating CSS and HTML tricks, which we hope are not yet well-known. We will be happy
 if everyone learn something new!
