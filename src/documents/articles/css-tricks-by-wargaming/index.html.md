@@ -1,5 +1,5 @@
 ---
-title: Some CSS tricks; or what we do on our Naked Fridays
+title: Some CSS tricks; or what we do at our Naked Fridays
 
 date: 2014-08-25
 
