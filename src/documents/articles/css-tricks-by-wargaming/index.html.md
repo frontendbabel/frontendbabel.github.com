@@ -21,7 +21,8 @@ translator:
 
 meta:
   desc: >
-    About viewport
+    A bunch of CSS tricks by WarGaming developers: easy center&middle block positioning, eliptic corners and cutting off
+    long strings in pure CSS.
 
 ---
 Our development department has a very nice tradition. Every 2 weeks we hold Naked Friday; this is a little conference
@@ -119,7 +120,7 @@ And the main content width depends only on the sidebar width. How do you do this
 }
 ```
 
-![](overflow.png)
+![](img/overflow.png)
 
 As you can see `overflow: hidden` solves the problems.
 
