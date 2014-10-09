@@ -28,7 +28,7 @@ meta:
 x_
 While working with one large project, my colleague and I were thinking about how to automate building the CSS sprites.
 Before, we used to build them manually or with different online services which anyway took a lot of time. Also, by that
-time we already used Gulp to build the project and so were looking for a gulp-friendlt solution for sprites.
+time we already used Gulp to build the project and so were looking for a gulp-friendly solution for sprites.
 
 Initially we were choosing from different variants:
 
@@ -301,7 +301,7 @@ I noticed only one problem since the time I've started to use the solution.<br/>
 An icon is blinking when using `:hover` or `:active`. This happens because the `sprite` mixin generates
 `background-image` for every case and changes the picture on hover.
 
-After thining for a while and reading the Stylys' documentation, I have found the solution. We just need to check if a
+After thinking for a while and reading the Stylys' documentation, I have found the solution. We just need to check if a
 selector has these pseudo classes. And if they are, we can skip the `spriteImage($sprite)` output.
 
 This is the final version of the mixin:
@@ -315,7 +315,7 @@ sprite($sprite)
     spriteHeight($sprite)
 ```
 
-Unfortunately this is not possible to foresee all the cases. Probably there would be some JavaScript code chaning a CSS
+Unfortunately this is not possible to foresee all the cases. Probably there would be some JavaScript code changing a CSS
 class. So, we can use `spritePosition($sprite)` if an image was already in use.
 
 ## Wrap up
