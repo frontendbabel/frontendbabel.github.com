@@ -23,9 +23,9 @@ translator:
 
 meta:
   desc: >
+    Alexey Krekotun presents working and proved solution for automated css sprite build with Gulp.
 
 ---
-x_
 While working with one large project, my colleague and I were thinking about how to automate building the CSS sprites.
 Before, we used to build them manually or with different online services which anyway took a lot of time. Also, by that
 time we already used Gulp to build the project and so were looking for a gulp-friendly solution for sprites.
