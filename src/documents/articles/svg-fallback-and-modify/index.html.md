@@ -23,6 +23,9 @@ translator:
 
 meta:
   desc: >
+    The task: paint over 30 colorless SVG icons and generate their PNG+CSS fallbacks for the older
+    browsers. This could take ages manually and is significantly fast with "svg_fallback" grunt plugin
+    by @yoksel_en.
 
 ---
 Once upon a time my colleagues and I met a need to work up a lot of SVG icons. The prerequisites: over 30
