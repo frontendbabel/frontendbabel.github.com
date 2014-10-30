@@ -1,7 +1,7 @@
 ---
 title: Why I wrote a plugin for Grunt to work with SVG
 
-date: 2014-10-25
+date: 2014-10-30
 
 source:
   name: Зачем я написала плагин для Grunt
@@ -79,3 +79,123 @@ At the end it opens a demo page which demonstrates SVG and PNG working.
 
 This is the simpliest scenario when no files were being modified. But the most interesting thing happens if you have
 `config.json` file to initiate the transformations.
+
+For example, you can define a default color to paint the icons:
+
+```js
+{
+    "color": "orangered"
+}
+```
+
+Currently the plugin can paint transparent icons only.
+
+Another case: you need icons of different size than is used for the source SVG. The resultant sizes can also be defined
+in the config:
+
+```js
+{
+    "default-sizes": {
+        "heart": {
+            "width": "182"
+            },
+        "home": {
+            "height": "42"
+        }
+    }
+}
+```
+
+The SVG images are size agnostical but this setting is needed to generate corresponding PNG icons and CSS for them.
+
+This is how you can make several versions of the same icon:
+
+```js
+{
+    "icons": {
+        "heart": [{
+            "width": "50"
+        }, {
+            "color": "green"
+        }, {
+            "width": "150",
+            "color": "steelblue"
+        }],
+        "home": [{
+            "width": "150"
+        }, {
+            "width": "170",
+            "color": "teal"
+        }, {
+            "height": "62",
+            "color": "yellowgreen"
+        }]
+    }
+}
+```
+
+As a result you will get `heart.svg` file and its modifications: `heart--w50.svg`, `heart--green.svg` and `heart--w150--steelblue.svg`.
+
+The configuration can be also defined at once:
+
+```js
+{
+    "color": "orangered",
+    "default-sizes": {
+        // default sizes
+    },
+    "icons": {
+        // icon versions
+    }
+}
+```
+
+The result would be 3 files named as the parent directory. For example, the content of `myicons/` folder turns into:
+
+* `myicons.svg` — library of symbols;
+* `myicons.png` — sprite;
+*  `myicons.css` — CSS with icons sizes and colors for SVG.
+
+Then, to use these icons in you page, you need:
+
+1. Link `myicons.css` file to the HTML.
+1. Place `myicons.svg` icon library in the begining of the document (right after the `<body>` tag).
+1. Insert icons with code like this:
+```xml
+&lt;svg xmlns="http://www.w3.org/2000/svg" class="myicons myicons--heart">
+    &lt;use xlink:href="#myicons--heart">&lt;/use>
+&lt;/svg>
+```
+*If you will use a single `<use/>` tag instead of pair `<use ...></use>`, you risk to loose HTML5 markup in older
+browsers. Thanks to [@mista_k](https://twitter.com/mista_k) for this information.*
+
+Older browsers show a PNG fallback according to this CSS:
+
+```css
+.ie8 .myicons {
+    background-image: url(noconfig.png);
+    }
+```
+
+This assumes that your page is marked with `.ie8` CSS class which detects the current IE version.
+
+For better understanding on how it all works, install the package and have a look into `svg_fallback/test/` folder.
+
+While developing this plugin I decided to wrap code for modifying the files into a separate [svg-modify](https://www.npmjs.org/package/svg-modify)
+package. It can be used in grunt with [grunt-svg-modify](https://www.npmjs.org/package/grunt-svg-modify).
+
+Now I have even 2 plugins :-) They are very specific and cannot become extremely popular, but if you need to modify
+SVG icons, they will help you to save time.
+
+If you want to use them, keep in mind that [svg-modify](https://www.npmjs.org/package/svg-modify) is going to be
+developed (I want it to be more smart about colors). I sometimes find and fix bugs in the plugins, so they are not very
+stable yet but I try to support.
+
+Moreover, [svg_fallback](https://www.npmjs.org/package/svg_fallback) was written for a particular task. You probably would
+like to change the file naming or CSS syntax. This plugin does not allow such tuning but you can fork it and modify.
+
+Also, I should say that my JS skills could be better; so my code can look strangely to some of you. I will appreciate
+a piece of advice on how to improve it.
+
+Great thanks to [@mista_k](https://twitter.com/mista_k) and [@alexeyten](https://twitter.com/alexeyten) for their help
+and advice.
