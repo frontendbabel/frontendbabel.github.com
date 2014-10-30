@@ -25,7 +25,7 @@ meta:
   desc: >
 
 ---
-Once upona a time my colleagues and I met a need to work up a lot of SVG icons. The prerequisites: over 30
+Once upon a time my colleagues and I met a need to work up a lot of SVG icons. The prerequisites: over 30
 colorless SVG images (the color are defined with CSS later). The task: generate their PNG+CSS fallbacks for
 the older browsers.
 
@@ -48,7 +48,7 @@ in mind the need of future changes.
 If leave the need to synchronize changes out of account, a simple version can be built with existing grunt plugins. The
 result looks wierd, but it works.
 
-First intergration looked like this:
+First integration looked like this:
 
 1. [grunt-grunticon](https://www.npmjs.org/package/grunt-grunticon) paints icons and creates their PNG versions;
 1. [grunt-spritesmith](https://www.npmjs.org/package/grunt-spritesmith) generates a sprite and CSS.
@@ -58,7 +58,7 @@ so that I had to define them manually. Moreover, I would need to duplicate SVG s
 colors and sizes to be included into the sprite. Then, they would be renamed in a special way to make *grunticon* paint
 them, and renamed again before the sprite generating.
 
-Thus, I came up with my own grunt plug-in which main responsibility is to paint the images and create several vertions
+Thus, I came up with my own grunt plugin which main responsibility is to paint the images and create several versions
 of different colors and sizes; and to generate a library of SVG symbols + sprite + CSS while I'm at it.
 
 This is my plugin: [svg_fallback](https://www.npmjs.org/package/svg_fallback).
@@ -77,7 +77,7 @@ different icon sets if they meet in the same page.
 
 At the end it opens a demo page which demonstrates SVG and PNG working.
 
-This is the simpliest scenario when no files were being modified. But the most interesting thing happens if you have
+This is the simplest scenario when no files were being modified. But the most interesting thing happens if you have
 `config.json` file to initiate the transformations.
 
 For example, you can define a default color to paint the icons:
@@ -106,7 +106,7 @@ in the config:
 }
 ```
 
-The SVG images are size agnostical but this setting is needed to generate corresponding PNG icons and CSS for them.
+The SVG images are size agnostic but this setting is needed to generate corresponding PNG icons and CSS for them.
 
 This is how you can make several versions of the same icon:
 
@@ -159,7 +159,7 @@ The result would be 3 files named as the parent directory. For example, the cont
 Then, to use these icons in you page, you need:
 
 1. Link `myicons.css` file to the HTML.
-1. Place `myicons.svg` icon library in the begining of the document (right after the `<body>` tag).
+1. Place `myicons.svg` icon library in the beginning of the document (right after the `<body>` tag).
 1. Insert icons with code like this:
 ```xml
 &lt;svg xmlns="http://www.w3.org/2000/svg" class="myicons myicons--heart">
