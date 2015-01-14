@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         shell: {
             enb: {
-                command: './node_modules/enb/bin/enb make'
+                command: 'node ./node_modules/enb/bin/enb make'
             }
         },
         copy: {
