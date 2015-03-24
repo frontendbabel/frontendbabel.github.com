@@ -13,7 +13,7 @@ author:
   name: Vladimir Kuznetsov
   site: http://noteskeeper.ru/about/
   github: mistakster
-  twitter: mista_k
+  twitter: mistakster
 
 translator:
   name: Varya Stepanova
