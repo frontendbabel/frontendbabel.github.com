@@ -23,6 +23,9 @@ translator:
 meta:
   desc: >
     How style placeholder using CSS.
+
+scripts:
+  - examples.js
 ---
 
 Placeholder attribute is used to call an action inside empty elements such as input and textarea. In this article, we consider the possibility of style text of placeholder, as well as some tricks that will make it more convenient and functional.
@@ -31,9 +34,16 @@ Let's begin with an example for those who don't know what the placeholder is.
 
 <!-- cut -->
 
-```<input type="text" placeholder="Leave message here">```
+```html
+&lt;input type="text" placeholder="Leave message here">
+```
 
+
+<div id="example1source">
 <style>
+  #example1source {
+    display: none;
+  }
   input{
     border: 2px solid rgba(220,220,220,1);
     color: #2980b9;
@@ -71,6 +81,9 @@ Let's begin with an example for those who don't know what the placeholder is.
 </style>
 
 <input type="text" placeholder="Leave message here">
+</div>
+
+<div id="example1"></div>
 
 Style of placeholder can be modified with the following css rules:
 
@@ -87,7 +100,11 @@ In IE and old firefox (until the 18th version) placeholder is considered pseudo-
 
 Let's see what happens:
 
+<div id="example2source">
 <style>
+  #example2source {
+    display: none;
+  }
   ::-webkit-input-placeholder {
     color: #c0392b;
   }
@@ -103,6 +120,9 @@ Let's see what happens:
 </style>
 
 <input type="text" placeholder="Leave message here">
+</div>
+
+<div id="example2"></div>
 
 We should say that not all possible fully supported css properties. Most modern browsers allow you to change:
 
@@ -131,7 +151,12 @@ Sometimes width text input is reduced взаимости of layout, especially f
   input:-moz-placeholder      {text-overflow:ellipsis;}
   input:-ms-input-placeholder {text-overflow:ellipsis;}
 ```
+
+<div id="example3source">
 <style>
+  #example3source {
+    display: none;
+  }
   input {
     width: 130px;
     margin-top: 3px;
@@ -145,6 +170,9 @@ Sometimes width text input is reduced взаимости of layout, especially f
 <input type="text" placeholder="Leave message here"><br><br>
 <span style="color:#2ecc71">With text-overflow: ellipsis;</span><br>
 <input class="ell" type="text" placeholder="Leave message here">
+</div>
+
+<div id="example3"></div>
 
 ### How to hide the placehoder in focus?
 
@@ -162,7 +190,11 @@ I like the first option. To specify this behavior in all browsers supporting pla
   :focus:-ms-input-placeholder      {color: transparent}
 ```
 
+<div id="example4source">
 <style>
+  #example4source {
+    display: none;
+  }
   input{
     margin-top: 3px;
   }
@@ -174,12 +206,19 @@ I like the first option. To specify this behavior in all browsers supporting pla
 
 Placeholder скрывается при фoкусе<br>
 <input type="text" placeholder="Leave message here">
+</div>
+
+<div id="example4"></div>
 
 ## Hiding the placeholder nicely
 
 You can also add a transition for appearance and hiding placeholder:
 
+<div id="example5source">
 <style>
+  #example5source {
+    display: none;
+  }
   input{
     margin-top: 3px;
   }
@@ -219,6 +258,9 @@ Shift right placeholder in focus
 
 Shift down placeholder in focus
 <input class="input3" type="text" placeholder="Leave message here"><br>
+</div>
+
+<div id="example5"></div>
 
 Here css:
 

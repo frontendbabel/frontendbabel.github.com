@@ -129,3 +129,11 @@ If you've spotted a mistake, feel free to
 <comments class="comments">
 <%- @getDisqus() %>
 </comments>
+
+<!-- Additional scripts -->
+<% if @document.scripts: %>
+  <% for src, idx in @document.scripts: %>
+    <script src="<%- src %>"></script>
+  <% end %>
+<% end %>
+
