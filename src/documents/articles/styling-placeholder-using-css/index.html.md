@@ -22,7 +22,8 @@ translator:
 
 meta:
   desc: >
-    How style placeholder using CSS.
+    CSS tricks for styling input and textarea placeholder. Things like nice hiding a placeholder with animation or
+    cutting of long placeholder phrases can be done in pure CSS!
 
 scripts:
   - examples.js
@@ -167,9 +168,9 @@ Sometimes width text input is reduced взаимости of layout, especially f
 </style>
 
 <span style="color:#e74c3c">Without text-overflow: ellipsis;</span><br>
-<input type="text" placeholder="Leave message here"><br><br>
+<input type="text" placeholder="Leave your long long message here"><br><br>
 <span style="color:#2ecc71">With text-overflow: ellipsis;</span><br>
-<input class="ell" type="text" placeholder="Leave message here">
+<input class="ell" type="text" placeholder="Leave your long long message here">
 </div>
 
 <div id="example3"></div>
