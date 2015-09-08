@@ -1,7 +1,7 @@
 ---
 title: Styling placeholder using CSS. Syntax, tricks, supported styles in HTML5
 
-date: 2015-08-04
+date: 2015-09-09
 
 source:
   name: Стилизуем placeholder при помощи CSS. Синтаксис, трюки, поддерживаемые стили в html5
