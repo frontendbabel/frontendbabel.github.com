@@ -1,5 +1,5 @@
 ---
-title: Styling placeholder using CSS. Syntax, tricks, supported styles in HTML5
+title: Styling placeholders with CSS. Syntax, tips & tricks, supported HTML5 styles
 
 date: 2015-09-09
 
@@ -22,16 +22,16 @@ translator:
 
 meta:
   desc: >
-    CSS tricks for styling input and textarea placeholder. Things like nice hiding a placeholder with animation or
-    cutting of long placeholder phrases can be done in pure CSS!
+    CSS tricks for styling input and textarea placeholders. Things like hiding a placeholder with an animation or
+    cutting off exceedingly long placeholder texts in a nice way can be done in pure CSS!
 
 scripts:
   - examples.js
 ---
 
-Placeholder attribute is used to call an action inside empty elements such as input and textarea. In this article, we consider the possibility of style text of placeholder, as well as some tricks that will make it more convenient and functional.
+Placeholder attribute is used to provide an action hint inside empty elements such as input or textarea. In this article, we consider the possibility of styling the placeholder text as well as some tricks to make it more usable and functional.
 
-Let's begin with an example for those who don't know what the placeholder is.
+Let's begin with an example for those who don't know what a placeholder is.
 
 <!-- cut -->
 
@@ -86,7 +86,7 @@ Let's begin with an example for those who don't know what the placeholder is.
 
 <div id="example1"></div>
 
-Style of placeholder can be modified with the following css rules:
+Placeholder styles can be modified with the following CSS rules:
 
 ```css
   ::-webkit-input-placeholder {color:#c0392b;}
@@ -95,9 +95,9 @@ Style of placeholder can be modified with the following css rules:
   :-ms-input-placeholder      {color:#c0392b;}
 ```
 
-Looks scary, doesn't it ? The fact that this is still not in the standards. Each browser does it own way to implement support for styling placeholder.
+Looks scary, doesn't it? In fact, it's not standartized yet. Each browser implements placeholder styling in its own way.
 
-In IE and old firefox (until the 18th version) placeholder is considered pseudo-class and in new firefox, webkit and blink, it is a pseudo-element.
+In IE and old Firefox (till ver. 18) placeholder is considered a pseudo-class whereas in the new Firefox, Webkit, and Blink, it is a pseudo-element.
 
 Let's see what happens:
 
@@ -125,7 +125,7 @@ Let's see what happens:
 
 <div id="example2"></div>
 
-We should say that not all possible fully supported css properties. Most modern browsers allow you to change:
+Not all CSS properties are fully supported. Most modern browsers would allow you to change:
 
 ```
   font (and related properties)
@@ -144,7 +144,7 @@ We should say that not all possible fully supported css properties. Most modern 
 
 ## If placeholder does not fit
 
-Sometimes width text input is reduced взаимости of layout, especially for mobile devices. In this case, if the text of placeholder is long it will be cut and look ugly. To prevent it you can use `text-overflow: ellipsis`. This syntax will work in all modern browsers.
+Sometimes the width of a text input gets reduced (depending on the layout), especially on mobile devices. In this case, the placeholder text will be cut off if it's too long. It looks ugly :) To prevent this, one can use `text-overflow: ellipsis`. This syntax works in all modern browsers.
 
 ```css
   input[placeholder]          {text-overflow:ellipsis;}
@@ -175,14 +175,14 @@ Sometimes width text input is reduced взаимости of layout, especially f
 
 <div id="example3"></div>
 
-### How to hide the placehoder in focus?
+### How to hide a placehoder on focus?
 
 Hiding the placeholder is not consistent across browsers.
 
-  1. in some browsers when it focused input
-  2. in other browsers in the presence of at least one character entered
+  1. In some browsers, it happens when input field is focused
+  2. In other browsers, it only happens after at least one character is entered
 
-I like the first option. To specify this behavior in all browsers supporting placeholder, define the following css rules:
+I like the first option. To implement this behavior in all browsers that support placeholders, define the following CSS rules:
 
 ```css
   :focus::-webkit-input-placeholder {color: transparent}
@@ -205,15 +205,15 @@ I like the first option. To specify this behavior in all browsers supporting pla
   :focus:-ms-input-placeholder      {color: transparent}
 </style>
 
-Placeholder скрывается при фoкусе<br>
+Placeholder hides itself on focus<br>
 <input type="text" placeholder="Leave message here">
 </div>
 
 <div id="example4"></div>
 
-## Hiding the placeholder nicely
+## Hiding the placeholder in a nice way
 
-You can also add a transition for appearance and hiding placeholder:
+You can add a transition for showing and hiding a placeholder:
 
 <div id="example5source">
 <style>
@@ -251,19 +251,19 @@ You can also add a transition for appearance and hiding placeholder:
   .input3:focus:-ms-input-placeholder      {line-height: 100px; transition: line-height 0.5s ease;}
 </style>
 
-Fadeouts of placeholder in focus
+Fadeouts of a placeholder in focus
 <input class="input1" type="text" placeholder="Leave message here"><br>
 
-Shift right placeholder in focus
+Shift a placeholder in focus right 
 <input class="input2" type="text" placeholder="Leave message here"><br>
 
-Shift down placeholder in focus
+Shift a placeholder in focus down
 <input class="input3" type="text" placeholder="Leave message here"><br>
 </div>
 
 <div id="example5"></div>
 
-Here css:
+Here is the CSS:
 
 ```css
   /* fadeouts of placeholder in focus */
@@ -297,4 +297,4 @@ Here css:
   .input3:focus:-ms-input-placeholder      {line-height: 100px; transition: line-height 0.5s ease;}
 ```
 
-I hope it will be useful for you. Write remarks and suggestion in comments.
+I hope you find it useful. Please leave your comments and suggestions below.
