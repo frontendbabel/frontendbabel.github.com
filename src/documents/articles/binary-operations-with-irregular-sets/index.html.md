@@ -1,7 +1,7 @@
 ---
 title: Binary operations with unordered sets
 
-date: 2015-09-15
+date: 2015-10-07
 
 source:
   name: Бинарные операции над неупорядоченными множествами
