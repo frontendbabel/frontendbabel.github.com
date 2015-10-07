@@ -1,5 +1,5 @@
 ---
-title: Binary operations with irregular sets
+title: Binary operations with unordered sets
 
 date: 2015-09-15
 
@@ -24,7 +24,7 @@ meta:
 
 ---
 
-In this post I will make algorithmization of the array operations and describe the operations.
+In this post I will do algorithmization of the array operations and describe the operations.
 
 Summary:
 
@@ -38,7 +38,7 @@ Summary:
 
 ## I. Intersection of sets
 
-The intersection of two sets A and B is the sets that contains all elements of A that also belong to B (or
+The intersection of two sets A and B is such a sets that contains all elements of A that also belong to B (or
 equivalently, all elements of B that also belong to A), but no other elements.
 
 ![](intersection.png)
