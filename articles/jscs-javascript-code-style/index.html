@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>JSCS: JavaScript Code Style — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="Matar Dulin is a front-end developer for Yandex, a very popular Russian search portal and suite of web tools. In this article, he talks about his experiences with managing code style while writing JavaScript and the tool be built to make style linting automatic.
+" property="og:description"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">JSCS: JavaScript Code Style</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://habrahabr.ru/">Marat Dulin</a> on 21st April 2014; translated by <a href="http://gggritso.com/">George Gritsouk</a> on 22nd July 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">When nine months ago I wrote a small console utility for myself, I didn&#39;t suspect that soon it would become a serious and unique in its class tool, which would be used even by such famous teams as <a href="http://jquery.com/">jQuery</a>, <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://angularjs.org/">Angular</a>. Now, as I&#39;m writing this article, my project has 1010 stars on GitHub, and I&#39;m very happy to think that so many people could make their work more comfortable with the help of my idea.</p><!-- cut -->
+<p class="text__p">The story of this project start with my personal pain.</p><p class="text__p">Not too long before that moment I transferred from one team of Yandex.Maps to another and was gradually adjusting to work on a new (to me) project. Everything was good, I really liked the new project, but the code style used by the guys on my new team was just too different from the code style that me and the guys from my previous team used. At one point, I was visited by the ridiculous thought that the code style of the new group was written directly opposite to the code style of the previous group specifically to confuse me.</p><p class="text__p">For example...</p><p class="text__p">Once, I finished developing a new visual block and sent it for code review, so that the guys could look through it for defects in logic. This is how it looked then.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="rate-form.png"/></p><p class="text__p"><em>The image is a simple &quot;rate our service&quot; form, with a text input field, a star rating and an email input.</em></p><p class="text__p">In this review is where disappointment was waiting.</p><p class="text__p">Imagine, I spent an entire week making a new feedback form, debugging, getting the code in order. But the first remark I got in the review was &quot;There&#39;s no space after <code>function</code>&quot;. And then the same thing in five other places!?</p><p class="text__p">Please understand me. I developed the product, worked hard. Thought up non-trivial logic which ended up with no mistakes. But I couldn&#39;t pass the review because I forgot to put a space after the word &quot;function&quot;?! I didn&#39;t like that. I wanted for the reviewers to pay attention to my code, to its architecture, to defects in logic, not to violations of the code style.</p><p class="text__p">I became sad. After that there was a second similar review, and the same situation with the space after &quot;function&quot;. Them and their space! And in that moment I fully understood that it can&#39;t go on like this. I became mad.</p><p class="text__p">This is how JavaScript Code Style — JSCS for short — a tool that will notify me of all my code style violations before I send the code off for review, was born. For a long time the tool had just one rule, which checked whether or not there was a space after &quot;function&quot;. And this was enough for me to feel happy. If it so happened that I forgot to insert the ill-fated space, JSCS would alert me of it before every commit.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="jscs-output.jpg"/></p><p class="text__p">For some time I was the only one to use the tool, without sharing with anyone. Why would I? I solved my problems and relaxed. But soon it turned out that many of my colleagues suffered from the same problems with code style. It&#39;s just that it wasn&#39;t the space after <code>function</code> that they forgot, but for example adding a newline at the end of a file. So I shared with them.</p><p class="text__p">JSCS started to proliferate within Yandex. It started to rapidly grow new rules. Different commands, different code styles — new and interesting rules appeared, for example, forbidden ambiguous type declarations (<code>!!x</code> — bad, <code>Boolean(x)</code> — good). Shortly thereafter I put JSCS on GitHub. And then the rules started to be added by external (with respect to Yandex) people. And suddenly the stars flowed.</p><p class="text__p">If you ask me what caused this explosive growth in popularity of this project, I&#39;ll answer.</p><p class="text__p">Firstly, an analogously complete tool didn&#39;t exist at that time, and I&#39;m not certain that it does now. The second reason is in that the tool exists to solve one very small problem, understood by everyone, relevant for many. And the third (and in my opinion very important reason) is that I created a tool with a simple and obvious programming architecture. That is, the tool doesn&#39;t try to solve a bunch of diverse problems, it does a single thing but does it very well.</p><p class="text__p">Why didn&#39;t we expand jshint, since jshint used to have a series of rules for code style checking?</p><p class="text__p">Those rules were incomplete, chaotic, and jshint&#39;s developers wanted to get rid of them. This is why in the JSCS repo <a href="https://github.com/mdevils/node-JSCS/issues/102">issue 102</a> appeared, where Mike Sherov started to move the code style rule support from jshint to JSCS. Right now, in the new version of jshint there isn&#39;t a single rule for code style, and JSCS became the only complete tool that solves this problem.</p><p class="text__p">Also, two full-time project maintainers appeared. They turned out to be guys who work on jQuery core — Mike Sherov <a href="https://github.com/mikesherov">mikesherov</a> and Oleg Gaidarenko <a href="https://github.com/markelog">markelog</a>, they sift through a massive collection of tickets which come from users. And those stars that the project earned on GitHub are chiefly their accomplishment. Thank you so much, guys!</p><p class="text__p">The GitHub project page: <a href="https://github.com/mdevils/node-JSCS">https://github.com/mdevils/node-JSCS</a>. On this page more than sixty rules are described, with the help of which you can tune the validation of code style in your project.</p><p class="text__p">Come by, use it, you might even like it.</p>
+    <div class="article__date">
+        22nd July 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://habrahabr.ru/post/220229/" rel="alternate" hreflang="ru">
+        JSCS: JavaScript Code Style
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://habrahabr.ru/">
+                        Marat Dulin
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/mdevils">
+                        mdevils
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/mdevils">
+                        @mdevils
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://habrahabr.ru/">
+                        http://habrahabr.ru/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://gggritso.com/">
+                        George Gritsouk
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/gggritso">
+                        gggritso
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/gggritso">
+                        @gggritso
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://gggritso.com/">
+                        http://gggritso.com/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="JSCS: JavaScript Code Style">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/jscs-javascript-code-style/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/jscs-javascript-code-style';
+		window.disqus_identifier = 'articles-jscs-javascript-code-style-index';
+		window.disqus_title = 'JSCS: JavaScript Code Style';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

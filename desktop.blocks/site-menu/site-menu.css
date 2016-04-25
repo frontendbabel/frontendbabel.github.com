@@ -1,0 +1,22 @@
+.site-menu
+{
+    display: table;
+    list-style: none;
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.site-menu__item
+{
+    display: table-cell;
+}
+
+.site-menu__item_current
+{
+    background-color: #ddd;
+}
+
+.site-menu__text {
+    display: block;
+    padding: 1em 1.6em;
+}

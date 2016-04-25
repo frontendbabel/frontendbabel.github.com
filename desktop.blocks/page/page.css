@@ -1,0 +1,34 @@
+/* Color scheme
+ * blue: #7294D4
+ * pink: #E6A0C4
+ * light violet: #C6CDF7
+ * beige: #D8A499
+ */
+
+.page
+{
+    background: #fff;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+table,
+tr,
+td,
+th,
+tbody,
+thead,
+iframe
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+table
+{
+    border-collapse: collapse;
+    border-spacing: 0;
+}

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>About the @viewport — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="About viewport
+" property="og:description"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">About the @viewport</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://wd.dizaina.net/en/">Oleg Korsunsky</a> on 17th July 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 22nd July 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">Once Opera’s guys proposed to use <code>@viewport { ... }</code> in CSS instead of <code>&lt;meta name=&quot;viewport&quot; ...&gt;</code> tag. Regarding the
+reasons
+<a href="http://vimeo.com/100523275">you’d better watch and listen to @ppk</a> and I will explain why you should use this
+right now.</p><!-- cut -->
+<h2 class="text-header text-header_lvl_2" id="1-proper-viewport-for-windows-phones"><a href="#1-proper-viewport-for-windows-phones" class="text-header__anchor">1. Proper viewport for Windows Phones</a></h2><p class="text__p">I’ve noticed long ago that websites on Windows Phone look bulky in landscape mode but never deeply thought
+about the fact.</p><p class="text__p">You might overlook the difference between iOS and Windows Phone views in portrait mode:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="p_before-portrait.png"/></th><th class="text-table__th"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="p_ipod-portrait.png"/></th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"><div class="article__tip">Windows Phone 8.1</div></td><td class="text-table__td"><div class="article__tip">iOS 7</div></td></tr></tbody></table><p class="text__p">However in the landscape mode the enourmousness of Windows Phone view becomes clear:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="p_before-landscape.png"/> <br/></p><div class='article__tip'>
+Windows Phone 8.1
+</div>
+
+<p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="p_ipod-landscape.png"/> <br/></p><div class='article__tip'>
+iOS 7
+</div>
+
+<p class="text__p">It turned out that Windows Phone considers usual <code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</code> as a designation to make a viewport 320 logical pixels wide, no matter what real device resolution is (because iPhone).</p><p class="text__p">Instead, fresh and lush <code>@viewport {width: device-width;}</code> currently being supported by IE10 and IE11 with prefix
+overrides this meta’s value; and moreover – instructs a Windows Phone to use its native viewport resolution.</p><p class="text__p">This is how it should work:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="before-landscape.png"/> <br/></p><div class='article__tip'>
+Before
+</div>
+
+<p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="after-landscape.png"/> <br/></p><div class='article__tip'>
+After
+</div>
+
+<p class="text__p">The portrait mode also undergoes a change. HTC 8x has better resolution then iPod and same pixel density, so its
+viewport should be a little bit wider than 320 pixels:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="before-portrait.png"/></th><th class="text-table__th"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="after-portrait.png"/></th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"><div class="article__tip">Before</div></td><td class="text-table__td"><div class="article__tip">After</div></td></tr></tbody></table><p class="text__p"><code>@-ms-viewport</code> was buggy in WP 8 before its third update because it operated with real pixels and not with logical
+ones. This caused too large viewport size (and so too small website view) in the retinish phones.</p><p class="text__p">Third update came out a while ago, older phones running WP7 are not affected by the bug, so now this bug can be safely ignored.</p><h2 class="text-header text-header_lvl_2" id="2-responsiveness-on-windows-8-devices"><a href="#2-responsiveness-on-windows-8-devices" class="text-header__anchor">2. Responsiveness on Windows 8 devices</a></h2><p class="text__p">Besides, <a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/">as it proved</a>, IE in Windows 8 ignores the meta tag in
+metro mode but correctly interprets <code>@-ms-viewport</code>. Here there are a couple of explanatory GIFs:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="win8-before.gif"/> <br/></p><div class='article__tip'>
+The web site is zoomed when using meta tag.
+</div>
+
+<p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="win8-after.gif"/> <br/></p><div class='article__tip'>
+The website adapts when using <code>@-ms-viwport</code>.
+</div>
+
+<p class="text__p">In the first case we get a non-adaptive web site. Bad. The second approach gives a mobile version snapped to the edge of the screen.
+Splendid!</p><h2 class="text-header text-header_lvl_2" id="what-do-we-do"><a href="#what-do-we-do" class="text-header__anchor">What do we do?</a></h2><p class="text__p">All the real guys are now combining the meta tag:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "html"} }'><code>&lt;head>
+  ...
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1">
+  ...
+&lt;/head></code></pre><p class="text__p">with CSS <code>@viewport</code> declaration:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>@-ms-viewport {
+  width: device-width;
+}
+
+@viewport {
+  width: device-width;
+}</code></pre><p class="text__p">Advantages:</p><ul>
+<li>Responsiveness in IE on Windows 8</li>
+<li>Native viewport in IE on Windows Phones</li>
+<li>Future-proof!</li>
+</ul>
+<p class="text__p">Drawbacks:</p><ul>
+<li>Viewport is broken on Windows Phone without third update</li>
+</ul>
+<h2 class="text-header text-header_lvl_2" id="related-links"><a href="#related-links" class="text-header__anchor">Related links</a></h2><ul>
+<li><a href="http://dev.w3.org/csswg/css-device-adapt/">CSS Device Adaptation</a>, W3C</li>
+<li><a href="http://vimeo.com/100523275">The Mobile Viewports</a>, Peter Paul Koch</li>
+<li><a href="http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/">IE10 Snap Mode and Responsive Design</a>, Tim Kadlec</li>
+<li><a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/">Windows Phone 8 and Device-Width</a>, Tim Kadlec</li>
+</ul>
+
+    <div class="article__date">
+        22nd July 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://wd.dizaina.net/internet-maintenance/about-viewport-at-rule/" rel="alternate" hreflang="ru">
+        Про @viewport
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://wd.dizaina.net/en/">
+                        Oleg Korsunsky
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/wilddeer">
+                        wilddeer
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/wildir">
+                        @wildir
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://wd.dizaina.net/en/">
+                        http://wd.dizaina.net/en/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://varya.me/">
+                        Varya Stepanova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/varya">
+                        varya
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/varya_en">
+                        @varya_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://varya.me/">
+                        http://varya.me/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="About the @viewport">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/about-viewport/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/about-viewport';
+		window.disqus_identifier = 'articles-about-viewport-index';
+		window.disqus_title = 'About the @viewport';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

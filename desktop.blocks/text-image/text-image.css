@@ -1,0 +1,17 @@
+.text-image
+{
+    max-width: 100%;
+}
+
+.text-image_size_small
+{
+    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
+}
+
+.text-image_size_normal
+{
+    max-width: initial;
+    cursor: -webkit-zoom-out;
+    cursor: zoom-out;
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>How to contribute — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item site-menu__item_current">
+                
+                    <span class="site-menu__text">How to contribute<span>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <h1 class="text-header text-header_lvl_1" id="how-to-contribute"><a href="#how-to-contribute" class="text-header__anchor">How to contribute</a></h1><p class="text__p"><strong>Frontend Babel</strong> is an open source project publicly
+<a href="https://github.com/frontendbabel/frontendbabel.github.com">hosted on Github</a>.
+You are very welcome to make a pull request, send a patch and create issues!</p><p class="text__p">Here are some ideas on what could be your contribution:</p><ul>
+<li><a href="https://github.com/frontendbabel/frontendbabel.github.com/issues/new">Add new source article into our task
+queue</a><br/>
+If you know an interesting article worth to be published, create an issue about it. So another
+contributor can grab this task and translate it.</li>
+<li><a href="#push-new-translation">Push new translations</a><br/>
+Find a nice article in a language you know, translate it into English and publish at this website.</li>
+<li><strong>Tell friends about the project</strong><br/>
+By mentioning this project on social networks and in your blog posts you can involve people from
+all over the world!</li>
+<li>Fix English in the texts<br/>
+If you spotted a grammar error, you can edit the article (there is a link to the editor below) and propose
+your pull request.</li>
+<li>Propose site changes<br/>
+Suggest what can be improved in this website by adding your ideas to <a href="https://github.com/frontendbabel/frontendbabel.github.com/issues?labels=%40+Translation&amp;state=open">the list of
+issues</a>.</li>
+<li><a href="https://github.com/frontendbabel/frontendbabel.github.com/issues?labels=&amp;page=1&amp;state=open">Grab an issue to do</a><br/>
+With your help this website can be improved a lot :-).</li>
+</ul>
+<h2 class="text-header text-header_lvl_2" id="push-new-translation"><a href="#push-new-translation" class="text-header__anchor">Push new translation</a></h2><p class="text__p">If you are ready to push the new translation, then</p><ol>
+<li><a href="#set-up-the-project-locally">Set up the project locally</a></li>
+<li><a href="#workign-with-articles-texts">Add an article text</a></li>
+<li>Make a pull request with your changes to an original repo</li>
+</ol>
+<p class="text__p">If you only want to suggest an article for future translation,
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/issues/new">create an issue</a>.</p><h2 class="text-header text-header_lvl_2" id="set-up-the-project-locally"><a href="#set-up-the-project-locally" class="text-header__anchor">Set up the project locally</a></h2><ol>
+<li>Fork <a href="https://github.com/frontendbabel/frontendbabel.github.com">the original repository</a></li>
+<li>Clone your repository and run:<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "bash"} }'><code>git clone <your-fork-adress> frontendbabel
+cd frontendbabel
+npm install
+docpad run</code></pre>You will need to have <code>docpad</code> installed on your computer. Follow their <a href="http://docpad.org/docs/install">installation
+guide</a>.</li>
+<li>Open (<a href="http://0.0.0.0:9778/">http://0.0.0.0:9778/</a>) to see your project copy.</li>
+</ol>
+<h2 class="text-header text-header_lvl_2" id="working-with-articles39-texts"><a href="#working-with-articles39-texts" class="text-header__anchor">Working with articles&#39; texts</a></h2><p class="text__p">Articles&#39; sources are stored in the <code>src/documents/articles/</code> directory. To add a new article
+create a new <code>&lt;article-name&gt;</code> folder, place <code>index.html.md</code> file and start.</p><p class="text__p">The articles are written with Markdown. Explore <a href="https://github.com/frontendbabel/frontendbabel.github.com/blob/source/src/documents/articles/graphical-interface/index.html.md">an
+example</a>
+to learn the structure.</p><h3 class="text-header text-header_lvl_3" id="provide-credits"><a href="#provide-credits" class="text-header__anchor">Provide credits</a></h3><p class="text__p">You need to provide meta information about the original source, its author and translator, like the following:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "md"} }'><code>source:
+  name: Название статьи
+  url: http://blog.author-site.name/article
+  lang: RU
+
+author:
+  name: Ivan Ivanov
+  site: http://blog.author-site.name/
+  twitter: ivan
+  github: awesomeivan
+
+translator:
+  name: Anna Smith
+  site: http://anna.me/
+  twitter: annaanna
+  github: annasmith</code></pre><p class="text__p">Information about author&#39;s and translator&#39;s social network accounts is optional. However we recommend to provide it
+to recognize and promote people. It is nice if you contact the original author of the article and get his or her permission.</p><h3 class="text-header text-header_lvl_3" id="provide-meta-information"><a href="#provide-meta-information" class="text-header__anchor">Provide meta information</a></h3><p class="text__p">It is recommended to provide meta information which makes an article more attrative when sharing link to it in social
+networks.</p><p class="text__p">You might want to give an article short description. For this declare <code>meta.desc</code> property. Use <code>&gt;</code> operator for long
+strings.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "md"} }'><code>meta:
+  desc: >
+    Hugo Domingo, a freelance developer shares his experiments in SVG animation.
+    Currently being supported by all the popular browseres this feature enables
+    us to create stunning web effects.</code></pre><p class="text__p">Besides description, you can provide thumbnail and so make an article snippet more noticeable. To do this place a
+thumbnail into article source folder named as <code>thumb.png</code> (<code>jpg</code> and &#39;gif&#39; are also possible extensions). You also can
+provide an URL to a third party resource with an image using <code>meta.thumb</code> property. However it is recommended to store
+thumbnails with articles.</p>
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+.layout
+{
+    display: table;
+}
+
+.layout__col
+{
+    display: table-cell;
+}
+
+.layout__col_top
+{
+    vertical-align: top;
+}

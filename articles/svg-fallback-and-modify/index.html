@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Why I wrote a plugin for Grunt to work with SVG — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="The task: paint over 30 colorless SVG icons and generate their PNG+CSS fallbacks for the older browsers. This could take ages manually and is significantly fast with 'svg_fallback' grunt plugin by @yoksel_en.
+" property="og:description"/><meta content="http://frontendbabel.info/articles/svg-fallback-and-modify/thumb.jpg" property="og:image"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">Why I wrote a plugin for Grunt to work with SVG</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://css.yoksel.ru/">Yulya Buhvalova</a> on 25th August 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 30th October 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">Once upon a time my colleagues and I met a need to work up a lot of SVG icons. The prerequisites: over 30
+colorless SVG images (the color are defined with CSS later). The task: generate their PNG+CSS fallbacks for
+the older browsers.</p><!-- cut -->
+<p class="text__p">These are the steps of this process:</p><ol>
+<li>Paint every icon with a color needed</li>
+<li>For some icons we need more than one variant of different colors and sizes</li>
+<li>Create a PNG sprite</li>
+<li>Write CSS</li>
+</ol>
+<p class="text__p">Finally we should have 2 icon set representations: the one is the colorless PNGs, and the other one is the sprite.
+The changes to these representations have to be synchronized. Ideally they should share the CSS defining their sizes
+and color fillings.</p><p class="text__p">Obviously this would be too time-consuming to do it manually and so this process should be automated, especially keeping
+in mind the need of future changes.</p><p class="text__p">If leave the need to synchronize changes out of account, a simple version can be built with existing grunt plugins. The
+result looks wierd, but it works.</p><p class="text__p">First integration looked like this:</p><ol>
+<li><a href="https://www.npmjs.org/package/grunt-grunticon">grunt-grunticon</a> paints icons and creates their PNG versions;</li>
+<li><a href="https://www.npmjs.org/package/grunt-spritesmith">grunt-spritesmith</a> generates a sprite and CSS.</li>
+</ol>
+<p class="text__p">It gave an interlocutory result but I was not happy with the generated CSS. It did not include colors for filling in SVG
+so that I had to define them manually. Moreover, I would need to duplicate SVG source if also wanted icons of different
+colors and sizes to be included into the sprite. Then, they would be renamed in a special way to make <em>grunticon</em> paint
+them, and renamed again before the sprite generating.</p><p class="text__p">Thus, I came up with my own grunt plugin which main responsibility is to paint the images and create several versions
+of different colors and sizes; and to generate a library of SVG symbols + sprite + CSS while I&#39;m at it.</p><p class="text__p">This is my plugin: <a href="https://www.npmjs.org/package/svg_fallback">svg_fallback</a>.</p><p class="text__p"><em>(Yes, I know that &quot;-&quot; would be better than &quot;_&quot;. And I should have prefixed it with &quot;grunt-&quot;. But this is my first
+plugin. :-)</em></p><p class="text__p">It does the following:</p><ol>
+<li>Takes a directory with SVG images and forms a library of symbols.</li>
+<li>Takes the directory again and builds the images into a sprite accomplished with CSS with filling colors, sizes and
+a background image for older browsers.</li>
+</ol>
+<p class="text__p">The folder name is used as a prefix for the resultant CSS classes and file names. It prevents conflicts between
+different icon sets if they meet in the same page.</p><p class="text__p">At the end it opens a demo page which demonstrates SVG and PNG working.</p><p class="text__p">This is the simplest scenario when no files were being modified. But the most interesting thing happens if you have
+<code>config.json</code> file to initiate the transformations.</p><p class="text__p">For example, you can define a default color to paint the icons:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>{
+    "color": "orangered"
+}</code></pre><p class="text__p">Currently the plugin can paint transparent icons only.</p><p class="text__p">Another case: you need icons of different size than is used for the source SVG. The resultant sizes can also be defined
+in the config:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>{
+    "default-sizes": {
+        "heart": {
+            "width": "182"
+            },
+        "home": {
+            "height": "42"
+        }
+    }
+}</code></pre><p class="text__p">The SVG images are size agnostic but this setting is needed to generate corresponding PNG icons and CSS for them.</p><p class="text__p">This is how you can make several versions of the same icon:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>{
+    "icons": {
+        "heart": [{
+            "width": "50"
+        }, {
+            "color": "green"
+        }, {
+            "width": "150",
+            "color": "steelblue"
+        }],
+        "home": [{
+            "width": "150"
+        }, {
+            "width": "170",
+            "color": "teal"
+        }, {
+            "height": "62",
+            "color": "yellowgreen"
+        }]
+    }
+}</code></pre><p class="text__p">As a result you will get <code>heart.svg</code> file and its modifications: <code>heart--w50.svg</code>, <code>heart--green.svg</code> and <code>heart--w150--steelblue.svg</code>.</p><p class="text__p">The configuration can be also defined at once:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>{
+    "color": "orangered",
+    "default-sizes": {
+        // default sizes
+    },
+    "icons": {
+        // icon versions
+    }
+}</code></pre><p class="text__p">The result would be 3 files named as the parent directory. For example, the content of <code>myicons/</code> folder turns into:</p><ul>
+<li><code>myicons.svg</code> — library of symbols;</li>
+<li><code>myicons.png</code> — sprite;</li>
+<li><code>myicons.css</code> — CSS with icons sizes and colors for SVG.</li>
+</ul>
+<p class="text__p">Then, to use these icons in you page, you need:</p><ol>
+<li>Link <code>myicons.css</code> file to the HTML.</li>
+<li>Place <code>myicons.svg</code> icon library in the beginning of the document (right after the <code>&lt;body&gt;</code> tag).</li>
+<li>Insert icons with code like this:<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg xmlns="http://www.w3.org/2000/svg" class="myicons myicons--heart">
+ &lt;use xlink:href="#myicons--heart">&lt;/use>
+&lt;/svg></code></pre><em>If you will use a single <code>&lt;use/&gt;</code> tag instead of pair <code>&lt;use ...&gt;&lt;/use&gt;</code>, you risk to loose HTML5 markup in older
+browsers. Thanks to <a href="https://twitter.com/mista_k">@mista_k</a> for this information.</em></li>
+</ol>
+<p class="text__p">Older browsers show a PNG fallback according to this CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.ie8 .myicons {
+    background-image: url(noconfig.png);
+    }</code></pre><p class="text__p">This assumes that your page is marked with <code>.ie8</code> CSS class which detects the current IE version.</p><p class="text__p">For better understanding on how it all works, install the package and have a look into <code>svg_fallback/test/</code> folder.</p><p class="text__p">While developing this plugin I decided to wrap code for modifying the files into a separate <a href="https://www.npmjs.org/package/svg-modify">svg-modify</a>
+package. It can be used in grunt with <a href="https://www.npmjs.org/package/grunt-svg-modify">grunt-svg-modify</a>.</p><p class="text__p">Now I have even 2 plugins :-) They are very specific and cannot become extremely popular, but if you need to modify
+SVG icons, they will help you to save time.</p><p class="text__p">If you want to use them, keep in mind that <a href="https://www.npmjs.org/package/svg-modify">svg-modify</a> is going to be
+developed (I want it to be more smart about colors). I sometimes find and fix bugs in the plugins, so they are not very
+stable yet but I try to support.</p><p class="text__p">Moreover, <a href="https://www.npmjs.org/package/svg_fallback">svg_fallback</a> was written for a particular task. You probably would
+like to change the file naming or CSS syntax. This plugin does not allow such tuning but you can fork it and modify.</p><p class="text__p">Also, I should say that my JS skills could be better; so my code can look strangely to some of you. I will appreciate
+a piece of advice on how to improve it.</p><p class="text__p">Great thanks to <a href="https://twitter.com/mista_k">@mista_k</a> and <a href="https://twitter.com/alexeyten">@alexeyten</a> for their help
+and advice.</p>
+    <div class="article__date">
+        30th October 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://css.yoksel.ru/grunt-plugin/" rel="alternate" hreflang="ru">
+        Зачем я написала плагин для Grunt
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://css.yoksel.ru/">
+                        Yulya Buhvalova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/yoksel">
+                        yoksel
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/yoksel_en">
+                        @yoksel_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://css.yoksel.ru/">
+                        http://css.yoksel.ru/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://varya.me/">
+                        Varya Stepanova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/varya">
+                        varya
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/varya_en">
+                        @varya_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://varya.me/">
+                        http://varya.me/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="Why I wrote a plugin for Grunt to work with SVG">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/svg-fallback-and-modify/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/svg-fallback-and-modify';
+		window.disqus_identifier = 'articles-svg-fallback-and-modify-index';
+		window.disqus_title = 'Why I wrote a plugin for Grunt to work with SVG';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

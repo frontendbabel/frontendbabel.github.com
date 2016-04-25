@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Generating CSS sprites with Gulp — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="Alexey Krekotun presents working and proved solution for automated css sprite build with Gulp.
+" property="og:description"/><meta content="http://frontendbabel.info/articles/css-sprites-with-gulp/thumb.png" property="og:image"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">Generating CSS sprites with Gulp</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://krekotun.ru">Alexey Krekotun</a> on 7th July 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 9th October 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">While working with one large project, my colleague and I were thinking about how to automate building the CSS sprites.
+Before, we used to build them manually or with different online services which anyway took a lot of time. Also, by that
+time we already used Gulp to build the project and so were looking for a gulp-friendly solution for sprites.</p><p class="text__p">Initially we were choosing from different variants:</p><ul>
+<li><a href="https://www.npmjs.org/package/css-sprite">css-sprite</a></li>
+<li><a href="https://www.npmjs.org/package/gulp-sprite-generator">gulp-sprite-generator</a></li>
+<li><a href="https://github.com/Otouto/gulp-spritesmith">gulp-spritesmith</a></li>
+<li><a href="https://github.com/twolfson/gulp.spritesmith">gulp.spritesmith</a></li>
+</ul>
+<!-- cut -->
+<p class="text__p">The first one is too complex to install; it has a few dependencies which require additional package managers. Once
+gotten a new developer into our team, we would need to explain this complex process. This did not look as an option for
+us. Also, it does not enable to tune image positions in the sprite.</p><p class="text__p">The other three modules are based on the same <a href="https://github.com/Ensighten/spritesmith">spritesmith</a> generator.
+Eventually we chose <a href="https://github.com/twolfson/gulp.spritesmith">gulp.spritesmith</a> as an official port of it.</p><h2 class="text-header text-header_lvl_2" id="installation"><a href="#installation" class="text-header__anchor">Installation</a></h2><p class="text__p">The first think to do is to install Gulp. Its <a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started">official
+documentation</a> will help you a
+lot.<br/>
+Then install <code>gulp.spritesmith</code>. If your project is empty yet (as mine is), take supplement packages as well:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>npm i gulp gulp-stylus gulp.spritesmith --save</code></pre><p class="text__p">Now you can move to tuning the generator.</p><h2 class="text-header text-header_lvl_2" id="tuning"><a href="#tuning" class="text-header__anchor">Tuning</a></h2><p class="text__p">Before you start declaring the task, let&#39;s introduce all the possible
+<a href="https://github.com/twolfson/gulp.spritesmith#spritesmithparams">parameters</a> to the function.</p><ul>
+<li>imgName <code>String</code> - Filename to save image as<ul>
+<li>Supported image extensions are <code>.png</code> and <code>.jpg/jpeg</code> (limited to specfic engines)</li>
+<li>Image format can be overridden via <code>imgOpts.format</code></li>
+</ul>
+</li>
+<li>cssName <code>String</code> - Filename to save CSS as<ul>
+<li>Supported CSS extensions are <code>.css</code> (CSS), <code>.sass</code> ([SASS][]), <code>.scss</code> ([SCSS][]), <code>.less</code> ([LESS][]), <code>.styl/.stylus</code> ([Stylus][]), and <code>.json</code> ([JSON][])</li>
+<li>CSS format can be overridden via <code>cssFormat</code></li>
+</ul>
+</li>
+<li>imgPath <code>String</code> - Optional path to use in CSS referring to image location</li>
+<li>engine <code>String</code> - Optional image generating engine to use<ul>
+<li>By default, <code>auto</code> will be used which detects the best supported engine for your system</li>
+<li>Supported options are <code>phantomjs</code>, <code>canvas</code>, <code>gm</code>, and <code>pngsmith</code></li>
+<li>More information can be found in the [engine][] section</li>
+</ul>
+</li>
+<li>algorithm <code>String</code> - Optional method for how to pack images<ul>
+<li>Supported options are <code>top-down</code> (default), <code>left-right</code>, <code>diagonal</code>, <code>alt-diagonal</code>, and <code>binary-tree</code></li>
+<li>More information can be found in the [algorithm][] section</li>
+</ul>
+</li>
+<li>padding <code>Number</code> - Optional amount of pixels to include between images<ul>
+<li>By default, there will be no padding</li>
+</ul>
+</li>
+<li>imgOpts <code>Object</code> - Options for image output<ul>
+<li>format <code>String</code> - Override for format of output image<ul>
+<li>Supported values are <code>png</code> and <code>jpg</code> (limited to specific engines)</li>
+</ul>
+</li>
+<li>quality <code>Number</code> - Quality of image (only supported by <code>gm</code> engine)</li>
+<li>timeout <code>Number</code> - Milliseconds to wait before terminating render (limited to <code>phantomjs</code> engine)</li>
+</ul>
+</li>
+<li>algorithmOpts <code>Object</code> - Options for algorithm configuration<ul>
+<li>sort <code>Boolean</code> - Enable/disable image sorting by <code>algorithm</code><ul>
+<li>By default, sorting is enabled (<code>true</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>engineOpts <code>Object</code> - Options for engine configuration<ul>
+<li>imagemagick <code>Boolean</code> - Force usage of <code>imagemagick</code> over <code>graphicsmagick</code> (limited to <code>gm</code>)</li>
+</ul>
+</li>
+<li>cssFormat <code>String</code> - Override for format of CSS output<ul>
+<li>Supported values are <code>css</code> (CSS), <code>sass</code> ([SASS][]), <code>scss</code> ([SCSS][]), <code>scss_maps</code> ([SCSS][] using [map notation][sass-maps]), <code>less</code> ([LESS][]), <code>stylus</code> ([Stylus][]), and <code>json</code> ([JSON][])</li>
+</ul>
+</li>
+<li>cssVarMap <code>Function</code> - Iterator to customize CSS variable names<ul>
+<li>An example can be found [here][cssvarmap-example]</li>
+</ul>
+</li>
+<li>cssTemplate <code>Function|String</code> - CSS templating function or path to alternative [mustache][] template<ul>
+<li>More information can be found in the [cssTemplate][] section</li>
+</ul>
+</li>
+<li>cssOpts <code>Object</code> - Container for CSS templates<ul>
+<li>functions <code>Boolean</code> - Skip output of mixins</li>
+<li>cssClass <code>Function</code> - Iterator to override default CSS selectors<ul>
+<li>An example can be found [here][cssclass-example]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="text__p">Assuming this, the simpliest task would look like the following:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>gulp.task('sprite', function() {
+    var spriteData = 
+        gulp.src('./src/assets/images/sprite/*.*') // source path of the sprite images
+            .pipe(spritesmith({
+                imgName: 'sprite.png',
+                cssName: 'sprite.css',
+            }));
+
+    spriteData.img.pipe(gulp.dest('./built/images/')); // output path for the sprite
+    spriteData.css.pipe(gulp.dest('./built/styles/')); // output path for the CSS
+});</code></pre><p class="text__p">With that we can generate this sprite:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="long-sprite.png"/></p><p class="text__p">It is served with the following CSS code:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+~```html
+&lt;i class="icon-home">&lt;/i>
+```~
+*/
+.icon-home {
+  background-image: url(sprite.png);
+  background-position: 0px 0px;
+  width: 16px;
+  height: 16px;
+}
+.icon-home_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -16px;
+  width: 16px;
+  height: 16px;
+}
+.icon-instagram {
+  background-image: url(sprite.png);
+  background-position: 0px -32px;
+  width: 16px;
+  height: 16px;
+}
+.icon-instagram_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -48px;
+  width: 16px;
+  height: 16px;
+}
+.icon-pin {
+  background-image: url(sprite.png);
+  background-position: 0px -64px;
+  width: 12px;
+  height: 16px;
+}
+.icon-pin_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -80px;
+  width: 12px;
+  height: 16px;
+}
+.icon-tras_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -96px;
+  width: 16px;
+  height: 16px;
+}
+.icon-trash {
+  background-image: url(sprite.png);
+  background-position: 0px -112px;
+  width: 16px;
+  height: 16px;
+}
+.icon-user {
+  background-image: url(sprite.png);
+  background-position: 0px -128px;
+  width: 16px;
+  height: 16px;
+}
+.icon-user_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -144px;
+  width: 16px;
+  height: 16px;
+}</code></pre><h3 class="text-header text-header_lvl_3" id="tweaking"><a href="#tweaking" class="text-header__anchor">Tweaking</a></h3><p class="text__p">In our project we use <a href="http://learnboost.github.io/stylus/">Stylus</a> for processing CSS, so it is much more handy to get
+a <code>.styl</code> file with the variables.<br/>
+I use <code>binary-tree</code> algorythm to make it more compact. All the variables are prefixed with <code>s-</code>, this makes them
+recognizable. I switched off generating the mixings and now have them in a separate file. I have created my own CSS
+template because the generic variant has too much of redundant code making the file heavier; and I don&#39;t use it anyway.</p><p class="text__p">As a result, I get such a sprite:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="sprite.png"/></p><p class="text__p">There are the JavaScript and Stylus code for it:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('sprite', function() {
+    var spriteData = 
+        gulp.src('./src/assets/images/sprite/*.*') // путь, откуда берем картинки для спрайта
+            .pipe(spritesmith({
+                imgName: 'sprite.png',
+                cssName: 'sprite.styl',
+                cssFormat: 'stylus',
+                algorithm: 'binary-tree',
+                cssTemplate: 'stylus.template.mustache',
+                cssVarMap: function(sprite) {
+                    sprite.name = 's-' + sprite.name
+                }
+            }));
+
+    spriteData.img.pipe(gulp.dest('./built/images/')); // путь, куда сохраняем картинку
+    spriteData.css.pipe(gulp.dest('./src/styles/')); // путь, куда сохраняем стили
+});</code></pre><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "php"} }'><code>$s-book = 16px 0px -16px 0px 16px 16px 80px 64px 'sprite.png';
+$s-book_hover = 48px 16px -48px -16px 16px 16px 80px 64px 'sprite.png';
+$s-comments = 0px 16px 0px -16px 16px 16px 80px 64px 'sprite.png';
+$s-comments_hover = 16px 16px -16px -16px 16px 16px 80px 64px 'sprite.png';
+$s-compose = 32px 0px -32px 0px 16px 16px 80px 64px 'sprite.png';
+$s-compose_hover = 32px 16px -32px -16px 16px 16px 80px 64px 'sprite.png';
+$s-faceboo_hover = 0px 32px 0px -32px 16px 16px 80px 64px 'sprite.png';
+$s-facebook = 16px 32px -16px -32px 16px 16px 80px 64px 'sprite.png';
+$s-globe = 32px 32px -32px -32px 16px 16px 80px 64px 'sprite.png';
+$s-globe_hover = 48px 0px -48px 0px 16px 16px 80px 64px 'sprite.png';
+$s-home = 0px 0px 0px 0px 16px 16px 80px 64px 'sprite.png';
+$s-home_hover = 48px 32px -48px -32px 16px 16px 80px 64px 'sprite.png';
+$s-instagram = 0px 48px 0px -48px 16px 16px 80px 64px 'sprite.png';
+$s-instagram_hover = 16px 48px -16px -48px 16px 16px 80px 64px 'sprite.png';
+$s-pin = 32px 48px -32px -48px 12px 16px 80px 64px 'sprite.png';
+$s-pin_hover = 44px 48px -44px -48px 12px 16px 80px 64px 'sprite.png';
+$s-tras_hover = 64px 0px -64px 0px 16px 16px 80px 64px 'sprite.png';
+$s-trash = 64px 16px -64px -16px 16px 16px 80px 64px 'sprite.png';
+$s-user = 64px 32px -64px -32px 16px 16px 80px 64px 'sprite.png';
+$s-user_hover = 64px 48px -64px -48px 16px 16px 80px 64px 'sprite.png';</code></pre><h2 class="text-header text-header_lvl_2" id="usage"><a href="#usage" class="text-header__anchor">Usage</a></h2><p class="text__p">Ok, the sprite image has been generated and there is a stylys file of variables, what is next?</p><p class="text__p">The next are mixins which I am not generating. I manually created a separate file for them which is <code>mixins.styl</code>. Here
+is its content:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>spriteWidth($sprite) {
+  width: $sprite[4];
+}
+
+spriteHeight($sprite) {
+  height: $sprite[5];
+}
+
+spritePosition($sprite) {
+  background-position: $sprite[2] $sprite[3];
+}
+
+spriteImage($sprite) {
+  background-image: url(../images/$sprite[8]);
+}
+
+sprite($sprite) {
+  spriteImage($sprite)
+  spritePosition($sprite)
+  spriteWidth($sprite)
+  spriteHeight($sprite)
+}</code></pre><p class="text__p">The main mixin is <code>sprite($sprite)</code>. As <code>$sprite</code> I use the needed variable, for example <code>sprite($s-home)</code>. It gives
+such a result:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>background-image:url("../images/sprite.png");
+background-position:0 0;
+width:16px;
+height:16px</code></pre><p class="text__p">The mixin enables to define the image sizes which is very useful when using pseudo elements.</p><p class="text__p">Here is the <a href="http://krekotun.github.io/gulp-sprite-generation/">working example</a>.</p><h2 class="text-header text-header_lvl_2" id="cons"><a href="#cons" class="text-header__anchor">Cons</a></h2><p class="text__p">I noticed only one problem since the time I&#39;ve started to use the solution.<br/>
+An icon is blinking when using <code>:hover</code> or <code>:active</code>. This happens because the <code>sprite</code> mixin generates
+<code>background-image</code> for every case and changes the picture on hover.</p><p class="text__p">After thinking for a while and reading the Stylys&#39; documentation, I have found the solution. We just need to check if a
+selector has these pseudo classes. And if they are, we can skip the <code>spriteImage($sprite)</code> output.</p><p class="text__p">This is the final version of the mixin:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>sprite($sprite)
+    if !match('hover', selector()) && !match('active', selector())
+        spriteImage($sprite)
+    spritePosition($sprite)
+    spriteWidth($sprite)
+    spriteHeight($sprite)</code></pre><p class="text__p">Unfortunately this is not possible to foresee all the cases. Probably there would be some JavaScript code changing a CSS
+class. So, we can use <code>spritePosition($sprite)</code> if an image was already in use.</p><h2 class="text-header text-header_lvl_2" id="wrap-up"><a href="#wrap-up" class="text-header__anchor">Wrap up</a></h2><p class="text__p">I&#39;ve been working with this solution for a few months and happy to say that it saves a lot of time. Aim to automate any
+routine and use your time the most effectively.</p><p class="text__p">I created a <a href="https://github.com/Krekotun/gulp-sprite-generation">sample repository</a> for you, you can use it as a dummy
+for your project or just explore how it work.</p><p class="text__p">##Links</p><ul>
+<li><a href="http://krekotun.github.io/gulp-sprite-generation/">working example</a></li>
+<li><a href="https://github.com/Krekotun/gulp-sprite-generation">sample repository</a></li>
+<li><a href="https://github.com/twolfson/gulp.spritesmith">gulp.spritesmith</a></li>
+<li><a href="http://gulpjs.com/">Gulp</a></li>
+</ul>
+
+    <div class="article__date">
+        9th October 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://habrahabr.ru/post/227945/" rel="alternate" hreflang="ru">
+        Генерация CSS-спрайтов с Gulp
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://krekotun.ru">
+                        Alexey Krekotun
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/krekotun">
+                        krekotun
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/akrekotun">
+                        @akrekotun
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://krekotun.ru">
+                        http://krekotun.ru
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://varya.me/">
+                        Varya Stepanova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/varya">
+                        varya
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/varya_en">
+                        @varya_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://varya.me/">
+                        http://varya.me/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="Generating CSS sprites with Gulp">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/css-sprites-with-gulp/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/css-sprites-with-gulp';
+		window.disqus_identifier = 'articles-css-sprites-with-gulp-index';
+		window.disqus_title = 'Generating CSS sprites with Gulp';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

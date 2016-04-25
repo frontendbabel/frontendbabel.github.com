@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Developing Cross-Browser Extensions — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="A piece of experience in building browser extensions for Chrome, Firefox and Safari shared with code examples. Alexander Beletsky, the author of Likeastore extension and tried different development practices from shameful copy-paste to reputable unified-code-base principle and so came up with some recommendations on extension architecture and building process."
+" property="og:description"/><meta content="http://frontendbabel.info/articles/developing-cross-browser-extensions/thumb.png" property="og:image"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">Developing Cross-Browser Extensions</h1>
+
+
+<div class="article__meta">
+    Written by <a href="https://likeastore.com/">Alexander Beletsky</a> on 27th June 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 7th July 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">What do we do if we have to search for something? Of course, we fire up our favorite search engine web site. It is quite hard to push yourself to use another a different search engine rather than the usual one, even if you know that the result would be better. To change this UX pattern I developed <a href="https://chrome.google.com/webstore/detail/likeastore/einhadilfmpdfmmjnnppomcccmlohjad">Likeastore Chrome
+Extension</a>. It adds social
+part to your search flow by showing relevant information from the article you liked. Besides Chrome we support Firefox
+and Safari. Despite the platform difference all these extensions are built from the same codebase.</p><!-- cut -->
+<h2 class="text-header text-header_lvl_2" id="at-the-first-set-out"><a href="#at-the-first-set-out" class="text-header__anchor">At the first set-out</a></h2><p class="text__p">This began with me developing a simple Chrome extension. By the way, developing for Chrome was very comfortable. I
+didn&#39;t go through the hassle of automation, just packed code into a zip after some local testing and then uploaded
+this to the Web Store.</p><p class="text__p">The Chrome extension was very welcomed by our customers which had been proved by metrics and feedback and meant that we
+should continue. The next was Firefox as it has 15% of our traffic.</p><p class="text__p">The basis of all browser extensions is the same: they are HTML/CSS/JavaScript applications with a manifest file where the
+content and the properties are described. So my initial idea was to copy the Chrome extension&#39;s repository and adjust
+the code for Firefox.</p><p class="text__p">While developing I had that guilty feeling for doing copy-paste; many developers must be familiar with it. Obviously, 99% of code was the same for both extensions and it could bring problems with application support as more and more functionallity was being added.</p><p class="text__p">By a lucky chance I bumped into <a href="https://github.com/buunguyen/octotree">octotree</a> extension (which I recommend to all
+active GitHub users) and met the need to fix a bug in it. When I cloned their repository and began to explore the code,
+I realized that all the octotree extensions are built from this repo code. Octotree is a content injection application
+similar to Likeastore, so this pattern could be borrowed.</p><p class="text__p">I <a href="https://github.com/buunguyen/octotree/pull/60">fixed the bug</a> and adapted and improved the compilation process
+to fit Likeastore needs. Let&#39;s have a look at what it turned out to be.</p><h2 class="text-header text-header_lvl_2" id="application-structure"><a href="#application-structure" class="text-header__anchor">Application structure</a></h2><p class="text__p">I propose the application structure which I believe is suitable for any extension.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "bash"} }'><code>browser-extention/
+  build/
+    chrome/
+    firefox/
+    safari/
+  css/
+  dist/
+    chrome/
+    firefox/
+    safari/
+  img/
+  js/
+  libs/
+  node_modules/
+  tools/
+  vendor/
+  gulpfile.js
+  package.json
+  README.md</code></pre><p class="text__p"><code>build</code> and <code>dist</code> folders are generic and contain source code and application for distribution, respectively.</p><p class="text__p"><code>css</code>, <code>img</code>, and <code>js</code> hold the source code of the application.</p><p class="text__p"><code>vendor</code> has platform-depending code in a separate directory for every browser.</p><p class="text__p"><code>tools</code> is a place for building utils.</p><p class="text__p">The build runs with <a href="http://gulpjs.com/">gulp</a>, a &quot;reconsidered&quot; build system under NodeJS. I recommend to install node
+if you are not using it yet, you will be able to enjoy all the profits of the npm world.</p><h3 class="text-header text-header_lvl_3" id="platform-dependent-code"><a href="#platform-dependent-code" class="text-header__anchor">Platform-dependent code</a></h3><p class="text__p">To begin with the most important: if you are staring a new project or want to adapt another one, you should clearly
+understand what are the needed platform-dependent calls and place them into a dedicated module.</p><p class="text__p">In my case there was only one such call: getting our resource URL from inside the app (where there are images). So I
+had a separate <code>browser.js</code> file.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>;(function (window) {
+  var app = window.app = window.app || {};
+
+  app.browser = {
+    name: 'Chrome',
+
+    getUrl: function (url) {
+      return chrome.extension.getURL(url);
+    }
+  };
+})(window);</code></pre><p class="text__p">The different variants of this module are used for <a href="https://github.com/likeastore/browser-extension/blob/master/vendor/firefox/browser.js">Firefox</a>
+and <a href="https://github.com/likeastore/browser-extension/blob/master/vendor/safari/browser.js">Safari</a>.</p><p class="text__p">The <code>browser.js</code> file can be extended with all the necessary calls for more complex cases and so be a facade between
+the specific code and the browser.</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>vendor/
+  chrome/
+    browser.js
+    manifest.json
+  firefox/
+    browser.js
+    main.js
+    package.json
+  safari/
+    browser.js
+    Info.plist
+    Settings.plist
+    Update.plist</code></pre><p class="text__p">Besides the facade, platform-dependent code also means manifests and extension settings. They are <code>manifest.json</code> for
+Chrome, <code>main.js</code> and <code>package.json</code> for Firefox and <code>.plist</code> files for Safari such as <code>Info.plist</code>, <code>Settings.plist</code>,
+and <code>Update.plist</code>.</p><h3 class="text-header text-header_lvl_3" id="automating-build-process-with-gulp"><a href="#automating-build-process-with-gulp" class="text-header__anchor">Automating build process with gulp</a></h3><p class="text__p">The purpose of a build process is to copy the core code and platform-dependent code into folders tree expected by the browsers.</p><p class="text__p">Let&#39;s define 3 tasks for that:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>var gulp     = require('gulp');
+var clean    = require('gulp-clean');
+var es       = require('event-stream');
+var rseq     = require('gulp-run-sequence');
+var zip      = require('gulp-zip');
+var shell    = require('gulp-shell');
+var chrome   = require('./vendor/chrome/manifest');
+var firefox  = require('./vendor/firefox/package');
+
+function pipe(src, transforms, dest) {
+  if (typeof transforms === 'string') {
+    dest = transforms;
+    transforms = null;
+  }
+
+  var stream = gulp.src(src);
+  transforms && transforms.forEach(function(transform) {
+    stream = stream.pipe(transform);
+  });
+
+  if (dest) {
+    stream = stream.pipe(gulp.dest(dest));
+  }
+
+  return stream;
+}
+
+gulp.task('clean', function() {
+  return pipe('./build', [clean()]);
+});
+
+gulp.task('chrome', function() {
+  return es.merge(
+    pipe('./libs/**/*', './build/chrome/libs'),
+    pipe('./img/**/*', './build/chrome/img'),
+    pipe('./js/**/*', './build/chrome/js'),
+    pipe('./css/**/*', './build/chrome/css'),
+    pipe('./vendor/chrome/browser.js', './build/chrome/js'),
+    pipe('./vendor/chrome/manifest.json', './build/chrome/')
+  );
+});
+
+gulp.task('firefox', function() {
+  return es.merge(
+    pipe('./libs/**/*', './build/firefox/data/libs'),
+    pipe('./img/**/*', './build/firefox/data/img'),
+    pipe('./js/**/*', './build/firefox/data/js'),
+    pipe('./css/**/*', './build/firefox/data/css'),
+    pipe('./vendor/firefox/browser.js', './build/firefox/data/js'),
+    pipe('./vendor/firefox/main.js', './build/firefox/data'),
+    pipe('./vendor/firefox/package.json', './build/firefox/')
+  );
+});
+
+gulp.task('safari', function() {
+  return es.merge(
+    pipe('./libs/**/*', './build/safari/likeastore.safariextension/libs'),
+    pipe('./img/**/*', './build/safari/likeastore.safariextension/img'),
+    pipe('./js/**/*', './build/safari/likeastore.safariextension/js'),
+    pipe('./css/**/*', './build/safari/likeastore.safariextension/css'),
+    pipe('./vendor/safari/browser.js', './build/safari/likeastore.safariextension/js'),
+    pipe('./vendor/safari/Info.plist', './build/safari/likeastore.safariextension'),
+    pipe('./vendor/safari/Settings.plist', './build/safari/likeastore.safariextension')
+  );
+});</code></pre><p class="text__p">The default task builds all the three extensions:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('default', function(cb) {
+    return rseq('clean', ['chrome', 'firefox', 'safari'], cb);
+});</code></pre><p class="text__p">In addition, a good idea that ensures comfortable development is to watch the file changes and run a background build:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('watch', function() {
+  gulp.watch(['./js/**/*', './css/**/*', './vendor/**/*', './img/**/*'], ['default']);
+});</code></pre><h3 class="text-header text-header_lvl_3" id="ready-to-distribute"><a href="#ready-to-distribute" class="text-header__anchor">Ready to distribute</a></h3><p class="text__p">Having the build finished, you need to pack the extension into a format requested by the browser extension storage. I
+have to note that in Safari&#39;s case there is no such store but they can show your extension in their gallery and
+link to where you host it if you match their requirements.</p><p class="text__p">For Chrome, you only need to pack into a <code>.zip</code>. It is signed and verified in the Chrome Web Store.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('chrome-dist', function () {
+  gulp.src('./build/chrome/**/*')
+    .pipe(zip('chrome-extension-' + chrome.version + '.zip'))
+    .pipe(gulp.dest('./dist/chrome'));
+});</code></pre><p class="text__p">Firefox procedure is a little bit more complex as you need to use the SDK including <code>cfx</code> which can wrap your extension
+into an <code>.xpi</code> file.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('firefox-dist', shell.task([
+  'mkdir -p dist/firefox',
+  'cd ./build/firefox && ../../tools/addon-sdk-1.16/bin/cfx xpi ' +
+  '--output-file=../../dist/firefox/firefox-extension-' + firefox.version +
+  '.xpi > /dev/null',
+]));</code></pre><p class="text__p">As for Safari, that was a bummer. That turned out that to get <code>.safariextz</code> package you need to run Safari. I&#39;ve spent a
+few hours to make it work according to <a href="http://stackoverflow.com/questions/3423522/how-can-i-build-a-safari-extension-package-from-the-command-line">the manual</a>
+but did not succeed. The point is that it is not possible to convert your developer certificate into <code>.p12</code> and so
+you are not able to create the keys needed to sign a package. I still have to run Safari manually to pack the extension yet the release is now as simple as copying the <code>Update.plist</code> file.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('safari-dist', function () {
+  pipe('./vendor/safari/Update.plist', './dist/safari');
+});</code></pre><h3 class="text-header text-header_lvl_3" id="summing-up"><a href="#summing-up" class="text-header__anchor">Summing up</a></h3><p class="text__p">This is joy and pleasure to develop with a single repository. As I mentioned, I found Chrome to be the most comfortable
+development environment, so I provide all the changes for it first and test with it.</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>$ gulp watch</code></pre><p class="text__p">Firefox goes next</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>$ gulp firefox-run</code></pre><p class="text__p">And then the manual tampering with Safari.</p><p class="text__p">Once I need to release a new version, I update the manifests and run</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>$ gulp dist</code></pre><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>dist/
+  chrome/
+    chrome-extention-1.0.10.zip
+    chrome-extention-1.0.6.zip
+    chrome-extention-1.0.8.zip
+    chrome-extention-1.0.9.zip
+  firefox/
+    firefox-extention-1.0.10.xpi
+    firefox-extention-1.0.6.xpi
+    firefox-extention-1.0.7.xpi
+    firefox-extention-1.0.8.xpi
+    firefox-extention-1.0.9.xpi
+  safari/
+    likeastore.safariextz
+    Update.plist</code></pre><p class="text__p">As a result, there are ready-to-distribute files in the <code>dist</code> folder. This would be perfect if extension stores
+would have an API for uploading a new version, but they don&#39;t. This is done manually.</p><p class="text__p">For more details and code please proceed to <a href="https://github.com/likeastore/browser-extension">the repository</a>.</p>
+    <div class="article__date">
+        7th July 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://habrahabr.ru/company/likeastore/blog/227881/" rel="alternate" hreflang="ru">
+        Разработка кросс-браузерных расширений
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="https://likeastore.com/">
+                        Alexander Beletsky
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/alexanderbeletsky">
+                        alexanderbeletsky
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/alexbeletsky">
+                        @alexbeletsky
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="https://likeastore.com/">
+                        https://likeastore.com/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://varya.me/">
+                        Varya Stepanova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/varya">
+                        varya
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/varya_en">
+                        @varya_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://varya.me/">
+                        http://varya.me/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="Developing Cross-Browser Extensions">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/developing-cross-browser-extensions/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/developing-cross-browser-extensions';
+		window.disqus_identifier = 'articles-developing-cross-browser-extensions-index';
+		window.disqus_title = 'Developing Cross-Browser Extensions';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+.logo
+{
+    font-family: Menlo, Monaco, Courier New, monospace, serif;
+    font-size: 2.5em;
+    line-height: 1em;
+    text-decoration: none;
+}
+
+.logo__symb
+{
+    color: #bd3613;
+    font-style: normal;
+}
+
+.logo__fr
+{
+    color: #859900;
+    font-style: normal;
+}
+
+.logo__bl
+{
+    color: #b58900;
+    font-style: normal;
+}

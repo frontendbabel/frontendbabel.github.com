@@ -1,0 +1,1285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Frontend Babel]]></title>
+        <description><![CDATA[Articles and blog posts from all over the world. Translated INTO English.]]></description>
+        <link>http://frontendbabel.info</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Mon, 02 Mar 2015 09:09:17 GMT</lastBuildDate>
+        <atom:link href="http://frontendbabel.info/rss.xml" rel="self" type="application/rss+xml"/>
+        <author><![CDATA[Frontend Babel]]></author>
+        <pubDate>Mon, 02 Mar 2015 09:09:10 GMT</pubDate>
+        <item>
+            <title><![CDATA[About the @viewport]]></title>
+            <description><![CDATA[<p class="text__p">Once Opera’s guys proposed to use <code>@viewport { ... }</code> in CSS instead of <code>&lt;meta name=&quot;viewport&quot; ...&gt;</code> tag. Regarding the
+reasons
+<a href="http://vimeo.com/100523275">you’d better watch and listen to @ppk</a> and I will explain why you should use this
+right now.</p><!-- cut -->
+<h2 class="text-header text-header_lvl_2" id="1-proper-viewport-for-windows-phones"><a href="#1-proper-viewport-for-windows-phones" class="text-header__anchor">1. Proper viewport for Windows Phones</a></h2><p class="text__p">I’ve noticed long ago that websites on Windows Phone look bulky in landscape mode but never deeply thought
+about the fact.</p><p class="text__p">You might overlook the difference between iOS and Windows Phone views in portrait mode:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="p_before-portrait.png"/></th><th class="text-table__th"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="p_ipod-portrait.png"/></th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"><div class="article__tip">Windows Phone 8.1</div></td><td class="text-table__td"><div class="article__tip">iOS 7</div></td></tr></tbody></table><p class="text__p">However in the landscape mode the enourmousness of Windows Phone view becomes clear:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="p_before-landscape.png"/> <br/></p><div class='article__tip'>
+Windows Phone 8.1
+</div>
+
+<p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="p_ipod-landscape.png"/> <br/></p><div class='article__tip'>
+iOS 7
+</div>
+
+<p class="text__p">It turned out that Windows Phone considers usual <code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</code> as a designation to make a viewport 320 logical pixels wide, no matter what real device resolution is (because iPhone).</p><p class="text__p">Instead, fresh and lush <code>@viewport {width: device-width;}</code> currently being supported by IE10 and IE11 with prefix
+overrides this meta’s value; and moreover – instructs a Windows Phone to use its native viewport resolution.</p><p class="text__p">This is how it should work:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="before-landscape.png"/> <br/></p><div class='article__tip'>
+Before
+</div>
+
+<p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="after-landscape.png"/> <br/></p><div class='article__tip'>
+After
+</div>
+
+<p class="text__p">The portrait mode also undergoes a change. HTC 8x has better resolution then iPod and same pixel density, so its
+viewport should be a little bit wider than 320 pixels:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="before-portrait.png"/></th><th class="text-table__th"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="after-portrait.png"/></th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"><div class="article__tip">Before</div></td><td class="text-table__td"><div class="article__tip">After</div></td></tr></tbody></table><p class="text__p"><code>@-ms-viewport</code> was buggy in WP 8 before its third update because it operated with real pixels and not with logical
+ones. This caused too large viewport size (and so too small website view) in the retinish phones.</p><p class="text__p">Third update came out a while ago, older phones running WP7 are not affected by the bug, so now this bug can be safely ignored.</p><h2 class="text-header text-header_lvl_2" id="2-responsiveness-on-windows-8-devices"><a href="#2-responsiveness-on-windows-8-devices" class="text-header__anchor">2. Responsiveness on Windows 8 devices</a></h2><p class="text__p">Besides, <a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/">as it proved</a>, IE in Windows 8 ignores the meta tag in
+metro mode but correctly interprets <code>@-ms-viewport</code>. Here there are a couple of explanatory GIFs:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="win8-before.gif"/> <br/></p><div class='article__tip'>
+The web site is zoomed when using meta tag.
+</div>
+
+<p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="win8-after.gif"/> <br/></p><div class='article__tip'>
+The website adapts when using <code>@-ms-viwport</code>.
+</div>
+
+<p class="text__p">In the first case we get a non-adaptive web site. Bad. The second approach gives a mobile version snapped to the edge of the screen.
+Splendid!</p><h2 class="text-header text-header_lvl_2" id="what-do-we-do"><a href="#what-do-we-do" class="text-header__anchor">What do we do?</a></h2><p class="text__p">All the real guys are now combining the meta tag:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "html"} }'><code>&lt;head>
+  ...
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1">
+  ...
+&lt;/head></code></pre><p class="text__p">with CSS <code>@viewport</code> declaration:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>@-ms-viewport {
+  width: device-width;
+}
+
+@viewport {
+  width: device-width;
+}</code></pre><p class="text__p">Advantages:</p><ul>
+<li>Responsiveness in IE on Windows 8</li>
+<li>Native viewport in IE on Windows Phones</li>
+<li>Future-proof!</li>
+</ul>
+<p class="text__p">Drawbacks:</p><ul>
+<li>Viewport is broken on Windows Phone without third update</li>
+</ul>
+<h2 class="text-header text-header_lvl_2" id="related-links"><a href="#related-links" class="text-header__anchor">Related links</a></h2><ul>
+<li><a href="http://dev.w3.org/csswg/css-device-adapt/">CSS Device Adaptation</a>, W3C</li>
+<li><a href="http://vimeo.com/100523275">The Mobile Viewports</a>, Peter Paul Koch</li>
+<li><a href="http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/">IE10 Snap Mode and Responsive Design</a>, Tim Kadlec</li>
+<li><a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/">Windows Phone 8 and Device-Width</a>, Tim Kadlec</li>
+</ul>
+]]></description>
+            <link>http://frontendbabel.info/articles/about-viewport/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/about-viewport/</guid>
+            <dc:creator><![CDATA[Oleg Korsunsky]]></dc:creator>
+            <pubDate>Tue, 22 Jul 2014 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Acquaintance with SVG images]]></title>
+            <description><![CDATA[<p class="text__p">SVG is quite a mature technology but it began to gain its popularity just recently. Mostly due to the fact that
+vector graphics perfectly suit for adaptive web sites. If you have just started to learn SVG,
+here is some information you can start with.</p><!-- cut -->
+<p class="text__p">SVG is a vector image format that uses XML.</p><p class="text__p">Specification: <a href="http://www.w3.org/TR/SVG/">w3.org/TR/SVG</a></p><p class="text__p">SVG has a lot of advantages over raster graphics:</p><ul>
+<li>Vector images are lossless when being scaled and look nicer with retina displays;</li>
+<li>Usually the size of SVG data is less than data size of PNG image with the same picture;</li>
+<li>The image is defined with XML so that you can open it in a text editor and see the code;</li>
+<li>And so you can code an image manually besides drawing it in a vector graphics editor;</li>
+<li>An SVG file is a source in itself. Unlike bitmaps` case you do not need a PSD file to edit the SVG image. Its layers are
+not flattened; you can always open the image source and change it. However this trick is not recommended as you may
+overwrite scripts and styles;</li>
+<li>You can define shadows and gradients in an SVG file; moreover, you can use them not only for this file content but
+apply to the elements from outside (although this is not supported everywhere yet);</li>
+<li>SVG file can contain CSS and JavaScript.</li>
+</ul>
+<p class="text__p">Example of SVG:</p><iframe id="cp_embed_vzBxp"
+src="//codepen.io/anon/embed/vzBxp?height=263&amp;theme-id=4974&amp;slug-hash=vzBxp&amp;default-tab=result"
+scrolling="no" frameborder="0" height="263" allowtransparency="true" class="cp_embed_iframe" style="width: 100%;
+overflow: hidden;"></iframe>
+
+<p class="text__p">All the modern browsers support SVG and so you can already use it providing PNG alternative for previous versions.</p><p class="text__p">The format is nice for adaptive design due to its capability to scale losslessly, small data size and being crisp at
+devices with high pixel ratio. The next mobile screenshot demonstrates this:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="http://img-fotki.yandex.ru/get/9809/5091629.9d/0_7fa35_27e932b6_L.jpg"/></p><div class="article__tip">
+The sign says &quot;Hello! :-)&quot; in Russian
+</div>
+
+<p class="text__p">The picture clearly shows that SVG (below) looks nicer than PNG (above). So if you are to build a website with
+astounding view at every device, SVG may come into play.</p><p class="text__p">Nowadays you can already find a lot of websites with ready-to-use SVG images. For instance,</p><ul>
+<li><a href="http://iconmelon.com/">iconmelon.com</a></li>
+<li><a href="http://icomoon.io/app/#/select">icomoon.io</a></li>
+<li><a href="http://www.flaticon.com/">flaticon.com</a></li>
+<li><a href="http://iconmonstr.com/">iconmonstr.com</a></li>
+</ul>
+<p class="text__p">Mostly they provide icon sets.</p><p class="text__p">You can use the images as is or repaint them, join into a stack or sprite, or create a font.</p><p class="text__p">You can paste SVG into a web page in a number of ways. They have different browser support and give various
+capabilities.</p><h3 class="text-header text-header_lvl_3" id="embedobjectiframe"><a href="#embedobjectiframe" class="text-header__anchor">Embed/object/iframe</a></h3><p class="text__p">The content is available for external JavaScript.<br/>
+It has good browser support (all but IE8 and earlier).</p><table style="width: 100%; text-align: center;">
+    <thead>
+        <tr>
+            <td>Embed:</td>
+            <td>Object:</td>
+            <td>Iframe:</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><embed src="/articles/acquaintance-with-svg/sign.svg" width="199" height="200"/></td>
+            <td><object type="image/svg+xml" data="/articles/acquaintance-with-svg/sign.svg" width="199" height="200"></object></td>
+            <td><iframe src="/articles/acquaintance-with-svg/sign.svg" width="199px" height="200px"></iframe></td>
+        </tr>
+    </tbody>
+</table>
+
+<h4 class="text-header text-header_lvl_4" id="embed"><a href="#embed" class="text-header__anchor">Embed</a></h4><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;embed src="your.svg"
+        width="199" height="200"></code></pre><h4 class="text-header text-header_lvl_4" id="object"><a href="#object" class="text-header__anchor">Object</a></h4><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;object data="your.svg"
+        type="image/svg+xml" width="199" height="200"></object></code></pre><h4 class="text-header text-header_lvl_4" id="iframe"><a href="#iframe" class="text-header__anchor">Iframe</a></h4><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;iframe src="your.svg"
+        width="199px" height="200px"></iframe></code></pre><p class="text__p">Browser support:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th">IE</th><th class="text-table__th">Opera</th><th class="text-table__th">Opera Mini</th><th class="text-table__th">Opera Mobile</th><th class="text-table__th">Chrome</th><th class="text-table__th">Firefox</th><th class="text-table__th">Safari</th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"> 9+</td><td class="text-table__td">9+</td><td class="text-table__td">5+</td><td class="text-table__td">10+</td><td class="text-table__td">4+</td><td class="text-table__td">3+</td><td class="text-table__td">3.2+</td></tr></tbody></table><h3 class="text-header text-header_lvl_3" id="img"><a href="#img" class="text-header__anchor">IMG</a></h3><p class="text__p">In this case the content is not available for JavaScript.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="/articles/acquaintance-with-svg/sign.svg"/></p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;img src="your.svg"/></code></pre><p class="text__p">Browser support:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th">IE</th><th class="text-table__th">Opera</th><th class="text-table__th">Opera Mini</th><th class="text-table__th">Opera Mobile</th><th class="text-table__th">Chrome</th><th class="text-table__th">Firefox</th><th class="text-table__th">Safari</th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"> 9+</td><td class="text-table__td">9+</td><td class="text-table__td">5+</td><td class="text-table__td">10+</td><td class="text-table__td">4+</td><td class="text-table__td">4+</td><td class="text-table__td">4+</td></tr></tbody></table><h3 class="text-header text-header_lvl_3" id="css-background"><a href="#css-background" class="text-header__anchor">CSS background</a></h3><p class="text__p">The content is not available for JavaScript; and you can have issues with older Opera versions. Opera Mini does not
+support SVG CSS backgrounds with viewBox.</p><div style="width: 199px; height: 200px; margin-bottom: 1em; background-image: url(http://css.yoksel.ru/assets/img/svg/sign.svg)"></div>
+
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>background-image: url(your.svg);</code></pre><p class="text__p">Browser support:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th">IE</th><th class="text-table__th">Opera</th><th class="text-table__th">Opera Mini</th><th class="text-table__th">Opera Mobile</th><th class="text-table__th">Chrome</th><th class="text-table__th">Firefox</th><th class="text-table__th">Safari</th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"> 9+</td><td class="text-table__td">12+</td><td class="text-table__td">5+</td><td class="text-table__td">16+</td><td class="text-table__td">5+</td><td class="text-table__td">24+</td><td class="text-table__td">5+</td></tr></tbody></table><h3 class="text-header text-header_lvl_3" id="inline-svg"><a href="#inline-svg" class="text-header__anchor">Inline SVG</a></h3><p class="text__p">This is not supported by Opera Mini.</p><svg width="199" height="200"><g fill="#7ED321"><path d="M110 10h-20v76.567l-.605-.605-62.933 62.933 14.142 14.142 49.395-49.395v76.358h20v-76.358l49.395 49.395 14.142-14.142-62.933-62.933-.605.605v-76.567z" /><path d="M99.5 0c-54.965 0-99.5 44.784-99.5 100s44.535 100 99.5 100 99.5-44.784 99.5-100-44.535-100-99.5-100zm0 20c43.894 0 79.5 35.805 79.5 80s-35.606 80-79.5 80-79.5-35.805-79.5-80 35.606-80 79.5-80z" /></g></svg>
+
+<p class="text__p">Browser support:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th">IE</th><th class="text-table__th">Opera</th><th class="text-table__th">Opera Mini</th><th class="text-table__th">Opera Mobile</th><th class="text-table__th">Chrome</th><th class="text-table__th">Firefox</th><th class="text-table__th">Safari</th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"> 9+</td><td class="text-table__td">11.6+</td><td class="text-table__td">-</td><td class="text-table__td">12+</td><td class="text-table__td">7+</td><td class="text-table__td">4+</td><td class="text-table__td">5.1+</td></tr></tbody></table><p class="text__p">The examples above are placed into this article page exactly as described. You can open the very page in another browser
+and observe how SVG works there.</p><h2 class="text-header text-header_lvl_2" id="ways-to-deal-with-older-browsers"><a href="#ways-to-deal-with-older-browsers" class="text-header__anchor">Ways to deal with older browsers</a></h2><h3 class="text-header text-header_lvl_3" id="1-background-hack"><a href="#1-background-hack" class="text-header__anchor">1. Background hack</a></h3><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>DIV {
+    background-image: url(your.png); /* PNG for IE6-8 */
+    background-image: url(your.svg), none;
+    }</code></pre><p class="text__p">The second <code>background-image</code> works for browsers supporting CSS3. Others ignore it and so show the PNG background.</p><h3 class="text-header text-header_lvl_3" id="2-the-image-method"><a href="#2-the-image-method" class="text-header__anchor">2. The <code>image</code> method</a></h3><p class="text__p">Modern browsers choose <code>xlink:href</code> attribute and render SVG image; others show the bitmap.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg width="200px" height="200px">
+    &lt;image xlink:href="your.svg"
+           src="your.png"
+           width="200px" height="200px"/>
+&lt;/svg></code></pre><p class="text__p">The image trick was picked up from this post: <a href="http://lynn.ru/examples/svg/en.html">http://lynn.ru/examples/svg</a>. The
+method was <a href="http://css-tricks.com/svg-fallbacks/">investigated by Chris Coyier</a>, you can find his review over the trick
+and proposal of others.</p><p class="text__p">That works correctly in IE8 and Opera Mini.
+However it has a drawback. IE9-11 downloads all the two images although only SVG is used for rendering. Opera sometimes
+has problems too. You may get the following instead of your picture:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="http://img-fotki.yandex.ru/get/9831/5091629.9d/0_7f9f6_9033810_M.png"/></p><h3 class="text-header text-header_lvl_3" id="3-modernizr"><a href="#3-modernizr" class="text-header__anchor">3. Modernizr</a></h3><p class="text__p">Elements containing SVG are wrapped with <code>div.svg</code>. Then, you can detect if a browser supports SVG using
+<a href="http://modernizr.com/">Modernizr</a>; browsers which do not understand SVG get <code>.no-svg</code> CSS class. With a piece of CSS
+you can hide the SVG images for the browsers that do not render them:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>/* Define size and PNG background for the wrapper: */
+.no-svg .svg {
+  width: 200px;
+  height: 200px;
+  background: url(your.png); /* PNG backdrop */
+  }
+
+/* Hide elements inside the wrapper. Otherwise there would be icons of
+not loaded images */
+.no-svg .svg IFRAME,
+.no-svg .svg OBJECT,
+.no-svg .svg EMBED,
+.no-svg .svg IMG {
+  display: none;
+}</code></pre><p class="text__p">This method works nicely in IE8 (and earlier IE versions). However you might have a problem with Opera Mini.
+This browser provides partial SVG support and so does not get <code>.no-svg</code> CSS class whereas it cannot render SVG CSS
+background and inline SVG inserts.</p><p class="text__p">It is also possible to use <a href="http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">this
+method</a> to detect IE.</p><h3 class="text-header text-header_lvl_3" id="4-root"><a href="#4-root" class="text-header__anchor">4. :root</a></h3><p class="text__p">The <code>:root</code> CSS selector is only supported by browsers that understand CSS3. So it can be used to separate CSS rules
+for modern and older browsers.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>/* Display PNG by default */
+.svg {
+  width: 200px;
+  height: 200px;
+  background: url(your.png);
+}
+
+/* Hide elements containing SVG */
+.svg IFRAME,
+.svg OBJECT,
+.svg EMBED,
+.svg IMG {
+  display: none;
+}
+
+/* Show SVG containers for the browsers with CSS3 */
+:root IFRAME,
+:root OBJECT,
+:root EMBED,
+:root IMG {
+  display: inline-block;
+}</code></pre><p class="text__p">Like the previous solution this works correctly to weed out IE8 (and the aged) but does not help in Opera Mini&#39;s case
+since it supports CSS3 and so the SVG containder will be switched on anyway.</p><h3 class="text-header text-header_lvl_3" id="5-solution-for-opera-with-presto-version-12-or-mini"><a href="#5-solution-for-opera-with-presto-version-12-or-mini" class="text-header__anchor">5. Solution for Opera with Presto (version 12 or Mini)</a></h3><p class="text__p">In Opera 12 SVG backgrounds are weirdly odd. Simple CSS code, harmless at first glance, can cause render issues with
+SVG backgrounds when scrolling. I was lucky to get pictures like this:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="http://img-fotki.yandex.ru/get/9746/5091629.9d/0_7f9f8_dff062ac_L.png"/></p><p class="text__p">You can examine the working example here: <a href="http://jsbin.com/winag/2/edit">http://jsbin.com/winag/2/edit</a><br/>
+<em>Open this page with Opera 12 and scroll up and down.</em></p><p class="text__p">Opera Mini has issues with SVG backgrounds and does not support inlined SVG at all. This is how SVG background looks
+like with it:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="http://img-fotki.yandex.ru/get/9819/5091629.9d/0_7f9f7_19c1f3e9_L.png"/></p><p class="text__p">For such a case you can use this <em>special for Opera</em> hack:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>doesnotexist:-o-prefocus, .selector {
+  background-image: url(your.png);
+}</code></pre><p class="text__p">This method uses specific Opera selector. You can learn details here:
+<a href="http://www.opera.com/docs/specs/presto2.12/css/o-vendor/">http://www.opera.com/docs/specs/presto2.12/css/o-vendor/</a>.</p><h3 class="text-header text-header_lvl_3" id="6-specific-opera-mini-selector"><a href="#6-specific-opera-mini-selector" class="text-header__anchor">6. Specific Opera Mini selector</a></h3><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>@media all and (-webkit-min-device-pixel-ratio:10000),
+       not all and (-webkit-min-device-pixel-ratio:0) {
+  .selector {
+    background-image: url(your.png);
+  }
+}</code></pre><h2 class="text-header text-header_lvl_2" id="to-be-continued"><a href="#to-be-continued" class="text-header__anchor">To be continued</a></h2><p class="text__p">Everything written above is just the tip of the iceberg. There is plenty of interesting in the SVG specification.
+To be continued! :-)</p><h3 class="text-header text-header_lvl_3" id="further-links"><a href="#further-links" class="text-header__anchor">Further links</a></h3><ul>
+<li><a href="http://caniuse.com/#search=svg">Browsers support for SVG</a></li>
+<li><a href="http://css-tricks.com/svg-fallbacks/">SVG Fallbacks</a></li>
+<li><a href="http://modernizr.com/">Modernizr</a></li>
+<li><a href="http://dbushell.com/2013/02/04/a-primer-to-front-end-svg-hacking/">A Primer to Front-end SVG Hacking</a></li>
+<li><a href="http://lynn.ru/examples/svg/en.html">SVG and <image> tag tricks</a></li>
+</ul>
+]]></description>
+            <link>http://frontendbabel.info/articles/acquaintance-with-svg/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/acquaintance-with-svg/</guid>
+            <dc:creator><![CDATA[Yulya Buhvalova]]></dc:creator>
+            <pubDate>Thu, 10 Jul 2014 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Generating BEM selectors with CSS preprocessors]]></title>
+            <description><![CDATA[<p class="text__p">The <a href="http://bem.info/">BEM methodology</a> never assumed that its long CSS classes such as <code>.block__element_modifier</code> to
+be written manually. At Yandex they use special tools to produce HTML markup and styles. If you are using CSS
+preprocessors to generate your styles, you also do not have to repeat block names again and again. Here I&#39;m going to
+demonstrate how to do this.</p><!-- cut -->
+<p class="text__p">All the CSS preprocessors enable to include one selector into another. This is how cascades are built.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  .title {
+    font: bold 24px/1 sans-serif;
+  }
+}</code></pre><p class="text__p">After the transformation it gives:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header .title {
+  font: bold 24px/1 sans-serif;
+}</code></pre><p class="text__p">It is possible to use <code>&amp;</code> symbol instead of container name, which is convenient if describing inner elements and pseudo
+selectors.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  a {
+    &, &:hover, &:focus {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}</code></pre><p class="text__p">CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header a,
+.header a:hover,
+.header a:focus {
+  color: white;
+  text-decoration: none;
+}</code></pre><p class="text__p"><strong>LESS</strong> (and now <strong>SASS</strong> as well) allow to use <code>&amp;</code> within a single class name. There is no strict requirements on what
+should be the symbols before and after <code>&amp;</code>. Thus, you can produce simple selectors instead of cascades.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  &__link {
+    &, &:hover, &:focus {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}</code></pre><p class="text__p">CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header__link,
+.header__link:hover,
+.header__link:focus {
+  color: white;
+  text-decoration: none;
+}</code></pre><p class="text__p">The same goes for selectors of elements and modifiers.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  background: white;
+  &__title {
+    font: bold 24px/1 sans-serif;
+    &_featured {
+      font-size: 30px;
+    }
+  }
+}</code></pre><p class="text__p">CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  background: white;
+}
+.header__title {
+  font: bold 24px/1 sans-serif;
+}
+.header__title_featured {
+  font-size: 30px;
+}</code></pre><p class="text__p">As you can see, nested selectors were flattened.</p><h2 class="text-header text-header_lvl_2" id="best-to-know"><a href="#best-to-know" class="text-header__anchor">Best to know</a></h2><p class="text__p">Now, a few simple rules to warn you of shooting your own foot.</p><h3 class="text-header text-header_lvl_3" id="use-a-block-name-just-once"><a href="#use-a-block-name-just-once" class="text-header__anchor">Use a block name just once</a></h3><p class="text__p">A block name should be mentioned at the first level only and never repeated again. There might be exceptions in
+case of complex modifier name. However if you met the need to do such a thing, you should reconsider the whole structure
+of this block elements and modifiers. I am sure you will find a way to decompose the block and simplify it.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  // block styles
+}</code></pre><h3 class="text-header text-header_lvl_3" id="elements-are-2nd-level-selectors"><a href="#elements-are-2nd-level-selectors" class="text-header__anchor">Elements are 2nd level selectors</a></h3><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  // block styles
+  &__element {
+    // element styles
+  }
+  &__title {
+  }
+}</code></pre><p class="text__p">Sometime you may have elements with similar names and this would induce you to include one element into another. I
+suggest not to yield to temptation in spite of you get correct resultant CSS.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  &__element {
+    &-wrapper {
+      // This is a bad example of declaring an element.
+      // This element is hard to be found in the code.
+    }
+  }
+}</code></pre><p class="text__p">Never do such a thing. Selectors like this are very hard to found in the code. And the name of the element
+(<code>element-wrapper</code>) is divided into 2 parts. You should write the whole element name even if it is partly similar to the
+others.</p><h3 class="text-header text-header_lvl_3" id="pseudo-classes-pseudo-elements-and-element-modifiers-can-fit-the-3rd-level"><a href="#pseudo-classes-pseudo-elements-and-element-modifiers-can-fit-the-3rd-level" class="text-header__anchor">Pseudo-classes, pseudo-elements and element modifiers can fit the 3rd level</a></h3><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  &__element {
+    &_modifier {
+      // styles for a modifier of an element
+    }
+    &_modifier_value {
+      // do not split modifier key and value
+    }
+    &:hover {
+      // pseudo-class is also a kind of a modifier
+    }
+  }
+}</code></pre><p class="text__p">Here you group styles for the element and its supplements in a very natural way; this will make it easier to find them
+across the source code.</p><p class="text__p">As is the convention, the element modifier must not influence inner elements. Placing it at the 3rd level of selectors
+you provide error protection. But I can imagine cases when it is handy to place a modifier into the 2nd level and so to
+repeat the element name.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  &__element_active {
+    // element modifier at the 2nd level
+  }
+  &__element_modifier_good {
+    // example of key-value modifier
+  }
+}</code></pre><p class="text__p">I personally prefer to place element modifiers at the 2nd level.
+Also, I believe that it is a bad practice to divide a modifier name into parts or separate its key and value parts.
+Excessive structure would make code less readable and so you can easily loose context.</p><h3 class="text-header text-header_lvl_3" id="modifiers-fit-the-2nd-level-and-can-cause-cascade"><a href="#modifiers-fit-the-2nd-level-and-can-cause-cascade" class="text-header__anchor">Modifiers fit the 2nd level and can cause cascade</a></h3><p class="text__p">Block modifiers are to use for changing their block appearance and the inner elements (not the inner blocks).</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  background: white;
+  &__title {
+    color: black;
+    font: bold 24px/1 sans-serif;
+  }
+  &_featured {
+    background: black;
+  }
+  &_featured &__title {
+    color: white;
+    font-size: 30px;
+  }
+}</code></pre><p class="text__p">The code is not that structured because we need to save the value of <code>&amp;</code>. Once we come down to the 3rd level, it is
+redefined and this makes us to write full block name in selectors which is recommended to avoid.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  background: white;
+}
+.block__title {
+  color: black;
+  font: bold 24px/1 sans-serif;
+}
+.block_featured {
+  background: black;
+}
+.block_featured .block__title {
+  color: white;
+  font-size: 30px;
+}</code></pre><h2 class="text-header text-header_lvl_2" id="wrapping-up"><a href="#wrapping-up" class="text-header__anchor">Wrapping up</a></h2><ul>
+<li>CSS preprocessors prevent repeating block names in selectors.</li>
+<li>The source code shows cascade but in the resultant CSS it all transforms into simple selectors.</li>
+<li>This method cut down errors and structural bugs.</li>
+</ul>
+]]></description>
+            <link>http://frontendbabel.info/articles/bem-with-css-preprocessors/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/bem-with-css-preprocessors/</guid>
+            <dc:creator><![CDATA[Vladimir Kuznetsov]]></dc:creator>
+            <pubDate>Tue, 29 Jul 2014 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Bower: Why Front-End Needs a Package Manager]]></title>
+            <description><![CDATA[<p class="text__p">This article was first published in the <a href="http://www.xakep.ru/xa/?id=184">May 2014 issue</a> of &quot;Хакер&quot; (russian word for &quot;Hacker&quot;) magazine. The article in the magazine is a shortened version; the full one is below.</p><p class="text__p">Package managers simplify installing and updating project dependencies, which are libraries that it uses: jQuery, Fotorama, everything that is used on your site and isn&#39;t written by you.</p><!-- cut -->
+<p class="text__p">Browsing all the library websites, downloading and unpacking the archives, copying files into the projects — all of this is replaced with a few commands in the terminal.</p><p class="text__p">Many programming languages have standard package managers, which developers use to install all libraries: gem for Ruby, pip for Python and others. For server-side JavaScript there is npm (reasons why it&#39;s not suitable for client-side are below), but client-side JavaScript until recently didn&#39;t have anything. There were many different package managers (Jam, Component, Volo, Ender), but the majority of them never became popular, and there is little sense in package managers that can&#39;t install the right packages.</p><p class="text__p">Bower is not the standard package manager for client-side JavaScript, but the most popular one: currently there are more than sixteen thousand packages.</p><p class="text__p">Bower doesn&#39;t prescribe to the user its own build system, or to the developer a method of including  libraries (AMD, CommonJS, etc.) All Bower does is install the right versions of the packages that the project needs and their dependencies. In other words: it downloads source files for the right libraries and everything they need into a special folder. Everything else is up to the developer.</p><h2 class="text-header text-header_lvl_2" id="why-not-npm"><a href="#why-not-npm" class="text-header__anchor">Why Not npm</a></h2><p class="text__p">The main difference between npm and Bower is the approach for installing package dependencies. npm installs dependencies for each package separately, and as a result makes a big package dependency tree (<code>node_modules/grunt/node_modules/glob/node_modules/...</code>), where there could be several version of the same package. For client-side JavaScript this is unacceptable: you can&#39;t add two different version for jQuery or any other library to a page. With Bower each package is installed once (jQuery will always be in the <code>bower_components/jquery</code> folder, regardless of how many packages depend on it) and in the case of a dependency conflict, Bower simply won&#39;t install the package incompatible with one that&#39;s already installed.</p><h2 class="text-header text-header_lvl_2" id="installing-bower"><a href="#installing-bower" class="text-header__anchor">Installing Bower</a></h2><p class="text__p">To work with Bower you&#39;ll need Node.js and git. Installation:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> npm install -g bower</code></pre><h2 class="text-header text-header_lvl_2" id="working-with-packages"><a href="#working-with-packages" class="text-header__anchor">Working with Packages</a></h2><p class="text__p">Let&#39;s try to install something, for example jQuery:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> bower install --save jquery  # or bower i -S jquery</code></pre><p class="text__p">This command will download the latest version of jQuery into the <code>bower_components/jquery</code> folder.</p><p class="text__p">The <code>--save</code> flag tells Bower that it should save the package name and its version into the <code>bower.json</code> manifest file. In this file is a list of all dependencies of the project (packages installed with Bower) and other metadata required for creation of your own packages (more on this at the end of the article). With the package names it&#39;s possible to specify the version with which your project is guaranteed to work.</p><p class="text__p">We don&#39;t have a file like that yet, which is what the line &quot;No bower.json file to save to, use bower init to create one&quot; in the log is about. Let&#39;s create it:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> bower init</code></pre><p class="text__p">Bower will ask many questions, but until we want to register our package, answers to most of them don&#39;t matter, you can just press Enter.</p><p class="text__p">The question &quot;set currently installed components as dependencies?&quot; should be answered with &quot;yes&quot; — all previously installed components (in our case it&#39;s jQuery) will be automatically placed in the created JSON file. The question &quot;would you like to mark this package as private which prevents it from being accidentally published to the registry?&quot; should also be answered &quot;yes&quot; — this will prevent accidental publication of the package into the Bower registry.</p><p class="text__p">Let&#39;s install a few more packages:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> bower install --save social-likes jquery-icheck fotorama</code></pre><p class="text__p">And take a look at what we got:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>> bower list
+bower check-new     Checking for new versions of the project dependencies..
+bowertest#0.0.0 /Users/admin/bowertest
+├─┬ fotorama#4.5.1
+│ └── jquery#2.1.0 (2.1.1-beta1 available)
+├── jquery#2.1.0 (2.1.1-beta1 available)
+├─┬ jquery-icheck#1.0.2
+│ └── jquery#2.1.0 (2.1.1-beta1 available)
+└─┬ social-likes#3.0.2
+    └── jquery#2.1.0</code></pre><p class="text__p">The <code>bower list</code> command shows a list of all installed packages. Here we see that all packages depend on jQuery, and that Bower found a version suitable for them all: 2.1.0.</p><p class="text__p">In the file system it looks like this:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>> tree -L 2
+.
+├── bower.json
+└── bower_components
+        ├── fotorama
+        ├── jquery
+        ├── jquery-icheck
+        └── social-likes
+
+5 directories, 1 file</code></pre><p class="text__p">Each package is installed into its own folder, there are no nested packages, and jQuery is only included once. In the project root lies the created by <code>bower init</code> file <code>bower.json</code>, but now it lists all the packages shown by <code>bower list</code>, not just jQuery.</p><p class="text__p">For uninstalling packages the <code>bower uninstall</code> command is used:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> bower uninstall --save jquery-icheck  # Или bower un -S jquery-icheck</code></pre><p class="text__p">You can confidently delete the <code>bower_components</code> directory or add it to your <code>.gitignore</code>. The <code>bower install</code> (without additional parameters) command will return everything to the way it was:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> bower install</code></pre><h3 class="text-header text-header_lvl_3" id="deploying-the-project"><a href="#deploying-the-project" class="text-header__anchor">Deploying the Project</a></h3><p class="text__p">There are two approaches for deploying a project:</p><ol>
+<li>Only the manifest file is added to the repo and all packages are installed during deployment. This way there is nothing unnecessary in the repo, but if GitHub crashes during deployment or another server from which packages are installed crashes, there will be problems.</li>
+<li>The <code>bower_components</code> folder as well as <code>bower.json</code> are added to the repository. This way deployment doesn&#39;t depend on external servers, but the repository blows up with hundreds (if not thousands) of extra files.</li>
+</ol>
+<h3 class="text-header text-header_lvl_3" id="semantic-versions-semver"><a href="#semantic-versions-semver" class="text-header__anchor">Semantic Versions (semver)</a></h3><p class="text__p"><a href="http://semver.org/">Semver</a> is, first-of-all, an approach to versioning libraries: a format for version numbers MAJOR.MINOR.PATCH and rules, which have to be followed when incrementing each number.</p><p class="text__p">Secondly, it&#39;s a method of describing necessary dependencies, which is used by Bower and npm.</p><p class="text__p">While installing with the <code>--save</code> flag, package version are added to <code>bower.json</code> like <code>~1.0.1</code>. The tilde at the beginning means that during installation version 1.0.1 will be chosen, or a version with a larger last number (PATCH) if it&#39;s available. This way the installed version will have the latest bug fixes, but will be fully compatible with the one specified in the manifest file.</p><h2 class="text-header text-header_lvl_2" id="updating-dependencies"><a href="#updating-dependencies" class="text-header__anchor">Updating Dependencies</a></h2><p class="text__p">Bower has a <code>bower update</code> command, but it updates packages with respect to the demands of the manifest file. For example, if it lists jQuery ~2.0.0 Bower can update jQuery to version 2.0.9, but 2.1.0 won&#39;t be installed because it doesn&#39;t satisfy the ~2.0.0 formula.</p><p class="text__p">To update packages (and <code>bower.json</code>) to the truly latest version you can use the <a href="https://github.com/sapegin/bower-update">bower-update</a> utility. Installation:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> npm install -g bower-update</code></pre><p class="text__p">Launch:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> bower-update</code></pre><h2 class="text-header text-header_lvl_2" id="searching-for-packages"><a href="#searching-for-packages" class="text-header__anchor">Searching for Packages</a></h2><p class="text__p">There are two methods for finding packages with Bower: geeky and normal.</p><p class="text__p">Geeky:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> bower search jquery
+Search results:
+
+        jquery git://github.com/jquery/jquery.git
+        jquery-ui git://github.com/components/jqueryui
+        ...</code></pre><p class="text__p">Normal: open <a href="http://bower.io/search/">bower.io/search</a> in a browser.</p><h2 class="text-header text-header_lvl_2" id="automatic-builds"><a href="#automatic-builds" class="text-header__anchor">Automatic Builds</a></h2><p class="text__p">Bower puts the problem of project builds on the shoulders of the developer. The simplest method is just to concatenate the JS files with Grunt, Gulp or any other task runner that you use.</p><p class="text__p">I use Grunt, so I&#39;ll describe how to concatenate the packages with Grunt. There was a <a href="http://nano.sapegin.ru/all/grunt-0-4">big article</a> on using Grunt in the June issue of last year, so I&#39;ll show my config of the <code>grunt-contrib-concat</code> plugin right away:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>concat: {
+    main: {
+        src: [
+            "bower_components/jquery/jquery.min.js",
+            "bower_components/fotorama/….js",
+            "bower_components/jquery-icheck/….js",
+            "bower_components/social-likes/social-likes.min.js",
+            "scripts/*.js"  // Your site’s scripts
+        ],
+        dest: "build/scripts.js"
+    }
+}</code></pre><p class="text__p">This method has many downsides: you have to watch the files for each package, make sure that the files are assembled in the right order (for example, jQuery has to be higher than scripts depending on it). The <a href="https://github.com/sapegin/grunt-bower-concat">grunt-bower-concat</a> plugin
+ can do this for you: it automatically concatenates all installed dependencies in the right order into a single file:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>bower_concat: {
+    all: {
+        dest: "build/_bower.js",  // Concatenated file
+        exclude: [  // Packages excluded from Bower
+                "jquery",  // If jQuery is loaded from the Google CDN
+                "modernizr"  // If loading scripts at the end of the page, modernizr should be loaded in the <head>
+        ]
+    }
+},
+concat: {
+    main: {
+        src: [
+            "build/_bower.js",
+            "scripts/*.js"  // You site's scripts
+        ],
+        dest: "build/scripts.js"
+    }
+}</code></pre><h2 class="text-header text-header_lvl_2" id="registering-your-packages"><a href="#registering-your-packages" class="text-header__anchor">Registering Your Packages</a></h2><p class="text__p">To make your library available to be installed with Bower it has to be registered. To do this:</p><ul>
+<li>at the root of a project there should be a <code>bower.json</code> manifest file.</li>
+<li>the project should be a git repository (for example on GitHub)</li>
+<li>the project should use semantic versioning and the repository should have a git tag for the latest version</li>
+</ul>
+<p class="text__p">To create the manifest file the <code>bower init</code> command is used:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> bower init
+[?] name: awesomelib
+[?] version: 0.0.1
+[?] description: My awesome jQuery plugin.
+[?] main file: jquery.awesomeplugin
+[?] keywords: jquery awesome yay
+[?] authors: Artem Sapegin <artem@sapegin.ru>
+[?] license: MIT
+[?] homepage: https://github.com/sapegn/jquery.awesomeplugin.js
+[?] set currently installed components as dependencies? Yes
+[?] add commonly ignored files to ignore list? Yes
+[?] would you like to mark this package as private which prevents it from being accidentally
+    published to the registry? No
+
+{
+    name: 'awesomelib',
+    version: '0.0.1',
+    description: 'My awesome jQuery plugin.',
+    main: 'jquery.awesomeplugin.js',
+    keywords: [
+        'jquery',
+        'awesome',
+        'yay'
+    ],
+    authors: [
+        'Artem Sapegin <artem@sapegin.ru>'
+    ],
+    license: 'MIT',
+    homepage: 'https://github.com/sapegn/jquery.awesomeplugin',
+    ignore: [
+        '**/.*',
+        'node_modules',
+        'bower_components',
+        'test',
+        'tests'
+    ],
+    "dependencies": {
+        "jquery": "~2.1.0"
+    }
+}
+
+[?] Looks good? Yes</code></pre><p class="text__p">And, although it&#39;s mandatory to fill in the <code>name</code> field, other fields are also very useful:</p><ul>
+<li><code>description</code> and <code>keywords</code> will help users find your library through the package search interface.</li>
+<li><code>main</code> determines the main file of the package. Thie field can be used by automatic build systems like <code>grunt-bower-concat</code>.</li>
+<li><code>license</code> — always specify a license: it tells a potential user of your package whether they can use it in their project. For example, the <code>GPL</code> license required that every project using it is also released with the same license, which isn&#39;t always possible.</li>
+<li><code>ignore</code> — by default Bower will download the whole repository, which, firstly, will increase installation time, and, secondly, will add unnecessary files to the project. It&#39;s best to exclude everything except the files required for the package to work (main JS file, CSS, etc.), license and README.</li>
+<li><code>dependencies</code> — all packages on which your package depends.</li>
+</ul>
+<p class="text__p">Now we need to commit the <code>bower.json</code> file, create a git tag with the latest version and push it to the remote repo:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> git add bower.json
+> git commit -m "Add bower.json"
+> git tag "v0.0.1"
+> git push origin --tags</code></pre><p class="text__p">Now you can register your package:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "shell"} }'><code>> bower register jquery-awesomeplugin git://github.com/sapegin/jquery-awesomeplugin.git</code></pre><p class="text__p">From now on, Bower will check package updates, you just have to create git tags for each new version.</p><p class="text__p">To make updating your packages easier you can use tools like <a href="https://github.com/vojtajina/grunt-bump">grunt-bump</a> or <a href="https://github.com/mikaelbr/mversion">mversion</a>.</p>]]></description>
+            <link>http://frontendbabel.info/articles/bower-why-frontend-package-manager/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/bower-why-frontend-package-manager/</guid>
+            <dc:creator><![CDATA[Artem Sapegin]]></dc:creator>
+            <pubDate>Wed, 16 Jul 2014 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Generating CSS sprites with Gulp]]></title>
+            <description><![CDATA[<p class="text__p">While working with one large project, my colleague and I were thinking about how to automate building the CSS sprites.
+Before, we used to build them manually or with different online services which anyway took a lot of time. Also, by that
+time we already used Gulp to build the project and so were looking for a gulp-friendly solution for sprites.</p><p class="text__p">Initially we were choosing from different variants:</p><ul>
+<li><a href="https://www.npmjs.org/package/css-sprite">css-sprite</a></li>
+<li><a href="https://www.npmjs.org/package/gulp-sprite-generator">gulp-sprite-generator</a></li>
+<li><a href="https://github.com/Otouto/gulp-spritesmith">gulp-spritesmith</a></li>
+<li><a href="https://github.com/twolfson/gulp.spritesmith">gulp.spritesmith</a></li>
+</ul>
+<!-- cut -->
+<p class="text__p">The first one is too complex to install; it has a few dependencies which require additional package managers. Once
+gotten a new developer into our team, we would need to explain this complex process. This did not look as an option for
+us. Also, it does not enable to tune image positions in the sprite.</p><p class="text__p">The other three modules are based on the same <a href="https://github.com/Ensighten/spritesmith">spritesmith</a> generator.
+Eventually we chose <a href="https://github.com/twolfson/gulp.spritesmith">gulp.spritesmith</a> as an official port of it.</p><h2 class="text-header text-header_lvl_2" id="installation"><a href="#installation" class="text-header__anchor">Installation</a></h2><p class="text__p">The first think to do is to install Gulp. Its <a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started">official
+documentation</a> will help you a
+lot.<br/>
+Then install <code>gulp.spritesmith</code>. If your project is empty yet (as mine is), take supplement packages as well:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>npm i gulp gulp-stylus gulp.spritesmith --save</code></pre><p class="text__p">Now you can move to tuning the generator.</p><h2 class="text-header text-header_lvl_2" id="tuning"><a href="#tuning" class="text-header__anchor">Tuning</a></h2><p class="text__p">Before you start declaring the task, let&#39;s introduce all the possible
+<a href="https://github.com/twolfson/gulp.spritesmith#spritesmithparams">parameters</a> to the function.</p><ul>
+<li>imgName <code>String</code> - Filename to save image as<ul>
+<li>Supported image extensions are <code>.png</code> and <code>.jpg/jpeg</code> (limited to specfic engines)</li>
+<li>Image format can be overridden via <code>imgOpts.format</code></li>
+</ul>
+</li>
+<li>cssName <code>String</code> - Filename to save CSS as<ul>
+<li>Supported CSS extensions are <code>.css</code> (CSS), <code>.sass</code> ([SASS][]), <code>.scss</code> ([SCSS][]), <code>.less</code> ([LESS][]), <code>.styl/.stylus</code> ([Stylus][]), and <code>.json</code> ([JSON][])</li>
+<li>CSS format can be overridden via <code>cssFormat</code></li>
+</ul>
+</li>
+<li>imgPath <code>String</code> - Optional path to use in CSS referring to image location</li>
+<li>engine <code>String</code> - Optional image generating engine to use<ul>
+<li>By default, <code>auto</code> will be used which detects the best supported engine for your system</li>
+<li>Supported options are <code>phantomjs</code>, <code>canvas</code>, <code>gm</code>, and <code>pngsmith</code></li>
+<li>More information can be found in the [engine][] section</li>
+</ul>
+</li>
+<li>algorithm <code>String</code> - Optional method for how to pack images<ul>
+<li>Supported options are <code>top-down</code> (default), <code>left-right</code>, <code>diagonal</code>, <code>alt-diagonal</code>, and <code>binary-tree</code></li>
+<li>More information can be found in the [algorithm][] section</li>
+</ul>
+</li>
+<li>padding <code>Number</code> - Optional amount of pixels to include between images<ul>
+<li>By default, there will be no padding</li>
+</ul>
+</li>
+<li>imgOpts <code>Object</code> - Options for image output<ul>
+<li>format <code>String</code> - Override for format of output image<ul>
+<li>Supported values are <code>png</code> and <code>jpg</code> (limited to specific engines)</li>
+</ul>
+</li>
+<li>quality <code>Number</code> - Quality of image (only supported by <code>gm</code> engine)</li>
+<li>timeout <code>Number</code> - Milliseconds to wait before terminating render (limited to <code>phantomjs</code> engine)</li>
+</ul>
+</li>
+<li>algorithmOpts <code>Object</code> - Options for algorithm configuration<ul>
+<li>sort <code>Boolean</code> - Enable/disable image sorting by <code>algorithm</code><ul>
+<li>By default, sorting is enabled (<code>true</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>engineOpts <code>Object</code> - Options for engine configuration<ul>
+<li>imagemagick <code>Boolean</code> - Force usage of <code>imagemagick</code> over <code>graphicsmagick</code> (limited to <code>gm</code>)</li>
+</ul>
+</li>
+<li>cssFormat <code>String</code> - Override for format of CSS output<ul>
+<li>Supported values are <code>css</code> (CSS), <code>sass</code> ([SASS][]), <code>scss</code> ([SCSS][]), <code>scss_maps</code> ([SCSS][] using [map notation][sass-maps]), <code>less</code> ([LESS][]), <code>stylus</code> ([Stylus][]), and <code>json</code> ([JSON][])</li>
+</ul>
+</li>
+<li>cssVarMap <code>Function</code> - Iterator to customize CSS variable names<ul>
+<li>An example can be found [here][cssvarmap-example]</li>
+</ul>
+</li>
+<li>cssTemplate <code>Function|String</code> - CSS templating function or path to alternative [mustache][] template<ul>
+<li>More information can be found in the [cssTemplate][] section</li>
+</ul>
+</li>
+<li>cssOpts <code>Object</code> - Container for CSS templates<ul>
+<li>functions <code>Boolean</code> - Skip output of mixins</li>
+<li>cssClass <code>Function</code> - Iterator to override default CSS selectors<ul>
+<li>An example can be found [here][cssclass-example]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="text__p">Assuming this, the simpliest task would look like the following:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>gulp.task('sprite', function() {
+    var spriteData = 
+        gulp.src('./src/assets/images/sprite/*.*') // source path of the sprite images
+            .pipe(spritesmith({
+                imgName: 'sprite.png',
+                cssName: 'sprite.css',
+            }));
+
+    spriteData.img.pipe(gulp.dest('./built/images/')); // output path for the sprite
+    spriteData.css.pipe(gulp.dest('./built/styles/')); // output path for the CSS
+});</code></pre><p class="text__p">With that we can generate this sprite:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="long-sprite.png"/></p><p class="text__p">It is served with the following CSS code:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+~```html
+&lt;i class="icon-home">&lt;/i>
+```~
+*/
+.icon-home {
+  background-image: url(sprite.png);
+  background-position: 0px 0px;
+  width: 16px;
+  height: 16px;
+}
+.icon-home_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -16px;
+  width: 16px;
+  height: 16px;
+}
+.icon-instagram {
+  background-image: url(sprite.png);
+  background-position: 0px -32px;
+  width: 16px;
+  height: 16px;
+}
+.icon-instagram_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -48px;
+  width: 16px;
+  height: 16px;
+}
+.icon-pin {
+  background-image: url(sprite.png);
+  background-position: 0px -64px;
+  width: 12px;
+  height: 16px;
+}
+.icon-pin_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -80px;
+  width: 12px;
+  height: 16px;
+}
+.icon-tras_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -96px;
+  width: 16px;
+  height: 16px;
+}
+.icon-trash {
+  background-image: url(sprite.png);
+  background-position: 0px -112px;
+  width: 16px;
+  height: 16px;
+}
+.icon-user {
+  background-image: url(sprite.png);
+  background-position: 0px -128px;
+  width: 16px;
+  height: 16px;
+}
+.icon-user_hover {
+  background-image: url(sprite.png);
+  background-position: 0px -144px;
+  width: 16px;
+  height: 16px;
+}</code></pre><h3 class="text-header text-header_lvl_3" id="tweaking"><a href="#tweaking" class="text-header__anchor">Tweaking</a></h3><p class="text__p">In our project we use <a href="http://learnboost.github.io/stylus/">Stylus</a> for processing CSS, so it is much more handy to get
+a <code>.styl</code> file with the variables.<br/>
+I use <code>binary-tree</code> algorythm to make it more compact. All the variables are prefixed with <code>s-</code>, this makes them
+recognizable. I switched off generating the mixings and now have them in a separate file. I have created my own CSS
+template because the generic variant has too much of redundant code making the file heavier; and I don&#39;t use it anyway.</p><p class="text__p">As a result, I get such a sprite:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="sprite.png"/></p><p class="text__p">There are the JavaScript and Stylus code for it:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('sprite', function() {
+    var spriteData = 
+        gulp.src('./src/assets/images/sprite/*.*') // путь, откуда берем картинки для спрайта
+            .pipe(spritesmith({
+                imgName: 'sprite.png',
+                cssName: 'sprite.styl',
+                cssFormat: 'stylus',
+                algorithm: 'binary-tree',
+                cssTemplate: 'stylus.template.mustache',
+                cssVarMap: function(sprite) {
+                    sprite.name = 's-' + sprite.name
+                }
+            }));
+
+    spriteData.img.pipe(gulp.dest('./built/images/')); // путь, куда сохраняем картинку
+    spriteData.css.pipe(gulp.dest('./src/styles/')); // путь, куда сохраняем стили
+});</code></pre><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "php"} }'><code>$s-book = 16px 0px -16px 0px 16px 16px 80px 64px 'sprite.png';
+$s-book_hover = 48px 16px -48px -16px 16px 16px 80px 64px 'sprite.png';
+$s-comments = 0px 16px 0px -16px 16px 16px 80px 64px 'sprite.png';
+$s-comments_hover = 16px 16px -16px -16px 16px 16px 80px 64px 'sprite.png';
+$s-compose = 32px 0px -32px 0px 16px 16px 80px 64px 'sprite.png';
+$s-compose_hover = 32px 16px -32px -16px 16px 16px 80px 64px 'sprite.png';
+$s-faceboo_hover = 0px 32px 0px -32px 16px 16px 80px 64px 'sprite.png';
+$s-facebook = 16px 32px -16px -32px 16px 16px 80px 64px 'sprite.png';
+$s-globe = 32px 32px -32px -32px 16px 16px 80px 64px 'sprite.png';
+$s-globe_hover = 48px 0px -48px 0px 16px 16px 80px 64px 'sprite.png';
+$s-home = 0px 0px 0px 0px 16px 16px 80px 64px 'sprite.png';
+$s-home_hover = 48px 32px -48px -32px 16px 16px 80px 64px 'sprite.png';
+$s-instagram = 0px 48px 0px -48px 16px 16px 80px 64px 'sprite.png';
+$s-instagram_hover = 16px 48px -16px -48px 16px 16px 80px 64px 'sprite.png';
+$s-pin = 32px 48px -32px -48px 12px 16px 80px 64px 'sprite.png';
+$s-pin_hover = 44px 48px -44px -48px 12px 16px 80px 64px 'sprite.png';
+$s-tras_hover = 64px 0px -64px 0px 16px 16px 80px 64px 'sprite.png';
+$s-trash = 64px 16px -64px -16px 16px 16px 80px 64px 'sprite.png';
+$s-user = 64px 32px -64px -32px 16px 16px 80px 64px 'sprite.png';
+$s-user_hover = 64px 48px -64px -48px 16px 16px 80px 64px 'sprite.png';</code></pre><h2 class="text-header text-header_lvl_2" id="usage"><a href="#usage" class="text-header__anchor">Usage</a></h2><p class="text__p">Ok, the sprite image has been generated and there is a stylys file of variables, what is next?</p><p class="text__p">The next are mixins which I am not generating. I manually created a separate file for them which is <code>mixins.styl</code>. Here
+is its content:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>spriteWidth($sprite) {
+  width: $sprite[4];
+}
+
+spriteHeight($sprite) {
+  height: $sprite[5];
+}
+
+spritePosition($sprite) {
+  background-position: $sprite[2] $sprite[3];
+}
+
+spriteImage($sprite) {
+  background-image: url(../images/$sprite[8]);
+}
+
+sprite($sprite) {
+  spriteImage($sprite)
+  spritePosition($sprite)
+  spriteWidth($sprite)
+  spriteHeight($sprite)
+}</code></pre><p class="text__p">The main mixin is <code>sprite($sprite)</code>. As <code>$sprite</code> I use the needed variable, for example <code>sprite($s-home)</code>. It gives
+such a result:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>background-image:url("../images/sprite.png");
+background-position:0 0;
+width:16px;
+height:16px</code></pre><p class="text__p">The mixin enables to define the image sizes which is very useful when using pseudo elements.</p><p class="text__p">Here is the <a href="http://krekotun.github.io/gulp-sprite-generation/">working example</a>.</p><h2 class="text-header text-header_lvl_2" id="cons"><a href="#cons" class="text-header__anchor">Cons</a></h2><p class="text__p">I noticed only one problem since the time I&#39;ve started to use the solution.<br/>
+An icon is blinking when using <code>:hover</code> or <code>:active</code>. This happens because the <code>sprite</code> mixin generates
+<code>background-image</code> for every case and changes the picture on hover.</p><p class="text__p">After thinking for a while and reading the Stylys&#39; documentation, I have found the solution. We just need to check if a
+selector has these pseudo classes. And if they are, we can skip the <code>spriteImage($sprite)</code> output.</p><p class="text__p">This is the final version of the mixin:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>sprite($sprite)
+    if !match('hover', selector()) && !match('active', selector())
+        spriteImage($sprite)
+    spritePosition($sprite)
+    spriteWidth($sprite)
+    spriteHeight($sprite)</code></pre><p class="text__p">Unfortunately this is not possible to foresee all the cases. Probably there would be some JavaScript code changing a CSS
+class. So, we can use <code>spritePosition($sprite)</code> if an image was already in use.</p><h2 class="text-header text-header_lvl_2" id="wrap-up"><a href="#wrap-up" class="text-header__anchor">Wrap up</a></h2><p class="text__p">I&#39;ve been working with this solution for a few months and happy to say that it saves a lot of time. Aim to automate any
+routine and use your time the most effectively.</p><p class="text__p">I created a <a href="https://github.com/Krekotun/gulp-sprite-generation">sample repository</a> for you, you can use it as a dummy
+for your project or just explore how it work.</p><h2 class="text-header text-header_lvl_2" id="links"><a href="#links" class="text-header__anchor">Links</a></h2><ul>
+<li><a href="http://krekotun.github.io/gulp-sprite-generation/">working example</a></li>
+<li><a href="https://github.com/Krekotun/gulp-sprite-generation">sample repository</a></li>
+<li><a href="https://github.com/twolfson/gulp.spritesmith">gulp.spritesmith</a></li>
+<li><a href="http://gulpjs.com/">Gulp</a></li>
+</ul>
+]]></description>
+            <link>http://frontendbabel.info/articles/css-sprites-with-gulp/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/css-sprites-with-gulp/</guid>
+            <dc:creator><![CDATA[Alexey Krekotun]]></dc:creator>
+            <pubDate>Thu, 09 Oct 2014 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Some CSS tricks; or what we do at our Naked Fridays]]></title>
+            <description><![CDATA[<p class="text__p">Our development department has a very nice tradition. Every 2 weeks we hold Naked Friday; this is a little conference
+where we share interesting knowledge gotten during our work. As a result, we have a lot of such information by now and
+so we decided to publish it.</p><p class="text__p">Thus, let me introduce a set of fascinating CSS and HTML tricks, which we hope are not yet well-known. We will be happy
+if everyone learn something new!</p><!-- cut -->
+<h2 class="text-header text-header_lvl_2" id="align-a-block-in-center-and-middle"><a href="#align-a-block-in-center-and-middle" class="text-header__anchor">Align a block in center and middle</a></h2><p class="text__p">The often solution to this problem is to put a block into 50% position horizontally and vertically with <code>top</code> and <code>left</code>
+properties and then shift it back with negative margins. However there is more accurate and less known trick.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}</code></pre><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/center-middle.jpg"/></p><p class="text__p">If you set a position not for an image but for a block, you need to declare its width and hight.</p><p class="text__p">This trick is not working for IE7 but I hope you gave it up long ago :-)</p><h2 class="text-header text-header_lvl_2" id="cut-off-long-lines-with-ellipsis"><a href="#cut-off-long-lines-with-ellipsis" class="text-header__anchor">Cut off long lines with ellipsis</a></h2><p class="text__p">This is quite a mature property (works in IE6!), however it was officially included inly in CSS3 standard. It is not
+very often used, so we consider that not everyone is familiar with it.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.text-overflow {
+    white-space: nowrap;       /* No line breaks */
+    overflow: hidden;          /* Hide text which does not fit the block */
+    text-overflow: ellipsis;   /* Cut off with ellipsis */
+    display: block;            /* Works only for block elements */
+}</code></pre><style>
+.text-overflow {
+    white-space: nowrap;       /* No line breaks */
+    overflow: hidden;          /* Hide text which does not fit the block */
+    text-overflow: ellipsis;   /* Cut off with ellipsis */
+    display: block;            /* Works only for block elements */
+}
+
+.column {
+  width: 250px;
+  border: red 1px solid;
+  padding: 1em;
+}
+
+</style>
+
+<div class="column">
+    <div class="text-overflow">
+        Articles and blog posts from all over the world
+    </div>
+</div>
+
+<p class="text__p">You can define block width, but by default it is as wide as its parent block. So, ellipsis is shown if the block
+is wider than its container. This works only for single lines.</p><h2 class="text-header text-header_lvl_2" id="blocks-with-dependant-width"><a href="#blocks-with-dependant-width" class="text-header__anchor">Blocks with dependant width</a></h2><p class="text__p">Let&#39;s say you want to have a sidebar.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "html"} }'><code>&lt;aside class="panel">
+    ...
+&lt;/aside>
+&lt;div class="content">
+    ...
+&lt;/div></code></pre><p class="text__p">And the main content width depends only on the sidebar width. How do you do this without declaring width? There is the way out!</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.content {
+    overflow: hidden;
+}
+.panel {
+    float: right;
+    width: 20%;
+}</code></pre><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/overflow.png"/></p><p class="text__p">As you can see <code>overflow: hidden</code> solves the problems.</p><h2 class="text-header text-header_lvl_2" id="elliptic-corners"><a href="#elliptic-corners" class="text-header__anchor">Elliptic corners</a></h2><p class="text__p">Only a few know (or at least not may use) that <code>border-radius</code> property accepts not 4 but 8 parameters; 2 per corner.
+The first one defines horizontal radius, and the second defines vertical one. For example:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.circle {
+    border-radius: 150px/100px 100px/200px 0 0;
+}</code></pre><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/eliptic-corners.gif"/></p><h2 class="text-header text-header_lvl_2" id="a-little-bit-about-pseudo-elements"><a href="#a-little-bit-about-pseudo-elements" class="text-header__anchor">A little bit about pseudo elements</a></h2><p class="text__p">Pseudo elements <code>:before</code> and <code>:after</code> overlay the element they belong to. In case you need them to be under the parent,
+set negative <code>z-index</code> property to them.</p><p class="text__p">Also, pseudo element do not work with tags which are not supposed to have text content; such as <code>&lt;img&gt;</code>, <code>&lt;br&gt;</code> and
+strangely enough <code>&lt;input&gt;</code>.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/pseudo-elements.gif"/></p><p class="text__p">However <code>&lt;hr&gt;</code> works normally with pseudo elements for some reason.</p><h2 class="text-header text-header_lvl_2" id="bonus-little-firebug-with-pure-html"><a href="#bonus-little-firebug-with-pure-html" class="text-header__anchor">Bonus: little Firebug with pure HTML</a></h2><p class="text__p">Just put this code into your page:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "html"} }'><code>&lt;style contenteditable style="display: block; border: 1px solid black; width: 90%; height: 300px; position: fixed;
+bottom: 50px; left: 5%;">&lt;/style></code></pre><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/little-firebug.gif"/></p><p class="text__p">Whoohoo! Everything works, thanks to HTML5!</p><p class="text__p">This this is almost useless. however if it is styled to have big font-size, it can come in handy for the presentations.
+Not all of us can easily make out the small letters of the real Firebug.</p><p class="text__p">This is all for today. Thank you for your attention! We are looking forward for your comments!</p>]]></description>
+            <link>http://frontendbabel.info/articles/css-tricks-by-wargaming/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/css-tricks-by-wargaming/</guid>
+            <dc:creator><![CDATA[Paul King]]></dc:creator>
+            <pubDate>Mon, 25 Aug 2014 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Developing Cross-Browser Extensions]]></title>
+            <description><![CDATA[<p class="text__p">What do we do if we have to search for something? Of course, we fire up our favorite search engine web site. It is quite hard to push yourself to use another a different search engine rather than the usual one, even if you know that the result would be better. To change this UX pattern I developed <a href="https://chrome.google.com/webstore/detail/likeastore/einhadilfmpdfmmjnnppomcccmlohjad">Likeastore Chrome
+Extension</a>. It adds social
+part to your search flow by showing relevant information from the article you liked. Besides Chrome we support Firefox
+and Safari. Despite the platform difference all these extensions are built from the same codebase.</p><!-- cut -->
+<h2 class="text-header text-header_lvl_2" id="at-the-first-set-out"><a href="#at-the-first-set-out" class="text-header__anchor">At the first set-out</a></h2><p class="text__p">This began with me developing a simple Chrome extension. By the way, developing for Chrome was very comfortable. I
+didn&#39;t go through the hassle of automation, just packed code into a zip after some local testing and then uploaded
+this to the Web Store.</p><p class="text__p">The Chrome extension was very welcomed by our customers which had been proved by metrics and feedback and meant that we
+should continue. The next was Firefox as it has 15% of our traffic.</p><p class="text__p">The basis of all browser extensions is the same: they are HTML/CSS/JavaScript applications with a manifest file where the
+content and the properties are described. So my initial idea was to copy the Chrome extension&#39;s repository and adjust
+the code for Firefox.</p><p class="text__p">While developing I had that guilty feeling for doing copy-paste; many developers must be familiar with it. Obviously, 99% of code was the same for both extensions and it could bring problems with application support as more and more functionallity was being added.</p><p class="text__p">By a lucky chance I bumped into <a href="https://github.com/buunguyen/octotree">octotree</a> extension (which I recommend to all
+active GitHub users) and met the need to fix a bug in it. When I cloned their repository and began to explore the code,
+I realized that all the octotree extensions are built from this repo code. Octotree is a content injection application
+similar to Likeastore, so this pattern could be borrowed.</p><p class="text__p">I <a href="https://github.com/buunguyen/octotree/pull/60">fixed the bug</a> and adapted and improved the compilation process
+to fit Likeastore needs. Let&#39;s have a look at what it turned out to be.</p><h2 class="text-header text-header_lvl_2" id="application-structure"><a href="#application-structure" class="text-header__anchor">Application structure</a></h2><p class="text__p">I propose the application structure which I believe is suitable for any extension.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "bash"} }'><code>browser-extention/
+  build/
+    chrome/
+    firefox/
+    safari/
+  css/
+  dist/
+    chrome/
+    firefox/
+    safari/
+  img/
+  js/
+  libs/
+  node_modules/
+  tools/
+  vendor/
+  gulpfile.js
+  package.json
+  README.md</code></pre><p class="text__p"><code>build</code> and <code>dist</code> folders are generic and contain source code and application for distribution, respectively.</p><p class="text__p"><code>css</code>, <code>img</code>, and <code>js</code> hold the source code of the application.</p><p class="text__p"><code>vendor</code> has platform-depending code in a separate directory for every browser.</p><p class="text__p"><code>tools</code> is a place for building utils.</p><p class="text__p">The build runs with <a href="http://gulpjs.com/">gulp</a>, a &quot;reconsidered&quot; build system under NodeJS. I recommend to install node
+if you are not using it yet, you will be able to enjoy all the profits of the npm world.</p><h3 class="text-header text-header_lvl_3" id="platform-dependent-code"><a href="#platform-dependent-code" class="text-header__anchor">Platform-dependent code</a></h3><p class="text__p">To begin with the most important: if you are staring a new project or want to adapt another one, you should clearly
+understand what are the needed platform-dependent calls and place them into a dedicated module.</p><p class="text__p">In my case there was only one such call: getting our resource URL from inside the app (where there are images). So I
+had a separate <code>browser.js</code> file.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>;(function (window) {
+  var app = window.app = window.app || {};
+
+  app.browser = {
+    name: 'Chrome',
+
+    getUrl: function (url) {
+      return chrome.extension.getURL(url);
+    }
+  };
+})(window);</code></pre><p class="text__p">The different variants of this module are used for <a href="https://github.com/likeastore/browser-extension/blob/master/vendor/firefox/browser.js">Firefox</a>
+and <a href="https://github.com/likeastore/browser-extension/blob/master/vendor/safari/browser.js">Safari</a>.</p><p class="text__p">The <code>browser.js</code> file can be extended with all the necessary calls for more complex cases and so be a facade between
+the specific code and the browser.</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>vendor/
+  chrome/
+    browser.js
+    manifest.json
+  firefox/
+    browser.js
+    main.js
+    package.json
+  safari/
+    browser.js
+    Info.plist
+    Settings.plist
+    Update.plist</code></pre><p class="text__p">Besides the facade, platform-dependent code also means manifests and extension settings. They are <code>manifest.json</code> for
+Chrome, <code>main.js</code> and <code>package.json</code> for Firefox and <code>.plist</code> files for Safari such as <code>Info.plist</code>, <code>Settings.plist</code>,
+and <code>Update.plist</code>.</p><h3 class="text-header text-header_lvl_3" id="automating-build-process-with-gulp"><a href="#automating-build-process-with-gulp" class="text-header__anchor">Automating build process with gulp</a></h3><p class="text__p">The purpose of a build process is to copy the core code and platform-dependent code into folders tree expected by the browsers.</p><p class="text__p">Let&#39;s define 3 tasks for that:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>var gulp     = require('gulp');
+var clean    = require('gulp-clean');
+var es       = require('event-stream');
+var rseq     = require('gulp-run-sequence');
+var zip      = require('gulp-zip');
+var shell    = require('gulp-shell');
+var chrome   = require('./vendor/chrome/manifest');
+var firefox  = require('./vendor/firefox/package');
+
+function pipe(src, transforms, dest) {
+  if (typeof transforms === 'string') {
+    dest = transforms;
+    transforms = null;
+  }
+
+  var stream = gulp.src(src);
+  transforms && transforms.forEach(function(transform) {
+    stream = stream.pipe(transform);
+  });
+
+  if (dest) {
+    stream = stream.pipe(gulp.dest(dest));
+  }
+
+  return stream;
+}
+
+gulp.task('clean', function() {
+  return pipe('./build', [clean()]);
+});
+
+gulp.task('chrome', function() {
+  return es.merge(
+    pipe('./libs/**/*', './build/chrome/libs'),
+    pipe('./img/**/*', './build/chrome/img'),
+    pipe('./js/**/*', './build/chrome/js'),
+    pipe('./css/**/*', './build/chrome/css'),
+    pipe('./vendor/chrome/browser.js', './build/chrome/js'),
+    pipe('./vendor/chrome/manifest.json', './build/chrome/')
+  );
+});
+
+gulp.task('firefox', function() {
+  return es.merge(
+    pipe('./libs/**/*', './build/firefox/data/libs'),
+    pipe('./img/**/*', './build/firefox/data/img'),
+    pipe('./js/**/*', './build/firefox/data/js'),
+    pipe('./css/**/*', './build/firefox/data/css'),
+    pipe('./vendor/firefox/browser.js', './build/firefox/data/js'),
+    pipe('./vendor/firefox/main.js', './build/firefox/data'),
+    pipe('./vendor/firefox/package.json', './build/firefox/')
+  );
+});
+
+gulp.task('safari', function() {
+  return es.merge(
+    pipe('./libs/**/*', './build/safari/likeastore.safariextension/libs'),
+    pipe('./img/**/*', './build/safari/likeastore.safariextension/img'),
+    pipe('./js/**/*', './build/safari/likeastore.safariextension/js'),
+    pipe('./css/**/*', './build/safari/likeastore.safariextension/css'),
+    pipe('./vendor/safari/browser.js', './build/safari/likeastore.safariextension/js'),
+    pipe('./vendor/safari/Info.plist', './build/safari/likeastore.safariextension'),
+    pipe('./vendor/safari/Settings.plist', './build/safari/likeastore.safariextension')
+  );
+});</code></pre><p class="text__p">The default task builds all the three extensions:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('default', function(cb) {
+    return rseq('clean', ['chrome', 'firefox', 'safari'], cb);
+});</code></pre><p class="text__p">In addition, a good idea that ensures comfortable development is to watch the file changes and run a background build:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('watch', function() {
+  gulp.watch(['./js/**/*', './css/**/*', './vendor/**/*', './img/**/*'], ['default']);
+});</code></pre><h3 class="text-header text-header_lvl_3" id="ready-to-distribute"><a href="#ready-to-distribute" class="text-header__anchor">Ready to distribute</a></h3><p class="text__p">Having the build finished, you need to pack the extension into a format requested by the browser extension storage. I
+have to note that in Safari&#39;s case there is no such store but they can show your extension in their gallery and
+link to where you host it if you match their requirements.</p><p class="text__p">For Chrome, you only need to pack into a <code>.zip</code>. It is signed and verified in the Chrome Web Store.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('chrome-dist', function () {
+  gulp.src('./build/chrome/**/*')
+    .pipe(zip('chrome-extension-' + chrome.version + '.zip'))
+    .pipe(gulp.dest('./dist/chrome'));
+});</code></pre><p class="text__p">Firefox procedure is a little bit more complex as you need to use the SDK including <code>cfx</code> which can wrap your extension
+into an <code>.xpi</code> file.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('firefox-dist', shell.task([
+  'mkdir -p dist/firefox',
+  'cd ./build/firefox && ../../tools/addon-sdk-1.16/bin/cfx xpi ' +
+  '--output-file=../../dist/firefox/firefox-extension-' + firefox.version +
+  '.xpi > /dev/null',
+]));</code></pre><p class="text__p">As for Safari, that was a bummer. That turned out that to get <code>.safariextz</code> package you need to run Safari. I&#39;ve spent a
+few hours to make it work according to <a href="http://stackoverflow.com/questions/3423522/how-can-i-build-a-safari-extension-package-from-the-command-line">the manual</a>
+but did not succeed. The point is that it is not possible to convert your developer certificate into <code>.p12</code> and so
+you are not able to create the keys needed to sign a package. I still have to run Safari manually to pack the extension yet the release is now as simple as copying the <code>Update.plist</code> file.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>gulp.task('safari-dist', function () {
+  pipe('./vendor/safari/Update.plist', './dist/safari');
+});</code></pre><h3 class="text-header text-header_lvl_3" id="summing-up"><a href="#summing-up" class="text-header__anchor">Summing up</a></h3><p class="text__p">This is joy and pleasure to develop with a single repository. As I mentioned, I found Chrome to be the most comfortable
+development environment, so I provide all the changes for it first and test with it.</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>$ gulp watch</code></pre><p class="text__p">Firefox goes next</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>$ gulp firefox-run</code></pre><p class="text__p">And then the manual tampering with Safari.</p><p class="text__p">Once I need to release a new version, I update the manifests and run</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>$ gulp dist</code></pre><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>dist/
+  chrome/
+    chrome-extention-1.0.10.zip
+    chrome-extention-1.0.6.zip
+    chrome-extention-1.0.8.zip
+    chrome-extention-1.0.9.zip
+  firefox/
+    firefox-extention-1.0.10.xpi
+    firefox-extention-1.0.6.xpi
+    firefox-extention-1.0.7.xpi
+    firefox-extention-1.0.8.xpi
+    firefox-extention-1.0.9.xpi
+  safari/
+    likeastore.safariextz
+    Update.plist</code></pre><p class="text__p">As a result, there are ready-to-distribute files in the <code>dist</code> folder. This would be perfect if extension stores
+would have an API for uploading a new version, but they don&#39;t. This is done manually.</p><p class="text__p">For more details and code please proceed to <a href="https://github.com/likeastore/browser-extension">the repository</a>.</p>]]></description>
+            <link>http://frontendbabel.info/articles/developing-cross-browser-extensions/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/developing-cross-browser-extensions/</guid>
+            <dc:creator><![CDATA[Alexander Beletsky]]></dc:creator>
+            <pubDate>Mon, 07 Jul 2014 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[JSCS: JavaScript Code Style]]></title>
+            <description><![CDATA[<p class="text__p">When nine months ago I wrote a small console utility for myself, I didn&#39;t suspect that soon it would become a serious and unique in its class tool, which would be used even by such famous teams as <a href="http://jquery.com/">jQuery</a>, <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://angularjs.org/">Angular</a>. Now, as I&#39;m writing this article, my project has 1010 stars on GitHub, and I&#39;m very happy to think that so many people could make their work more comfortable with the help of my idea.</p><!-- cut -->
+<p class="text__p">The story of this project start with my personal pain.</p><p class="text__p">Not too long before that moment I transferred from one team of Yandex.Maps to another and was gradually adjusting to work on a new (to me) project. Everything was good, I really liked the new project, but the code style used by the guys on my new team was just too different from the code style that me and the guys from my previous team used. At one point, I was visited by the ridiculous thought that the code style of the new group was written directly opposite to the code style of the previous group specifically to confuse me.</p><p class="text__p">For example...</p><p class="text__p">Once, I finished developing a new visual block and sent it for code review, so that the guys could look through it for defects in logic. This is how it looked then.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="rate-form.png"/></p><p class="text__p"><em>The image is a simple &quot;rate our service&quot; form, with a text input field, a star rating and an email input.</em></p><p class="text__p">In this review is where disappointment was waiting.</p><p class="text__p">Imagine, I spent an entire week making a new feedback form, debugging, getting the code in order. But the first remark I got in the review was &quot;There&#39;s no space after <code>function</code>&quot;. And then the same thing in five other places!?</p><p class="text__p">Please understand me. I developed the product, worked hard. Thought up non-trivial logic which ended up with no mistakes. But I couldn&#39;t pass the review because I forgot to put a space after the word &quot;function&quot;?! I didn&#39;t like that. I wanted for the reviewers to pay attention to my code, to its architecture, to defects in logic, not to violations of the code style.</p><p class="text__p">I became sad. After that there was a second similar review, and the same situation with the space after &quot;function&quot;. Them and their space! And in that moment I fully understood that it can&#39;t go on like this. I became mad.</p><p class="text__p">This is how JavaScript Code Style — JSCS for short — a tool that will notify me of all my code style violations before I send the code off for review, was born. For a long time the tool had just one rule, which checked whether or not there was a space after &quot;function&quot;. And this was enough for me to feel happy. If it so happened that I forgot to insert the ill-fated space, JSCS would alert me of it before every commit.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="jscs-output.jpg"/></p><p class="text__p">For some time I was the only one to use the tool, without sharing with anyone. Why would I? I solved my problems and relaxed. But soon it turned out that many of my colleagues suffered from the same problems with code style. It&#39;s just that it wasn&#39;t the space after <code>function</code> that they forgot, but for example adding a newline at the end of a file. So I shared with them.</p><p class="text__p">JSCS started to proliferate within Yandex. It started to rapidly grow new rules. Different commands, different code styles — new and interesting rules appeared, for example, forbidden ambiguous type declarations (<code>!!x</code> — bad, <code>Boolean(x)</code> — good). Shortly thereafter I put JSCS on GitHub. And then the rules started to be added by external (with respect to Yandex) people. And suddenly the stars flowed.</p><p class="text__p">If you ask me what caused this explosive growth in popularity of this project, I&#39;ll answer.</p><p class="text__p">Firstly, an analogously complete tool didn&#39;t exist at that time, and I&#39;m not certain that it does now. The second reason is in that the tool exists to solve one very small problem, understood by everyone, relevant for many. And the third (and in my opinion very important reason) is that I created a tool with a simple and obvious programming architecture. That is, the tool doesn&#39;t try to solve a bunch of diverse problems, it does a single thing but does it very well.</p><p class="text__p">Why didn&#39;t we expand jshint, since jshint used to have a series of rules for code style checking?</p><p class="text__p">Those rules were incomplete, chaotic, and jshint&#39;s developers wanted to get rid of them. This is why in the JSCS repo <a href="https://github.com/mdevils/node-JSCS/issues/102">issue 102</a> appeared, where Mike Sherov started to move the code style rule support from jshint to JSCS. Right now, in the new version of jshint there isn&#39;t a single rule for code style, and JSCS became the only complete tool that solves this problem.</p><p class="text__p">Also, two full-time project maintainers appeared. They turned out to be guys who work on jQuery core — Mike Sherov <a href="https://github.com/mikesherov">mikesherov</a> and Oleg Gaidarenko <a href="https://github.com/markelog">markelog</a>, they sift through a massive collection of tickets which come from users. And those stars that the project earned on GitHub are chiefly their accomplishment. Thank you so much, guys!</p><p class="text__p">The GitHub project page: <a href="https://github.com/mdevils/node-JSCS">https://github.com/mdevils/node-JSCS</a>. On this page more than sixty rules are described, with the help of which you can tune the validation of code style in your project.</p><p class="text__p">Come by, use it, you might even like it.</p>]]></description>
+            <link>http://frontendbabel.info/articles/jscs-javascript-code-style/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/jscs-javascript-code-style/</guid>
+            <dc:creator><![CDATA[Marat Dulin]]></dc:creator>
+            <pubDate>Tue, 22 Jul 2014 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Graphical interface]]></title>
+            <description><![CDATA[<p class="text__p">Let me introduce myself. I am an <em>Interface Designer</em> at Yandex, and I&#39;ve been involved with projects like Yandex.Maps
+and Search Engine Results Page, and also designed brand icons, promo materials, documentation, a project planner, a
+shared interface component library, and a fast prototyping system. Besides that, I follow my colleagues&#39; projects such
+as Yandex Main Page and other Yandex portal services: Market, News, Images, Video, Disk, Auto, Realty. I see how these
+projects grow and evolve.</p><!-- cut -->
+<p class="text__p">After some time, I drew certain conclusions from this process, and decided to share those of them which were proven by
+stats and numbers. This is an overview, focused on these questions:</p><ul>
+<li>Should an interface designer be able to draw and work with fonts?</li>
+<li>Should designers work on texts themselves?</li>
+<li>Is it necessary to code and do HTML/CSS?</li>
+<li>How interfaces should be evaluated?</li>
+</ul>
+<p class="text__p">Before we dive in, here is a couple of common term definitions:</p><p class="text__p"><em>Interface</em> is a model of interaction with a product.</p><p class="text__p"><em>Designer</em> is a person who defines interface type and content.</p><p class="text__p">Examples of interface types:</p><ul>
+<li>graphical</li>
+<li>programming</li>
+<li>command line</li>
+<li>voice interface</li>
+</ul>
+<p class="text__p">The graphical interface is what we are discussing.</p><p class="text__p">I&#39;d like to emphasize that &quot;interface&quot; does not equal &quot;buttons&quot;, and &quot;designer&quot; is not an antipode of &quot;developer&quot;.</p><p class="text__p">An extra note: I can&#39;t say I read lots of books on the subject, I don&#39;t have a degree in arts; nonetheless, design is
+how I earn money since my university years. Therefore my experience comes mostly from practice and observing the world
+around me.</p><h2 class="text-header text-header_lvl_2" id="shape"><a href="#shape" class="text-header__anchor">Shape</a></h2><p class="text__p">When I was a kid, I saw drawing as a process of projecting images out of my head onto a piece of paper. Later on, when
+I started copying images from comic books or drawing things I saw around, the process of drawing became a practical
+skill of observing and correctly measuring various object details.</p><p class="text__p">It didn&#39;t take me much time to understand the true value of form, but it wasn&#39;t until much later that I started paying
+more attention to color. Still being a schoolboy, I drew cartoons in Flash together with a friend, who criticized me for
+using a primitive color palette, such as <code>#F00</code> for red or <code>#0F0</code> for blue. I can&#39;t imagine myself doing that now, but
+at that time I was quite content with those acid colors — in fact, a mere color abbreviation: &quot;this is blue&quot;,
+&quot;this is red&quot;. I prefer to blame the default (ordinary) Flash editor palette, as it didn&#39;t inspire one to look for new
+and uncommon color combinations.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*kunb6fFJzaxdPCvDdL4nCQ.jpeg"/></p><p class="text__p">A couple of drawing lessons would have done me good. I could have learned about the color wheel and HSV-model.
+Unfortunately, I didn&#39;t have time for that, so I learned about colors in my physics class at school while studying
+stuff like light wave spectrum. A special thanks goes to my friend, too.</p><p class="text__p">An <a href="http://whoyougle.ru/services/color">interface example</a> from my first job:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*SG-gWiaq9rK51ToEPQN6fQ.png"/></p><div class='article__tip'> 
+The selected color is named <b>Dove-coloured</b>, and aside you can see a list of resembling colors with their names.
+</div>
+
+<p class="text__p">For some time I was even considering a career in illustration. For that purpose, I downloaded all the issues of the
+2D-Artist Magazine, and went through drawing tutorials step-by-step: fantasy, anime, animals with thick fur, snow on
+the tree branches, and many others. This isn&#39;t too hard when you get to drawing your 10th wolf or 20th tree. Drawing
+something out of your head is much more difficult — one needs practice, a lot of it.</p><p class="text__p">Experimenting with Photoshop brushes:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*DYns-3bPVCjSVGgDHtLTnA.png"/></p><p class="text__p">Finding my own style:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*wJyCyAH3u-NWB7bZ40j08Q.png"/></p><p class="text__p">However, I didn&#39;t earn my first money by drawing stuff. I got paid for designing a web interface for a popular science
+portal, Whoyougle — quite a quirk of fate, wasn&#39;t it? That helped me shift my focus towards what I still do these days.</p><p class="text__p"><a href="http://whoyougle.ru/services/dogs">The above-mentioned interface</a>: visual dog breed selector</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*8d_S6hCvvCmwiRLJg0sCzw.png"/></p><div class="article__tip">
+The picture demonstrates an interface to model a dog by defining properties of its parts like muzzle, ears, body, paws,
+and tail.
+</div>
+
+<p class="text__p">I didn&#39;t stop sketching, but it became more conceptual: icons, schemes and various constructions composed of different
+shapes.</p><p class="text__p">Yandex services&#39; logos and icons: pieces of a unified ecosystem</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*6N5iJk8dicACqGMiI2zEdA.png"/></p><div class="article__tip">
+Icons: Auto Navigator, Maps, Disk (cloud storage).
+</div>
+
+<p class="text__p">A MacOS browser fantasy:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*Da1S2lHmz-bw5JsCXH7Eiw.png"/></p><p class="text__p">A shaped emotion. A message in a well-defined system.</p><p class="text__p">So, as a visual designer, do you need drawing/sketching skills? This is how I would answer this question: you have to
+feel shape and form to find effective means of expression for a given context and expand those to a broader set of
+cases. I think I didn&#39;t learn how to sketch properly, but I can &quot;catch&quot; the shape I need — sometimes, after a dozen
+cmd+Z keystrokes.</p><p class="text__p">If foundation of a product form was laid out by someone else, do not start thinking about rebuilding it all from
+scratch, but rather try to understand the system and see if you can carry on with it. The same, I think, applies to
+interior design: you don&#39;t have to create the items yourself, yet finding a balanced combination is essential, as well
+as extending the existing combination whenever necessary.</p><p class="text__p">Google&#39;s brand action buttons:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*WMVseMDKhlEHbb9F5pjZMA.png"/></p><p class="text__p">The Like icon uses a recognizable shade of blue and familiar Facebook style</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*_MHgKOoHri0DsT663IIyfQ.png"/></p><p class="text__p">Yandex.Money logo: as sharp and yellow as the search form on its main page</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*Vw-E9-COuAwfBerQfj-N8A.png"/></p><p class="text__p">A Windows 8 logo is an introduction to the OS style</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*kb9PDJOfuOICxRHXU-hliw.png"/></p><p class="text__p">All visual features of iOS7, packed into one icon</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*G__j5kCIz1sNFYDtezQEFw.png"/></p><p class="text__p">Form expresses the mood of an interface, its own nature. Form is a &quot;coordinate system&quot; in which the means of expression
+must evolve. It shapes the first product impression and leaves a distinctive footprint in memory, thus being a valued
+characteristic of any product.</p><hr>
+<p class="text__p">Color is a detachable part of the form. It emphasizes the unity of various elements on the screen, highlights key
+points, creates a recognizable image. Color is usually extracted from a logo or a predominant visual.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*e4AAtApZftYamtdKZA5S_Q.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*AAuzaO3dxe-qkywagiZYtA.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*XweyY0O9-JQrOKn5_3ZOFQ.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*hmoTNpTvM4Dbhks8Oq5EKQ.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*Jf2I2FwE4kQr1AwnzGNIMw.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*8va2qDAAJxq52MwTKoRzmQ.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*tJSowLjIcP-moI-uHAqM8Q.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*kGrDDiWH-tIYZxvt7OT6-g.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*2e6A2ugcf8u_yBwgsO_QkQ.png"/></p><hr>
+<p class="text__p">Font is also a form, and that means it can be unique and important asset of a product.</p><p class="text__p">VK.com chose the &quot;system&quot; Tahoma font that is seldom used on the Web, and those recognizable small letters got
+associated with their product.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*TFtXvkt64XFRrYw-H0CSJA.png"/></p><p class="text__p">Had they chosen Arial instead, the set of unique features could have been less pronounced:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*RNgZ9z9d944mv3VrgFD_sQ.png"/></p><p class="text__p">MacOS interfaces are instantly recognizable thanks to rounded lowercase letters and contrasting capitals of the
+Lucida Grande font:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/782/1*xpO4PnKBo-H3o1S1paaziw.png"/></p><p class="text__p">I&#39;m pretty sure anyone would recognize this OS thanks to Roboto:</p><p class="text__p">Hint: &quot;A&quot; is the first letter</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*lfjqZRtmRPwsoBPo2sh5tw.png"/></p><p class="text__p">My colleague cracked a joke once: &quot;In our ads, we put bare text where others would place a naked woman&quot;. The Textbook
+font face had been associated with the Yandex brand for quite some time.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*T3_p0ddSbc8atXK7WOG79Q.jpeg"/></p><div class="article__tip">
+The billboard advertises Yandex.Maps. They show their headquarter address (Lv. Tolstoy str, Moscow) as an example.
+</div>
+
+<p class="text__p">In other words, even non-designers associate a font with a brand. The shape of letters is equally important as the logo
+shape or color; when a logo drops out of sight or brand identity color can&#39;t be used, we still have the font.</p><hr>
+<p class="text__p">Why do I put so much emphasis on the product identity? All these properties — form, color or font — define frames and
+guidelines one should follow to make the product stand out in the market. They help us avoid stylistical uncertainty
+and focus on the content.</p><h2 class="text-header text-header_lvl_2" id="content"><a href="#content" class="text-header__anchor">Content</a></h2><p class="text__p">Any interface is also an element hierarchy. Using shape, size, color, alignment and context, we separate primary
+elements from secondary ones, content that can be omitted from content that deserves user&#39;s attention.</p><p class="text__p">Text also has a hierarchical structure: headings, subheadings, paragraphs, nested lists. Inside any text, there are more important and less important things. Many actions applicable to an interface can also be applied to texts: we can improve it, make it comprehensible, more interesting, shorter, disambiguate it etc.</p><p class="text__p">Text is a special case of a data model, and a data model is used to build an interface around it. Let&#39;s make one step
+back to see how the product visualization process happens. Here&#39;s a simple example: an interface for a new e-mail
+message form. We start by formally defining the incoming data model:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>Message
+  From
+    address
+  To
+    address1
+    address2
+    ...
+  Copy
+    address1
+    address2
+    ...
+  Subject
+  Date
+  Content
+    Text
+    Images
+    ...
+  Actions
+    Translation
+    Options</code></pre><p class="text__p">The interface is built on top the data. There is one model with multiple possible representations. One of those is, in
+our case, the new message form:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*P09dV9gJUKfeQ9thE6goEA.png"/></p><div class="article__tip">
+Input fields at the top: To and Subject. Controls at the bottom: Options (selector), Attach, Translate, and Send.
+</div>
+
+<p class="text__p">&quot;From&quot; and &quot;Date&quot; fields were put aside, and &quot;CC&quot; was moved into Options. Using the same model, we can create a couple
+of extra representations: the message itself, and its shortened version in the thread selection column.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*u_8KVPOlyCduP8_0dU6zvg.png"/></p><p class="text__p">Thus, designer has to study the data model thoroughly before starting to create a representation (interface).</p><p class="text__p">The statement above may sounds unconvincing as the supporting example is quite primitive. Here is something else.
+I&#39;ve already mentioned that I worked for a popular science web resource as a developer and, later, as a designer.
+During that time, I had to read many articles on nutrition and diets, and collect the necessary data about
+<a href="http://wyg.su/js/services/food.data.js?f4033cc">360</a> essential products, only to create this
+<a href="http://whoyougle.ru/services/food">nutrition calculator</a>.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*IkrVskq3GWOPSPmmb3z94g.png"/></p><div class="article__tip">
+A user is suggested calorie content to consume daily (3050 kcal). Below they can add eaten pieces of food and their
+weight to get the actual amount of gotten calories.
+</div>
+
+<p class="text__p">To design an <a href="http://whoyougle.ru/services/fitness">online fitness guide</a>, I had to read a small book on physical
+excercise.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*RtWcfP05m97a4YrDHA-pIQ.png"/></p><div class="article__tip">
+With defining a gender and selecting muscles you get a suitable workout.
+</div>
+
+<p class="text__p">The model of incoming data is often poorly or vaguely defined, and it&#39;s a designer&#39;s responsibility to formalize
+and finalize it.</p><hr>
+<p class="text__p">For a promo screen, input data is the marketing idea to highlight certain product features, or change the way customers
+perceive the product. It would be a terrible mistake for a designer to create a so-called &quot;draft design&quot; which is
+filled in with text later — most likely, by a third party. Designer and copyrighter have to work together, combining
+words and graphics into a holistic experience, so that the result looks like this:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/1019/1*bXjq7gmQVdNgU_YA0PYenA.png"/></p><p class="text__p">...and not like this:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/978/1*th_M1iFJVwnTrMIXP1UDpg.png"/></p><div class="article__tip">
+The title: From the bottom of our hearts.
+</div>
+
+<p class="text__p">The whole Internet is filled over with the same layout (&quot;image + text&quot;):</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*s8k1k4cJTm9Dg4p41_rSPg.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*TA9s1vrcyBKHHFr0bUM8dA.png"/></p><p class="text__p">The designer&#39;s creativity can transform this info something bigger and better:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*qz3ZwMVkDC6lvNDs61tzpQ.png"/></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*aLxI5oeOi_6t_kbisFo3Yw.jpeg"/></p><div class="article__tip">
+Crumpled paper refers to <em>Love is</em> bubble gum insert. &quot;Loving Porsche Cayenne is the same as loving
+Lost TV series, American P book by B I E, BC movie, and Lady Gaga.&quot;
+</div>
+
+<p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*RfvzAWMJUX3h1rVDFncTeQ.png"/></p><div class="article__tip">
+The title: Glaringly fast. In Russian &quot;glaringly&quot; and &quot;call for a taxi&quot; sound the same.
+</div>
+
+<p class="text__p">...or not:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*KUPy0NUcAUQGF5QXXRyokw.png"/></p><div class="article__tip">
+The text extols Opera web browser.
+</div>
+
+<p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/773/1*_h40yfy02gJPrbsyv8-kUQ.png"/></p><div class="article__tip">
+A lot of small letters trying to advertise Samsung Galaxy S4.
+</div>
+
+<h2 class="text-header text-header_lvl_2" id="system"><a href="#system" class="text-header__anchor">System</a></h2><p class="text__p">Not every designer had that experience of providing long term support for a complicated product. Even less people can
+claim they helped shape the initial idea from the very beginning. This is probably the reason why the systematic
+approach (one that involves data structures, logical schemes, complicated prototypes) doesn&#39;t have that much
+credibility or support.</p><p class="text__p">How many designers would be able to list all the types and states of the buttons they&#39;re using in the interface they
+work with? Can they remember the sizing scale: what is the height of a small button, a medium one, a large one?</p><p class="text__p">I always liked to play with Lego pieces, trying to combine then in different ways. Sometimes it looked like its
+creators themselves didn&#39;t know all the possible combinations but just followed a set of strict rules, and because of
+that, those pieces of plastic are interlocking in many different combinations, allowing for infinite number of
+complicated objects to be built from a finite set of simple elements.</p><p class="text__p">How did I connect this Lego principle with the interface domain? Here&#39;s a simple button:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*g3V7GqVo0pm8iq3QkxlzGA.png"/></p><p class="text__p">The button has states, a lot of them:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*SkgKu9v5vakjz2II84SZQQ.png"/></p><p class="text__p">The systematic approach has a feature: in the very beginning, you have to work a lot, to get plenty of bonuses later.</p><p class="text__p">From several buttons glued together one can assemble a radio group:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*6_qyP2tbJrrzLywGUAsDoQ.png"/></p><p class="text__p">The dropdown list is a special button type:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*C2HY_hyYiSFlGHmO18zBfA.png"/></p><p class="text__p">A slider is made from that very button:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*1-YWL_LVHIZzqkEyuRC4Sw.png"/></p><p class="text__p">A switch is a white button inside a checked button:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*um8yz1_OdpKiOabDTLAncQ.png"/></p><p class="text__p">Checkbox is a checked button with a tick:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*gBhotZOIxW5Mlf5Xo_JTEw.png"/></p><p class="text__p">Compound elements evolve from simple ones (another simple element is a text entry field). This is how you get a search form:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*l2OigbMS457aC4ijEfIIVg.png"/></p><p class="text__p">A combobox:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*8QSp9NPXjlGuJbREGS-5_w.png"/></p><p class="text__p">A payment form:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*9oQ8KeDPIhaWMuBHWeohYA.png"/></p><p class="text__p">Sometimes we have to highlight a form element (e.g. to point out an input error). A contrast popup can be used for this:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*aMpfoFUQPbbz1QH9Y-P38g.png"/></p><p class="text__p">A sizing scale has been defined before: 24, 28, and 32 px. All the controls (from a button to a slider) have this
+height already, and it would be logical to have popups aligned along the same scale. Thus, popups in a form, even if
+displayed next to each field, won&#39;t conflict with each other, and all the elements will align themselves horizontally
+and vertically.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*OlJV9QaWwfiR4iFKQpA9jg.png"/></p><p class="text__p">Element paddings can also be defined within the same scale. I set those to be either 6, 10, 16 or 20 px, so that each
+of them is divisible by two.</p><p class="text__p">On the one hand, this keeps yourself organized and helps a lot. On the other hand, as the system grows, means of
+expression also grow, more elements and modifications are added, connections between elements become complicated, and
+the model gets more difficult to maintain. These details are too subtle; graphic editor software won&#39;t take care of
+that, so a lot has to be kept just in your head. Communicating the system to another person is hard as a lot of details
+are hard to explain or simply get lost, and after some time, you the designer start forgetting about some of those
+details, too.</p><p class="text__p">I&#39;ll explain once more why it is so complicated. Imagine a search interface that has to give an answer to any query or
+question. That answer comes not as simple hyperlinks or text, but as objects, video, music player, images, maps,
+phone numbers and addresses, goods with price tags and &quot;buy now&quot; buttons, ads, forms, calculators and converters,
+graphs and counters. Now imagine that every answer is interactive: you can touch it and it expands, or shows a new
+block on the side. This is only the main search interface. There are also specialized search interfaces for video,
+images, music, maps, goods, people, news, dictionaries, cars and so on — all these have to work in a way similar to
+the main search, but also add some unique features and experience. There are also standalone services which have to
+look and feel like the main search, but... at this point you&#39;ve got my idea, right?</p><p class="text__p">An instrument is needed that would allow for controlling the system without exponentially increasing the price of
+adding new components. However, Titanic (for example) was perfectly controllable — without much success. Actually,
+I prefer the term &quot;juggling&quot; instead of &quot;controlling&quot;.</p><p class="text__p">I see my colleagues constantly looking for a silver bullet in a graphical interface. In inDesign, one finds text style
+classes; Axure allows a prototype to be built from a series of screens; Sketch supports object libraries and builds
+screens from object copies. Each tool reaches its limits sooner or later: an editor won&#39;t support behavior definitions,
+and a prototyping environment won&#39;t have support for an object library or any other dynamic actions except for
+switching between the screens.</p><p class="text__p">Instead of those limits, I see endless possibilities as vast as the outer space. The closer to the stars I fly,
+the bigger the universe seems to be. The first insight happens when you learn HTML. Working with lists, huge texts
+and tables finally becomes comfortable: there are many settings to play with to achieve the ideal balance, test
+various representations with different data and minimal effort.</p><p class="text__p">During interviewing and hiring process, we at Yandex sometimes ask people to send us a prototype of a beautiful table
+representing data on 170 employees or a couple of documentation pages with paragraphs and subsections, code examples,
+lists, method tables and other formatting. Some candidates manually arrange 170 portraits in Photoshop, to make it
+look outstanding, other ones write a script to fill the same layout with different data on 170 people from their
+Facebook friend list. These two kinds of candidates are equally interesting for us.</p><hr>
+<p class="text__p">Are you sure your project won&#39;t grow to that level of complexity? Should you avoid this complexity at all, or is it a
+just a level-up? How could you be possibly sure that your project won&#39;t get two dozen extra screens in a couple of
+months? If you work with a flow of similar clients (corporate clients, for example), do you ever consider factoring out
+common interface elements? Did you ever trust a different designer on your team with creating some follow-up screens
+for your own project?</p><p class="text__p">I won&#39;t be showcasing examples of code that save hours and hours of manual work, as sharing another link to CSS and
+JavaScript resources these days is redundant, to say the least. What I&#39;m trying to emphasize is that this might be
+the new perspective, the new way to expand your knowledge and expertise. Learn development tools not to prove that
+you are smarter then other, not to aquire another skill, not to understand programmers&#39; humor better, but only to hit
+the limit and break out of it, into the outer space of possibilities.</p><h2 class="text-header text-header_lvl_2" id="critics"><a href="#critics" class="text-header__anchor">Critics</a></h2><p class="text__p">How would you recognize a good design? I already mentioned some of the key factors: clear and emotionally defined form,
+visual language, systematic approach. Each of the factors has to follow the product&#39;s goal. A good design features
+unified, carefully chosen and well-integrated forms where key points are highlighted by means of words or shapes.
+As a result, the message should be clear and comprehensible.</p><hr>
+<p class="text__p">This is a thing from another planet, it does magic:
+<a href="http://www.apple.com/mac-pro/">http://www.apple.com/mac-pro/</a></p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/954/1*E_pE2JntAgLroox_DP7D0Q.png"/></p><p class="text__p">Loosen reader&#39;s critical filters before he starts reading the article:
+<a href="http://w-o-s.ru/article/8597">http://w-o-s.ru/article/8597</a>
+<img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/897/1*HP0qRilpHKkXQrdAjoJ9CA.png"/></p><p class="text__p">We&#39;ve got a visitor, now engage him — at any cost, so shoot with all the guns:
+<a href="https://www.facebook.com/">https://www.facebook.com/</a>
+<img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/1280/1*sy1Ok2BkNOnVeC9GxQw3Eg.png"/></p><p class="text__p">We have a lot of music for you, please enter:
+<a href="http://zvooq.ru/">http://zvooq.ru/</a>
+<img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/1317/1*-ervJAOfnKBk-uw9tWuAPg.png"/></p><p class="text__p">You are about to finish with this one, we have similar stuff released this year:
+<a href="http://www.youtube.com/watch?v=VCTen3-B8GU">http://www.youtube.com/watch?v=VCTen3-B8GU</a>
+<img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/1036/1*PxHN2Co-uxEJhHO3Pz75nA.png"/></p><p class="text__p">We know so much more... feel free to ask!
+<a href="http://yandex.ru/yandsearch?lr=213&amp;text=%D0%BA%D1%83%D1%80%D1%81+%D0%B4%D0%BE%D0%BB%D0%BB%D0%B0%D1%80%D0%B0&amp;nl=1">currency exchange rate</a>
+<img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/781/1*-MOotBTxU597ZWyFA7aWHw.png"/></p><p class="text__p">Let&#39;s see some pictures; we promise you won&#39;t get bored:
+<a href="http://www.pinterest.com/">http://www.pinterest.com/</a>
+<img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/1248/1*3uaWDcR9_VgQQ0CQ52G95Q.png"/></p><p class="text__p">Just point your finger at the style you like:
+<a href="http://bangbangstudio.ru/illustrations">http://bangbangstudio.ru/illustrations</a>
+<img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/1000/1*jxhNQ8C5GFHQYYHJdJrzsQ.png"/></p><p class="text__p">If you see another beautiful bulding in Kiev, it&#39;s likely we who built it:
+<a href="http://www.zhytlobud.com/ru/buildings/kiev/">http://www.zhytlobud.com/ru/buildings/kiev/</a>
+<img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/1308/1*uLzBMaI2-4w5GpEZXanU_w.png"/></p><p class="text__p">You just saved one hour of your life:
+<a href="http://www.yandex.ru/">http://www.yandex.ru/</a>
+<img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="https://d262ilb51hltx0.cloudfront.net/max/800/1*SnZTZmMkqiuDYIesB9Mazg.png"/></p><p class="text__p">That&#39;s it.</p><p class="text__p">I hope you learned something new about interfaces and things we do at Yandex, and also about things my colleagues
+around the world do for other projects. I hope you find it interesting.</p>]]></description>
+            <link>http://frontendbabel.info/articles/graphical-interface/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/graphical-interface/</guid>
+            <dc:creator><![CDATA[Danil Kovchy]]></dc:creator>
+            <pubDate>Mon, 30 Jun 2014 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Why I wrote a plugin for Grunt to work with SVG]]></title>
+            <description><![CDATA[<p class="text__p">Once upon a time my colleagues and I met a need to work up a lot of SVG icons. The prerequisites: over 30
+colorless SVG images (the color are defined with CSS later). The task: generate their PNG+CSS fallbacks for
+the older browsers.</p><!-- cut -->
+<p class="text__p">These are the steps of this process:</p><ol>
+<li>Paint every icon with a color needed</li>
+<li>For some icons we need more than one variant of different colors and sizes</li>
+<li>Create a PNG sprite</li>
+<li>Write CSS</li>
+</ol>
+<p class="text__p">Finally we should have 2 icon set representations: the one is the colorless PNGs, and the other one is the sprite.
+The changes to these representations have to be synchronized. Ideally they should share the CSS defining their sizes
+and color fillings.</p><p class="text__p">Obviously this would be too time-consuming to do it manually and so this process should be automated, especially keeping
+in mind the need of future changes.</p><p class="text__p">If leave the need to synchronize changes out of account, a simple version can be built with existing grunt plugins. The
+result looks wierd, but it works.</p><p class="text__p">First integration looked like this:</p><ol>
+<li><a href="https://www.npmjs.org/package/grunt-grunticon">grunt-grunticon</a> paints icons and creates their PNG versions;</li>
+<li><a href="https://www.npmjs.org/package/grunt-spritesmith">grunt-spritesmith</a> generates a sprite and CSS.</li>
+</ol>
+<p class="text__p">It gave an interlocutory result but I was not happy with the generated CSS. It did not include colors for filling in SVG
+so that I had to define them manually. Moreover, I would need to duplicate SVG source if also wanted icons of different
+colors and sizes to be included into the sprite. Then, they would be renamed in a special way to make <em>grunticon</em> paint
+them, and renamed again before the sprite generating.</p><p class="text__p">Thus, I came up with my own grunt plugin which main responsibility is to paint the images and create several versions
+of different colors and sizes; and to generate a library of SVG symbols + sprite + CSS while I&#39;m at it.</p><p class="text__p">This is my plugin: <a href="https://www.npmjs.org/package/svg_fallback">svg_fallback</a>.</p><p class="text__p"><em>(Yes, I know that &quot;-&quot; would be better than &quot;_&quot;. And I should have prefixed it with &quot;grunt-&quot;. But this is my first
+plugin. :-)</em></p><p class="text__p">It does the following:</p><ol>
+<li>Takes a directory with SVG images and forms a library of symbols.</li>
+<li>Takes the directory again and builds the images into a sprite accomplished with CSS with filling colors, sizes and
+a background image for older browsers.</li>
+</ol>
+<p class="text__p">The folder name is used as a prefix for the resultant CSS classes and file names. It prevents conflicts between
+different icon sets if they meet in the same page.</p><p class="text__p">At the end it opens a demo page which demonstrates SVG and PNG working.</p><p class="text__p">This is the simplest scenario when no files were being modified. But the most interesting thing happens if you have
+<code>config.json</code> file to initiate the transformations.</p><p class="text__p">For example, you can define a default color to paint the icons:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>{
+    "color": "orangered"
+}</code></pre><p class="text__p">Currently the plugin can paint transparent icons only.</p><p class="text__p">Another case: you need icons of different size than is used for the source SVG. The resultant sizes can also be defined
+in the config:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>{
+    "default-sizes": {
+        "heart": {
+            "width": "182"
+            },
+        "home": {
+            "height": "42"
+        }
+    }
+}</code></pre><p class="text__p">The SVG images are size agnostic but this setting is needed to generate corresponding PNG icons and CSS for them.</p><p class="text__p">This is how you can make several versions of the same icon:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>{
+    "icons": {
+        "heart": [{
+            "width": "50"
+        }, {
+            "color": "green"
+        }, {
+            "width": "150",
+            "color": "steelblue"
+        }],
+        "home": [{
+            "width": "150"
+        }, {
+            "width": "170",
+            "color": "teal"
+        }, {
+            "height": "62",
+            "color": "yellowgreen"
+        }]
+    }
+}</code></pre><p class="text__p">As a result you will get <code>heart.svg</code> file and its modifications: <code>heart--w50.svg</code>, <code>heart--green.svg</code> and <code>heart--w150--steelblue.svg</code>.</p><p class="text__p">The configuration can be also defined at once:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>{
+    "color": "orangered",
+    "default-sizes": {
+        // default sizes
+    },
+    "icons": {
+        // icon versions
+    }
+}</code></pre><p class="text__p">The result would be 3 files named as the parent directory. For example, the content of <code>myicons/</code> folder turns into:</p><ul>
+<li><code>myicons.svg</code> — library of symbols;</li>
+<li><code>myicons.png</code> — sprite;</li>
+<li><code>myicons.css</code> — CSS with icons sizes and colors for SVG.</li>
+</ul>
+<p class="text__p">Then, to use these icons in you page, you need:</p><ol>
+<li>Link <code>myicons.css</code> file to the HTML.</li>
+<li>Place <code>myicons.svg</code> icon library in the beginning of the document (right after the <code>&lt;body&gt;</code> tag).</li>
+<li>Insert icons with code like this:<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg xmlns="http://www.w3.org/2000/svg" class="myicons myicons--heart">
+ &lt;use xlink:href="#myicons--heart">&lt;/use>
+&lt;/svg></code></pre><em>If you will use a single <code>&lt;use/&gt;</code> tag instead of pair <code>&lt;use ...&gt;&lt;/use&gt;</code>, you risk to loose HTML5 markup in older
+browsers. Thanks to <a href="https://twitter.com/mista_k">@mista_k</a> for this information.</em></li>
+</ol>
+<p class="text__p">Older browsers show a PNG fallback according to this CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.ie8 .myicons {
+    background-image: url(noconfig.png);
+    }</code></pre><p class="text__p">This assumes that your page is marked with <code>.ie8</code> CSS class which detects the current IE version.</p><p class="text__p">For better understanding on how it all works, install the package and have a look into <code>svg_fallback/test/</code> folder.</p><p class="text__p">While developing this plugin I decided to wrap code for modifying the files into a separate <a href="https://www.npmjs.org/package/svg-modify">svg-modify</a>
+package. It can be used in grunt with <a href="https://www.npmjs.org/package/grunt-svg-modify">grunt-svg-modify</a>.</p><p class="text__p">Now I have even 2 plugins :-) They are very specific and cannot become extremely popular, but if you need to modify
+SVG icons, they will help you to save time.</p><p class="text__p">If you want to use them, keep in mind that <a href="https://www.npmjs.org/package/svg-modify">svg-modify</a> is going to be
+developed (I want it to be more smart about colors). I sometimes find and fix bugs in the plugins, so they are not very
+stable yet but I try to support.</p><p class="text__p">Moreover, <a href="https://www.npmjs.org/package/svg_fallback">svg_fallback</a> was written for a particular task. You probably would
+like to change the file naming or CSS syntax. This plugin does not allow such tuning but you can fork it and modify.</p><p class="text__p">Also, I should say that my JS skills could be better; so my code can look strangely to some of you. I will appreciate
+a piece of advice on how to improve it.</p><p class="text__p">Great thanks to <a href="https://twitter.com/mista_k">@mista_k</a> and <a href="https://twitter.com/alexeyten">@alexeyten</a> for their help
+and advice.</p>]]></description>
+            <link>http://frontendbabel.info/articles/svg-fallback-and-modify/</link>
+            <guid isPermaLink="true">http://frontendbabel.info/articles/svg-fallback-and-modify/</guid>
+            <dc:creator><![CDATA[Yulya Buhvalova]]></dc:creator>
+            <pubDate>Thu, 30 Oct 2014 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

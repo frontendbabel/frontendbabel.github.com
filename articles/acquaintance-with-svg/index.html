@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Acquaintance with SVG images — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="Yulya Buhvalova, a developer for LiveJournal and talented frontend dev blogger shares her findings on SVG; vector graphics format which is now becoming more and more popular and is peftectly suitable for adaptive web sites. With her introduction into scalable vector graphics for web you can smoothly be absorbed in the subject.
+" property="og:description"/><meta content="http://frontendbabel.info/articles/acquaintance-with-svg/thumb.png" property="og:image"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">Acquaintance with SVG images</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://css.yoksel.ru/">Yulya Buhvalova</a> on 19th March 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 10th July 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">SVG is quite a mature technology but it began to gain its popularity just recently. Mostly due to the fact that
+vector graphics perfectly suit for adaptive web sites. If you have just started to learn SVG,
+here is some information you can start with.</p><!-- cut -->
+<p class="text__p">SVG is a vector image format that uses XML.</p><p class="text__p">Specification: <a href="http://www.w3.org/TR/SVG/">w3.org/TR/SVG</a></p><p class="text__p">SVG has a lot of advantages over raster graphics:</p><ul>
+<li>Vector images are lossless when being scaled and look nicer with retina displays;</li>
+<li>Usually the size of SVG data is less than data size of PNG image with the same picture;</li>
+<li>The image is defined with XML so that you can open it in a text editor and see the code;</li>
+<li>And so you can code an image manually besides drawing it in a vector graphics editor;</li>
+<li>An SVG file is a source in itself. Unlike bitmaps` case you do not need a PSD file to edit the SVG image. Its layers are
+not flattened; you can always open the image source and change it. However this trick is not recommended as you may
+overwrite scripts and styles;</li>
+<li>You can define shadows and gradients in an SVG file; moreover, you can use them not only for this file content but
+apply to the elements from outside (although this is not supported everywhere yet);</li>
+<li>SVG file can contain CSS and JavaScript.</li>
+</ul>
+<p class="text__p">Example of SVG:</p><iframe id="cp_embed_vzBxp"
+src="//codepen.io/anon/embed/vzBxp?height=263&amp;theme-id=4974&amp;slug-hash=vzBxp&amp;default-tab=result"
+scrolling="no" frameborder="0" height="263" allowtransparency="true" class="cp_embed_iframe" style="width: 100%;
+overflow: hidden;"></iframe>
+
+<p class="text__p">All the modern browsers support SVG and so you can already use it providing PNG alternative for previous versions.</p><p class="text__p">The format is nice for adaptive design due to its capability to scale losslessly, small data size and being crisp at
+devices with high pixel ratio. The next mobile screenshot demonstrates this:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="http://img-fotki.yandex.ru/get/9809/5091629.9d/0_7fa35_27e932b6_L.jpg"/></p><div class="article__tip">
+The sign says &quot;Hello! :-)&quot; in Russian
+</div>
+
+<p class="text__p">The picture clearly shows that SVG (below) looks nicer than PNG (above). So if you are to build a website with
+astounding view at every device, SVG may come into play.</p><p class="text__p">Nowadays you can already find a lot of websites with ready-to-use SVG images. For instance,</p><ul>
+<li><a href="http://iconmelon.com/">iconmelon.com</a></li>
+<li><a href="http://icomoon.io/app/#/select">icomoon.io</a></li>
+<li><a href="http://www.flaticon.com/">flaticon.com</a></li>
+<li><a href="http://iconmonstr.com/">iconmonstr.com</a></li>
+</ul>
+<p class="text__p">Mostly they provide icon sets.</p><p class="text__p">You can use the images as is or repaint them, join into a stack or sprite, or create a font.</p><p class="text__p">You can paste SVG into a web page in a number of ways. They have different browser support and give various
+capabilities.</p><h3 class="text-header text-header_lvl_3" id="embedobjectiframe"><a href="#embedobjectiframe" class="text-header__anchor">Embed/object/iframe</a></h3><p class="text__p">The content is available for external JavaScript.<br/>
+It has good browser support (all but IE8 and earlier).</p><table style="width: 100%; text-align: center;">
+    <thead>
+        <tr>
+            <td>Embed:</td>
+            <td>Object:</td>
+            <td>Iframe:</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><embed src="/articles/acquaintance-with-svg/sign.svg" width="199" height="200"/></td>
+            <td><object type="image/svg+xml" data="/articles/acquaintance-with-svg/sign.svg" width="199" height="200"></object></td>
+            <td><iframe src="/articles/acquaintance-with-svg/sign.svg" width="199px" height="200px"></iframe></td>
+        </tr>
+    </tbody>
+</table>
+
+<h4 class="text-header text-header_lvl_4" id="embed"><a href="#embed" class="text-header__anchor">Embed</a></h4><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;embed src="your.svg"
+        width="199" height="200"></code></pre><h4 class="text-header text-header_lvl_4" id="object"><a href="#object" class="text-header__anchor">Object</a></h4><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;object data="your.svg"
+        type="image/svg+xml" width="199" height="200"></object></code></pre><h4 class="text-header text-header_lvl_4" id="iframe"><a href="#iframe" class="text-header__anchor">Iframe</a></h4><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;iframe src="your.svg"
+        width="199px" height="200px"></iframe></code></pre><p class="text__p">Browser support:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th">IE</th><th class="text-table__th">Opera</th><th class="text-table__th">Opera Mini</th><th class="text-table__th">Opera Mobile</th><th class="text-table__th">Chrome</th><th class="text-table__th">Firefox</th><th class="text-table__th">Safari</th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"> 9+</td><td class="text-table__td">9+</td><td class="text-table__td">5+</td><td class="text-table__td">10+</td><td class="text-table__td">4+</td><td class="text-table__td">3+</td><td class="text-table__td">3.2+</td></tr></tbody></table><h3 class="text-header text-header_lvl_3" id="img"><a href="#img" class="text-header__anchor">IMG</a></h3><p class="text__p">In this case the content is not available for JavaScript.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="/articles/acquaintance-with-svg/sign.svg"/></p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;img src="your.svg"/></code></pre><p class="text__p">Browser support:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th">IE</th><th class="text-table__th">Opera</th><th class="text-table__th">Opera Mini</th><th class="text-table__th">Opera Mobile</th><th class="text-table__th">Chrome</th><th class="text-table__th">Firefox</th><th class="text-table__th">Safari</th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"> 9+</td><td class="text-table__td">9+</td><td class="text-table__td">5+</td><td class="text-table__td">10+</td><td class="text-table__td">4+</td><td class="text-table__td">4+</td><td class="text-table__td">4+</td></tr></tbody></table><h3 class="text-header text-header_lvl_3" id="css-background"><a href="#css-background" class="text-header__anchor">CSS background</a></h3><p class="text__p">The content is not available for JavaScript; and you can have issues with older Opera versions. Opera Mini does not
+support SVG CSS backgrounds with viewBox.</p><div style="width: 199px; height: 200px; margin-bottom: 1em; background-image: url(http://css.yoksel.ru/assets/img/svg/sign.svg)"></div>
+
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>background-image: url(your.svg);</code></pre><p class="text__p">Browser support:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th">IE</th><th class="text-table__th">Opera</th><th class="text-table__th">Opera Mini</th><th class="text-table__th">Opera Mobile</th><th class="text-table__th">Chrome</th><th class="text-table__th">Firefox</th><th class="text-table__th">Safari</th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"> 9+</td><td class="text-table__td">12+</td><td class="text-table__td">5+</td><td class="text-table__td">16+</td><td class="text-table__td">5+</td><td class="text-table__td">24+</td><td class="text-table__td">5+</td></tr></tbody></table><h3 class="text-header text-header_lvl_3" id="inline-svg"><a href="#inline-svg" class="text-header__anchor">Inline SVG</a></h3><p class="text__p">This is not supported by Opera Mini.</p><svg width="199" height="200"><g fill="#7ED321"><path d="M110 10h-20v76.567l-.605-.605-62.933 62.933 14.142 14.142 49.395-49.395v76.358h20v-76.358l49.395 49.395 14.142-14.142-62.933-62.933-.605.605v-76.567z" /><path d="M99.5 0c-54.965 0-99.5 44.784-99.5 100s44.535 100 99.5 100 99.5-44.784 99.5-100-44.535-100-99.5-100zm0 20c43.894 0 79.5 35.805 79.5 80s-35.606 80-79.5 80-79.5-35.805-79.5-80 35.606-80 79.5-80z" /></g></svg>
+
+<p class="text__p">Browser support:</p><table class="text-table"><thead class="text-table__head"><tr class="text-table__row"><th class="text-table__th">IE</th><th class="text-table__th">Opera</th><th class="text-table__th">Opera Mini</th><th class="text-table__th">Opera Mobile</th><th class="text-table__th">Chrome</th><th class="text-table__th">Firefox</th><th class="text-table__th">Safari</th></tr></thead><tbody class="text-table__body"><tr class="text-table__row"><td class="text-table__td"> 9+</td><td class="text-table__td">11.6+</td><td class="text-table__td">-</td><td class="text-table__td">12+</td><td class="text-table__td">7+</td><td class="text-table__td">4+</td><td class="text-table__td">5.1+</td></tr></tbody></table><p class="text__p">The examples above are placed into this article page exactly as described. You can open the very page in another browser
+and observe how SVG works there.</p><h2 class="text-header text-header_lvl_2" id="ways-to-deal-with-older-browsers"><a href="#ways-to-deal-with-older-browsers" class="text-header__anchor">Ways to deal with older browsers</a></h2><h3 class="text-header text-header_lvl_3" id="1-background-hack"><a href="#1-background-hack" class="text-header__anchor">1. Background hack</a></h3><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>DIV {
+    background-image: url(your.png); /* PNG for IE6-8 */
+    background-image: url(your.svg), none;
+    }</code></pre><p class="text__p">The second <code>background-image</code> works for browsers supporting CSS3. Others ignore it and so show the PNG background.</p><h3 class="text-header text-header_lvl_3" id="2-the-image-method"><a href="#2-the-image-method" class="text-header__anchor">2. The <code>image</code> method</a></h3><p class="text__p">Modern browsers choose <code>xlink:href</code> attribute and render SVG image; others show the bitmap.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg width="200px" height="200px">
+    &lt;image xlink:href="your.svg"
+           src="your.png"
+           width="200px" height="200px"/>
+&lt;/svg></code></pre><p class="text__p">The image trick was picked up from this post: <a href="http://lynn.ru/examples/svg/en.html">http://lynn.ru/examples/svg</a>. The
+method was <a href="http://css-tricks.com/svg-fallbacks/">investigated by Chris Coyier</a>, you can find his review over the trick
+and proposal of others.</p><p class="text__p">That works correctly in IE8 and Opera Mini.
+However it has a drawback. IE9-11 downloads all the two images although only SVG is used for rendering. Opera sometimes
+has problems too. You may get the following instead of your picture:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="http://img-fotki.yandex.ru/get/9831/5091629.9d/0_7f9f6_9033810_M.png"/></p><h3 class="text-header text-header_lvl_3" id="3-modernizr"><a href="#3-modernizr" class="text-header__anchor">3. Modernizr</a></h3><p class="text__p">Elements containing SVG are wrapped with <code>div.svg</code>. Then, you can detect if a browser supports SVG using
+<a href="http://modernizr.com/">Modernizr</a>; browsers which do not understand SVG get <code>.no-svg</code> CSS class. With a piece of CSS
+you can hide the SVG images for the browsers that do not render them:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>/* Define size and PNG background for the wrapper: */
+.no-svg .svg {
+  width: 200px;
+  height: 200px;
+  background: url(your.png); /* PNG backdrop */
+  }
+
+/* Hide elements inside the wrapper. Otherwise there would be icons of
+not loaded images */
+.no-svg .svg IFRAME,
+.no-svg .svg OBJECT,
+.no-svg .svg EMBED,
+.no-svg .svg IMG {
+  display: none;
+}</code></pre><p class="text__p">This method works nicely in IE8 (and earlier IE versions). However you might have a problem with Opera Mini.
+This browser provides partial SVG support and so does not get <code>.no-svg</code> CSS class whereas it cannot render SVG CSS
+background and inline SVG inserts.</p><p class="text__p">It is also possible to use <a href="http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">this
+method</a> to detect IE.</p><h3 class="text-header text-header_lvl_3" id="4-root"><a href="#4-root" class="text-header__anchor">4. :root</a></h3><p class="text__p">The <code>:root</code> CSS selector is only supported by browsers that understand CSS3. So it can be used to separate CSS rules
+for modern and older browsers.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>/* Display PNG by default */
+.svg {
+  width: 200px;
+  height: 200px;
+  background: url(your.png);
+}
+
+/* Hide elements containing SVG */
+.svg IFRAME,
+.svg OBJECT,
+.svg EMBED,
+.svg IMG {
+  display: none;
+}
+
+/* Show SVG containers for the browsers with CSS3 */
+:root IFRAME,
+:root OBJECT,
+:root EMBED,
+:root IMG {
+  display: inline-block;
+}</code></pre><p class="text__p">Like the previous solution this works correctly to weed out IE8 (and the aged) but does not help in Opera Mini&#39;s case
+since it supports CSS3 and so the SVG containder will be switched on anyway.</p><h3 class="text-header text-header_lvl_3" id="5-solution-for-opera-with-presto-version-12-or-mini"><a href="#5-solution-for-opera-with-presto-version-12-or-mini" class="text-header__anchor">5. Solution for Opera with Presto (version 12 or Mini)</a></h3><p class="text__p">In Opera 12 SVG backgrounds are weirdly odd. Simple CSS code, harmless at first glance, can cause render issues with
+SVG backgrounds when scrolling. I was lucky to get pictures like this:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="http://img-fotki.yandex.ru/get/9746/5091629.9d/0_7f9f8_dff062ac_L.png"/></p><p class="text__p">You can examine the working example here: <a href="http://jsbin.com/winag/2/edit">http://jsbin.com/winag/2/edit</a><br/>
+<em>Open this page with Opera 12 and scroll up and down.</em></p><p class="text__p">Opera Mini has issues with SVG backgrounds and does not support inlined SVG at all. This is how SVG background looks
+like with it:</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="http://img-fotki.yandex.ru/get/9819/5091629.9d/0_7f9f7_19c1f3e9_L.png"/></p><p class="text__p">For such a case you can use this <em>special for Opera</em> hack:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>doesnotexist:-o-prefocus, .selector {
+  background-image: url(your.png);
+}</code></pre><p class="text__p">This method uses specific Opera selector. You can learn details here:
+<a href="http://www.opera.com/docs/specs/presto2.12/css/o-vendor/">http://www.opera.com/docs/specs/presto2.12/css/o-vendor/</a>.</p><h3 class="text-header text-header_lvl_3" id="6-specific-opera-mini-selector"><a href="#6-specific-opera-mini-selector" class="text-header__anchor">6. Specific Opera Mini selector</a></h3><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>@media all and (-webkit-min-device-pixel-ratio:10000),
+       not all and (-webkit-min-device-pixel-ratio:0) {
+  .selector {
+    background-image: url(your.png);
+  }
+}</code></pre><h2 class="text-header text-header_lvl_2" id="to-be-continued"><a href="#to-be-continued" class="text-header__anchor">To be continued</a></h2><p class="text__p">Everything written above is just the tip of the iceberg. There is plenty of interesting in the SVG specification.
+To be continued! :-)</p><h3 class="text-header text-header_lvl_3" id="further-links"><a href="#further-links" class="text-header__anchor">Further links</a></h3><ul>
+<li><a href="http://caniuse.com/#search=svg">Browsers support for SVG</a></li>
+<li><a href="http://css-tricks.com/svg-fallbacks/">SVG Fallbacks</a></li>
+<li><a href="http://modernizr.com/">Modernizr</a></li>
+<li><a href="http://dbushell.com/2013/02/04/a-primer-to-front-end-svg-hacking/">A Primer to Front-end SVG Hacking</a></li>
+<li><a href="http://lynn.ru/examples/svg/en.html">SVG and <image> tag tricks</a></li>
+</ul>
+
+    <div class="article__date">
+        10th July 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://css.yoksel.ru/svg/" rel="alternate" hreflang="ru">
+        Знакомство с SVG
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://css.yoksel.ru/">
+                        Yulya Buhvalova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/yoksel">
+                        yoksel
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/yoksel_en">
+                        @yoksel_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://css.yoksel.ru/">
+                        http://css.yoksel.ru/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://varya.me/">
+                        Varya Stepanova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/varya">
+                        varya
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/varya_en">
+                        @varya_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://varya.me/">
+                        http://varya.me/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="Acquaintance with SVG images">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/acquaintance-with-svg/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/acquaintance-with-svg';
+		window.disqus_identifier = 'articles-acquaintance-with-svg-index';
+		window.disqus_title = 'Acquaintance with SVG images';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

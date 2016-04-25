@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Tidying Up Your CSS: A Case Study From Yandex — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="Denis "Beyondtheclouds" Payase describes a tool that keeps CSS codestyle and codebase aligned, based on his experience at Yandex, one of the largest Russian IT companies.
+" property="og:description"/><meta content="http://frontendbabel.info/articles/tidying-up-css-yandex/thumb.jpg" property="og:image"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">Tidying Up Your CSS: A Case Study From Yandex</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://habrahabr.ru/company/yandex/blog/223503/">Denis Payase</a> on 9th July 2014; translated by Max Shirshin on 10th August 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">I work on a huge project — in fact, on nothing else than the Yandex SERP (Search Engine Results Page).
+As in any other large project, people here work with enourmously huge chunks of CSS code; a separate developer team does the maintenance.</p><p class="text__p">When different people create and edit CSS using different tools and approaches, the resulting code becomes complicated, messy and inconsistent. For example, different developers apply different order for vendor prefixes, some of them omit quotes around urls while others don&#39;t. I could even imagine that in a hotfix rush, one could add something like <code>position: relative</code> to a rule set which already has <code>position: absolute</code> buried deep inside between other definitions... a happy debugging session guaranteed!</p><p class="text__p">Regarldess of the aforementioned problems, our CSS repository shines with consistent code style and looks perfect, all of it.</p><p class="text__p">How do we do it?</p><!-- cut -->
+<h2 class="text-header text-header_lvl_2" id="the-first-steps"><a href="#the-first-steps" class="text-header__anchor">The first steps</a></h2><p class="text__p">When you want your code to follow some code style, the most obvious solution would be to find a Big Boss who would say: &quot;do this and that, follow the rules, effective immediately&quot;, and punish everyone who deviates from it in the code review process. This sounds promising but does not really work:</p><ul>
+<li>We are all humans prone to errors, and memorizing the exact order of CSS rules is really difficult;</li>
+<li>Code review process turns into a codestyle discussion, while its original purpose is to improve architecture and logic;</li>
+<li>All mistakes have to be fixed manually, all edge cases meticulously described in code style documentation.</li>
+</ul>
+<p class="text__p">This doesn&#39;t look good, takes lots of time, and frustrates developers. We had to find an alternative solution to make developers happy, and we had found it.</p><h2 class="text-header text-header_lvl_2" id="robots-are-our-friends"><a href="#robots-are-our-friends" class="text-header__anchor">Robots are our friends</a></h2><p class="text__p">We already had a friendly robot, an old tool called <a href="http://habrahabr.ru/post/149998/">CSScomb</a> capable of solving our core problem: sorting CSS properties in a given order. However, it had some critical disadvantages:</p><ul>
+<li>sorting was the only thing it could do,</li>
+<li>was created with PHP and regexp-based parsers,</li>
+<li>and could not be extended.</li>
+</ul>
+<p class="text__p">While PHP is more popular in the frontend world compared to, say, C++, this wasn&#39;t exactly the technology we wanted to employ.</p><p class="text__p">It was when <a href="http://habrahabr.ru/users/mishanga/">mishanga</a>, a developer from our team, decided to improve the existing tool. He wanted it to be a full-featured and extensible tool written in JS. While Yandex developers still actively participate in CSScomb.js development, it has evolved into an open source project beyond Yandex borders.</p><p class="text__p">Let me introduce <a href="https://github.com/csscomb/csscomb.js">CSScomb.js</a> — a new version of the good old CSSComb, capable of some nice magic.</p><h2 class="text-header text-header_lvl_2" id="how-does-it-looks-like"><a href="#how-does-it-looks-like" class="text-header__anchor">How does it looks like?</a></h2><p class="text__p">Here&#39;s an example: let&#39;s suppose we want to commit this piece of code (for educational purposes only!)</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+-webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
+-moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
+box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
+z-index: 2;
+position: absolute;
+height: 2px;
+width: 2px;
+color: #FFFFFF;
+}</code></pre><p class="text__p">The code doesn&#39;t look nice and doesn&#39;t follow the code style, so the commit is prevented, and a message appears instead:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>% git commit block.css -m"Add My awesome css"
+
+Code style errors found.
+! block.css</code></pre><p class="text__p">Such a file cannot be committed because there is a git commit hook defined in our repo, which uses CSScomb to check all the CSS file changes we want to commit. It work in a &quot;linter&quot; mode and is quite smart, so checks only the actual changes introduced and not everything.</p><p class="text__p">After we see that message, we just ask CSScomb.js to help us fix the problem:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>% csscomb block.css</code></pre><p class="text__p">This time, it gets better:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block
+{
+    position: absolute;
+    z-index: 2;
+
+    width: 2px;
+    height: 2px;
+
+    color: #fff;
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
+       -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
+}</code></pre><p class="text__p">The tool did a lot of atomic changes and adjustments: moved the curly bracket on a new line, lowercased the color, aligned indentation for the vendor prefixes, and rearranged the properties to follow the styleguide order. This code successfully passes the automated check and proceeds to the code review where its quality and functionality will be assessed.</p><p class="text__p">The developer didn&#39;t have to think about following the CSS styleguide, he just wrote the code the way he liked it, while the rest is automated. This is exactly what we wanted to achieve.</p><h2 class="text-header text-header_lvl_2" id="magic-inside"><a href="#magic-inside" class="text-header__anchor">Magic inside</a></h2><p class="text__p">This system consists of two parts: the CSScomb itself and a pre-commit hook that uses it. I&#39;ll give more details on the hook later, and now let&#39;s see how CSSComb.js is designed.</p><p class="text__p">CSScomb.js is founded on two things: a plugin system, and a CSS-parser named <a href="https://github.com/tonyganch/gonzales-pe">gonzales-pe</a> which is a really quite tool supporting not only pure CSS but also preprocessors such Sass or LESS.</p><p class="text__p">The parser parses the CSS code and builds an AST (Abstract Syntax Tree) on top of it. For example, this piece of CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block
+{
+     position: absolute
+}</code></pre><p class="text__p">will generate the following AST:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>[ "stylesheet",
+  [ "ruleset",
+    [ "selector",
+      [ "simpleselector",
+        [ "class", [ "ident", "block" ] ],
+        [ "s", "\n" ]
+      ]
+    ],
+    [ "block",
+      [ "s", "\n    " ],
+      [ "declaration",
+        [ "property", [ "ident", "position" ] ],
+        [ "propertyDelim" ],
+        [ "value", [ "s", " " ], [ "ident", "absolute" ] ]
+      ],
+      [ "s", "\n" ]
+    ]
+  ],
+  [ "s", "\n" ]
+]</code></pre><p class="text__p">This format is too complex to be read by a human, but at the same time it&#39;s notably suitable for automated processing performed by <a href="https://github.com/csscomb/csscomb.js/tree/master/lib/options">plugins</a> which are responsible for all the subsequent transformations. The plugins do not interact with the &quot;raw&quot; CSS code directly, but only with the AST. A separate configuration file defines which plugins should be used.</p><p class="text__p">In the example above I intentionally omitted a semicolon after <code>absolute</code>. A plugin that detects and correct missing semicolons could notice and fix that by modifying the AST tree (here you only see the relevant part of the tree):</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>...
+    [ "block",
+      [ "s", "\n    " ],
+      [ "declaration",
+        [ "property", [ "ident", "position" ] ],
+        [ "propertyDelim" ],
+        [ "value", [ "s", " " ], [ "ident", "absolute" ] ]
+
+      ],
+      >>>[ "declDelim" ],<<<
+      [ "s", "\n" ]
+...</code></pre><p class="text__p">After all the plugins finish the processing, the same <code>gonzales-pe</code> tool transforms AST back into CSS code, and the previously skipped semicolon can now be found in the appropriate place:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block
+{
+     position: absolute;
+}</code></pre><h2 class="text-header text-header_lvl_2" id="getting-started-with-csscomb"><a href="#getting-started-with-csscomb" class="text-header__anchor">Getting started with CSSComb</a></h2><h3 class="text-header text-header_lvl_3" id="step-1"><a href="#step-1" class="text-header__anchor">Step 1</a></h3><p class="text__p">Add CSScomb.js to your project dependencies. 
+If your project uses npm, add it to <code>devDependencies</code> in the <code>package.json</code> file:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>{
+  ...
+  "devDependencies": {
+    ...
+    "csscomb": "2.0.4",
+    ...
+  }
+  ...
+}</code></pre><h3 class="text-header text-header_lvl_3" id="step-2"><a href="#step-2" class="text-header__anchor">Step 2</a></h3><p class="text__p">For the plugins to postprocess your code, a <a href="https://github.com/csscomb/csscomb.js/blob/master/doc/configuration.md">plugin configuration file</a> has to be placed in the project root. Learn more about each plugin and its options <a href="https://github.com/csscomb/csscomb.js/blob/master/doc/options.md">here</a>. </p><p class="text__p">CSScomb.js can automate this process (up to a certain extent) by generating a config file based on an existing CSS file.</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>csscomb -d example.css > .csscomb.json</code></pre><p class="text__p">All the plugins can be configured in this way, the only exception being the property sorting plugin that requires the sorting to be described manually (or copy it from anywhere else).</p><h3 class="text-header text-header_lvl_3" id="step-3"><a href="#step-3" class="text-header__anchor">Step 3</a></h3><p class="text__p">We have to make CSScomb.js run in a linter mode before the commit in the same way as jscs/jshint-groups or similar tools do. In a Linux/BSD based environment it can look like this:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>#!/usr/bin/env bash
+
+PATCH_FILE="working-tree.patch" 
+NPM_BIN="./node_modules/.bin"
+
+function cleanup {
+    exit_code=$?
+    if [ -f "$PATCH_FILE" ]; then
+        patch -p0 < "$PATCH_FILE"
+        rm "$PATCH_FILE"
+    fi
+    exit $exit_code
+}
+
+# Cleaning up after exit
+trap cleanup EXIT SIGINT SIGHUP
+
+# Creating a patch
+git diff > "$PATCH_FILE" --no-prefix
+# Drop unstaged changes
+git checkout -- .
+
+# getting a list of files which we are about to commit
+git_cached_files=$(git diff --cached --name-only --diff-filter=ACMR | xargs echo)
+if [ "$git_cached_files" ]; then
+    # running CSScomb.js
+    $NPM_BIN/csscomb -v -l $git_cached_files || exit 1
+fi</code></pre><p class="text__p">Why can&#39;t we just run CSSComb.js in the correction mode right away, and automatically commit the result? This works fine in most cases, except for the case when we make several changes in the same file but only want to commit one of those (<code>git add -p</code>). If we find an error in that file version we are going to commit, these problems may occur:</p><ul>
+<li>We could run CSScomb.js on the file version we are going to commit and get conflicts applying toe patch</li>
+<li>We could run CSScomb.js on the etire file, but the changes we do not yet want to commit can contain anything, even broken code.</li>
+</ul>
+<p class="text__p">In general, it might be annoying when a file changes &quot;by itself&quot;. Thus, we decided that CSScomb.js should be run by the developer himself.</p><h2 class="text-header text-header_lvl_2" id="ready-steady-go"><a href="#ready-steady-go" class="text-header__anchor">Ready, steady, go!</a></h2><p class="text__p">That&#39;s it! Now CSScomb.js won&#39;t let in any non-compliant code, and code formatting is fast and automated.
+This is how a simple tool keep your CSS organized and saves developers&#39; time.</p><p class="text__p">Don&#39;t feel like out-of-the-box capabilities are enough for you? Create an issue, or <a href="https://github.com/csscomb/csscomb.js/pulls">contribute</a> your own solution.</p>
+    <div class="article__date">
+        10th August 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://habrahabr.ru/company/yandex/blog/223503/" rel="alternate" hreflang="ru">
+        Приводим в порядок css-код. Опыт Яндекса
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://habrahabr.ru/company/yandex/blog/223503/">
+                        Denis Payase
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/L0stSoul">
+                        L0stSoul
+                    </a>
+                </dd>
+            </dl>
+        
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://habrahabr.ru/company/yandex/blog/223503/">
+                        http://habrahabr.ru/company/yandex/blog/223503/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    Max Shirshin
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/ingdir">
+                        ingdir
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/ingdir">
+                        @ingdir
+                    </a>
+                </dd>
+            </dl>
+        
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="Tidying Up Your CSS: A Case Study From Yandex">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/tidying-up-css-yandex/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/tidying-up-css-yandex';
+		window.disqus_identifier = 'articles-tidying-up-css-yandex-index';
+		window.disqus_title = 'Tidying Up Your CSS: A Case Study From Yandex';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

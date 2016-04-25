@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Generating BEM selectors with CSS preprocessors — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="Vladimir Kuznetsov explains how to benefit from CSS preprocessors (such as SASS and LESS) when using BEM methodology.
+" property="og:description"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">Generating BEM selectors with CSS preprocessors</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://noteskeeper.ru/about/">Vladimir Kuznetsov</a> on 11th June 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 29th July 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">The <a href="http://bem.info/">BEM methodology</a> never assumed that its long CSS classes such as <code>.block__element_modifier</code> to
+be written manually. At Yandex they use special tools to produce HTML markup and styles. If you are using CSS
+preprocessors to generate your styles, you also do not have to repeat block names again and again. Here I&#39;m going to
+demonstrate how to do this.</p><!-- cut -->
+<p class="text__p">All the CSS preprocessors enable to include one selector into another. This is how cascades are built.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  .title {
+    font: bold 24px/1 sans-serif;
+  }
+}</code></pre><p class="text__p">After the transformation it gives:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header .title {
+  font: bold 24px/1 sans-serif;
+}</code></pre><p class="text__p">It is possible to use <code>&amp;</code> symbol instead of container name, which is convenient if describing inner elements and pseudo
+selectors.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  a {
+    &, &:hover, &:focus {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}</code></pre><p class="text__p">CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header a,
+.header a:hover,
+.header a:focus {
+  color: white;
+  text-decoration: none;
+}</code></pre><p class="text__p"><strong>LESS</strong> (and now <strong>SASS</strong> as well) allow to use <code>&amp;</code> within a single class name. There is no strict requirements on what
+should be the symbols before and after <code>&amp;</code>. Thus, you can produce simple selectors instead of cascades.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  &__link {
+    &, &:hover, &:focus {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}</code></pre><p class="text__p">CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header__link,
+.header__link:hover,
+.header__link:focus {
+  color: white;
+  text-decoration: none;
+}</code></pre><p class="text__p">The same goes for selectors of elements and modifiers.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  background: white;
+  &__title {
+    font: bold 24px/1 sans-serif;
+    &_featured {
+      font-size: 30px;
+    }
+  }
+}</code></pre><p class="text__p">CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.header {
+  background: white;
+}
+.header__title {
+  font: bold 24px/1 sans-serif;
+}
+.header__title_featured {
+  font-size: 30px;
+}</code></pre><p class="text__p">As you can see, nested selectors were flattened.</p><h2 class="text-header text-header_lvl_2" id="best-to-know"><a href="#best-to-know" class="text-header__anchor">Best to know</a></h2><p class="text__p">Now, a few simple rules to warn you of shooting your own foot.</p><h3 class="text-header text-header_lvl_3" id="use-a-block-name-just-once"><a href="#use-a-block-name-just-once" class="text-header__anchor">Use a block name just once</a></h3><p class="text__p">A block name should be mentioned at the first level only and never repeated again. There might be exceptions in
+case of complex modifier name. However if you met the need to do such a thing, you should reconsider the whole structure
+of this block elements and modifiers. I am sure you will find a way to decompose the block and simplify it.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  // block styles
+}</code></pre><h3 class="text-header text-header_lvl_3" id="elements-are-2nd-level-selectors"><a href="#elements-are-2nd-level-selectors" class="text-header__anchor">Elements are 2nd level selectors</a></h3><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  // block styles
+  &__element {
+    // element styles
+  }
+  &__title {
+  }
+}</code></pre><p class="text__p">Sometime you may have elements with similar names and this would induce you to include one element into another. I
+suggest not to yield to temptation in spite of you get correct resultant CSS.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  &__element {
+    &-wrapper {
+      // This is a bad example of declaring an element.
+      // This element is hard to be found in the code.
+    }
+  }
+}</code></pre><p class="text__p">Never do such a thing. Selectors like this are very hard to found in the code. And the name of the element
+(<code>element-wrapper</code>) is divided into 2 parts. You should write the whole element name even if it is partly similar to the
+others.</p><h3 class="text-header text-header_lvl_3" id="pseudo-classes-pseudo-elements-and-element-modifiers-can-fit-the-3rd-level"><a href="#pseudo-classes-pseudo-elements-and-element-modifiers-can-fit-the-3rd-level" class="text-header__anchor">Pseudo-classes, pseudo-elements and element modifiers can fit the 3rd level</a></h3><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  &__element {
+    &_modifier {
+      // styles for a modifier of an element
+    }
+    &_modifier_value {
+      // do not split modifier key and value
+    }
+    &:hover {
+      // pseudo-class is also a kind of a modifier
+    }
+  }
+}</code></pre><p class="text__p">Here you group styles for the element and its supplements in a very natural way; this will make it easier to find them
+across the source code.</p><p class="text__p">As is the convention, the element modifier must not influence inner elements. Placing it at the 3rd level of selectors
+you provide error protection. But I can imagine cases when it is handy to place a modifier into the 2nd level and so to
+repeat the element name.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  &__element_active {
+    // element modifier at the 2nd level
+  }
+  &__element_modifier_good {
+    // example of key-value modifier
+  }
+}</code></pre><p class="text__p">I personally prefer to place element modifiers at the 2nd level.
+Also, I believe that it is a bad practice to divide a modifier name into parts or separate its key and value parts.
+Excessive structure would make code less readable and so you can easily loose context.</p><h3 class="text-header text-header_lvl_3" id="modifiers-fit-the-2nd-level-and-can-cause-cascade"><a href="#modifiers-fit-the-2nd-level-and-can-cause-cascade" class="text-header__anchor">Modifiers fit the 2nd level and can cause cascade</a></h3><p class="text__p">Block modifiers are to use for changing their block appearance and the inner elements (not the inner blocks).</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  background: white;
+  &__title {
+    color: black;
+    font: bold 24px/1 sans-serif;
+  }
+  &_featured {
+    background: black;
+  }
+  &_featured &__title {
+    color: white;
+    font-size: 30px;
+  }
+}</code></pre><p class="text__p">The code is not that structured because we need to save the value of <code>&amp;</code>. Once we come down to the 3rd level, it is
+redefined and this makes us to write full block name in selectors which is recommended to avoid.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.block {
+  background: white;
+}
+.block__title {
+  color: black;
+  font: bold 24px/1 sans-serif;
+}
+.block_featured {
+  background: black;
+}
+.block_featured .block__title {
+  color: white;
+  font-size: 30px;
+}</code></pre><h2 class="text-header text-header_lvl_2" id="wrapping-up"><a href="#wrapping-up" class="text-header__anchor">Wrapping up</a></h2><ul>
+<li>CSS preprocessors prevent repeating block names in selectors.</li>
+<li>The source code shows cascade but in the resultant CSS it all transforms into simple selectors.</li>
+<li>This method cut down errors and structural bugs.</li>
+</ul>
+
+    <div class="article__date">
+        29th July 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://noteskeeper.ru/1139/" rel="alternate" hreflang="ru">
+        Генерация названий селекторов в стиле БЭМ с помощью препроцессоров
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://noteskeeper.ru/about/">
+                        Vladimir Kuznetsov
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/mistakster">
+                        mistakster
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/mistakster">
+                        @mistakster
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://noteskeeper.ru/about/">
+                        http://noteskeeper.ru/about/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://varya.me/">
+                        Varya Stepanova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/varya">
+                        varya
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/varya_en">
+                        @varya_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://varya.me/">
+                        http://varya.me/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="Generating BEM selectors with CSS preprocessors">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/bem-with-css-preprocessors/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/bem-with-css-preprocessors';
+		window.disqus_identifier = 'articles-bem-with-css-preprocessors-index';
+		window.disqus_title = 'Generating BEM selectors with CSS preprocessors';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

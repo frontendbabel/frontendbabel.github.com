@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Some CSS tricks; or what we do at our Naked Fridays — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="A bunch of CSS tricks by WarGaming developers: easy center&middle block positioning, eliptic corners and cutting off long strings in pure CSS.
+" property="og:description"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">Some CSS tricks; or what we do at our Naked Fridays</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://habrahabr.ru/company/wargaming/">Paul King</a> on 27th June 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 25th August 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">Our development department has a very nice tradition. Every 2 weeks we hold Naked Friday; this is a little conference
+where we share interesting knowledge gotten during our work. As a result, we have a lot of such information by now and
+so we decided to publish it.</p><p class="text__p">Thus, let me introduce a set of fascinating CSS and HTML tricks, which we hope are not yet well-known. We will be happy
+if everyone learn something new!</p><!-- cut -->
+<h2 class="text-header text-header_lvl_2" id="align-a-block-in-center-and-middle"><a href="#align-a-block-in-center-and-middle" class="text-header__anchor">Align a block in center and middle</a></h2><p class="text__p">The often solution to this problem is to put a block into 50% position horizontally and vertically with <code>top</code> and <code>left</code>
+properties and then shift it back with negative margins. However there is more accurate and less known trick.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}</code></pre><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/center-middle.jpg"/></p><p class="text__p">If you set a position not for an image but for a block, you need to declare its width and hight.</p><p class="text__p">This trick is not working for IE7 but I hope you gave it up long ago :-)</p><h2 class="text-header text-header_lvl_2" id="cut-off-long-lines-with-ellipsis"><a href="#cut-off-long-lines-with-ellipsis" class="text-header__anchor">Cut off long lines with ellipsis</a></h2><p class="text__p">This is quite a mature property (works in IE6!), however it was officially included inly in CSS3 standard. It is not
+very often used, so we consider that not everyone is familiar with it.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.text-overflow {
+    white-space: nowrap;       /* No line breaks */
+    overflow: hidden;          /* Hide text which does not fit the block */
+    text-overflow: ellipsis;   /* Cut off with ellipsis */
+    display: block;            /* Works only for block elements */
+}</code></pre><style>
+.text-overflow {
+    white-space: nowrap;       /* No line breaks */
+    overflow: hidden;          /* Hide text which does not fit the block */
+    text-overflow: ellipsis;   /* Cut off with ellipsis */
+    display: block;            /* Works only for block elements */
+}
+
+.column {
+  width: 250px;
+  border: red 1px solid;
+  padding: 1em;
+}
+
+</style>
+
+<div class="column">
+    <div class="text-overflow">
+        Articles and blog posts from all over the world
+    </div>
+</div>
+
+<p class="text__p">You can define block width, but by default it is as wide as its parent block. So, ellipsis is shown if the block
+is wider than its container. This works only for single lines.</p><h2 class="text-header text-header_lvl_2" id="blocks-with-dependant-width"><a href="#blocks-with-dependant-width" class="text-header__anchor">Blocks with dependant width</a></h2><p class="text__p">Let&#39;s say you want to have a sidebar.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "html"} }'><code>&lt;aside class="panel">
+    ...
+&lt;/aside>
+&lt;div class="content">
+    ...
+&lt;/div></code></pre><p class="text__p">And the main content width depends only on the sidebar width. How do you do this without declaring width? There is the way out!</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.content {
+    overflow: hidden;
+}
+.panel {
+    float: right;
+    width: 20%;
+}</code></pre><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/overflow.png"/></p><p class="text__p">As you can see <code>overflow: hidden</code> solves the problems.</p><h2 class="text-header text-header_lvl_2" id="elliptic-corners"><a href="#elliptic-corners" class="text-header__anchor">Elliptic corners</a></h2><p class="text__p">Only a few know (or at least not may use) that <code>border-radius</code> property accepts not 4 but 8 parameters; 2 per corner.
+The first one defines horizontal radius, and the second defines vertical one. For example:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.circle {
+    border-radius: 150px/100px 100px/200px 0 0;
+}</code></pre><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/eliptic-corners.gif"/></p><h2 class="text-header text-header_lvl_2" id="a-little-bit-about-pseudo-elements"><a href="#a-little-bit-about-pseudo-elements" class="text-header__anchor">A little bit about pseudo elements</a></h2><p class="text__p">Pseudo elements <code>:before</code> and <code>:after</code> overlay the element they belong to. In case you need them to be under the parent,
+set negative <code>z-index</code> property to them.</p><p class="text__p">Also, pseudo element do not work with tags which are not supposed to have text content; such as <code>&lt;img&gt;</code>, <code>&lt;br&gt;</code> and
+strangely enough <code>&lt;input&gt;</code>.</p><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/pseudo-elements.gif"/></p><p class="text__p">However <code>&lt;hr&gt;</code> works normally with pseudo elements for some reason.</p><h2 class="text-header text-header_lvl_2" id="bonus-little-firebug-with-pure-html"><a href="#bonus-little-firebug-with-pure-html" class="text-header__anchor">Bonus: little Firebug with pure HTML</a></h2><p class="text__p">Just put this code into your page:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "html"} }'><code>&lt;style contenteditable style="display: block; border: 1px solid black; width: 90%; height: 300px; position: fixed;
+bottom: 50px; left: 5%;">&lt;/style></code></pre><p class="text__p"><img class="text-image i-bem" data-bem='{ "text-image": {} }'  src="img/little-firebug.gif"/></p><p class="text__p">Whoohoo! Everything works, thanks to HTML5!</p><p class="text__p">This this is almost useless. however if it is styled to have big font-size, it can come in handy for the presentations.
+Not all of us can easily make out the small letters of the real Firebug.</p><p class="text__p">This is all for today. Thank you for your attention! We are looking forward for your comments!</p>
+    <div class="article__date">
+        25th August 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://habrahabr.ru/company/wargaming/blog/198138/" rel="alternate" hreflang="ru">
+        Подборка полезных CSS рецептов, или чем мы занимаемся на голых пятницах
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://habrahabr.ru/company/wargaming/">
+                        Paul King
+                    </a>
+                
+            </dd>
+        </dl>
+        
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://habrahabr.ru/company/wargaming/">
+                        http://habrahabr.ru/company/wargaming/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://varya.me/">
+                        Varya Stepanova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/varya">
+                        varya
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/varya_en">
+                        @varya_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://varya.me/">
+                        http://varya.me/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="Some CSS tricks; or what we do at our Naked Fridays">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/css-tricks-by-wargaming/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/css-tricks-by-wargaming';
+		window.disqus_identifier = 'articles-css-tricks-by-wargaming-index';
+		window.disqus_title = 'Some CSS tricks; or what we do at our Naked Fridays';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

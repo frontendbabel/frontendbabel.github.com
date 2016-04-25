@@ -1,0 +1,16 @@
+.content
+{
+    position: relative;
+    margin-top: 1em;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.content code
+{
+    font-family: Menlo, Monaco, Courier New, monospace, serif;
+    font-size: 90%;
+    background-color: rgba(0,0,0, 0.05);
+    font-weight: 300;
+    padding: 1px 5px;
+}

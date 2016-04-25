@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Frontend Babel. Articles and blog posts from all over the world</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="Frontend Babel — an online hub for publishing English translations of frontend articles originally written in other languages. Not all authors have time, resources or skills to make an English version of what they write. Other members of the community can change that, contributing their translations and helping the world discover new frontend stars, experts, and innovators. Across boundaries." property="og:description"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <ul class="posts-list">
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/yet-another-way-to-load-svg-sprite/">
+            <h2 class="post-list__title">
+                Yet another way to load SVG sprite
+            </h2>
+        </a>
+        
+        <p class="text__p">During our experiments with inlining SVG icons at our company, we discovered that browsers responded to linking SVG set into a page differently. However, we would like to have a universal and stable method, which works in all the browsers with support SVG.</p><p class="text__p">Trials and errors led us to this scenario:
+to some variable in a variable in JavaScript.</p><ol>
+<li>Add the JavaScript file in the bundle of all JavaScript files. Then, link this
+bundle in <code>&lt;head&gt;</code> section.</li>
+<li>Before the first usage of SVG add an empty element (placeholder) and insert  the content of SVG-string here.</li>
+</ol>
+<p class="text__p">Thus, we achieved the caching of SVG pictograms similar to how it happens to other static files. Also, we overcame a problem of linking
+an external SVG file in IE.</p>
+        <div class="post-list__meta">
+            Written by <a href="https://noteskeeper.ru">Vladimir Kuznetsov</a> on 23rd July 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 25th April 2016
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/binary-operations-with-irregular-sets/">
+            <h2 class="post-list__title">
+                Binary operations with unordered sets
+            </h2>
+        </a>
+        
+        <p class="text__p">In this post I will do algorithmization of the array operations and describe the operations.</p><p class="text__p">Summary:</p><ul>
+<li>I. Intersection of sets</li>
+<li>II. Différence of sets</li>
+<li>III. Union of sets</li>
+<li>IV. Symmetric difference of sets</li>
+<li>conclusion</li>
+</ul>
+
+        <div class="post-list__meta">
+            Written by <a href="https://connected.su">Roman Mestsheryakov</a>; translated by <a href="http://varya.me/">Varya Stepanova</a> on 7th October 2015
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/styling-placeholder-using-css/">
+            <h2 class="post-list__title">
+                Styling placeholders with CSS. Syntax, tips &amp; tricks, supported HTML5 styles
+            </h2>
+        </a>
+        
+        <p class="text__p">Placeholder attribute is used to provide an action hint inside empty elements such as input or textarea. In this article, we consider the possibility of styling the placeholder text as well as some tricks to make it more usable and functional.</p><p class="text__p">Let&#39;s begin with an example for those who don&#39;t know what a placeholder is.</p>
+        <div class="post-list__meta">
+            Written by <a href="http://html5.by/">Dudin Dmitriy</a>; translated by <a href="http://www.gtalk.kz/">Talgautb</a> on 9th September 2015
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/svg-fallback-and-modify/">
+            <h2 class="post-list__title">
+                Why I wrote a plugin for Grunt to work with SVG
+            </h2>
+        </a>
+        
+        <p class="text__p">Once upon a time my colleagues and I met a need to work up a lot of SVG icons. The prerequisites: over 30
+colorless SVG images (the color are defined with CSS later). The task: generate their PNG+CSS fallbacks for
+the older browsers.</p>
+        <div class="post-list__meta">
+            Written by <a href="http://css.yoksel.ru/">Yulya Buhvalova</a> on 25th August 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 30th October 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/css-sprites-with-gulp/">
+            <h2 class="post-list__title">
+                Generating CSS sprites with Gulp
+            </h2>
+        </a>
+        
+        <p class="text__p">While working with one large project, my colleague and I were thinking about how to automate building the CSS sprites.
+Before, we used to build them manually or with different online services which anyway took a lot of time. Also, by that
+time we already used Gulp to build the project and so were looking for a gulp-friendly solution for sprites.</p><p class="text__p">Initially we were choosing from different variants:</p><ul>
+<li><a href="https://www.npmjs.org/package/css-sprite">css-sprite</a></li>
+<li><a href="https://www.npmjs.org/package/gulp-sprite-generator">gulp-sprite-generator</a></li>
+<li><a href="https://github.com/Otouto/gulp-spritesmith">gulp-spritesmith</a></li>
+<li><a href="https://github.com/twolfson/gulp.spritesmith">gulp.spritesmith</a></li>
+</ul>
+
+        <div class="post-list__meta">
+            Written by <a href="http://krekotun.ru">Alexey Krekotun</a> on 7th July 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 9th October 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/css-tricks-by-wargaming/">
+            <h2 class="post-list__title">
+                Some CSS tricks; or what we do at our Naked Fridays
+            </h2>
+        </a>
+        
+        <p class="text__p">Our development department has a very nice tradition. Every 2 weeks we hold Naked Friday; this is a little conference
+where we share interesting knowledge gotten during our work. As a result, we have a lot of such information by now and
+so we decided to publish it.</p><p class="text__p">Thus, let me introduce a set of fascinating CSS and HTML tricks, which we hope are not yet well-known. We will be happy
+if everyone learn something new!</p>
+        <div class="post-list__meta">
+            Written by <a href="http://habrahabr.ru/company/wargaming/">Paul King</a> on 27th June 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 25th August 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/tidying-up-css-yandex/">
+            <h2 class="post-list__title">
+                Tidying Up Your CSS: A Case Study From Yandex
+            </h2>
+        </a>
+        
+        <p class="text__p">I work on a huge project — in fact, on nothing else than the Yandex SERP (Search Engine Results Page).
+As in any other large project, people here work with enourmously huge chunks of CSS code; a separate developer team does the maintenance.</p><p class="text__p">When different people create and edit CSS using different tools and approaches, the resulting code becomes complicated, messy and inconsistent. For example, different developers apply different order for vendor prefixes, some of them omit quotes around urls while others don&#39;t. I could even imagine that in a hotfix rush, one could add something like <code>position: relative</code> to a rule set which already has <code>position: absolute</code> buried deep inside between other definitions... a happy debugging session guaranteed!</p><p class="text__p">Regarldess of the aforementioned problems, our CSS repository shines with consistent code style and looks perfect, all of it.</p><p class="text__p">How do we do it?</p>
+        <div class="post-list__meta">
+            Written by <a href="http://habrahabr.ru/company/yandex/blog/223503/">Denis Payase</a> on 9th July 2014; translated by Max Shirshin on 10th August 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/bem-with-css-preprocessors/">
+            <h2 class="post-list__title">
+                Generating BEM selectors with CSS preprocessors
+            </h2>
+        </a>
+        
+        <p class="text__p">The <a href="http://bem.info/">BEM methodology</a> never assumed that its long CSS classes such as <code>.block__element_modifier</code> to
+be written manually. At Yandex they use special tools to produce HTML markup and styles. If you are using CSS
+preprocessors to generate your styles, you also do not have to repeat block names again and again. Here I&#39;m going to
+demonstrate how to do this.</p>
+        <div class="post-list__meta">
+            Written by <a href="http://noteskeeper.ru/about/">Vladimir Kuznetsov</a> on 11th June 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 29th July 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/about-viewport/">
+            <h2 class="post-list__title">
+                About the @viewport
+            </h2>
+        </a>
+        
+        <p class="text__p">Once Opera’s guys proposed to use <code>@viewport { ... }</code> in CSS instead of <code>&lt;meta name=&quot;viewport&quot; ...&gt;</code> tag. Regarding the
+reasons
+<a href="http://vimeo.com/100523275">you’d better watch and listen to @ppk</a> and I will explain why you should use this
+right now.</p>
+        <div class="post-list__meta">
+            Written by <a href="http://wd.dizaina.net/en/">Oleg Korsunsky</a> on 17th July 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 22nd July 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/jscs-javascript-code-style/">
+            <h2 class="post-list__title">
+                JSCS: JavaScript Code Style
+            </h2>
+        </a>
+        
+        <p class="text__p">When nine months ago I wrote a small console utility for myself, I didn&#39;t suspect that soon it would become a serious and unique in its class tool, which would be used even by such famous teams as <a href="http://jquery.com/">jQuery</a>, <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://angularjs.org/">Angular</a>. Now, as I&#39;m writing this article, my project has 1010 stars on GitHub, and I&#39;m very happy to think that so many people could make their work more comfortable with the help of my idea.</p>
+        <div class="post-list__meta">
+            Written by <a href="http://habrahabr.ru/">Marat Dulin</a> on 21st April 2014; translated by <a href="http://gggritso.com/">George Gritsouk</a> on 22nd July 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/bower-why-frontend-package-manager/">
+            <h2 class="post-list__title">
+                Bower: Why Front-End Needs a Package Manager
+            </h2>
+        </a>
+        
+        <p class="text__p">This article was first published in the <a href="http://www.xakep.ru/xa/?id=184">May 2014 issue</a> of &quot;Хакер&quot; (russian word for &quot;Hacker&quot;) magazine. The article in the magazine is a shortened version; the full one is below.</p><p class="text__p">Package managers simplify installing and updating project dependencies, which are libraries that it uses: jQuery, Fotorama, everything that is used on your site and isn&#39;t written by you.</p>
+        <div class="post-list__meta">
+            Written by <a href="http://blog.sapegin.me/">Artem Sapegin</a> on 23rd June 2014; translated by <a href="http://gggritso.com/">George Gritsouk</a> on 16th July 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/svg-grouping-and-reusing-elements/">
+            <h2 class="post-list__title">
+                SVG: Grouping and Re-using Elements
+            </h2>
+        </a>
+        
+        <p class="text__p">SVG-figures can be grouped to structure a file in more convenient manner. There are several tags for this purpose:
+<code>&lt;g&gt;</code>, <code>&lt;defs&gt;</code> and <code>&lt;symbol&gt;</code>. Elements, element groups and symbols can be used repeatedly.</p>
+        <div class="post-list__meta">
+            Written by <a href="http://css.yoksel.ru/">Yulya Buhvalova</a> on 22nd March 2014; translated by <a href="http://gggritso.com/">George Gritsouk</a> on 14th July 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/acquaintance-with-svg/">
+            <h2 class="post-list__title">
+                Acquaintance with SVG images
+            </h2>
+        </a>
+        
+        <p class="text__p">SVG is quite a mature technology but it began to gain its popularity just recently. Mostly due to the fact that
+vector graphics perfectly suit for adaptive web sites. If you have just started to learn SVG,
+here is some information you can start with.</p>
+        <div class="post-list__meta">
+            Written by <a href="http://css.yoksel.ru/">Yulya Buhvalova</a> on 19th March 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 10th July 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/developing-cross-browser-extensions/">
+            <h2 class="post-list__title">
+                Developing Cross-Browser Extensions
+            </h2>
+        </a>
+        
+        <p class="text__p">What do we do if we have to search for something? Of course, we fire up our favorite search engine web site. It is quite hard to push yourself to use another a different search engine rather than the usual one, even if you know that the result would be better. To change this UX pattern I developed <a href="https://chrome.google.com/webstore/detail/likeastore/einhadilfmpdfmmjnnppomcccmlohjad">Likeastore Chrome
+Extension</a>. It adds social
+part to your search flow by showing relevant information from the article you liked. Besides Chrome we support Firefox
+and Safari. Despite the platform difference all these extensions are built from the same codebase.</p>
+        <div class="post-list__meta">
+            Written by <a href="https://likeastore.com/">Alexander Beletsky</a> on 27th June 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 7th July 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/webpage-rendering-101/">
+            <h2 class="post-list__title">
+                What Every Frontend Developer Should Know About Webpage Rendering
+            </h2>
+        </a>
+        
+        <p class="text__p">Today I&#39;d like to focus on the subject of web page rendering and why it is important in web development. A lot of articles are available covering the subject, but the information is scattered and somehow fragmented. To wrap my head around the subject, for example, I had to study a lot of sources. That&#39;s why I decided I should write this article. I believe the article will be useful for beginners as well as for more advanced developers who want to refresh and structure what they already know.</p>
+        <div class="post-list__meta">
+            Written by <a href="http://skutin.ru/">Alexander Skutin</a> on 26th May 2014; translated by Max Shirshin on 30th June 2014
+        </div>
+    </li>
+
+    <li class="posts-list__item">
+        <a class="link" href="/articles/graphical-interface/">
+            <h2 class="post-list__title">
+                Graphical interface
+            </h2>
+        </a>
+        
+            <h3 class="post-list__subtitle">
+                A shaped emotion, a message in a well-defined system
+            </h3>
+        
+        <p class="text__p">Let me introduce myself. I am an <em>Interface Designer</em> at Yandex, and I&#39;ve been involved with projects like Yandex.Maps
+and Search Engine Results Page, and also designed brand icons, promo materials, documentation, a project planner, a
+shared interface component library, and a fast prototyping system. Besides that, I follow my colleagues&#39; projects such
+as Yandex Main Page and other Yandex portal services: Market, News, Images, Video, Disk, Auto, Realty. I see how these
+projects grow and evolve.</p>
+        <div class="post-list__meta">
+            Written by <a href="https://medium.com/@kovchiy">Danil Kovchy</a>; translated by Max Shirshin on 30th June 2014
+        </div>
+    </li>
+
+</ul>
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

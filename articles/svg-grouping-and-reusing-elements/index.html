@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>SVG: Grouping and Re-using Elements — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="Yulya Buhvalova, talks about using SVG features like `<g>`, `<def>` and `<symbol>` to make SVG elements more organized and easy to re-use.
+" property="og:description"/><meta content="http://frontendbabel.info/articles/svg-grouping-and-reusing-elements/thumb.png" property="og:image"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">SVG: Grouping and Re-using Elements</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://css.yoksel.ru/">Yulya Buhvalova</a> on 22nd March 2014; translated by <a href="http://gggritso.com/">George Gritsouk</a> on 14th July 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">SVG-figures can be grouped to structure a file in more convenient manner. There are several tags for this purpose:
+<code>&lt;g&gt;</code>, <code>&lt;defs&gt;</code> and <code>&lt;symbol&gt;</code>. Elements, element groups and symbols can be used repeatedly.</p><!-- cut -->
+<h2 class="text-header text-header_lvl_2" id="g"><a href="#g" class="text-header__anchor">g</a></h2><p class="text__p">The <code>&lt;g&gt;</code> tag serves for grouping figures semantically, for maintaining a transparent document structure.
+Groups of elements can be used repeatedly.</p><svg width="275" height="100">
+  <!-- Group 1  -->
+  <g id="to-sun">
+    <circle fill="purple" r="20" cx="25" cy="25"/>
+    <circle fill="crimson" r="20" cx="70" cy="25"/>
+    <circle fill="red" r="20" cx="115" cy="25"/>
+    <circle fill="orange" r="20" cx="160" cy="25"/>
+    <circle fill="gold" r="20" cx="205" cy="25"/>
+    <circle fill="yellow" r="20" cx="250" cy="25"/>
+  </g>
+  <!-- Group 2 -->
+  <g id="to-night">
+    <circle fill="greenyellow" r="20" cx="25" cy="70"/>
+    <circle fill="yellowgreen" r="20" cx="70" cy="70"/>
+    <circle fill="green" r="20" cx="115" cy="70"/>
+    <circle fill="steelblue" r="20" cx="160" cy="70"/>
+    <circle fill="darkviolet" r="20" cx="205" cy="70"/>
+    <circle fill="purple" r="20" cx="250" cy="70"/>
+  </g>
+</svg>
+
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg width="275" height="100">
+  &lt;!-- Group 1  -->
+  &lt;g id="to-sun">
+    &lt;circle fill="purple" r="20" cx="25" cy="25"/>
+    &lt;circle fill="crimson" r="20" cx="70" cy="25"/>
+    &lt;circle fill="red" r="20" cx="115" cy="25"/>
+    &lt;circle fill="orange" r="20" cx="160" cy="25"/>
+    &lt;circle fill="gold" r="20" cx="205" cy="25"/>
+    &lt;circle fill="yellow" r="20" cx="250" cy="25"/>
+  &lt;/g>
+  &lt;!-- Group 2 -->
+  &lt;g id="to-night">
+    &lt;circle fill="greenyellow" r="20" cx="25" cy="70"/>
+    &lt;circle fill="yellowgreen" r="20" cx="70" cy="70"/>
+    &lt;circle fill="green" r="20" cx="115" cy="70"/>
+    &lt;circle fill="steelblue" r="20" cx="160" cy="70"/>
+    &lt;circle fill="darkviolet" r="20" cx="205" cy="70"/>
+    &lt;circle fill="purple" r="20" cx="250" cy="70"/>
+  &lt;/g>
+&lt;/svg></code></pre><p class="text__p">Groups, like figures, can be given fills and strokes. The style will work for figures inside groups, which
+don&#39;t have their own style:</p><svg width="170" height="50">
+  <!-- Red Figures -->
+  <g id="to-sun" fill="tomato">
+    <ellipse rx="30" ry="10" cx="25" cy="25"
+             transform="rotate(-45 25 25)"/>
+    <ellipse rx="30" ry="10" cx="105" cy="25"
+             transform="rotate(-45 105 25)"/>
+  </g>
+  <!-- Blue Figures -->
+  <g id="to-sun" fill="skyblue">
+    <ellipse rx="30" ry="10" cx="65" cy="25"
+             transform="rotate(45 65 25)"/>
+    <ellipse rx="30" ry="10" cx="145" cy="25"
+             transform="rotate(45 145 25)"/>
+  </g>
+</svg>
+
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg width="170" height="50">
+  &lt;!-- Red Figures -->
+  &lt;g id="to-sun" fill="tomato">
+    &lt;ellipse rx="30" ry="10" cx="25" cy="25"
+             transform="rotate(-45 25 25)"/>
+    &lt;ellipse rx="30" ry="10" cx="105" cy="25"
+             transform="rotate(-45 105 25)"/>
+  &lt;/g>
+  &lt;!-- Blue Figures -->
+  &lt;g id="to-sun" fill="skyblue">
+    &lt;ellipse rx="30" ry="10" cx="65" cy="25"
+             transform="rotate(45 65 25)"/>
+    &lt;ellipse rx="30" ry="10" cx="145" cy="25"
+             transform="rotate(45 145 25)"/>
+  &lt;/g>
+&lt;/svg></code></pre><p class="text__p">Groups don&#39;t work like included elements in HTML, but more like groups of elements in visual editors.</p><p class="text__p">Groups don&#39;t show themselves visually, but can be used for grouping operations on their contents: it&#39;s possible
+to apply transformations for a group of elements, with no need to move each one, it&#39;s possible to set a visual
+theme to the whole group at once; all the elements inside the group inherit the given style. Additionally, properties
+of the group are added to the inner elements, without overwriting their own ones. For example, if an element has a red
+fill, but the group has a green one — the fill of the element remains red.</p><p class="text__p">For an element to inherit the visual properties of the group, it can&#39;t have properties of its own.</p><h2 class="text-header text-header_lvl_2" id="defs"><a href="#defs" class="text-header__anchor">defs</a></h2><p class="text__p">The <code>&lt;defs&gt;</code> tag acts as a library of elements and effects, which can be used later. The contents of the tag
+are not shown on the page.</p><svg width="200" height="200">
+  <!-- Hidden container for effects and figures -->
+  <defs>
+    <!-- Group of gradients -->
+    <g>
+      <linearGradient id="g1" x1="0%" y1="0%" x2="90%" y2="90%">
+        <stop stop-color="crimson" offset="0%"/>
+        <stop stop-color="gold" offset="100%"/>
+      </linearGradient>
+      <linearGradient id="g2" x1="0%" y1="0%" x2="90%" y2="90%">
+        <stop stop-color="yellowgreen" offset="0%"/>
+        <stop stop-color="green" offset="100%"/>
+      </linearGradient>
+    </g>
+    <!-- Group of figures, not shown on the page -->
+    <g>
+      <circle fill="url(#g1)" r="50" id="sun"/>
+      <rect width="200" height="70" id="rect" fill="url(#g2)"/>
+    </g>
+  </defs>
+
+  <!-- Usage of the figures -->
+  <use xlink:href="#sun" x="120" y="60"/>
+  <use xlink:href="#rect" x="0" y="110" transform="rotate(10 100 110)"/>
+</svg>
+
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg width="200" height="200">
+  &lt;!-- Hidden container for effects and figures -->
+  &lt;defs>
+    &lt;!-- Group of gradients -->
+    &lt;g>
+      &lt;linearGradient id="g1" x1="0%" y1="0%" x2="90%" y2="90%">
+        &lt;stop stop-color="crimson" offset="0%"/>
+        &lt;stop stop-color="gold" offset="100%"/>
+      &lt;/linearGradient>
+      &lt;linearGradient id="g2" x1="0%" y1="0%" x2="90%" y2="90%">
+        &lt;stop stop-color="yellowgreen" offset="0%"/>
+        &lt;stop stop-color="green" offset="100%"/>
+      &lt;/linearGradient>
+    &lt;/g>
+    &lt;!-- Group of figures, not shown on the page -->
+    &lt;g>
+      &lt;circle fill="url(#g1)" r="50" id="sun"/>
+      &lt;rect width="200" height="70" id="rect" fill="url(#g2)"/>
+    &lt;/g>
+  &lt;/defs>
+
+  &lt;!-- Usage of the figures -->
+  &lt;use xlink:href="#sun" x="120" y="60"/>
+  &lt;use xlink:href="#rect" x="0" y="110" transform="rotate(10 100 110)"/>
+&lt;/svg></code></pre><h2 class="text-header text-header_lvl_2" id="symbol"><a href="#symbol" class="text-header__anchor">symbol</a></h2><p class="text__p">A symbol is a group of figures, all part of a single whole. Like a <code>&lt;def&gt;</code>, not shown on the page, and like
+the <code>&lt;g&gt;</code>, can be used again. Inside a symbol is a new coordinate system.</p><svg width="240" height="170">
+  <defs>
+    <g>
+      <circle fill="gold" r="30" id="yellowball"/>
+    </g>
+    <!-- Symbol Description -->
+    <symbol id="mouth">
+      <polyline points="15 15 5 10 15 5" stroke="crimson" fill="none" stroke-width="3"/>
+    </symbol>
+    <!-- Symbol Description -->
+    <symbol id="bird">
+      <g stroke="brown">
+        <polyline points="0 0 0 25" stroke-width="3" transform="translate(25 100)"/>
+        <polyline points="0 0 0 25" stroke-width="3" transform="translate(45 100)"/>
+        <polyline points="0 0 12 0" stroke-width="3" transform="translate(19 125)"/>
+        <polyline points="0 0 12 0" stroke-width="3" transform="translate(40 125)"/>
+      </g>
+      <use xlink:href="#mouth" x="83" y="35"/>
+      <use xlink:href="#yellowball" x="90" y="55" transform="scale(.75)"/>
+      <use xlink:href="#yellowball" x="35" y="75" width="100"/>
+      <polyline points="55 70 45 90 20 80" stroke="orange" stroke-width="3" fill="none"/>
+      <circle fill="black" r="5" cx="75" cy="35"/>
+      <circle fill="gray" r="1" cx="77" cy="35"/>
+    </symbol>
+  </defs>
+
+  <!-- Symbol Usage -->
+  <use xlink:href="#bird" x="15" y="15"/>
+  <!-- Using the symbol again, flipping horizontally -->
+  <use xlink:href="#bird" x="0" y="35" transform="translate(225 -20) scale(-1,1)"/>
+</svg>
+
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg width="240" height="170">
+  &lt;defs>
+    &lt;g>
+      &lt;circle fill="gold" r="30" id="yellowball"/>
+    &lt;/g>
+    &lt;!-- Symbol Description -->
+    &lt;symbol id="mouth">
+      &lt;polyline points="15 15 5 10 15 5" stroke="crimson" fill="none" stroke-width="3"/>
+    &lt;/symbol>
+    &lt;!-- Symbol Description -->
+    &lt;symbol id="bird">
+      &lt;g stroke="brown">
+        &lt;polyline points="0 0 0 25" stroke-width="3" transform="translate(25 100)"/>
+        &lt;polyline points="0 0 0 25" stroke-width="3" transform="translate(45 100)"/>
+        &lt;polyline points="0 0 12 0" stroke-width="3" transform="translate(19 125)"/>
+        &lt;polyline points="0 0 12 0" stroke-width="3" transform="translate(40 125)"/>
+      &lt;/g>
+      &lt;use xlink:href="#mouth" x="83" y="35"/>
+      &lt;use xlink:href="#yellowball" x="90" y="55" transform="scale(.75)"/>
+      &lt;use xlink:href="#yellowball" x="35" y="75" width="100"/>
+      &lt;polyline points="55 70 45 90 20 80" stroke="orange" stroke-width="3" fill="none"/>
+      &lt;circle fill="black" r="5" cx="75" cy="35"/>
+      &lt;circle fill="gray" r="1" cx="77" cy="35"/>
+    &lt;/symbol>
+  &lt;/defs>
+
+  &lt;!-- Symbol Usage -->
+  &lt;use xlink:href="#bird" x="15" y="15"/>
+  &lt;!-- Using the symbol again, flipping horizontally -->
+  &lt;use xlink:href="#bird" x="0" y="35" transform="translate(225 -20) scale(-1,1)"/>
+&lt;/svg></code></pre><h2 class="text-header text-header_lvl_2" id="use"><a href="#use" class="text-header__anchor">use</a></h2><p class="text__p">This is a tag allowing re-use SVG-elements. It&#39;s possible to copy any element inside a single HTML page. It&#39;s
+also possible to include a library of elements at the beginning of a page and later use them in the necessary places.</p><p class="text__p">The copies can be given positions, widths and heights:</p><svg width="260" height="140">
+  <defs>
+    <!-- Symbol Creation -->
+    <symbol id="color-wheel">
+      <circle r="50" fill="gold" cx="50" cy="50"/>
+      <circle r="35" fill="orangered" cx="50" cy="50"/>
+      <circle r="20" fill="crimson" cx="50" cy="50"/>
+      <circle r="5" fill="maroon" cx="50" cy="50"/>
+     </symbol>
+  </defs>
+
+  <!-- Symbol copy with coordinates -->
+  <use xlink:href="#color-wheel" x="20" y="20"/>
+  <!-- Symbol copy with coordinates and height -->
+  <use xlink:href="#color-wheel" x="140" y="20" height="50"/>
+</svg>
+
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg width="260" height="140">
+  &lt;defs>
+    &lt;!-- Symbol Creation -->
+    &lt;symbol id="color-wheel">
+      &lt;circle r="50" fill="gold" cx="50" cy="50"/>
+      &lt;circle r="35" fill="orangered" cx="50" cy="50"/>
+      &lt;circle r="20" fill="crimson" cx="50" cy="50"/>
+      &lt;circle r="5" fill="maroon" cx="50" cy="50"/>
+     &lt;/symbol>
+  &lt;/defs>
+
+  &lt;!-- Symbol copy with coordinates -->
+  &lt;use xlink:href="#color-wheel" x="20" y="20"/>
+  &lt;!-- Symbol copy with coordinates and height -->
+  &lt;use xlink:href="#color-wheel" x="140" y="20" height="50"/>
+&lt;/svg></code></pre><p class="text__p">The position of the copy is determined with respect to the top left corner of the figure in the existing
+coordinate system. However, the coordinate system within the symbol is its own.</p><p class="text__p">On insertion of a symbol, the <code>width</code> and <code>height</code> determine not the size of the figure, but the visible area of
+the copy (like in the figure on the right), however when copying a group (<code>&lt;g&gt;</code>) the height and width don&#39;t affect
+anything. Use transformations to change the sizes of copies.</p><p class="text__p">It&#39;s also possible to give strokes, fills and transformations:</p><svg width="260" height="140">
+  <defs>
+    <!-- Original symbol, not shown -->
+    <symbol id="s-rect">
+      <rect width="100" height="25" x="2" y="2"/>
+     </symbol>
+  </defs>
+
+  <!-- Simple copy, the background is black by default -->
+  <use xlink:href="#s-rect" x="20" y="20"/>
+  <!-- Adding width and fill -->
+  <use xlink:href="#s-rect" x="140" y="20"
+       width="50" fill="yellowgreen"/>
+  <!-- Adding fill and stroke -->
+  <use xlink:href="#s-rect" x="20" y="80"
+       fill="gold" stroke="orange" stroke-width="4"/>
+  <!-- Adding fill, stroke and transform -->
+  <use xlink:href="#s-rect" x="140" y="80"
+       fill="skyblue" stroke="steelblue" stroke-width="2"
+       transform="rotate(-25 190 92)"/>
+</svg>
+
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg width="260" height="140">
+  &lt;defs>
+    &lt;!-- Original symbol, not shown -->
+    &lt;symbol id="s-rect">
+      &lt;rect width="100" height="25" x="2" y="2"/>
+     &lt;/symbol>
+  &lt;/defs>
+
+  &lt;!-- Simple copy, the background is black by default -->
+  &lt;use xlink:href="#s-rect" x="20" y="20"/>
+  &lt;!-- Adding width and fill -->
+  &lt;use xlink:href="#s-rect" x="140" y="20"
+       width="50" fill="yellowgreen"/>
+  &lt;!-- Adding fill and stroke -->
+  &lt;use xlink:href="#s-rect" x="20" y="80"
+       fill="gold" stroke="orange" stroke-width="4"/>
+  &lt;!-- Adding fill, stroke and transform -->
+  &lt;use xlink:href="#s-rect" x="140" y="80"
+       fill="skyblue" stroke="steelblue" stroke-width="2"
+       transform="rotate(-25 190 92)"/>
+&lt;/svg></code></pre><p class="text__p">Different CSS classes can be applied for the copies:</p><svg width="260" height="50">
+  <style>
+ .col-1 {
+    fill: #F35C78;
+    }
+  .col-2 {
+    fill: #E77D6D;
+    }
+  .col-3 {
+    fill: #D99B64;
+    }
+  .col-4 {
+    fill: #C8B357;
+    }
+  .col-5 {
+    fill: #B2CC49;
+    }
+  </style>
+
+  <defs>
+    <!-- House -->
+    <path id="house" d="M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z"/>
+  </defs>
+
+  <!-- House copy -->
+  <use xlink:href="#house"
+       class="col-1" x="20" y="10"
+       transform="rotate(35 36 26)"/>
+  <use xlink:href="#house"
+       class="col-2" x="67" y="10"
+       transform="rotate(100 83 26)"/>
+  <use xlink:href="#house"
+       class="col-3" x="114" y="10"
+       transform="rotate(140 130 26)"/>
+  <use xlink:href="#house"
+       class="col-4" x="161" y="10"
+       transform="rotate(30 177 26)"/>
+  <use xlink:href="#house"
+       class="col-5" x="208" y="10"
+       transform="rotate(100 224 26)"/>
+</svg>
+
+<p class="text__p">House is from <a href="http://icomoon.io">icomoon.io</a></p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "xml"} }'><code>&lt;svg width="260" height="50">
+  &lt;style>
+ .col-1 {
+    fill: #F35C78;
+    }
+  .col-2 {
+    fill: #E77D6D;
+    }
+  .col-3 {
+    fill: #D99B64;
+    }
+  .col-4 {
+    fill: #C8B357;
+    }
+  .col-5 {
+    fill: #B2CC49;
+    }
+  &lt;/style>
+
+  &lt;defs>
+    &lt;!-- House -->
+    &lt;path id="house"
+          d="M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z"/>
+  &lt;/defs>
+
+  &lt;!-- House copy -->
+  &lt;use xlink:href="#house"
+       class="col-1" x="20" y="10"
+       transform="rotate(35 36 26)"/>
+  &lt;use xlink:href="#house"
+       class="col-2" x="67" y="10"
+       transform="rotate(100 83 26)"/>
+  &lt;use xlink:href="#house"
+       class="col-3" x="114" y="10"
+       transform="rotate(140 130 26)"/>
+  &lt;use xlink:href="#house"
+       class="col-4" x="161" y="10"
+       transform="rotate(30 177 26)"/>
+  &lt;use xlink:href="#house"
+       class="col-5" x="208" y="10"
+       transform="rotate(100 224 26)"/>
+&lt;/svg></code></pre><p class="text__p">A well-structured file makes development faster and more comfortable, and copying symbols can make
+code significantly shorter.</p><h3 class="text-header text-header_lvl_3" id="links-on-the-same-topic"><a href="#links-on-the-same-topic" class="text-header__anchor">Links on the Same Topic</a></h3><ul>
+<li><a href="http://www.w3.org/TR/SVG/struct.html">W3C Document Structre</a></li>
+<li><a href="http://sarasoueidan.com/blog/structuring-grouping-referencing-in-svg/">Structuring, Grouping, and Referencing in SVG – The &lt;g&gt;, <use>, <defs> and <symbol> Elements</a></li>
+</ul>
+
+    <div class="article__date">
+        14th July 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://css.yoksel.ru/svg-groups-use/" rel="alternate" hreflang="ru">
+        SVG: группировка и переиспользование элементов
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://css.yoksel.ru/">
+                        Yulya Buhvalova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/yoksel">
+                        yoksel
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/yoksel_en">
+                        @yoksel_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://css.yoksel.ru/">
+                        http://css.yoksel.ru/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://gggritso.com/">
+                        George Gritsouk
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/gggritso">
+                        gggritso
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/gggritso">
+                        @gggritso
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://gggritso.com/">
+                        http://gggritso.com/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="SVG: Grouping and Re-using Elements">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/svg-grouping-and-reusing-elements/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/svg-grouping-and-reusing-elements';
+		window.disqus_identifier = 'articles-svg-grouping-and-reusing-elements-index';
+		window.disqus_title = 'SVG: Grouping and Re-using Elements';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

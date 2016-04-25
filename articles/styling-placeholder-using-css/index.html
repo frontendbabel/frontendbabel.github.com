@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Styling placeholders with CSS. Syntax, tips &amp; tricks, supported HTML5 styles — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="CSS tricks for styling input and textarea placeholders. Things like hiding a placeholder with an animation or cutting off exceedingly long placeholder texts in a nice way can be done in pure CSS!
+" property="og:description"/><meta content="http://frontendbabel.info/articles/styling-placeholder-using-css/thumb.png" property="og:image"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">Styling placeholders with CSS. Syntax, tips &amp; tricks, supported HTML5 styles</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://html5.by/">Dudin Dmitriy</a>; translated by <a href="http://www.gtalk.kz/">Talgautb</a> on 9th September 2015
+</div>
+<div class="article__text text">
+    <p class="text__p">Placeholder attribute is used to provide an action hint inside empty elements such as input or textarea. In this article, we consider the possibility of styling the placeholder text as well as some tricks to make it more usable and functional.</p><p class="text__p">Let&#39;s begin with an example for those who don&#39;t know what a placeholder is.</p><!-- cut -->
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "html"} }'><code>&lt;input type="text" placeholder="Leave message here"></code></pre><div id="example1source">
+<style>
+  #example1source {
+    display: none;
+  }
+  input{
+    border: 2px solid rgba(220,220,220,1);
+    color: #2980b9;
+    font-size: 16px;
+    box-shadow: 1px 1px 3px 1px rgba(200,200,200, 0.2) inset;
+    padding: 1em;
+    width: 17em;
+    outline: none;
+    margin: 0;
+    -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  }
+
+  input:hover{
+    border: 2px solid rgba(52, 152, 219, 1);
+    box-shadow: 1px 1px 3px 1px rgba(52, 152, 219, 0.2) inset;
+    -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  }
+
+  input:focus{
+    border: 2px solid rgba(52, 152, 219, 1);
+    box-shadow: 0px 0px 0px 0px rgba(52, 152, 219, 1);
+    background-color: rgba(255,255,255, 0.5);
+    -webkit-transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1);
+  }
+
+</style>
+
+<input type="text" placeholder="Leave message here">
+</div>
+
+<div id="example1"></div>
+
+<p class="text__p">Placeholder styles can be modified with the following CSS rules:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>  ::-webkit-input-placeholder {color:#c0392b;}
+  ::-moz-placeholder          {color:#c0392b;} /* Firefox 19+ */
+  :-moz-placeholder           {color:#c0392b;} /* Firefox 18- */
+  :-ms-input-placeholder      {color:#c0392b;}</code></pre><p class="text__p">Looks scary, doesn&#39;t it? In fact, it&#39;s not standartized yet. Each browser implements placeholder styling in its own way.</p><p class="text__p">In IE and old Firefox (till ver. 18) placeholder is considered a pseudo-class whereas in the new Firefox, Webkit, and Blink, it is a pseudo-element.</p><p class="text__p">Let&#39;s see what happens:</p><div id="example2source">
+<style>
+  #example2source {
+    display: none;
+  }
+  ::-webkit-input-placeholder {
+    color: #c0392b;
+  }
+  ::-moz-placeholder { /<em> Firefox 19+ </em>/
+    color: #c0392b;
+  }
+  :-ms-input-placeholder {
+    color: #c0392b;
+  }
+  :-moz-placeholder { /<em> Firefox 18- </em>/
+    color: #c0392b;
+  }
+</style>
+
+<input type="text" placeholder="Leave message here">
+</div>
+
+<div id="example2"></div>
+
+<p class="text__p">Not all CSS properties are fully supported. Most modern browsers would allow you to change:</p><pre class="highlight i-bem" data-bem='{ "highlight": {} }'><code>  font (and related properties)
+  background (and related properties)
+  color
+  word-spacing
+  letter-spacing
+  text-decoration
+  vertical-align
+  text-transform
+  line-height
+  text-indent
+  text-overflow
+  opacity</code></pre><h2 class="text-header text-header_lvl_2" id="if-placeholder-does-not-fit"><a href="#if-placeholder-does-not-fit" class="text-header__anchor">If placeholder does not fit</a></h2><p class="text__p">Sometimes the width of a text input gets reduced (depending on the layout), especially on mobile devices. In this case, the placeholder text will be cut off if it&#39;s too long. It looks ugly :) To prevent this, one can use <code>text-overflow: ellipsis</code>. This syntax works in all modern browsers.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>  input[placeholder]          {text-overflow:ellipsis;}
+  input::-moz-placeholder     {text-overflow:ellipsis;}
+  input:-moz-placeholder      {text-overflow:ellipsis;}
+  input:-ms-input-placeholder {text-overflow:ellipsis;}</code></pre><div id="example3source">
+<style>
+  #example3source {
+    display: none;
+  }
+  input {
+    width: 130px;
+    margin-top: 3px;
+  }
+  input.ell[placeholder] {text-overflow: ellipsis;}
+  input.ell::-moz-placeholder { text-overflow: ellipsis; } /<em> firefox 19+ </em>/
+  input.ell:-moz-placeholder { text-overflow: ellipsis; }
+</style>
+
+<span style="color:#e74c3c">Without text-overflow: ellipsis;</span><br>
+<input type="text" placeholder="Leave your long long message here"><br><br>
+<span style="color:#2ecc71">With text-overflow: ellipsis;</span><br>
+<input class="ell" type="text" placeholder="Leave your long long message here">
+</div>
+
+<div id="example3"></div>
+
+<h3 class="text-header text-header_lvl_3" id="how-to-hide-a-placehoder-on-focus"><a href="#how-to-hide-a-placehoder-on-focus" class="text-header__anchor">How to hide a placehoder on focus?</a></h3><p class="text__p">Hiding the placeholder is not consistent across browsers.</p><ol>
+<li>In some browsers, it happens when input field is focused</li>
+<li>In other browsers, it only happens after at least one character is entered</li>
+</ol>
+<p class="text__p">I like the first option. To implement this behavior in all browsers that support placeholders, define the following CSS rules:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>  :focus::-webkit-input-placeholder {color: transparent}
+  :focus::-moz-placeholder          {color: transparent}
+  :focus:-moz-placeholder           {color: transparent}
+  :focus:-ms-input-placeholder      {color: transparent}</code></pre><div id="example4source">
+<style>
+  #example4source {
+    display: none;
+  }
+  input{
+    margin-top: 3px;
+  }
+  :focus::-webkit-input-placeholder {color: transparent}
+  :focus::-moz-placeholder          {color: transparent}
+  :focus:-moz-placeholder           {color: transparent}
+  :focus:-ms-input-placeholder      {color: transparent}
+</style>
+
+Placeholder hides itself on focus<br>
+<input type="text" placeholder="Leave message here">
+</div>
+
+<div id="example4"></div>
+
+<h2 class="text-header text-header_lvl_2" id="hiding-the-placeholder-in-a-nice-way"><a href="#hiding-the-placeholder-in-a-nice-way" class="text-header__anchor">Hiding the placeholder in a nice way</a></h2><p class="text__p">You can add a transition for showing and hiding a placeholder:</p><div id="example5source">
+<style>
+  #example5source {
+    display: none;
+  }
+  input{
+    margin-top: 3px;
+  }
+  .input1::-webkit-input-placeholder     {opacity: 1; transition: opacity 0.3s ease;}
+  .input1::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
+  .input1:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
+  .input1:-ms-input-placeholder            {opacity: 1; transition: opacity 0.3s ease;}
+  .input1:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+  .input1:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s ease;}
+  .input1:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
+  .input1:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}
+
+  .input2::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.3s ease;}
+  .input2::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
+  .input2:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
+  .input2:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
+  .input2:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.3s ease;}
+  .input2:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.3s ease;}
+  .input2:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.3s ease;}
+  .input2:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.3s ease;}
+
+  .input3::-webkit-input-placeholder       {line-height: 20px;  transition: line-height 0.5s ease;}
+  .input3::-moz-placeholder                {line-height: 20px;  transition: line-height 0.5s ease;}
+  .input3:-moz-placeholder                 {line-height: 20px;  transition: line-height 0.5s ease;}
+  .input3:-ms-input-placeholder            {line-height: 20px;  transition: line-height 0.5s ease;}
+  .input3:focus::-webkit-input-placeholder {line-height: 100px; transition: line-height 0.5s ease;}
+  .input3:focus::-moz-placeholder          {line-height: 100px; transition: line-height 0.5s ease;}
+  .input3:focus:-moz-placeholder           {line-height: 100px; transition: line-height 0.5s ease;}
+  .input3:focus:-ms-input-placeholder      {line-height: 100px; transition: line-height 0.5s ease;}
+</style>
+
+Fadeouts of a placeholder in focus
+<input class="input1" type="text" placeholder="Leave message here"><br>
+
+Shift a placeholder in focus right 
+<input class="input2" type="text" placeholder="Leave message here"><br>
+
+Shift a placeholder in focus down
+<input class="input3" type="text" placeholder="Leave message here"><br>
+</div>
+
+<div id="example5"></div>
+
+<p class="text__p">Here is the CSS:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>  /* fadeouts of placeholder in focus */
+  .input1::-webkit-input-placeholder       {opacity: 1; transition: opacity 0.3s ease;}
+  .input1::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
+  .input1:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
+  .input1:-ms-input-placeholder            {opacity: 1; transition: opacity 0.3s ease;}
+  .input1:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+  .input1:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s ease;}
+  .input1:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
+  .input1:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}
+
+  /* shift right placeholder in focus */
+  .input2::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.3s ease;}
+  .input2::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
+  .input2:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
+  .input2:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
+  .input2:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.3s ease;}
+  .input2:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.3s ease;}
+  .input2:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.3s ease;}
+  .input2:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.3s ease;}
+
+  /* shift down placeholder in focus */
+  .input3::-webkit-input-placeholder       {line-height: 20px;  transition: line-height 0.5s ease;}
+  .input3::-moz-placeholder                {line-height: 20px;  transition: line-height 0.5s ease;}
+  .input3:-moz-placeholder                 {line-height: 20px;  transition: line-height 0.5s ease;}
+  .input3:-ms-input-placeholder            {line-height: 20px;  transition: line-height 0.5s ease;}
+  .input3:focus::-webkit-input-placeholder {line-height: 100px; transition: line-height 0.5s ease;}
+  .input3:focus::-moz-placeholder          {line-height: 100px; transition: line-height 0.5s ease;}
+  .input3:focus:-moz-placeholder           {line-height: 100px; transition: line-height 0.5s ease;}
+  .input3:focus:-ms-input-placeholder      {line-height: 100px; transition: line-height 0.5s ease;}</code></pre><p class="text__p">I hope you find it useful. Please leave your comments and suggestions below.</p>
+    <div class="article__date">
+        9th September 2015
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://html5.by/blog/placeholder/" rel="alternate" hreflang="ru">
+        Стилизуем placeholder при помощи CSS. Синтаксис, трюки, поддерживаемые стили в html5
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://html5.by/">
+                        Dudin Dmitriy
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/nedudi">
+                        nedudi
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/nedudi">
+                        @nedudi
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://html5.by/">
+                        http://html5.by/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://www.gtalk.kz/">
+                        Talgautb
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/talgautb">
+                        talgautb
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/talgautb">
+                        @talgautb
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://www.gtalk.kz/">
+                        http://www.gtalk.kz/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="Styling placeholders with CSS. Syntax, tips & tricks, supported HTML5 styles">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/styling-placeholder-using-css/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/styling-placeholder-using-css';
+		window.disqus_identifier = 'articles-styling-placeholder-using-css-index';
+		window.disqus_title = 'Styling placeholders with CSS. Syntax, tips & tricks, supported HTML5 styles';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+  
+    <script src="examples.js"></script>
+  
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

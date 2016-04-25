@@ -1,0 +1,43 @@
+.text-header__anchor
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+.text-header__anchor:before
+{
+    content: '# ';
+    display: block;
+    position: absolute;
+    margin-left: -1em;
+    padding-right: 1em;
+    visibility: hidden;
+}
+
+.text-header__anchor:hover::before
+{
+    visibility: visible;
+}
+
+.text-header
+{
+    font-size: 1.8em;
+    margin: 1em 0 0;
+    font-weight: 300;
+}
+
+.text-header_lvl_2
+{
+    font-size: 1.4em;
+}
+
+.text-header_lvl_3
+{
+    font-size: 1.2em;
+}
+
+.text-header_lvl_4
+{
+    font-size: 1em;
+    font-weight: 400;
+}

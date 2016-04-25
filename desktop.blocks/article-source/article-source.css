@@ -1,0 +1,24 @@
+.article-source
+{
+    background-color: #7294D4;
+    position: relative;
+    padding: 0.5em;
+    margin-top: 4em;
+    border-radius: 2px;
+}
+
+.article-source::before
+{
+    content: 'Source';
+    color: #fff;
+    font-size: 21px;
+    display: inline-block;
+}
+
+.article-source__link
+{
+    color: #FFF;
+    text-decoration: none;
+    border: #FFF dotted;
+    border-width: 0 0 1px 0;
+}

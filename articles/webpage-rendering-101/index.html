@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>What Every Frontend Developer Should Know About Webpage Rendering — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">What Every Frontend Developer Should Know About Webpage Rendering</h1>
+
+
+<div class="article__meta">
+    Written by <a href="http://skutin.ru/">Alexander Skutin</a> on 26th May 2014; translated by Max Shirshin on 30th June 2014
+</div>
+<div class="article__text text">
+    <p class="text__p">Today I&#39;d like to focus on the subject of web page rendering and why it is important in web development. A lot of articles are available covering the subject, but the information is scattered and somehow fragmented. To wrap my head around the subject, for example, I had to study a lot of sources. That&#39;s why I decided I should write this article. I believe the article will be useful for beginners as well as for more advanced developers who want to refresh and structure what they already know.</p><!-- cut -->
+<p class="text__p">Rendering has to be optimized from the very beginning, when the page layout is being defined, as styles and scripts play the crucial role in page rendering. Professionals have to know certain tricks to avoid performance problems.</p><p class="text__p">This article does not study the inner browser mechanics in detail, but rather offers some common principles. Different browser engines work differently, this would make a browser-specific study even more complicated.</p><h2 class="text-header text-header_lvl_2" id="how-do-browsers-render-a-web-page"><a href="#how-do-browsers-render-a-web-page" class="text-header__anchor">How do browsers render a web page</a></h2><p class="text__p">We start with an overview of browser actions when rendering a page:</p><ol>
+<li>The DOM (Document Object Model) is formed from the HTML that is received from a server.</li>
+<li>Styles are loaded and parsed, forming the CSSOM (CSS Object Model).</li>
+<li>On top of DOM and CSSOM, a rendering tree is created, which is a set of objects to be rendered (Webkit calls each of those a &quot;renderer&quot; or &quot;render object&quot;, while in Gecko it&#39;s a &quot;frame&quot;). Render tree reflects the DOM structure except for invisible elements (like the &lt;head&gt; tag or elements that have <code>display:none;</code> set). Each text string is represented in the rendering tree as a separate renderer. Each of the rendering objects contains its corresponding DOM object (or a text block) plus the calculated styles. In other words, the render tree describes the visual representation of a DOM.</li>
+<li>For each render tree element, its coordinates are calculated, which is called &quot;layout&quot;. Browsers use a flow method which only required one pass to layout all the elements (tables require more than one pass).</li>
+<li>Finally, this gets actually displayed in a browser window, a process called &quot;painting&quot;.</li>
+</ol>
+<p class="text__p">When users interact with a page, or scripts modify it, some of the aforementioned operations have to be repeated, as the underlying page structure changes.</p><h3 class="text-header text-header_lvl_3" id="repaint"><a href="#repaint" class="text-header__anchor">Repaint</a></h3><p class="text__p">When changing element styles which don&#39;t affect the element&#39;s position on a page (such as <code>background-color</code>, <code>border-color</code>, <code>visibility</code>), the browser just repaints the element again with the new styles applied (that means a &quot;repaint&quot; or &quot;restyle&quot; is happening).</p><h3 class="text-header text-header_lvl_3" id="reflow"><a href="#reflow" class="text-header__anchor">Reflow</a></h3><p class="text__p">When the changes affect document contents or structure, or element position, a reflow (or relayout) happens. These changes are usually triggered by:</p><ul>
+<li>DOM manipulation (element addition, deletion, altering, or changing element order);</li>
+<li>Contents changes, including text changes in form fields;</li>
+<li>Calculation or altering of CSS properties;</li>
+<li>Adding or removing style sheets;</li>
+<li>Changing the &quot;class&quot; attribute;</li>
+<li>Browser window manipulation (resizing, scrolling);</li>
+<li>Pseudo-class activation (:hover).</li>
+</ul>
+<h2 class="text-header text-header_lvl_2" id="how-browsers-optimize-rendering"><a href="#how-browsers-optimize-rendering" class="text-header__anchor">How browsers optimize rendering</a></h2><p class="text__p">Browsers are doing their best to restrict repaint/reflow to the area that covers the changed elements only. For example, a size change in an absolute/fixed positioned element only affects the element itself and its descendants, whereas a similar change in a statically positioned element triggers reflow for all the subsequent elements.</p><p class="text__p">Another optimization technique is that while running pieces of JavaScript code, browsers cache the changes, and apply them in a single pass after the code was run. For example, this piece of code will only trigger one reflow and repaint:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>var $body = $('body');
+$body.css('padding', '1px'); // reflow, repaint
+$body.css('color', 'red'); // repaint
+$body.css('margin', '2px'); // reflow, repaint
+// only 1 reflow and repaint will actually happen</code></pre><p class="text__p">However, as mentioned above, accessing an element property triggers a forced reflow. This will happen if we add an extra line that reads an element property to the previous block:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>var $body = $('body');
+$body.css('padding', '1px');
+$body.css('padding'); // reading a property, a forced reflow
+$body.css('color', 'red');
+$body.css('margin', '2px');</code></pre><p class="text__p">As a result, we get 2 reflows instead of one. Because of this, you should group reading element properties together to optimize performance (<a href="http://jsbin.com/duhah/2/edit">see a more detailed example on JSBin</a>).</p><p class="text__p">There are situations when you have to trigger a forced reflow. Example: we have to apply the same property (&quot;margin-left&quot; for example) to the same element twice. Initially, it should be set to <code>100px</code> without animation, and then it has to be animated with <code>transition</code> to a value of <code>50px</code>. You can study this example <a href="http://jsbin.com/qutev/1/edit">on JSBin</a> right now, but I&#39;ll describe it here in more detail.</p><p class="text__p">We start by creating a CSS class with a transition:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>.has-transition {
+   -webkit-transition: margin-left 1s ease-out;
+      -moz-transition: margin-left 1s ease-out;
+        -o-transition: margin-left 1s ease-out;
+           transition: margin-left 1s ease-out;
+}</code></pre><p class="text__p">Then proceed with the implementation:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>// our element that has a "has-transition" class by default
+var $targetElem = $('#targetElemId');
+
+// remove the transition class
+$targetElem.removeClass('has-transition');
+
+// change the property expecting the transition to be off, as the class is not there
+// anymore
+$targetElem.css('margin-left', 100);
+
+// put the transition class back
+$targetElem.addClass('has-transition');
+
+// change the property
+$targetElem.css('margin-left', 50);</code></pre><p class="text__p">This implementation, however, does not work as expected. The changes are cached and applied only at the end of the code block. What we need is a forced reflow, which we can achieve by making the following changes:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>// remove the transition class
+$(this).removeClass('has-transition');
+
+// change the property
+$(this).css('margin-left', 100);
+
+// trigger a forced reflow, so that changes in a class/property get applied immediately
+$(this)[0].offsetHeight; // an example, other properties would work, too
+
+// put the transition class back
+$(this).addClass('has-transition');
+
+// change the property
+$(this).css('margin-left', 50);</code></pre><p class="text__p">Now this works as expected.</p><h2 class="text-header text-header_lvl_2" id="practical-advice-on-optimization"><a href="#practical-advice-on-optimization" class="text-header__anchor">Practical advice on optimization</a></h2><p class="text__p">Summarizing the available information, I could recommend the following:</p><ul>
+<li>Create valid HTML and CSS, do not forget to specify the document encoding. Styles should be included into &lt;head&gt;, and scripts appended to the end of the &lt;body&gt; tag.</li>
+<li>Try to simplify and optimize CSS selectors (this optimization is almost universally ignored by developers who mostly use CSS preprocessors). Keep nesting levels at a minimum. This is how CSS selectors rank according to their performance (starting from the fastest ones):<ol>
+<li>Identificator: <code>#id</code></li>
+<li>Class: <code>.class</code></li>
+<li>Tag: <code>div</code></li>
+<li>Adjacent sibling selector: <code>a + i</code></li>
+<li>Parent selector: <code>ul &gt; li</code></li>
+<li>Universal selector: <code>*</code></li>
+<li>Attribute selector: <code>input[type=&quot;text&quot;]</code></li>
+<li>Pseudoclasses and pseudoelements: <code>a:hover</code>
+You should remember that browsers process selectors from right to left, that&#39;s why the rightmost selector should be the fastest one — either <code>#id</code> or <code>.class</code>:</li>
+</ol>
+</li>
+</ul>
+<pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "css"} }'><code>div * {...} // bad
+.list li {...} // bad
+.list-item {...} // good
+#list .list-item {...} // good</code></pre><ol>
+<li>In your scripts, minimize DOM manipulation whenever possible. Cache everything, including properties and objects (if they are to be reused). It&#39;s better to work with an &quot;offline&quot; element when performing complicated manipulations (an &quot;offline&quot; element is one that is disconnected from DOM and only stored in memory), and append it to DOM afterwards.</li>
+<li>If you use jQuery to select elements, follow <a href="http://learn.jquery.com/performance/optimize-selectors/">jQuery selectors best practices</a>.</li>
+<li>To change element&#39;s styles, modifying the &quot;class&quot; attribute is one of the most performant ways. The deeper in the DOM tree you perform this change, the better (also because this helps decouple logic from presentation).</li>
+<li>Animate only absolute/fixed positioned elements if you can.</li>
+<li>It is a good idea to disable complicated <code>:hover</code> animations while scrolling (e.g. by adding an extra &quot;no-hover&quot; class to &lt;body&gt;). <a href="http://habrahabr.ru/post/204238/">Read an article on the subject</a>.</li>
+</ol>
+<p class="text__p">For a more detailed overview, have a look at these articles:</p><ol>
+<li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm">How browsers work</a></li>
+<li><a href="http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/">Rendering: repaint, reflow/relayout, restyle</a></li>
+</ol>
+<p class="text__p">I hope you find this article useful!</p>
+    <div class="article__date">
+        30th June 2014
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="http://habrahabr.ru/post/224187/" rel="alternate" hreflang="ru">
+        Рендеринг WEB-страницы: что об этом должен знать front-end разработчик
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://skutin.ru/">
+                        Alexander Skutin
+                    </a>
+                
+            </dd>
+        </dl>
+        
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://skutin.ru/">
+                        http://skutin.ru/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    Max Shirshin
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/ingdir">
+                        ingdir
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/ingdir">
+                        @ingdir
+                    </a>
+                </dd>
+            </dl>
+        
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="What Every Frontend Developer Should Know About Webpage Rendering">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/webpage-rendering-101/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/webpage-rendering-101';
+		window.disqus_identifier = 'articles-webpage-rendering-101-index';
+		window.disqus_title = 'What Every Frontend Developer Should Know About Webpage Rendering';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

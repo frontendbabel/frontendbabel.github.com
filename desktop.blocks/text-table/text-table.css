@@ -1,0 +1,28 @@
+.text-table
+{
+    border: 1px solid #dddddd;
+    border-bottom: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+
+.text-table__head
+{
+    font-weight: bold;
+}
+
+.text-table__th,
+.text-table__td
+{
+    text-align: center;
+    border-left: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding: 0.5em;
+}
+
+.text-table__th:first-child,
+.text-table__td:first-child
+{
+    border-left: 0;
+}

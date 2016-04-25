@@ -1,0 +1,7 @@
+.footer
+{
+    border: rgba(0,0,0, 0.1) solid;
+    border-width: 1px 0 0 0;
+    padding: 1.25em 0;
+    margin: 2em auto 0;
+}

@@ -1,0 +1,7 @@
+.header
+{
+    border: rgba(0,0,0, 0.1) solid;
+    border-width: 0 0 1px 0;
+    padding: 1.25em 0;
+    font-size: 18px;
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Yet another way to load SVG sprite — Frontend Babel</title>
+    <link rel="stylesheet" type="text/css" href="/desktop.bundles/index/index.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta content="Vladimir Kuznetsov suggests a clever way to link SVG sprite to HTML pages so that the sets can be cached as other static files. This technique also perfectly works for IE.
+" property="og:description"/><meta content="http://frontendbabel.info/articles/yet-another-way-to-load-svg-sprite/thumb.png" property="og:image"/>
+</head>
+<body class="page">
+    <header class="header layout">
+        <div class="layout__col">
+            <a class="logo" href="/">
+                <i class="logo__symb">›</i> <i class="logo__fr">Frontend</i> <i class="logo__bl">Babel</i>
+            </a>
+        </div>
+        <div class="layout__col">
+            <ul class="site-menu">
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/about/">About</a>
+                
+                </li>
+            
+                <li class="site-menu__item ">
+                
+                    <a class="site-menu__text link" href="/how-to-contribute/">How to contribute</a>
+                
+                </li>
+            
+            </ul>
+        </div>
+        <div class="layout__col layout__col_top">
+            <ul class="social-icons">
+                <li class="social-icons__item">
+                    <a href="/rss.xml">
+                        <img class="social-icons__img"
+                             title="Get fresh articles with RSS"
+                             src="/desktop.blocks/social-icons/__rss/social-icons__rss.png"/>
+                    </a>
+                </li>
+                <li class="social-icons__item">
+                    <a href="https://twitter.com/frontendbabel">
+                        <img class="social-icons__img"
+                             title="Follow #FrontendBabel in Twitter and we will keep you updated"
+                             src="/desktop.blocks/social-icons/__twitter/social-icons__twitter.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <article class="article">
+<h1 class="text-header">Yet another way to load SVG sprite</h1>
+
+
+<div class="article__meta">
+    Written by <a href="https://noteskeeper.ru">Vladimir Kuznetsov</a> on 23rd July 2014; translated by <a href="http://varya.me/">Varya Stepanova</a> on 25th April 2016
+</div>
+<div class="article__text text">
+    <p class="text__p">During our experiments with inlining SVG icons at our company, we discovered that browsers responded to linking SVG set into a page differently. However, we would like to have a universal and stable method, which works in all the browsers with support SVG.</p><p class="text__p">Trials and errors led us to this scenario:
+to some variable in a variable in JavaScript.</p><ol>
+<li>Add the JavaScript file in the bundle of all JavaScript files. Then, link this
+bundle in <code>&lt;head&gt;</code> section.</li>
+<li>Before the first usage of SVG add an empty element (placeholder) and insert  the content of SVG-string here.</li>
+</ol>
+<p class="text__p">Thus, we achieved the caching of SVG pictograms similar to how it happens to other static files. Also, we overcame a problem of linking
+an external SVG file in IE.</p><!-- cut -->
+<p class="text__p">I&#39;ll describe our steps in details.</p><h2 class="text-header text-header_lvl_2" id="converting-svg-into-javascript"><a href="#converting-svg-into-javascript" class="text-header__anchor">Converting SVG into JavaScript</a></h2><p class="text__p">This is a perfect task for Grunt.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "js"} }'><code>grunt.registerTask('elements', 'Transform a SVG sprites to a JS file',
+  function () {
+    var LINE_LENGTH = 100, svg = [], i, l, content;
+
+    content = grunt.file.read('assets/images/elements.svg');
+    content = content.replace(/'/g, "\\'");
+    content = content.replace(/>\s+</g, "><").trim();
+    l = Math.ceil(content.length / LINE_LENGTH);
+
+    for (i = 0; i < l; i++) {
+      svg.push("'" + content.substr(i * LINE_LENGTH, LINE_LENGTH) + "'");
+    }
+
+    grunt.file.write('assets/_/js/elements.js',
+      'var SVG_SPRITE = ' + svg.join('+\n') + ';');
+  }
+);</code></pre><p class="text__p">This code transforms <code>assets/images/elements.svg</code> into <code>assets/_/js/elements.js</code> file.</p><h2 class="text-header text-header_lvl_2" id="concatenation"><a href="#concatenation" class="text-header__anchor">Concatenation</a></h2><p class="text__p">The <code>elements.js</code> file should be linked in <code>&lt;head&gt;</code> section. Sure, you&#39;ve got few more scripts to be loaded at the beginning of the page. You can bundle them to decrease the amount of HTTP requests to the server.</p><h3 class="text-header text-header_lvl_3" id="adding-on-page"><a href="#adding-on-page" class="text-header__anchor">Adding on page</a></h3><p class="text__p">It is important for sprites to be inserted on the page before their first usage. So, let&#39;s add an empty placeholder element.</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "html"} }'><code>&lt;div id="elements-placeholder"
+  style="border: 0; clip: rect(0 0 0 0); overflow: hidden;
+    margin: -1px; padding: 0; position: absolute;
+    width: 1px; height: 1px;">&lt;/div></code></pre><p class="text__p">You need a placeholder to safely modify DOM tree in the loading process. It has to have a unique id. I included some inline styles to prevent broken image effect in case if countors accidentally turn up outside of <code>&lt;defs&gt;</code>.</p><p class="text__p">Fill the placeholder:</p><pre class="highlight i-bem" data-bem='{ "highlight": { "lang": "html"} }'><code>&lt;script>document.getElementById("elements-placeholder").innerHTML = SVG_SPRITE;</script></code></pre><h2 class="text-header text-header_lvl_2" id="notes"><a href="#notes" class="text-header__anchor">Notes</a></h2><ol>
+<li>In my case, to ease the building a JS file, I assume the creation of a global variable <code>SVG_SPRITE</code>. However, to espace the pollution of global context, I suggest saving the SVG string into the application namespace. See more at <a href="https://github.com/mistakster/app-skeleton#defaults">module approach</a> page.</li>
+<li>File names are hard coded in my Grunt task. It makes sense to re-write it as a configurable process, especially
+if you have a range of SVG sets in your project.</li>
+</ol>
+<h2 class="text-header text-header_lvl_2" id="demo"><a href="#demo" class="text-header__anchor">Demo</a></h2><p class="text__p">We&#39;ve got a <a href="https://github.com/graph-uk/assemble">template project</a> at our company&#39;s GitHub. You can check it out to get detailed overview of this method.</p>
+    <div class="article__date">
+        25th April 2016
+    </div>
+</div>
+<div class="article-source">
+    
+        [RU]
+    
+    <a class="link article-source__link" href="https://noteskeeper.ru/1168/" rel="alternate" hreflang="ru">
+        Ещё один вариант загрузки набора SVG-изображений
+    </a>
+</div>
+<div class="credits">
+    <div class="credits__author user">
+        <dl class="credits__name">
+            <dt class="credits__var">Author:</dt>
+            <dd class="credits__val">
+                
+                    <a href="https://noteskeeper.ru">
+                        Vladimir Kuznetsov
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/mistakster">
+                        mistakster
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/mista_k">
+                        @mista_k
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="https://noteskeeper.ru">
+                        https://noteskeeper.ru
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+    <div class="credits__translator user">
+        <dl class="credits__name">
+            <dt class="credits__var">Translator:</dt>
+            <dd class="credits__val">
+                
+                    <a href="http://varya.me/">
+                        Varya Stepanova
+                    </a>
+                
+            </dd>
+        </dl>
+        
+            <dl class="credits__github">
+                <dt class="credits__var">GitHub:</dt>
+                <dd class="credits__val">
+                    <a href="https://github.com/varya">
+                        varya
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__twitter">
+                <dt class="credits__var">Twitter:</dt>
+                <dd class="credits__val">
+                    <a href="https://twitter.com/varya_en">
+                        @varya_en
+                    </a>
+                </dd>
+            </dl>
+        
+        
+            <dl class="credits__site">
+                <dt class="credits__var">Site:</dt>
+                <dd class="credits__val">
+                    <a href="http://varya.me/">
+                        http://varya.me/
+                    </a>
+                </dd>
+            </dl>
+        
+    </div>
+</div>
+</article>
+<div class="social-likes-panel">
+    <div class="social-likes social-likes_light" data-title="Yet another way to load SVG sprite">
+        <div class="facebook" title="Share on Facebook">Facebook</div>
+        <div class="twitter" title="Share on Twitter">Twitter</div>
+        <div class="plusone" title="Share on Google+">Google+</div>
+    </div>
+</div>
+<div>
+If you've spotted a mistake, feel free to
+<a href="https://github.com/frontendbabel/frontendbabel.github.com/edit/source/src/documents/articles/yet-another-way-to-load-svg-sprite/index.html.md">edit it on GitHub</a>.
+</div>
+<comments class="comments">
+<div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'frontendbabel';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://frontendbabel.info/articles/yet-another-way-to-load-svg-sprite';
+		window.disqus_identifier = 'articles-yet-another-way-to-load-svg-sprite-index';
+		window.disqus_title = 'Yet another way to load SVG sprite';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</comments>
+
+<!-- Additional scripts -->
+
+    </div>
+    <script src="/desktop.bundles/index/index.min.js"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52228839-1', 'frontendbabel.info');
+    ga('send', 'pageview');
+
+    </script>
+</body>
+</html>
