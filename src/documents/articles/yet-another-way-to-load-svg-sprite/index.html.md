@@ -77,7 +77,7 @@ The `elements.js` file should be linked in `<head>` section. Sure, you've got fe
 
 It is important for sprites to be inserted on the page before their first usage. So, let's add an empty placeholder element.
 
-```html
+```
 <div id="elements-placeholder"
   style="border: 0; clip: rect(0 0 0 0); overflow: hidden;
     margin: -1px; padding: 0; position: absolute;
@@ -88,7 +88,7 @@ You need a placeholder to safely modify DOM tree in the loading process. It has 
 
 Fill the placeholder:
 
-```html
+```
 <script>document.getElementById("elements-placeholder").innerHTML = SVG_SPRITE;</script>
 ```
 
