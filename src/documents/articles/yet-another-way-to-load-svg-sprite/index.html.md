@@ -77,19 +77,19 @@ The `elements.js` file should be linked in `<head>` section. Sure, you've got fe
 
 It is important for sprites to be inserted on the page before their first usage. So, let's add an empty placeholder element.
 
-```
-<div id="elements-placeholder"
+```html
+&lt;div id="elements-placeholder"
   style="border: 0; clip: rect(0 0 0 0); overflow: hidden;
     margin: -1px; padding: 0; position: absolute;
-    width: 1px; height: 1px;"></div>
+    width: 1px; height: 1px;">&lt;/div>
 ```
 
 You need a placeholder to safely modify DOM tree in the loading process. It has to have a unique id. I included some inline styles to prevent broken image effect in case if countors accidentally turn up outside of `<defs>`.
 
 Fill the placeholder:
 
-```
-<script>document.getElementById("elements-placeholder").innerHTML = SVG_SPRITE;</script>
+```html
+&lt;script>document.getElementById("elements-placeholder").innerHTML = SVG_SPRITE;</script>
 ```
 
 ## Notes
