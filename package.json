@@ -32,5 +32,9 @@
   "scripts": {
     "install": "./node_modules/bower-npm-install/bin/bower-npm-install",
     "start": "node_modules/docpad/bin/docpad-server"
+  },
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "ym": "^0.1.2"
   }
 }
