@@ -5,7 +5,7 @@ import style from './style.css'
 export default class Article extends Component {
 
   render() {
-    const { title, link } = this.props
+    const { title, link, author, source } = this.props
 
     const header = link ? (
       <h2 className={style.header}>
@@ -17,14 +17,28 @@ export default class Article extends Component {
       <h1 className={style.header}>{title}</h1>
     )
 
+    const meta = author ? (
+      <div>
+        Written by {author.name}
+      </div>
+    ) : null
+
+    const sourceInfo = source ? (
+      <div>
+        Source: {source.lang.toUpperCase()}, <a href={source.url}>{source.name}</a>
+      </div>
+    ) : null
+
     return (
       <div className={style.article} role="main">
         <div className={style.body}>
           {header}
         </div>
+        {meta}
         <div className={style.text}>
           {this.props.children}
         </div>
+        {sourceInfo} 
       </div>
     )
 
