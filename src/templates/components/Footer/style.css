@@ -1,0 +1,132 @@
+/*
+Footer
+
+markup:
+<div class="footer__outer">
+  <footer class="footer">
+    <div class="footer__left">
+    </div>
+    <div class="footer__center">
+        Links
+    </div>
+    <div class="footer__right">
+    </div>
+  </footer>
+</div>
+
+Styleguide 2.2
+
+*/
+
+.outer
+{
+    background: #999;
+}
+
+.footer
+{
+    width: 1200px;
+    margin: 2em auto 0;
+    padding: 1.5em 0;
+    text-align: left;
+    font-size: .8em;
+    color: white;
+    font-family: Monaco;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -moz-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        width: 710px;
+        text-align: center;
+    }
+}
+
+.left
+{
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    -ms-flex-order: 1;
+    -webkit-order: 1;
+    order: 1;
+    width: 13%;
+    padding-left: 5em;
+    padding-left: 10%;
+}
+
+@media screen and (max-width: 768px) {
+    .left
+    {
+        padding-left: 0;
+        width: 100%;
+        margin-bottom: 0.5em;
+    }
+
+    .footer__left .menu-vert__item
+    {
+        display: inline-block;
+    }
+
+    .footer__left .menu-vert__item:after
+    {
+        content: '·';
+        margin: 0 0.5em;
+    }
+
+    .footer__left .menu-vert__item:last-child::after
+    {
+        display: none;
+    }
+}
+
+.center
+{
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
+    width: 48.5%;
+    padding-left: 2em;
+    padding-left: 3%;
+}
+
+@media screen and (max-width: 768px) {
+    .center
+    {
+        padding-left: 0;
+        width: 100%;
+    }
+}
+
+.right
+{
+    -webkit-box-ordinal-group: 3;
+    -moz-box-ordinal-group: 3;
+    -ms-flex-order: 3;
+    -webkit-order: 3;
+    order: 3;
+    width: 22.5%;
+    padding-left: 2em;
+    padding-left: 3%;
+}
+
+@media screen and (max-width: 768px) {
+    .right
+    {
+        display: none;
+    }
+}
+
+.footer a
+{
+    color: #fff;
+}

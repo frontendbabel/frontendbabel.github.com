@@ -1,0 +1,56 @@
+/*
+Recent posts
+
+markup:
+<div class="recent-posts i-bem" data-bem='{ "recent-posts": {} }'>
+  <ul class="recent-posts__list">
+    <li class="recent-posts__item">
+      <span class="badge recent-posts__date">11 February 2015</span>
+      <span class="recent-posts__text-item">
+        <a href="/en/posts/jscs-in-use">JSCS in use</a>
+      </span>
+    </li>
+    <li class="recent-posts__item">
+      <span class="badge recent-posts__date">12 September 2014</span>
+      <span class="recent-posts__text-item">
+        <a href="/en/posts/run-app-in-time-on-mac">Run on time (about Mac applications)</a>
+      </span>
+   </li>
+  </ul>
+</div>
+
+Styleguide 3.5
+*/
+
+.recent-posts
+{
+    padding: 0;
+}
+
+.list
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.item
+{
+    margin: 0;
+    border-bottom: rgba(0,0,0, .075) 1px solid;
+}
+
+.date
+{
+    padding: 0.25em 0.25em 0.25em 1em;
+    width: 6em;
+    display: inline-block;
+    text-align: right;
+    border-right: rgba(0,0,0, .075) 1px solid;
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0, 0), rgba(255,255,255, 0.5));
+}
+
+.text
+{
+    padding: 0.25em 0.5em 0.25em 0.25em;
+}

@@ -1,0 +1,61 @@
+/*
+
+Comments
+
+markup:
+<div class="comments">
+  <div class="comments__box box__body">
+    <sg-insert>3.2.1</sg-insert>
+  </div>
+  <div class="comments__body box__island">
+    Disqus comments
+  </div>
+</div>
+
+Styleguide 3.2
+
+*/
+
+.comments
+{
+    margin-top: 2em;
+}
+
+.body
+{
+    padding: 0 1em;
+}
+
+.island
+{
+    padding: 0 1em;
+    background-color: #f9f9f9;
+
+    padding: 1em;
+    margin-top: .25em;
+
+    border: rgba(0,0,0, .075) 1px solid;
+}
+
+@media screen and (max-width: 330px) {
+    .island {
+        border-width: 1px 0 0;
+    }
+}
+
+/*
+Comments' header
+
+markup:
+<h4 class="comments__header">
+  Comments
+</h4>
+
+Styleguide 3.2.1
+*/
+
+.header
+{
+    margin: 0;
+    font-size: 1.5em;
+}

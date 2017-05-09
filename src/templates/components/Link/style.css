@@ -1,0 +1,13 @@
+/*
+Link
+
+markup:
+<a class="link" href="http://google.com">Link</a>
+
+Styleguide 1.3
+*/
+
+.link
+{
+    color: #3B8DBD;
+}

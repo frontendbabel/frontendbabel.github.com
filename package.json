@@ -1,40 +1,102 @@
 {
-  "name": "frontendbabel",
+  "name": "bridge-the-gap",
   "version": "0.1.0",
-  "description": "New DocPad project without using a skeleton",
-  "engines": {
-    "node": "0.10",
-    "npm": "1.3"
-  },
-  "dependencies": {
-    "bower-npm-install": "~0.5.1",
-    "docpad": "~6.78.1",
-    "docpad-plugin-cleanurls": "~2.7.0",
-    "docpad-plugin-eco": "~2.1.0",
-    "docpad-plugin-ghpages": "~2.4.3",
-    "docpad-plugin-grunt": "~2.1.1",
-    "docpad-plugin-marked": "2.3.0",
-    "docpad-plugin-moment": "~2.0.2",
-    "docpad-plugin-rss": "~2.1.3",
-    "docpad-plugin-services": "~2.6.0",
-    "enb": "~0.13.2",
-    "enb-bemxjst": "~1.2.0",
-    "enb-borschik": "~1.0.4",
-    "enb-diverse-js": ">=0.1.0",
-    "enb-modules": "~0.1.2",
-    "enb-xjst": "~1.1.1",
-    "grunt": "~0.4.5",
-    "grunt-contrib-copy": "~0.4.0",
-    "grunt-shell": "~0.7.0",
-    "moment": "~2.0.0"
-  },
-  "main": "node_modules/docpad/bin/docpad-server",
+  "description": "",
+  "main": "",
   "scripts": {
-    "install": "./node_modules/bower-npm-install/bin/bower-npm-install",
-    "start": "node_modules/docpad/bin/docpad-server"
+    "build": "cross-env NODE_ENV=production npm run build:all",
+    "build:all": "npm run build:webpack && npm run build:metalsmith",
+    "build:metalsmith": "babel-node src/scripts/build-metalsmith.js",
+    "build:webpack": "npm run clean:webpack && babel-node src/scripts/build-webpack.js",
+    "clean": "npm run clean:metalsmith && npm run clean:webpack",
+    "clean:metalsmith": "rimraf dist/site/*",
+    "clean:webpack": "rimraf dist/assets/*",
+    "dev": "npm run clean && cross-env DEBUG=metalsmith*,server* nodemon --watch src/scripts --watch src/config --exec babel-node src/scripts/run-dev-server.js",
+    "server": "cross-env DEBUG=server* nodemon --watch dist/site --watch src/config src/scripts/run-server.js",
+    "lint": "eslint src test",
+    "test": "npm run lint",
+    "preversion": "npm test",
+    "version": "npm run build && git add -f dist",
+    "postversion": "git push && git push --tags",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "url": "https://github.com/frontendbabel/frontendbabel.github.com",
+    "type": "git"
+  },
+  "keywords": [
+    "metalsmith",
+    "webpack"
+  ],
+  "author": "Varya Stepanova <mail@varya.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frontendbabel/frontendbabel.github.com/issues"
+  },
+  "homepage": "https://github.com/frontendbabel/frontendbabel.github.com#readme",
+  "files": [
+    "src",
+    "dist",
+    "README.md",
+    "CONTRIBUTING.md"
+  ],
+  "release": {
+    "verifyConditions": "condition-circle"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "devDependencies": {
-    "bower": "^1.8.0",
-    "ym": "^0.1.2"
+    "assets-webpack-plugin": "^3.5.0",
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-istanbul": "^3.0.0",
+    "babel-plugin-webpack-loaders": "^0.9.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-node6": "^0.4.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "condition-circle": "^1.5.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^3.1.3",
+    "css-loader": "^0.26.1",
+    "cz-conventional-changelog": "^1.2.0",
+    "debug": "^2.5.2",
+    "eslint": "^3.12.2",
+    "eslint-config-standard": "^6.2.0",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "metalsmith": "^2.2.0",
+    "metalsmith-assets": "^0.1.0",
+    "metalsmith-collection-metadata": "^0.1.0",
+    "metalsmith-collections": "^0.9.0",
+    "metalsmith-copy": "^0.3.0",
+    "metalsmith-markdownit": "^0.4.0",
+    "metalsmith-paths": "^3.0.1",
+    "metalsmith-permalinks": "^0.5.0",
+    "metalsmith-react-templates": "^6.0.3",
+    "metalsmith-watch": "^1.0.3",
+    "nodemon": "^1.11.0",
+    "postcss-loader": "^2.0.1",
+    "precss": "^1.4.0",
+    "rimraf": "^2.5.4",
+    "semantic-release": "^6.3.2",
+    "style-loader": "^0.13.1",
+    "uglifyjs-webpack-plugin": "^0.4.3",
+    "webpack": "^2.2.0-rc.0",
+    "webpack-dev-middleware": "^1.9.0",
+    "write-file-webpack-plugin": "^3.4.2"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   }
 }

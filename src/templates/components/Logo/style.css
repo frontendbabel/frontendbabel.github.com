@@ -1,0 +1,53 @@
+/*
+
+Logo
+
+markup:
+<logo class="logo">···<b class="var">var</b>·<b class="ya">ya</b>;<b class="cursor"></b></logo>
+
+Styleguide 1.1
+
+*/
+.logo
+{
+    color: #C9C9C9;
+    margin: 0;
+    margin-right: -10px;
+    font: 32px/1 Monaco;
+    text-align: center;
+}
+
+@media screen and (max-width: 330px) {
+    .logo {
+        float: none;
+    }
+}
+
+.var
+{
+    color: #66C9EE;
+}
+
+.ya
+{
+    color: #82B964;
+}
+
+@-webkit-keyframes twinkly {
+    0%   { background: #D24D33; }
+    100% { background: lightgrey; }
+}
+@-moz-keyframes twinkly {
+    0%   { background: #D24D33; }
+    100% { background: lightgrey; }
+}
+
+.cursor
+{
+    width: 3px;
+    height: 45px;
+    margin-bottom: -10px;
+    display: inline-block;
+    -webkit-animation: twinkly .5s alternate infinite;
+    -moz-animation: twinkly .5s alternate infinite;
+}

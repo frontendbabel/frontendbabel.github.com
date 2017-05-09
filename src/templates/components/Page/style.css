@@ -1,0 +1,17 @@
+.page
+{
+    font: 16px/1.5 'Noto Serif', Palatino Linotype, Palatino, serif;
+    color: green;
+}
+
+:global(.page)
+{
+    margin: 0;
+    text-align: center;
+
+    background-color: #f6f6f6;
+
+    font: 16px/1.5 'Noto Serif', Palatino Linotype, Palatino, serif;
+    font-weight: 400;
+}
+

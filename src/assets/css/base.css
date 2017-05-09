@@ -1,0 +1,12 @@
+html {
+  font-family: sans-serif;
+
+  &.no-js body::before {
+    content: 'Javascript is disabled or not ready yet';
+  }
+}
+
+body {
+  padding: 5vw 5vh;
+  background-color: #fff;
+}

@@ -1,0 +1,128 @@
+/*
+Header
+
+markup:
+<header class="header">
+  <div class="left candies i-bem"
+      data-bem='{ "candies" : { "size" : { "max" : 28, "min" : 12 }, "reverse" : true } }'></div>
+  <div class="center">
+      <logo class="logo">···<b class="var">var</b>·<b class="ya">ya</b>;<b class="cursor"></b></logo>
+  </div>
+  <div class="right candies i-bem"
+      data-bem='{ "candies" : { "size" : { "max" : 28, "min" : 12 } } }'></div>
+</header>
+
+Styleguide 2.1
+*/
+
+.header
+{
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    -ms-flex-order: 1;
+    -webkit-order: 1;
+    order: 1;
+    width: 1200px;
+    margin: 2em auto 3em;
+    text-align: left;
+    padding: 0;
+    display: table;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        width: 720px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .header {
+        width: 580px;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .header {
+        width: 330px;
+        text-align: center;
+    }
+}
+
+.left
+{
+    padding: 0;
+    margin: 0;
+    width: auto;
+    display: table-cell;
+    text-align: right;
+    width: 778px;
+    line-height: 4em;
+}
+
+@media screen and (max-width: 768px) {
+    .left {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .left {
+        width: 360px;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .left {
+        display: none;
+    }
+}
+
+.center
+{
+    padding: 0;
+    margin: 0;
+    display: table-cell;
+    width: 201px;
+}
+
+@media screen and (max-width: 580px) {
+    .center {
+        padding-right: 10px;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .center {
+        width: 100%;
+    }
+}
+
+.right
+{
+    padding: 0;
+    margin: 0;
+    width: 325px;
+    padding-left: 20px;
+    display: table-cell;
+    line-height: 4em;
+}
+
+@media screen and (max-width: 768px) {
+    .right {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .right {
+        display: none;
+    }
+}
+
+.item
+{
+    border-radius: 50%;
+    margin-bottom: 30px;
+    margin-right: 3px;
+    display: inline-block;
+}

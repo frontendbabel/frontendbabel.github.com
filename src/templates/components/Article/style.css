@@ -1,0 +1,103 @@
+@import '../Colors/style.css';
+
+/*
+Article
+
+markup:
+<div class="article" role="main">
+  <div class="article__body box__body">
+    <sg-insert>3.1.1</sg-insert>
+  </div>
+  <div class="article__text box__island">
+    <sg-insert>3.1.2</sg-insert>
+    <p>
+      Article text
+    </p>
+  </div>
+</div>
+
+Styleguide 3.1
+*/
+
+/*
+Article header
+
+markup:
+<h1 class="article__header">
+  Article title
+</h1>
+
+Styleguide 3.1.1
+*/
+
+.article
+{
+    font: 16px/1.5 'Noto Serif', Palatino Linotype, Palatino, serif;
+    font-weight: 400;
+}
+
+.body {
+    padding: 0 1em;
+}
+
+.header
+{
+    padding: 0;
+    margin: 0;
+    color: $color__main--bright;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.link,
+.link:link,
+.link:hover,
+.link:visited
+{
+    color: $color__main--bright;
+}
+
+/*
+Article details
+
+markup:
+<span class="article__details author vcard">
+    Published on
+    11th February 2015
+</span>
+
+Styleguide 3.1.2
+*/
+
+.details
+{
+    font-size: .8em;
+    color: #999;
+}
+
+.text
+{
+    padding: 0 1em;
+
+    padding: 1em;
+    margin-top: .25em;
+
+    border: rgba(0,0,0, .075) 1px solid;
+}
+
+.text code
+{
+    white-space: nowrap;
+}
+
+.text pre code
+{
+    white-space: pre;
+}
+
+.article__image
+{
+    display: block;
+    border: rgba(0,0,0, 0.1) 1px solid;
+    margin: 1em auto;
+}

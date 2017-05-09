@@ -1,0 +1,49 @@
+/*
+Box
+
+markup:
+<div class="box__body">
+  Box Body
+</div>
+<div class="box__island">
+  Island
+</div>
+
+Styleguide 2.3
+*/
+
+.box
+{
+    margin-bottom: 1em;
+}
+
+.box__body
+{
+    padding: 0 1em;
+}
+
+.box__island
+{
+    padding: 0 1em;
+    background-color: #f9f9f9;
+
+    padding: 1em;
+    margin-top: .25em;
+
+    border: rgba(0,0,0, .075) 1px solid;
+}
+
+@media screen and (max-width: 330px) {
+    .box__island {
+        border-width: 1px 0 0;
+    }
+}
+
+.title
+{
+    font-size: 1.5em;
+    font-weight: 400;
+    margin: 0 0 .5em;
+    padding: 0;
+    color: #666;
+}

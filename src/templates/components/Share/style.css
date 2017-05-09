@@ -1,0 +1,21 @@
+/*
+Share
+
+markup:
+<script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+<div class="share yashare-auto-init" data-yashareL10n="{{ lang }}"
+    data-yashareQuickServices="twitter,facebook,gplusvkontakte" data-yashareTheme="counter"
+></div>
+
+Styleguide 1.6
+*/
+.share
+{
+    height: 26px;
+    float: right;
+}
+
+:global(.b-share-btn__wrap)
+{
+    display: block;
+}

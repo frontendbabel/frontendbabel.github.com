@@ -1,0 +1,7 @@
+html {
+  font-family: sans-serif;
+}
+
+html.no-js body:before {
+  content: 'Javascript is disabled or not ready yet'
+}
