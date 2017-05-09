@@ -1,5 +1,5 @@
 ---
 title: Articles
-layout: index
+rtemplate: Posts.js
 ---
 Text of a page
