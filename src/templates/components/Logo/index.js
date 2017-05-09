@@ -6,14 +6,10 @@ export default class Logo extends Component {
 
   render() {
     return (
-      <logo className={style.logo}>
-        &sdot;&sdot;&sdot;
-        <b className={style.var}>var</b>
-        &sdot;
-        <b className={style.ya}>ya</b>
-        ;
-        <b className={style.cursor}/>
-      </logo>
+      <a className={style.logo} href="/">
+        <i className={style.symb}>›</i>
+        <i className={style.fr}>Frontend</i> <i className={style.bl}>Babel</i>
+      </a>
     )
 
   }

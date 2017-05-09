@@ -21,9 +21,9 @@ export default class Post extends Component {
           <ArticleDetails>{texts.publishedOn} {published}</ArticleDetails>
           <div dangerouslySetInnerHTML={{ __html: contents }}/>
         </Article>
+        <Comments {...this.props}/>
       </Page>
     )
-        //<Comments {...this.props}/>
 
   }
 

@@ -11,7 +11,7 @@
     "clean": "npm run clean:metalsmith && npm run clean:webpack",
     "clean:metalsmith": "rimraf dist/site/*",
     "clean:webpack": "rimraf dist/assets/*",
-    "dev": "npm run clean && cross-env DEBUG=metalsmith*,server* nodemon --watch src/scripts --watch src/config --exec babel-node src/scripts/run-dev-server.js",
+    "dev": "npm run clean && cross-env DEBUG=metalsmith*,server* nodemon --watch src/scripts --watch src/config --watch src/templates --exec babel-node src/scripts/run-dev-server.js",
     "server": "cross-env DEBUG=server* nodemon --watch dist/site --watch src/config src/scripts/run-server.js",
     "lint": "eslint src test",
     "test": "npm run lint",
